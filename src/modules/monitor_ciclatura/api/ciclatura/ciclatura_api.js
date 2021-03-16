@@ -2,7 +2,7 @@
  * Fornisce tutti i dati riguardanti la ciclatura
  */
 import { BaseApi } from '../base_api';
-import { isFake } from '@/utils/ambiente';
+import { isFake } from '@/shared/ambiente';
 import { fake_getDatiCiclatura } from '../fake/ciclatura';
 
 export const Endpoints = {

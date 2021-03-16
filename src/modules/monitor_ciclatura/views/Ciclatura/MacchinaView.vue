@@ -26,7 +26,7 @@
 
 <script>
 import Macchina from '../../components/Macchina';
-import { isFake } from '@/utils/ambiente';
+import { isFake } from '@/shared/ambiente';
 import { mapGetters, mapActions } from 'vuex';
 import CiclaturaConfig from '../../configs/ciclatura.js';
 
