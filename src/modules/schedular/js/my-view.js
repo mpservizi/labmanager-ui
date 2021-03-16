@@ -1,20 +1,20 @@
-import { myScheduler } from './my-lib.js';
-import { VIEW_TIMELINE, SCALA_MENSILE, SCALA_SETTIMANALE } from './costanti.js';
+import { myScheduler } from "./my-lib.js";
+import { VIEW_TIMELINE, SCALA_MENSILE, SCALA_SETTIMANALE } from "./costanti.js";
 import {
   getparametriScala,
   calcolaColonneView,
-  getScalaAttiva
-} from './my-func.js';
+  getScalaAttiva,
+} from "./my-func.js";
 
-import { getGiorniDelMese } from './util.js';
+import { getGiorniDelMese } from "./util.js";
 
 /**
  * Imposta la scala mensile per timeline view
  */
 export function setScalaMensile() {
   myScheduler.myConfig.paramScala.scala = SCALA_MENSILE;
-  myScheduler.myConfig.paramScala.scalaSecondaria = 'month';
-  myScheduler.myConfig.paramScala.unitIncremento = 'month';
+  myScheduler.myConfig.paramScala.scalaSecondaria = "month";
+  myScheduler.myConfig.paramScala.unitIncremento = "month";
   aggiornaScala();
 }
 
@@ -23,8 +23,8 @@ export function setScalaMensile() {
  */
 export function setScalaSettimanale() {
   myScheduler.myConfig.paramScala.scala = SCALA_SETTIMANALE;
-  myScheduler.myConfig.paramScala.scalaSecondaria = 'week';
-  myScheduler.myConfig.paramScala.unitIncremento = 'day';
+  myScheduler.myConfig.paramScala.scalaSecondaria = "week";
+  myScheduler.myConfig.paramScala.unitIncremento = "day";
   aggiornaScala();
 }
 
@@ -43,18 +43,18 @@ function aggiornaScala() {
 /**
  * Impostare qui i parametri custom da gestire ne codice
  */
-export function creaParamteriCustom() {
-  myScheduler.myConfig = {
+export function creaParamteriCustom(ObjSchedular) {
+  ObjSchedular.myConfig = {
     //Tutte le info riguardo al cambio scala
     paramScala: {
       scala: SCALA_SETTIMANALE, // id scala attiva
       giorniView: 14, //numero dei giorni da mostrare in view, di default
-      scalaSecondaria: 'week', //Scala secondaria timeline
-      unitIncremento: 'day', //di quale unità spostare con tasti navigazione
+      scalaSecondaria: "week", //Scala secondaria timeline
+      unitIncremento: "day", //di quale unità spostare con tasti navigazione
 
       // calcola il primo giorno da mostrare in view
-      getPrimoGiorno: aggiornaViewAttiva
-    }
+      getPrimoGiorno: aggiornaViewAttiva,
+    },
   };
 }
 
@@ -90,11 +90,11 @@ export function centraViewOggi() {
   if (getScalaAttiva() == SCALA_MENSILE) {
     inizio = myScheduler.date.month_start(oggi);
     let giorniMese = getGiorniDelMese(oggi);
-    fine = myScheduler.date.add(inizio, giorniMese, 'day');
+    fine = myScheduler.date.add(inizio, giorniMese, "day");
   } else {
     //scala settimanale range tra -1 e +1 settinama rispetto alla data odierna
-    inizio = myScheduler.date.add(oggi, -1, 'week');
-    fine = myScheduler.date.add(oggi, 1, 'week');
+    inizio = myScheduler.date.add(oggi, -1, "week");
+    fine = myScheduler.date.add(oggi, 1, "week");
   }
   let view = myScheduler.getView(VIEW_TIMELINE);
   view.setRange(inizio, fine);

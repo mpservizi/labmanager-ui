@@ -1,34 +1,38 @@
 <template>
-  <div>
-    <p>Filtra macchine</p>
-    <select ref="tipo" @change="showRooms"></select>
-    <div class="separatore"><button @click="save">Salva dati</button></div>
-  </div>
+  <v-row>
+    <v-col cols="6">
+      <v-select
+        :items="items"
+        label="Filtra macchine"
+        outlined
+        dense
+        item-text="text"
+        item-value="key"
+        @change="filtraRisorse"
+      ></v-select>
+    </v-col>
+    <v-col cols="6">
+      <v-btn @click="save">Salva dati</v-btn>
+    </v-col>
+  </v-row>
 </template>
 <script>
-import { LISTA_FILTRO_RISORSE } from './../js/costanti.js';
+import { LISTA_FILTRO_RISORSE } from "./../js/costanti.js";
 export default {
-  name: 'Filtro',
-  props: {},
-
+  name: "Filtro",
+  data() {
+    return {
+      items: LISTA_FILTRO_RISORSE,
+    };
+  },
   methods: {
-    showRooms() {
-      this.$emit('cambio', this.$refs.tipo.value);
+    filtraRisorse(valore) {
+      this.$emit("cambio", valore);
     },
     save() {
-      this.$emit('save');
+      this.$emit("save");
     },
   },
-  mounted: function () {
-    const roomSelect = this.$refs.tipo;
-    const types = LISTA_FILTRO_RISORSE;
-    const typeElements = [];
-    types.forEach(function (type) {
-      typeElements.push(
-        "<option value='" + type.key + "'>" + type.text + '</option>'
-      );
-    });
-    roomSelect.innerHTML = typeElements.join('');
-  },
+  mounted: function () {},
 };
 </script>

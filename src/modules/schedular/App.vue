@@ -1,5 +1,5 @@
 <template>
-  <div class="box-schedular">
+  <div>
     <scheduler></scheduler>
   </div>
 </template>
@@ -20,8 +20,4 @@ export default {
 </script>
 
 <style>
-.box-schedular {
-  height: 100%;
-  width: 100%;
-}
 </style>

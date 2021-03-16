@@ -1,10 +1,13 @@
 <template>
   <div style="width: 100%; height: 800px">
-    <div class="tool_box">
-      <scala @cambio="cambiaScala"></scala>
-      <div class="separatore"></div>
-      <filtro @cambio="filtra" @save="save"></filtro>
-    </div>
+    <v-row>
+      <v-col cols="4">
+        <scala @cambio="cambiaScala"></scala>
+      </v-col>
+      <v-col cols="6">
+        <filtro @cambio="filtra" @save="save"></filtro>
+      </v-col>
+    </v-row>
     <div
       ref="scheduler_here"
       id="scheduler_here"
@@ -30,12 +33,20 @@ import { MyPlanner } from "./../js/my-planner.js";
 export default {
   name: "Scheduler",
   props: {},
+  data() {
+    return {
+      pronto: false,
+    };
+  },
   components: { Filtro, Scala },
   methods: {
     filtra(valore) {
       MyPlanner.filtraRisorse(valore);
     },
     cambiaScala(valore) {
+      if (!this.pronto) {
+        return;
+      }
       MyPlanner.cambiaScala(valore);
     },
     async save() {
@@ -44,6 +55,7 @@ export default {
     },
     async load() {
       await MyPlanner.loadDati();
+      this.pronto = true;
     },
   },
   mounted: function () {

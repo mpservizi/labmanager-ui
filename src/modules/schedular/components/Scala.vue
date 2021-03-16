@@ -1,32 +1,26 @@
 <template>
-  <div>
-    <p>Cambia scala</p>
-    <select ref="scala" @change="aggiorna()"></select>
-  </div>
+  <v-row>
+    <v-col>
+      <v-radio-group mandatory @change="aggiorna" row>
+        <span class="pr-2">Seleziona scala</span>
+        <v-radio label="Settimanale" value="2"></v-radio>
+        <v-radio label="Mensile" value="1"></v-radio>
+      </v-radio-group>
+    </v-col>
+  </v-row>
 </template>
 <script>
 export default {
-  name: 'Filtro',
+  name: "Scala",
   props: {},
-
+  data() {
+    return {};
+  },
   methods: {
-    aggiorna() {
-      this.$emit('cambio', this.$refs.scala.value);
+    aggiorna(valore) {
+      this.$emit("cambio", parseInt(valore));
     },
   },
-  mounted: function () {
-    const elLista = this.$refs.scala;
-    const types = [
-      { value: '2', label: 'Settimanale' },
-      { value: '1', label: 'Mensile' },
-    ];
-    const typeElements = [];
-    types.forEach(function (type) {
-      typeElements.push(
-        "<option value='" + type.value + "'>" + type.label + '</option>'
-      );
-    });
-    elLista.innerHTML = typeElements.join('');
-  },
+  mounted: function () {},
 };
 </script>
