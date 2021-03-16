@@ -3,7 +3,7 @@
     <scheduler></scheduler>
   </div>
 </template>
- 
+
 <script>
 import Scheduler from "./components/Scheduler.vue";
 
@@ -12,12 +12,11 @@ export default {
   components: { Scheduler },
   data() {
     return {
-      messages: [],
+      messages: []
     };
   },
-  methods: {},
+  methods: {}
 };
 </script>
 
-<style>
-</style>
+<style></style>

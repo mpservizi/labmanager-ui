@@ -1,12 +1,12 @@
 /**
  * Dati da configurare prima di chiamare init schedular
  */
-import { EV_ID_RISORSA, LISTA_RISORSE_FILTRATA } from './costanti.js';
-import { getparametriScala } from './my-func.js';
+import { EV_ID_RISORSA, LISTA_RISORSE_FILTRATA } from "./costanti.js";
+import { getparametriScala } from "./my-func.js";
 
 export function initPreConfig(myScheduler) {
-  myScheduler.locale.labels.timeline_tab = 'Timeline';
-  myScheduler.locale.labels.section_custom = 'Section';
+  myScheduler.locale.labels.timeline_tab = "Timeline";
+  myScheduler.locale.labels.section_custom = "Section";
 
   //Titolo colonne risorse
   var headerHTML =
@@ -30,21 +30,21 @@ export function initPreConfig(myScheduler) {
   //
   let paramsScala = getparametriScala();
   myScheduler.createTimelineView({
-    name: 'timeline',
-    x_unit: 'day',
-    x_date: '%j',
+    name: "timeline",
+    x_unit: "day",
+    x_date: "%j",
     x_step: 1,
     x_size: paramsScala.giorniView,
     section_autoheight: false,
     y_unit: myScheduler.serverList(LISTA_RISORSE_FILTRATA),
     y_property: EV_ID_RISORSA,
-    render: 'bar',
+    render: "bar",
     round_position: true,
     dy: 40,
-    event_dy: 'full', //altezza evento nella riga risorsa
+    event_dy: "full", //altezza evento nella riga risorsa
     second_scale: {
       x_unit: paramsScala.scalaSecondaria,
-      x_date: '%F, %Y'
+      x_date: "%F, %Y"
     }
   });
   //
@@ -71,7 +71,7 @@ export function initPreConfig(myScheduler) {
   /** Evidenzia i giorni del calendario */
   myScheduler.addMarkedTimespan({
     days: [0, 6],
-    zones: 'fullday',
-    css: 'timeline_weekend'
+    zones: "fullday",
+    css: "timeline_weekend"
   });
 }

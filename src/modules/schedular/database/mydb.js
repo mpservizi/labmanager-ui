@@ -1,4 +1,4 @@
-const RisorseProvider = require('./risorse-provider.js');
+const RisorseProvider = require("./risorse-provider.js");
 module.exports = () => {
   const result = {
     risorse: RisorseProvider.getRisorse(),

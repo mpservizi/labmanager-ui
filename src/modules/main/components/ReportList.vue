@@ -27,10 +27,10 @@ export default {
       tasks: [
         { id: 1, text: "rp21lab004" },
         { id: 2, text: "rp21lab0015" }
-      ],
+      ]
     };
   },
-  props: {},
+  props: {}
 };
 </script>
 

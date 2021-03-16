@@ -15,6 +15,6 @@ export default {
       console.log("Installazione modulo : " + NOME_MODULO);
       await RegistraModulo(SchedularModule, true);
       return true;
-    },
-  },
+    }
+  }
 };

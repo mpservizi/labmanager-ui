@@ -3,22 +3,22 @@ import {
   creaTemplateColonneRisorse,
   creaTempateTooltip,
   creaTemplateClasseEvento
-} from './my-templates.js';
+} from "./my-templates.js";
 
-import { filtraRisorse, showMessage } from './my-func.js';
-import { centraViewOggi } from './my-view.js';
+import { filtraRisorse, showMessage } from "./my-func.js";
+import { centraViewOggi } from "./my-view.js";
 
 export function initEventi(myScheduler) {
   /** Default values per new event */
-  myScheduler.attachEvent('onEventCreated', handleNewEvento);
+  myScheduler.attachEvent("onEventCreated", handleNewEvento);
 
   /** Dopo il parsing dei dati */
-  myScheduler.attachEvent('onParse', function() {
-    filtraRisorse('all');
+  myScheduler.attachEvent("onParse", function() {
+    filtraRisorse("all");
   });
 
   /** Prima di cambiare view*/
-  myScheduler.attachEvent('onBeforeViewChange', function(
+  myScheduler.attachEvent("onBeforeViewChange", function(
     old_mode,
     old_date,
     mode,
@@ -31,10 +31,10 @@ export function initEventi(myScheduler) {
   });
 
   /** Collisione eventi */
-  myScheduler.attachEvent('onEventCollision', handleEventCollsion);
+  myScheduler.attachEvent("onEventCollision", handleEventCollsion);
 
   //** Quando i templates sono pronti. Definire qui i custom templates */
-  myScheduler.attachEvent('onTemplatesReady', function() {
+  myScheduler.attachEvent("onTemplatesReady", function() {
     //
     //Templates
     //
@@ -50,15 +50,15 @@ export function initEventi(myScheduler) {
 
     /** Titolo finestra lightbox */
     myScheduler.templates.lightbox_header = function(start, end, ev) {
-      var formatFunc = myScheduler.date.date_to_str('%d.%m.%Y');
-      return formatFunc(start) + ' - ' + formatFunc(end);
+      var formatFunc = myScheduler.date.date_to_str("%d.%m.%Y");
+      return formatFunc(start) + " - " + formatFunc(end);
     };
   });
 
   /**
    * Al click sul tasto Today
    */
-  myScheduler.attachEvent('onBeforeTodayDisplayed', function() {
+  myScheduler.attachEvent("onBeforeTodayDisplayed", function() {
     centraViewOggi();
     return false; //diabilito comportamento di default
   });
@@ -70,14 +70,14 @@ export function initEventi(myScheduler) {
   function handleNewEvento(event_id) {
     //  Imposto i valori di default per nuovo evento
     let ev = myScheduler.getEvent(event_id);
-    ev.text = 'New test';
+    ev.text = "New test";
   }
 }
 
 function handleEventCollsion(ev, evs) {
   for (var i = 0; i < evs.length; i++) {
     if (ev.idRisorsa != evs[i].idRisorsa) continue;
-    showMessage('Stallo già occupato', 'error');
+    showMessage("Stallo già occupato", "error");
   }
   return true;
 }

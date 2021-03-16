@@ -3,13 +3,13 @@ import {
   dateToStr,
   ricavaNomeCaricoDaId,
   ricavaIdCarico
-} from './my-func.js';
+} from "./my-func.js";
 /**
  * Converte gli eventi del schedular in json per salvare sul server
  * @param {*} eventi
  */
 export function eventiToJson(eventi) {
-  let json = '[]';
+  let json = "[]";
   //    Eventi è oggento composto da tutti gli eventi del schedular
   //    ogni voce del oggetto è uguale al id del evento
 
@@ -44,7 +44,7 @@ export function eventiToJson(eventi) {
     json = JSON.stringify(lista);
   } catch (error) {
     console.log(error);
-    console.log('Errore conversione eventi in Json');
+    console.log("Errore conversione eventi in Json");
   }
 
   return json;
@@ -82,7 +82,7 @@ export function parseEventiServer(datiServer) {
     return dati;
   } catch (error) {
     console.log(error);
-    console.log('Errore parsing dati server');
+    console.log("Errore parsing dati server");
     return [];
   }
 }
@@ -108,7 +108,7 @@ export async function parseRisorse(datiServer) {
     return dati;
   } catch (error) {
     console.log(error);
-    console.log('Errore parsing lista risorse dal server');
+    console.log("Errore parsing lista risorse dal server");
   }
 
   return [];

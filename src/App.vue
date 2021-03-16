@@ -26,8 +26,8 @@ export default {
   name: "App",
   components: {},
   data: () => ({
-    drawer: false,
-  }),
+    drawer: false
+  })
 };
 </script>
 <style>

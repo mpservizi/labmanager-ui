@@ -1,7 +1,7 @@
-const URL_RISORSE = 'http://localhost:3000/api/planner/risorse';
-const URL_CICLATURA = 'http://localhost:3000/api/planner/dati_ciclatura';
+const URL_RISORSE = "http://localhost:3000/api/planner/risorse";
+const URL_CICLATURA = "http://localhost:3000/api/planner/dati_ciclatura";
 
-import { parseEventiServer, parseRisorse } from './data-parser.js';
+import { parseEventiServer, parseRisorse } from "./data-parser.js";
 
 /**
  * Carica la liste delle risorse dal server
@@ -40,10 +40,10 @@ export async function save(dati) {
 async function postRequest(url, json) {
   try {
     const rawResponse = await fetch(url, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
+        Accept: "application/json",
+        "Content-Type": "application/json"
       },
       body: json
     });

@@ -21,22 +21,22 @@ export default {
         {
           id: 1,
           nome: "Schedular ciclature",
-          link: "/schedular",
+          link: "/schedular"
         },
         {
           id: 2,
           nome: "App 1",
-          link: "/app2",
+          link: "/app2"
         },
         {
           id: 3,
           nome: "App 1",
-          link: "/app3",
-        },
-      ],
+          link: "/app3"
+        }
+      ]
     };
   },
-  props: {},
+  props: {}
 };
 </script>
 

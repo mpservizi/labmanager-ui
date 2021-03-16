@@ -19,7 +19,7 @@ export default {
   name: "Main",
   components: {
     TaskList,
-    ReportList,
-  },
+    ReportList
+  }
 };
 </script>

@@ -9,7 +9,7 @@ import {
   creaParamteriCustom,
   centraViewOggi,
   setScalaSettimanale,
-  setScalaMensile,
+  setScalaMensile
 } from "./my-view.js";
 
 import { save, loadRisorse, loadDatiCiclatura } from "./api.js";
@@ -70,5 +70,5 @@ export const MyPlanner = {
   filtraRisorse,
   loadDati,
   saveDati,
-  cambiaScala,
+  cambiaScala
 };

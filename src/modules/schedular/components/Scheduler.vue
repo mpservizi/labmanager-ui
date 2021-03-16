@@ -25,7 +25,7 @@
     </div>
   </div>
 </template>
- 
+
 <script>
 import Filtro from "./Filtro.vue";
 import Scala from "./Scala.vue";
@@ -35,7 +35,7 @@ export default {
   props: {},
   data() {
     return {
-      pronto: false,
+      pronto: false
     };
   },
   components: { Filtro, Scala },
@@ -56,15 +56,15 @@ export default {
     async load() {
       await MyPlanner.loadDati();
       this.pronto = true;
-    },
+    }
   },
-  mounted: function () {
+  mounted: function() {
     MyPlanner.init(this.$refs.scheduler_here);
     this.load();
-  },
+  }
 };
 </script>
- 
+
 <style>
 @import "./../libs/schedular/dhtmlxscheduler.css";
 @import "./../css/my-style.css";

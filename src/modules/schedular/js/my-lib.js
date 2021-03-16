@@ -1,17 +1,17 @@
 //Importare qui tutti gli script richiesti nella pagina
-import '../libs/schedular/scripts/dhtmlxscheduler.js';
+import "../libs/schedular/scripts/dhtmlxscheduler.js";
 //Devono essere importati in questo ordine
-import '../libs/schedular/scripts/dhtmlxscheduler_limit';
-import '../libs/schedular/scripts/dhtmlxscheduler_timeline';
+import "../libs/schedular/scripts/dhtmlxscheduler_limit";
+import "../libs/schedular/scripts/dhtmlxscheduler_timeline";
 //Tooltip
-import '../libs/schedular/scripts/dhtmlxscheduler_tooltip';
+import "../libs/schedular/scripts/dhtmlxscheduler_tooltip";
 //Lighbox
-import '../libs/schedular/scripts/dhtmlxscheduler_minical';
-import '../libs/schedular/scripts/dhtmlxscheduler_editors';
+import "../libs/schedular/scripts/dhtmlxscheduler_minical";
+import "../libs/schedular/scripts/dhtmlxscheduler_editors";
 //Collisione eventi
-import '../libs/schedular/scripts/dhtmlxscheduler_collision';
+import "../libs/schedular/scripts/dhtmlxscheduler_collision";
 //Serializer
-import '../libs/schedular/scripts/dhtmlxscheduler_serialize';
+import "../libs/schedular/scripts/dhtmlxscheduler_serialize";
 
 //Raccolta risorse
 // import "../libs/schedular/dhtmlxscheduler_treetimeline";

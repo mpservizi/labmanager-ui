@@ -22,7 +22,7 @@ export default {
   name: "Filtro",
   data() {
     return {
-      items: LISTA_FILTRO_RISORSE,
+      items: LISTA_FILTRO_RISORSE
     };
   },
   methods: {
@@ -31,8 +31,8 @@ export default {
     },
     save() {
       this.$emit("save");
-    },
+    }
   },
-  mounted: function () {},
+  mounted: function() {}
 };
 </script>

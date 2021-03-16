@@ -19,8 +19,8 @@ export default {
   methods: {
     aggiorna(valore) {
       this.$emit("cambio", parseInt(valore));
-    },
+    }
   },
-  mounted: function () {},
+  mounted: function() {}
 };
 </script>

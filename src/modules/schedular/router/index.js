@@ -14,7 +14,7 @@ export default [
       { path: "p1", name: "pag1", component: Page1 },
       { path: "p2", name: "pag2", component: Page2 },
       { path: "links", name: "links", component: Links },
-      { path: "root", name: "root", component: Root },
-    ],
-  },
+      { path: "root", name: "root", component: Root }
+    ]
+  }
 ];

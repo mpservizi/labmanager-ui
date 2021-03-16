@@ -3,7 +3,7 @@ import { VIEW_TIMELINE, SCALA_MENSILE, SCALA_SETTIMANALE } from "./costanti.js";
 import {
   getparametriScala,
   calcolaColonneView,
-  getScalaAttiva,
+  getScalaAttiva
 } from "./my-func.js";
 
 import { getGiorniDelMese } from "./util.js";
@@ -53,8 +53,8 @@ export function creaParamteriCustom(ObjSchedular) {
       unitIncremento: "day", //di quale unità spostare con tasti navigazione
 
       // calcola il primo giorno da mostrare in view
-      getPrimoGiorno: aggiornaViewAttiva,
-    },
+      getPrimoGiorno: aggiornaViewAttiva
+    }
   };
 }
 
