@@ -5,6 +5,8 @@ import Store from "./services/store";
 import MainModule from "./modules/main/module";
 import { RegistraModulo } from "./services/installer";
 import vuetify from "./plugins/vuetify";
+import "roboto-fontface/css/roboto/roboto-fontface.css";
+import "@mdi/font/css/materialdesignicons.css";
 
 Vue.config.productionTip = false;
 initApp();
@@ -22,7 +24,7 @@ async function initApp() {
       router: Router,
       store: Store,
       vuetify,
-      render: h => h(App)
+      render: (h) => h(App),
     }).$mount("#app");
   }
 }
