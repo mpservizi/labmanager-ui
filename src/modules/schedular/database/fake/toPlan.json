@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "id_richiesta": 1,
+    "samples_required": 6,
+    "carico": 19.1,
+    "start_date": "04/03/2021",
+    "end_date": "26/03/2021"
+  },
+  {
+    "id": 2,
+    "id_richiesta": 1,
+    "samples_required": 6,
+    "carico": 19.2,
+    "start_date": "04/03/2021",
+    "end_date": "26/03/2021"
+  },
+  {
+    "id": 3,
+    "id_richiesta": 1,
+    "samples_required": 6,
+    "carico": 19.3,
+    "start_date": "04/03/2021",
+    "end_date": "26/03/2021"
+  },
+  {
+    "id": 4,
+    "id_richiesta": 2,
+    "samples_required": 6,
+    "carico": 19.1,
+    "start_date": "04/03/2021",
+    "end_date": "26/03/2021"
+  },
+  {
+    "id": 5,
+    "id_richiesta": 2,
+    "samples_required": 6,
+    "carico": 19.2,
+    "start_date": "04/03/2021",
+    "end_date": "26/03/2021"
+  },
+  {
+    "id": 6,
+    "id_richiesta": 2,
+    "samples_required": 6,
+    "carico": 19.3,
+    "start_date": "04/03/2021",
+    "end_date": "26/03/2021"
+  }
+]

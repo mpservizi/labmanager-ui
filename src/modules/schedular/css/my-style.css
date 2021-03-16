@@ -1,0 +1,86 @@
+/* Carico 19.1 */
+.carico_1 {
+  background-color: #ffb74d !important;
+}
+/* Carico 19.2 */
+.carico_2 {
+  background-color: #9ccc65 !important;
+}
+
+/* Carico 19.3 */
+.carico_3 {
+  background-color: #40c4ff !important;
+}
+/* Nessun carico assegnato */
+.carico_ {
+  background-color: #2abbda !important;
+}
+/* Celle weekend */
+.timeline_weekend {
+  background-color: #e6e6e6;
+}
+/* Celle titolo risorse */
+.timeline_item_cell {
+  width: 30%;
+  font-size: 12px;
+  text-align: center;
+}
+
+/* Separatore celle risorse */
+.timeline_item_separator {
+  background-color: #cecece;
+  width: 1px;
+  height: 100% !important;
+}
+/* Cella risora */
+.dhx_matrix_scell {
+  text-align: center;
+}
+
+/* Righe risorse */
+.timeline_item_separator,
+.timeline_item_cell {
+  vertical-align: top;
+  height: 100% !important;
+  display: inline-block;
+  line-height: 50px;
+  vertical-align: top;
+}
+
+/* Handler per resize del task */
+.dhx_event_resize {
+  background: none !important;
+}
+
+/* Testo deentro evento */
+.txt_ev {
+  /* background: red; */
+  text-align: center;
+  /* display: block; */
+  margin-left: -10px;
+  color: white;
+}
+
+/* Div contenitore per filtro e cambio scala */
+/* .tool_box {
+  display: flex;
+  padding-top: 20px;
+  padding-left: 20px;
+} 
+*/
+/* Separatore tra gli elementi di toolbox */
+/* .separatore {
+  display: inline;
+  margin: 0px 10px;
+} */
+
+/* Elementi dentro tool box */
+/* .tool_box select,
+button,
+p {
+  background: rgb(231, 231, 231);
+  height: 30px;
+  width: 150px;
+  margin: 0;
+  line-height: 30px;
+} */
