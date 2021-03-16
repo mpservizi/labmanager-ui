@@ -25,10 +25,10 @@
 </template>
 
 <script>
-import Macchina from '@/components/Macchina';
+import Macchina from '../../components/Macchina';
 import { isFake } from '@/utils/ambiente';
 import { mapGetters, mapActions } from 'vuex';
-import CiclaturaConfig from '@/configs/ciclatura.js';
+import CiclaturaConfig from '../../configs/ciclatura.js';
 
 export default {
     name: 'MacchinaView',

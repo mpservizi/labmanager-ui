@@ -1,20 +1,23 @@
-import { RegistraModulo } from "@/services/installer";
-import SchedularModule from "@/modules/schedular/module";
-import { NOME_MODULO } from "./../costanti.js";
+import { RegistraModulo } from '@/services/installer';
+import SchedularModule from '@/modules/schedular/module';
+import MonitorCiclaturaModule from '@/modules/monitor_ciclatura/module';
+import { NOME_MODULO } from './../costanti.js';
 export default {
-  namespaced: true,
+    namespaced: true,
 
-  state: {},
+    state: {},
 
-  getters: {},
+    getters: {},
 
-  mutations: {},
+    mutations: {},
 
-  actions: {
-    async init() {
-      console.log("Installazione modulo : " + NOME_MODULO);
-      await RegistraModulo(SchedularModule, true);
-      return true;
+    actions: {
+        async init() {
+            console.log('Installazione modulo : ' + NOME_MODULO);
+            await RegistraModulo(SchedularModule, true);
+            await RegistraModulo(MonitorCiclaturaModule, true);
+
+            return true;
+        }
     }
-  }
 };

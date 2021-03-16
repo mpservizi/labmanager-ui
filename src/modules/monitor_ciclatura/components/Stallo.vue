@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { STATI_STALLI } from '@/store/ciclatura_module.js';
+import { STATI_STALLI } from '../store/ciclatura_module.js';
 export default {
     name: 'Stallo',
     props: ['params'],
@@ -67,7 +67,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang='scss'>
-@import '@/sass/colori';
+@import '../sass/colori';
 
 .stallo {
     border: 1px solid gray;
