@@ -19,7 +19,7 @@ const moduleRoutes = [
     },
     {
         name: 'SchedularView',
-        linkLabel: 'Test request',
+        linkLabel: 'Schedular View',
         component: SchedularView
     }
 ];
@@ -72,7 +72,7 @@ function creaModuleRoutes(params) {
         let path = isRoot ? ROOT_PATH : ROOT_PATH + '/p' + index;
         let modello = {
             path: path,
-            name: item.linkLabel,
+            name: item.name,
             component: item.component,
             meta: creaLinksNavigazione(item)
         };
@@ -84,7 +84,10 @@ function creaModuleRoutes(params) {
 
 function creaLinksNavigazione(item) {
     let homepageRoute = { name: 'Homepage', link: 'home' };
-    let moduleEntryRoute = { name: ENTRY_ROUTE.linkLabel, link: ROOT_PATH };
+    let moduleEntryRoute = {
+        name: ENTRY_ROUTE.linkLabel,
+        link: ENTRY_ROUTE.name
+    };
 
     let lista = [];
     if (item.isRoot) {
@@ -102,4 +105,7 @@ function creaLinksNavigazione(item) {
 
 // const linkAuto = creaModuleRoutes(moduleRoutes);
 let result = creaModuleRoutes(moduleRoutes);
+let a = rawExport[1];
+let b = result[1];
+console.log(a == b);
 console.log(result);
