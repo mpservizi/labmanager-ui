@@ -1,10 +1,8 @@
 <template>
     <div>
         <div>
-            <router-link :to="{ name: 'TestRequestView' }"
-                >Test resquest</router-link
-            >
-            <router-link :to="{ name: 'SchedularView' }">Schedular</router-link>
+            <router-link to="p1">Test resquest</router-link>
+            <router-link to="p2">Schedular</router-link>
         </div>
     </div>
 </template>
