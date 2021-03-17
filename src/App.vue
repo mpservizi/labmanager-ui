@@ -14,8 +14,8 @@
         </v-app-bar>
 
         <v-main>
+            <breadcrumbs />
             <v-container>
-                <breadcrumbs />
                 <router-view></router-view>
             </v-container>
         </v-main>

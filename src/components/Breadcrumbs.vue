@@ -1,15 +1,10 @@
 <template>
-    <div class="breadcrumb">
-        <ul>
-            <li
-                v-for="(breadcrumb, idx) in breadcrumbList"
-                :key="idx"
-                @click="routeTo(idx)"
-                :class="{ linked: !!breadcrumb.link }"
-            >
-                {{ breadcrumb.name }}
-            </li>
-        </ul>
+    <div>
+        <v-breadcrumbs
+            large
+            :items="breadcrumbList"
+            divider=" / "
+        ></v-breadcrumbs>
     </div>
 </template>
 
@@ -30,51 +25,28 @@ export default {
         }
     },
     methods: {
-        routeTo(pRouteTo) {
-            if (this.breadcrumbList[pRouteTo].link) {
-                let routeName = this.breadcrumbList[pRouteTo].link;
-                this.$router.push({ name: routeName });
-            }
-        },
         updateList() {
-            this.breadcrumbList = this.$route.meta.breadcrumb;
+            let listaRouter = this.$route.meta.breadcrumb;
+            let listaLinks = [];
+            //Se ci sono più di 1 link, altrimenti nascondo breadcumb
+            if (listaRouter.length > 1) {
+                listaRouter.forEach((item) => {
+                    if (item) {
+                        let obj = {
+                            text: item.name,
+                            disabled: false,
+                            exact: true,
+                            to: { name: item.link }
+                        };
+                        listaLinks.push(obj);
+                    }
+                });
+            }
+            this.breadcrumbList = listaLinks;
         }
     }
 };
 </script>
 
 <style scoped>
-.breadcrumb {
-}
-ul {
-    display: flex;
-    justify-content: center;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-ul > li {
-    display: flex;
-    float: left;
-    height: 10px;
-    width: auto;
-    color: green;
-    font-weight: bold;
-    font-size: 0.8em;
-    cursor: default;
-    align-items: center;
-}
-ul > li:not(:last-child)::after {
-    content: '/';
-    float: right;
-    font-size: 0.8em;
-    margin: 0 0.5em;
-    color: gray;
-    cursor: default;
-}
-.linked {
-    cursor: pointer;
-    font-size: 1em;
-    font-weight: normal;
-}
 </style>
