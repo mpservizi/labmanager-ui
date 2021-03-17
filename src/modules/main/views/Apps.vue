@@ -21,7 +21,7 @@ export default {
                 {
                     id: 1,
                     nome: 'Schedular ciclature',
-                    link: '/schedular'
+                    link: '/schedular/'
                 },
                 {
                     id: 2,

@@ -29,11 +29,19 @@ export async function RegistraModulo(modulo, isRoot) {
  * @returns
  */
 export async function importaAndRegistra(nomeCartella, isRoot) {
+    let modulo = await importaModulo(nomeCartella);
+    await RegistraModulo(modulo, isRoot);
+    return true;
+}
+
+/**
+ * Importa il modulo in base al nome della cartella in modules folder
+ * @param {String} nomeCartella : nome della cartella che contiene il modulo
+ */
+export async function importaModulo(nomeCartella) {
     //Import lo script dalla cartella moduli in base al nome della cartella
     //Moduli viene risolto da webpack alla cartella src/modules
     let script = await import(`Moduli/${nomeCartella}/module.js`);
-    //Estraggo oggetto default esportato dallo script
-    let modulo = script.default;
-    await RegistraModulo(modulo, isRoot);
-    return true;
+    //Estraggo oggetto esportato dallo script come modulo
+    return script.Modulo;
 }

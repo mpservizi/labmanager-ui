@@ -1,9 +1,9 @@
-import store from "./store";
-import routes from "./router";
-import { NOME_MODULO } from "./costanti.js";
+import store from './store';
+import routes from './router';
+import { NOME_MODULO } from './costanti.js';
 
-export default {
-  name: NOME_MODULO,
-  store: store,
-  routes: routes
+export const Modulo = {
+    name: NOME_MODULO,
+    store: store,
+    routes: routes
 };
