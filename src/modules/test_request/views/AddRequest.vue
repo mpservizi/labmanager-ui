@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import DataPicker from '../components/DataPicker.vue';
+import DataPicker from '@/components/DataPicker.vue';
 export default {
     name: 'AddRequest',
     components: { DataPicker },
