@@ -1,7 +1,7 @@
-import Main from '../views/Main.vue';
-import TestRequestView from '../views/TestRequestView.vue';
-import SchedularView from '../views/SchedularView.vue';
-import { ROOT_PATH } from '../costanti.js';
+const Main = '../views/Main.vue';
+const TestRequestView = '../views/TestRequestView.vue';
+const SchedularView = '../views/SchedularView.vue';
+const ROOT_PATH = '/schedular';
 
 const ENTRY_ROUTE = {
     name: 'schedular_module',
@@ -101,4 +101,5 @@ function creaLinksNavigazione(item) {
 }
 
 // const linkAuto = creaModuleRoutes(moduleRoutes);
-export default rawExport;
+let result = creaModuleRoutes(moduleRoutes);
+console.log(result);
