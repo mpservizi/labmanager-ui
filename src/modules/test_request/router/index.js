@@ -1,4 +1,5 @@
 import Main from '../views/Main.vue';
+import AddView from '../views/AddRequest.vue';
 
 export default [
     {
@@ -9,6 +10,17 @@ export default [
             breadcrumb: [
                 { name: 'Homepage', link: 'home' },
                 { name: 'Test request' }
+            ]
+        }
+    },
+    {
+        path: '/test_request/add',
+        name: 'add_request',
+        component: AddView,
+        meta: {
+            breadcrumb: [
+                { name: 'Lista richieste', link: 'test_requests' },
+                { name: 'New test request' }
             ]
         }
     }
