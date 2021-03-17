@@ -1,10 +1,12 @@
 <template>
     <div>
         <v-row>
-            <v-col v-for="app in apps" :key="app.id">
+            <v-col v-for="app in listaApp" :key="app.id">
                 <div>
-                    <h1>{{ app.nome }}</h1>
-                    <router-link :to="app.link">Open</router-link>
+                    <h1>{{ app.label }}</h1>
+                    <router-link :to="{ name: app.routeName }"
+                        >Open</router-link
+                    >
                 </div>
             </v-col>
         </v-row>
@@ -12,31 +14,20 @@
 </template>
 
 <script>
+import { LISTA_MODULI } from '@/shared/info-moduli';
 export default {
     name: 'Apps',
     components: {},
     data() {
-        return {
-            apps: [
-                {
-                    id: 1,
-                    nome: 'Schedular ciclature',
-                    link: '/schedular/'
-                },
-                {
-                    id: 2,
-                    nome: 'Monitor ciclature',
-                    link: '/monitorendurance'
-                },
-                {
-                    id: 3,
-                    nome: 'App 1',
-                    link: '/app3'
-                }
-            ]
-        };
+        return {};
     },
-    props: {}
+    props: {},
+    computed: {
+        listaApp() {
+            let result = LISTA_MODULI.filter((item) => item.id != 1);
+            return result;
+        }
+    }
 };
 </script>
 

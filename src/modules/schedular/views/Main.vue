@@ -1,9 +1,6 @@
 <template>
     <div>
         <div>
-            <router-link :to="{ name: 'TestRequestView' }"
-                >Test resquest</router-link
-            >
             <router-link :to="{ name: 'SchedularView' }">Schedular</router-link>
         </div>
     </div>

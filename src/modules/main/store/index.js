@@ -24,10 +24,10 @@ export default {
  * @returns
  */
 async function registraModuliGlobali() {
-    LISTA_MODULI.forEach(item => {
+    LISTA_MODULI.forEach(async item => {
         if (item.registrareOnAvvio) {
             //Registro moduli con parametro root true. Non so ancora cosa cambia mettendo a false
-            importaAndRegistra(item.cartella, true);
+            await importaAndRegistra(item.cartella, true);
         }
     });
     return true;

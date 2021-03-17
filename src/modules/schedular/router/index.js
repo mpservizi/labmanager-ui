@@ -1,5 +1,5 @@
 import Main from '../views/Main.vue';
-import TestRequestView from '../views/TestRequestView.vue';
+// import TestRequestView from '../views/TestRequestView.vue';
 import SchedularView from '../views/SchedularView.vue';
 import { ROOT_PATH } from '../costanti.js';
 
@@ -10,19 +10,19 @@ const ENTRY_ROUTE = {
     isRoot: true
 };
 
-const moduleRoutes = [
-    ENTRY_ROUTE,
-    {
-        name: 'TestRequestView',
-        linkLabel: 'Test request',
-        component: TestRequestView
-    },
-    {
-        name: 'SchedularView',
-        linkLabel: 'Test request',
-        component: SchedularView
-    }
-];
+// const moduleRoutes = [
+//     ENTRY_ROUTE,
+//     {
+//         name: 'TestRequestView',
+//         linkLabel: 'Test request',
+//         component: TestRequestView
+//     },
+//     {
+//         name: 'SchedularView',
+//         linkLabel: 'Test request',
+//         component: SchedularView
+//     }
+// ];
 
 const rawExport = [
     {
@@ -36,19 +36,6 @@ const rawExport = [
             ]
         }
     },
-
-    {
-        path: ROOT_PATH + '/p1',
-        name: 'TestRequestView',
-        component: TestRequestView,
-        meta: {
-            breadcrumb: [
-                { name: 'Schedular', link: 'schedular_module' },
-                { name: 'Test request' }
-            ]
-        }
-    },
-
     {
         path: ROOT_PATH + '/p2',
         name: 'SchedularView',

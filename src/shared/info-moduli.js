@@ -8,6 +8,7 @@ export const LISTA_MODULI = [
         cartella: 'main',
         label: 'Main',
         route: '/',
+        routeName: 'home',
         descrizione: 'Modulo entry point per intera applicazione',
         registrareOnAvvio: false //Modulo main caricato nel file main.js
     },
@@ -16,6 +17,7 @@ export const LISTA_MODULI = [
         cartella: 'schedular',
         label: 'Schedular Ciclature',
         route: '/schedular',
+        routeName: 'SchedularView',
         descrizione: 'Pianifica le prove sui stalli di ciclatura',
         registrareOnAvvio: true
     },
@@ -24,7 +26,17 @@ export const LISTA_MODULI = [
         cartella: 'monitor_ciclatura',
         label: 'Monitor Ciclature',
         route: '/monitor_ciclatura',
+        routeName: 'monitor_ciclatura',
         descrizione: 'Mostra lo stato reale dei stalli di ciclatura',
+        registrareOnAvvio: true
+    },
+    {
+        id: 4,
+        cartella: 'test_request',
+        label: 'Test request',
+        route: '/test_request',
+        routeName: 'test_requests',
+        descrizione: 'Gestisce le richieste di prova per le ciclature',
         registrareOnAvvio: true
     }
 ];

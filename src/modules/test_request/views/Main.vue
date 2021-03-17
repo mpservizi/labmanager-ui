@@ -6,11 +6,11 @@
 
 <script>
 export default {
-    name: 'TestRequest',
+    name: 'TestRequet',
     components: {},
     data() {
         return {
-            msg: 'Gestione test request'
+            msg: 'Test request page in modulo'
         };
     },
     props: {}
