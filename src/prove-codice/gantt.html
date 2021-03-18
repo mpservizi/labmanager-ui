@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Single task</title>
+        <script src="./dati.js"></script>
+        <script src="../modules/gantt/libs/gantt/dhtmlxgantt.js"></script>
+        <link
+            rel="stylesheet"
+            href="../modules/gantt/libs/gantt/dhtmlxgantt.css"
+        />
+        <style>
+            .gantt_tooltip {
+                font-size: 13px;
+                line-height: 16px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="gantt_here" style="width: 100%; height: 500px;"></div>
+        <script>
+            // gantt.plugins({
+            //     click_drag: true
+            // });
+            gantt.plugins({
+                tooltip: true,
+                auto_scheduling: true
+            });
+            gantt.config.lightbox.sections = [
+                {
+                    name: 'description',
+                    height: 38,
+                    map_to: 'text',
+                    type: 'textarea',
+                    focus: true
+                },
+                {
+                    name: 'priority',
+                    height: 22,
+                    map_to: 'priority',
+                    type: 'select',
+                    options: [
+                        { key: 1, label: 'High' },
+                        { key: 2, label: 'Normal' },
+                        { key: 3, label: 'Low' }
+                    ]
+                },
+                { name: 'time', type: 'duration', map_to: 'auto' }
+            ];
+
+            gantt.config.open_split_tasks = true;
+            gantt.locale.labels.section_priority = 'Priority';
+            gantt.config.auto_scheduling = true;
+            gantt.config.auto_scheduling_strict = false;
+            // gantt.config.multiselect = true;
+
+            gantt.init('gantt_here');
+            gantt.parse(dati);
+            function creatask() {
+                gantt.createTask({
+                    text: 'New task',
+                    start_date: gantt.roundDate(startDate),
+                    end_date: gantt.roundDate(endDate)
+                });
+            }
+        </script>
+    </body>
+</html>
