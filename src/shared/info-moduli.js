@@ -38,6 +38,15 @@ export const LISTA_MODULI = [
         routeName: 'test_requests',
         descrizione: 'Gestisce le richieste di prova per le ciclature',
         registrareOnAvvio: true
+    },
+    {
+        id: 5,
+        cartella: 'gantt',
+        label: 'Planner',
+        route: '/gantt',
+        routeName: 'gantt',
+        descrizione: 'Pianificazione delle prove in base ai progetti',
+        registrareOnAvvio: true
     }
 ];
 
