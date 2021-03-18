@@ -1,15 +1,13 @@
-const URL_RISORSE = "http://localhost:3000/api/planner/risorse";
-const URL_CICLATURA = "http://localhost:3000/api/planner/dati_ciclatura";
-
-import { parseEventiServer, parseRisorse } from "./data-parser.js";
+import { URL_RISORSE, URL_CICLATURA } from '@/shared/api-routes.js';
+import { parseEventiServer, parseRisorse } from './data-parser.js';
 
 /**
  * Carica la liste delle risorse dal server
  * @returns
  */
 export async function loadRisorse() {
-  let data = await getRequest(URL_RISORSE);
-  return parseRisorse(data);
+    let data = await getRequest(URL_RISORSE);
+    return parseRisorse(data);
 }
 
 /**
@@ -17,8 +15,8 @@ export async function loadRisorse() {
  * @returns
  */
 export async function loadDatiCiclatura() {
-  let data = await getRequest(URL_CICLATURA);
-  return parseEventiServer(data);
+    let data = await getRequest(URL_CICLATURA);
+    return parseEventiServer(data);
 }
 
 /**
@@ -27,8 +25,8 @@ export async function loadDatiCiclatura() {
  * @returns
  */
 export async function save(dati) {
-  let result = await postRequest(URL_CICLATURA, dati);
-  return result;
+    let result = await postRequest(URL_CICLATURA, dati);
+    return result;
 }
 
 /**
@@ -38,19 +36,19 @@ export async function save(dati) {
  * @returns
  */
 async function postRequest(url, json) {
-  try {
-    const rawResponse = await fetch(url, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      body: json
-    });
-    return await rawResponse.json();
-  } catch (error) {
-    return null;
-  }
+    try {
+        const rawResponse = await fetch(url, {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: json
+        });
+        return await rawResponse.json();
+    } catch (error) {
+        return null;
+    }
 }
 
 /**
@@ -59,7 +57,7 @@ async function postRequest(url, json) {
  * @returns : Json parsed
  */
 async function getRequest(url) {
-  let response = await fetch(url);
-  let data = await response.json();
-  return data;
+    let response = await fetch(url);
+    let data = await response.json();
+    return data;
 }
