@@ -32,26 +32,13 @@ export default {
         };
     },
     props: {},
+    mounted() {
+        this.$store.dispatch('TestRequestModule/loadRichieste');
+    },
     methods: {},
     computed: {
         listaRichieste() {
-            let lista = [
-                {
-                    id: 1,
-                    progetto: 'Universal range',
-                    descrizione: 'Switch gallery schema 1 testati a 16A',
-                    inizio: '04/03/2021',
-                    fine: '28/03/2021'
-                },
-                {
-                    id: 2,
-                    progetto: 'Universal range',
-                    descrizione: 'Switch gallery schema 6 testati a 16A',
-                    inizio: '04/03/2021',
-                    fine: '28/03/2021'
-                }
-            ];
-            return lista;
+            return this.$store.getters['TestRequestModule/listaRichieste'];
         }
     }
 };
