@@ -14,11 +14,18 @@
         </v-app-bar>
 
         <v-main>
-            <breadcrumbs />
-            <v-container>
-                <router-view></router-view>
+            <v-container fluid>
+                <breadcrumbs class="app-links"></breadcrumbs>
+                <div class="rw">
+                    <router-view></router-view>
+                </div>
             </v-container>
         </v-main>
+        <v-footer padless dense>
+            <v-col class="text-center" cols="12">
+                <span>Made with passion by </span><strong>Malkit Sandhu</strong>
+            </v-col>
+        </v-footer>
     </v-app>
 </template>
 
@@ -37,7 +44,15 @@ html,
 body {
     margin: 0;
     padding: 0;
+    /* height: 100%; */
+    /* overflow: hidden; */
+}
+.prova {
+    background: green;
     height: 100%;
-    overflow: hidden;
+}
+.rw {
+    /* background: gray; */
+    height: 850px;
 }
 </style>
