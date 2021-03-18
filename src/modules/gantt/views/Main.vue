@@ -9,37 +9,15 @@ export default {
     components: { Gantt },
     data() {
         return {
-            tasks: {
-                data: [
-                    {
-                        id: 1,
-                        text: 'Task #1',
-                        start_date: '2020-01-17',
-                        duration: 3,
-                        progress: 0.6
-                    },
-                    {
-                        id: 2,
-                        text: 'Task #2',
-                        start_date: '2020-01-20',
-                        duration: 3,
-                        progress: 0.4
-                    }
-                ],
-                links: [{ id: 1, source: 1, target: 2, type: '0' }]
-            }
+            tasks: {}
         };
     },
     props: {},
     mounted() {
-        this.$store.dispatch('GanttModule/loadRichieste');
+        this.$store.dispatch('GanttModule/loadTasks');
     },
     methods: {},
-    computed: {
-        dati() {
-            return this.$store.getters['GanttModule/listaRichieste'];
-        }
-    }
+    computed: {}
 };
 </script>
 

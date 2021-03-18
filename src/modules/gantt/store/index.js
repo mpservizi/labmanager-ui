@@ -1,12 +1,12 @@
 import { NOME_MODULO } from '../costanti.js';
-import TestRequestService from '../servizi/index.js';
+import TasksService from '../servizi/index.js';
 export default {
     namespaced: true,
     state: {
-        lista: []
+        lista: { data: [], links: [] }
     },
     getters: {
-        listaRichieste: function(state) {
+        listaTasks: function(state) {
             return state.lista;
         }
     },
@@ -21,8 +21,8 @@ export default {
             console.info('Installazione modulo : ' + NOME_MODULO);
             return true; //Risultato funzione RegistraModulo
         },
-        async loadRichieste({ commit }) {
-            let dati = await TestRequestService.getAll();
+        async loadTasks({ commit }) {
+            let dati = await TasksService.getAll();
             commit('SET_DATI', dati);
         }
     }

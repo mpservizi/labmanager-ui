@@ -19,7 +19,19 @@ export default {
         gantt.config.xml_date = '%Y-%m-%d';
 
         gantt.init(this.$refs.gantt);
-        gantt.parse(this.$props.tasks);
+    },
+    methods: {},
+    computed: {
+        // Estaggo i dati dal store
+        dati() {
+            return this.$store.getters['GanttModule/listaTasks'];
+        }
+    },
+    watch: {
+        //  Quando cambiano i dati nel store ricarico nel gantt
+        dati(newVal, oldVal) {
+            gantt.parse(newVal);
+        }
     }
 };
 </script>
