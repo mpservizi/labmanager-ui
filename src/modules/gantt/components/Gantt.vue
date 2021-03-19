@@ -12,14 +12,7 @@ import MyGantt from '../js/my-gantt.js';
 
 export default {
     name: 'gantt',
-    props: {
-        tasks: {
-            type: Object,
-            default() {
-                return { data: [], links: [] };
-            }
-        }
-    },
+    props: {},
     data() {
         return {
             gruppoAttivo: false

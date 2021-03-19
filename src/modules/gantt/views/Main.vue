@@ -1,5 +1,5 @@
 <template>
-    <gantt :tasks="tasks"></gantt>
+    <gantt></gantt>
 </template>
 
 <script>
@@ -8,9 +8,7 @@ export default {
     name: 'GanttView',
     components: { Gantt },
     data() {
-        return {
-            tasks: {}
-        };
+        return {};
     },
     props: {},
     mounted() {

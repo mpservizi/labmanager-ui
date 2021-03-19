@@ -8,6 +8,17 @@ function init(divContainer) {
     // gantt.config.task_height = 16;
     // gantt.config.row_height = 40;
 
+    /** Setting scala */
+    gantt.config.min_column_width = 10;
+    gantt.config.scale_height = 90;
+
+    gantt.config.scales = [
+        { unit: 'month', step: 1, format: '%F, %Y' },
+        { unit: 'week', step: 1, format: 'WK %W' }
+    ];
+
+    /** Fine setting scala */
+
     gantt.serverList('carichi', [
         { key: 1, label: '19.1' },
         { key: 2, label: '19.2' },
