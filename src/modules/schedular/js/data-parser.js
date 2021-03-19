@@ -4,7 +4,7 @@ import {
     dateToStr,
     ricavaNomeCaricoDaId,
     ricavaIdCarico,
-    calcolaDifferenzaDateInGiorni
+    calcolaDatiDurata
 } from './my-func.js';
 /**
  * Converte gli eventi del schedular in json per salvare sul server
@@ -122,40 +122,32 @@ export async function parseRisorse(datiServer) {
     return [];
 }
 
+/**
+ * Calcola il carico per tutte le risorse in base ai task assegnati
+ * @param {*} myScheduler 
+ * @param {*} eventi 
+ */
 export function calcolaCaricoRisorse(myScheduler, eventi) {
     let caricoRisorse = {};
-    debugger;
     eventi.forEach(item => {
-        ricavaCaricoRisorsaTask(myScheduler, caricoRisorse, item);
+        let caricoTask=ricavaCaricoRisorsaTask(myScheduler, caricoRisorse, item);
+        sommaCaricoTaskAlWorkloadRisorse(caricoRisorse,item.idRisorsa,caricoTask);
     });
-    console.log(caricoRisorse);
-    return;
-    // console.log(eventi);
-    // let taskWk = eventi.filter(item => item.startWeek == 9);
-    // console.log(taskWk);
-
-    console.log(tasksRisorsa);
-    console.log(settimane);
+    return caricoRisorse;
 }
 
-function addDatiDurata(myScheduler, item) {
-    item.startWeek = myScheduler.date.getISOWeek(item.start_date);
-    item.endWeek = myScheduler.date.getISOWeek(item.end_date);
-    item.durata =
-        calcolaDifferenzaDateInGiorni(item.start_date, item.end_date) + 1;
-
-    //Indica il numero dei giorni liberi tra inzio settimana e inizio task
-    let weekStartDate = gantt.date.week_start(item.start_date);
-    item.start_offset = calcolaDifferenzaDateInGiorni(
-        weekStartDate,
-        item.start_date
-    );
-}
-
+/**
+ * Aggiunge il valore alla chiave del oggetto indicato
+ * @param {*} obj : oggetto in cui inserire
+ * @param {*} key : chiave dove sommare
+ * @param {*} valore : valore da sommare al valore esistente nella chiave
+ */
 function addValoreInKey(obj, key, valore) {
+    //Se il valore della chiave non esisto, imposto 0
     if (!obj[key]) {
         obj[key] = 0;
     }
+    //Aggiungo il valore
     obj[key] += valore;
 }
 
@@ -171,39 +163,61 @@ function addValoreInKey(obj, key, valore) {
 function ricavaCaricoRisorsaTask(myScheduler, workLoad, item) {
     let caricoRisorsa = {};
     //Aggiungo i dati della durata al oggetto task
-    addDatiDurata(myScheduler, item);
+    item.datiDurata = calcolaDatiDurata(item.start_date, item.end_date);
+
+    let startWeek = item.datiDurata.startWeek;
+    let endWeek = item.datiDurata.endWeek;
+    let durata = item.datiDurata.durata;
+    let start_offset = item.datiDurata.start_offset;
+
+    let part1 = 7 - start_offset; //7 = numero di giorni nella settimana in cui inizia il task
+    let part2 = durata - part1; // resto dal aggiungere nella settimana successiva
+
     //Se task è incluso nella stessa settimana
-    if (item.startWeek == item.endWeek) {
-        addValoreInKey(caricoRisorsa, item.startWeek, item.durata);
-    } else {
+    let keyWeek = creaKeyWeek(startWeek);
+    let giorni = durata;
+    if (startWeek != endWeek) {
         //task tra 2 settimane
-        //nella prima settimana aggiungo i giorni disponibili
-        let part1 = 7 - item.start_offset; //7 = numero di giorni nella settimana
-        let part2 = item.durata - part1; // resto dal aggiungere nella settimana successiva
-
-        //Ad oggin non è gestitito il task più lungo di 2 settimane perchè nessuna prova dura così tanto
-        addValoreInKey(caricoRisorsa, item.startWeek, part1);
-        //nella settimana successiva aggiungo i giorni rimanenti
-        addValoreInKey(caricoRisorsa, item.startWeek + 1, part2);
+        giorni = part1;
     }
+    //Sommo il carico di lavoro
+    addValoreInKey(caricoRisorsa, keyWeek, giorni);
 
+    if (part2 > 0) {
+        keyWeek = creaKeyWeek(startWeek + 1);
+        addValoreInKey(caricoRisorsa, keyWeek, part2);
+    }
+    return caricoRisorsa;
+}
+
+/**
+ * Somma il carico del task nella lista del carico di tutte le risorse
+ * @param {*} workLoad : lista con carico di tutte le risorse
+ * @param {*} idRisorsa : id della risorsa a cui sommare
+ * @param {*} caricoRisorsa : carico da sommare
+ */
+function sommaCaricoTaskAlWorkloadRisorse(workLoad, idRisorsa, caricoRisorsa) {
     //aggiungere il carico della risorsa ai valori già presenti nella lista
-    let objRisorsa = workLoad[item.idRisorsa];
+    let objRisorsa = workLoad[idRisorsa];
     //Se oggetto non è presente nella lista assegno i carico calcolato
     if (!objRisorsa) {
-        workLoad[item.idRisorsa] = caricoRisorsa;
+        workLoad[idRisorsa] = caricoRisorsa;
     } else {
-        console.log(workLoad);
-        console.log(objRisorsa);
-        console.log(caricoRisorsa);
         //se è presente devo aggiornar ei singoli valori delle settimane
-        // Object.keys(caricoRisorse).forEach(key => {
-        //     let week = parseInt(key);
-        //     let giorni = caricoRisorse[week];
-        //     addValoreInKey(objRisorsa, key, caricoRisorsa[key]);
-        // });
-
-        //Aggiorno oggetto nella lista
-        workLoad[item.idRisorsa] = objRisorsa;
+        Object.keys(caricoRisorsa).forEach(key => {
+            addValoreInKey(objRisorsa, key, caricoRisorsa[key]);
+        });
     }
+}
+
+/**
+ * Crea la chiave da usare nell'oggetto per rappresentare il numero di settimana
+ * @param {*} numWeek 
+ */
+function creaKeyWeek(numWeek) {
+    let prefix = 'WK';
+    if (numWeek < 10) {
+        prefix = prefix + '0';
+    }
+    return prefix + numWeek;
 }

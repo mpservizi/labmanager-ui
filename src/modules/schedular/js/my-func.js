@@ -18,7 +18,7 @@ export function filtraRisorse(valore) {
     if (valore == 'all') {
         itemsFiltrati = risorse.slice();
     } else {
-        itemsFiltrati = risorse.filter(function(room) {
+        itemsFiltrati = risorse.filter(function (room) {
             return room.label == valore;
         });
     }
@@ -99,4 +99,24 @@ export function showMessage(testo, tipo) {
         type: tipo,
         text: testo
     });
+}
+
+/**
+ * Calcola i dati relativi alla durata in base alle date indicate
+ * @param {Date} start_date 
+ * @param {Date} end_date 
+ */
+export function calcolaDatiDurata(start_date, end_date) {
+    let item = {};
+    item.startWeek = myScheduler.date.getISOWeek(start_date);
+    item.endWeek = myScheduler.date.getISOWeek(end_date);
+    item.durata =
+        calcolaDifferenzaDateInGiorni(start_date, end_date) + 1;
+
+    //Indica il numero dei giorni liberi tra inzio settimana e inizio task
+    let weekStartDate = myScheduler.date.week_start(start_date);
+    item.start_offset = calcolaDifferenzaDateInGiorni(
+        weekStartDate, start_date);
+
+    return item;
 }

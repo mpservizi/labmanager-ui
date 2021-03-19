@@ -40,6 +40,7 @@ async function saveDati() {
     try {
         // let json = eventiToJson(myScheduler.myScheduler.getEvents());
         let carico = calcolaCaricoRisorse(myScheduler, myScheduler.getEvents());
+        console.log(carico);        
         // let result = await save(json);
         // return result;
         return true;
