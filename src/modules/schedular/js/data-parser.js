@@ -19,6 +19,10 @@ export function eventiToJson(eventi) {
         //Per ogni evento
         keys.forEach(key => {
             let item = eventi[key];
+            if (!item.idRisorsa) {
+                console.log('Id risorsa non valido');
+                return;
+            }
             //campi modificati prima di salvare sul server
             let data_fine = dateToStr(item.end_date);
             let data_inizio = dateToStr(item.start_date);
@@ -26,11 +30,11 @@ export function eventiToJson(eventi) {
 
             let modello = {
                 id: item.id,
-                idRisorsa: item.idRisorsa,
+                idRisorsa: parseInt(item.idRisorsa),
                 text: item.text,
-                corrente: item.corrente,
+                corrente: parseInt(item.corrente),
                 carico: nomeCarico,
-                idRequest: item.idRequest,
+                idRequest: parseInt(item.idRequest),
                 start_date: data_inizio,
                 end_date: data_fine,
                 time: {

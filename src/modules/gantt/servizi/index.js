@@ -22,6 +22,7 @@ async function getAll() {
     //     links: [{ id: 1, source: 1, target: 2, type: '0' }]
     // };
     let dati = await loadDatiCiclatura();
+    ricavaSettimana(dati);
     // console.log(dati);
     let result = {
         data: dati.map(item => {
@@ -43,6 +44,10 @@ async function getAll() {
     // console.log(result);
     await pausa(10);
     return result;
+}
+
+function ricavaSettimana(dati) {
+    console.log(dati);
 }
 
 export default {
