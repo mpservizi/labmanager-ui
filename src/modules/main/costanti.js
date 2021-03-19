@@ -1,1 +1,1 @@
-export const NOME_MODULO = "MainModule";
+export const NOME_MODULO = 'MainModule';

@@ -11,14 +11,14 @@
 </template>
 <script>
 export default {
-  name: "Scala",
+  name: 'Scala',
   props: {},
   data() {
     return {};
   },
   methods: {
     aggiorna(valore) {
-      this.$emit("cambio", parseInt(valore));
+      this.$emit('cambio', parseInt(valore));
     }
   },
   mounted: function() {}

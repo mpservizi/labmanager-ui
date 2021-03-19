@@ -19,16 +19,16 @@
 
 <script>
 export default {
-  name: "TaskList",
+  name: 'TaskList',
   components: {},
   data() {
     return {
-      msg: "Componente modello",
+      msg: 'Componente modello',
       tasks: [
-        { id: 1, text: "Task 1" },
-        { id: 2, text: "Task 2" },
-        { id: 3, text: "Task 3" },
-        { id: 4, text: "Task 4" }
+        { id: 1, text: 'Task 1' },
+        { id: 2, text: 'Task 2' },
+        { id: 3, text: 'Task 3' },
+        { id: 4, text: 'Task 4' }
       ]
     };
   },

@@ -6,11 +6,11 @@
 
 <script>
 export default {
-  name: "HelloWorld",
+  name: 'HelloWorld',
   components: {},
   data() {
     return {
-      msg: "Componente modello"
+      msg: 'Componente modello'
     };
   },
   props: {}

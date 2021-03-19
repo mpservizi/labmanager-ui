@@ -17,9 +17,9 @@
   </v-row>
 </template>
 <script>
-import { LISTA_FILTRO_RISORSE } from "./../js/costanti.js";
+import { LISTA_FILTRO_RISORSE } from './../js/costanti.js';
 export default {
-  name: "Filtro",
+  name: 'Filtro',
   data() {
     return {
       items: LISTA_FILTRO_RISORSE
@@ -27,10 +27,10 @@ export default {
   },
   methods: {
     filtraRisorse(valore) {
-      this.$emit("cambio", valore);
+      this.$emit('cambio', valore);
     },
     save() {
-      this.$emit("save");
+      this.$emit('save');
     }
   },
   mounted: function() {}

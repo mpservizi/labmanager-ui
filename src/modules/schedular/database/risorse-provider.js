@@ -1,24 +1,24 @@
 //macchine
 const L180 = {
   idMacchina: 1,
-  nome: "L180",
-  stalli: [{ num: "6" }, { num: "7" }, { num: "8" }, { num: "9" }]
+  nome: 'L180',
+  stalli: [{ num: '6' }, { num: '7' }, { num: '8' }, { num: '9' }]
 };
 const L232 = {
   idMacchina: 2,
-  nome: "L232",
-  stalli: [{ num: "6" }, { num: "7" }, { num: "8" }, { num: "9" }]
+  nome: 'L232',
+  stalli: [{ num: '6' }, { num: '7' }, { num: '8' }, { num: '9' }]
 };
 const L2020 = {
   idMacchina: 3,
-  nome: "L2020",
+  nome: 'L2020',
   stalli: [
-    { num: "1" },
-    { num: "2" },
-    { num: "3" },
-    { num: "4" },
-    { num: "5" },
-    { num: "6" }
+    { num: '1' },
+    { num: '2' },
+    { num: '3' },
+    { num: '4' },
+    { num: '5' },
+    { num: '6' }
   ]
 };
 

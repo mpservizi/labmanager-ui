@@ -1,4 +1,4 @@
-import { NOME_MODULO } from "../costanti.js";
+import { NOME_MODULO } from '../costanti.js';
 import PersonModule from './person_module';
 import MessageModule from './message_module';
 import { CiclaturaModule } from './ciclatura_module';
@@ -18,7 +18,7 @@ export default {
   actions: {
     /** Metodo per inizializzare il modulo. Chiamato dopo la registrazione */
     async init() {
-      console.info("Installazione modulo : " + NOME_MODULO);
+      console.info('Installazione modulo : ' + NOME_MODULO);
       return true; //Risultato funzione RegistraModulo
     },
   },

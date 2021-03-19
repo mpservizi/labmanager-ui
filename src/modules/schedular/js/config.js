@@ -10,11 +10,11 @@ export function initPreConfig(myScheduler) {
 
     //Titolo colonne risorse
     var headerHTML =
-        "<div class='timeline_item_cell'>Id</div>" +
-        "<div class='timeline_item_separator'></div>" +
-        "<div class='timeline_item_cell'>Macchina</div>" +
-        "<div class='timeline_item_separator'></div>" +
-        "<div class='timeline_item_cell'>Stallo</div>";
+        '<div class=\'timeline_item_cell\'>Id</div>' +
+        '<div class=\'timeline_item_separator\'></div>' +
+        '<div class=\'timeline_item_cell\'>Macchina</div>' +
+        '<div class=\'timeline_item_separator\'></div>' +
+        '<div class=\'timeline_item_cell\'>Stallo</div>';
 
     myScheduler.locale.labels.timeline_scale_header = headerHTML;
 

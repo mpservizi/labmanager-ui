@@ -13,10 +13,10 @@
 
 <script>
 // @ is an alias to /src
-import TaskList from "./../components/TaskList.vue";
-import ReportList from "./../components/ReportList.vue";
+import TaskList from './../components/TaskList.vue';
+import ReportList from './../components/ReportList.vue';
 export default {
-  name: "Main",
+  name: 'Main',
   components: {
     TaskList,
     ReportList
