@@ -13,7 +13,7 @@ import {
 } from './my-view.js';
 
 import { save, loadRisorse, loadDatiCiclatura } from './api.js';
-import { eventiToJson } from './data-parser.js';
+import { eventiToJson, calcolaCaricoRisorse } from './data-parser.js';
 
 import {
     LISTA_RISORSE,
@@ -38,9 +38,11 @@ function initPlanner(container, dataInizio, view) {
 // Salva i dati sul server
 async function saveDati() {
     try {
-        let json = eventiToJson(myScheduler._get_serializable_data());
-        let result = await save(json);
-        return result;
+        // let json = eventiToJson(myScheduler.myScheduler.getEvents());
+        let carico = calcolaCaricoRisorse(myScheduler, myScheduler.getEvents());
+        // let result = await save(json);
+        // return result;
+        return true;
     } catch (error) {
         console.log(error);
         console.log('Errore salvataggio dati');
