@@ -1,74 +1,90 @@
-import { myScheduler } from "./my-lib.js";
+import { myScheduler } from './my-lib.js';
 
-import { initLightbox } from "./lightbox.js";
-import { initEventi } from "./ev-manager.js";
-import { initPreConfig } from "./config.js";
-import { filtraRisorse } from "./my-func.js";
+import { initLightbox } from './lightbox.js';
+import { initEventi } from './ev-manager.js';
+import { initPreConfig } from './config.js';
+import { filtraRisorse } from './my-func.js';
 
 import {
-  creaParamteriCustom,
-  centraViewOggi,
-  setScalaSettimanale,
-  setScalaMensile
-} from "./my-view.js";
+    creaParamteriCustom,
+    centraViewOggi,
+    setScalaSettimanale,
+    setScalaMensile
+} from './my-view.js';
 
-import { save, loadRisorse, loadDatiCiclatura } from "./api.js";
-import { eventiToJson } from "./data-parser.js";
+import { save, loadRisorse, loadDatiCiclatura } from './api.js';
+import { eventiToJson } from './data-parser.js';
 
-import { LISTA_RISORSE, SCALA_MENSILE } from "./costanti.js";
+import {
+    LISTA_RISORSE,
+    SCALA_MENSILE,
+    LISTA_SELEZIONE_RISORSE
+} from './costanti.js';
 
 function initPlanner(container, dataInizio, view) {
-  creaParamteriCustom(myScheduler);
-  initPreConfig(myScheduler); //Configuration
-  initLightbox(myScheduler); //Lightbox
-  initEventi(myScheduler); //Eventi
+    // Inizalizzo le liste vuote per le risrose
+    myScheduler.serverList(LISTA_SELEZIONE_RISORSE);
+    myScheduler.serverList(LISTA_RISORSE);
+    creaParamteriCustom(myScheduler);
+    initPreConfig(myScheduler); //Configuration
+    initLightbox(myScheduler); //Lightbox
+    initEventi(myScheduler); //Eventi
 
-  //Init schedular
-  myScheduler.init(container, new Date(), "timeline");
-  centraViewOggi();
+    //Init schedular
+    myScheduler.init(container, new Date(), 'timeline');
+    centraViewOggi();
 }
 
 // Salva i dati sul server
 async function saveDati() {
-  try {
-    let json = eventiToJson(myScheduler._get_serializable_data());
-    let result = await save(json);
-    return result;
-  } catch (error) {
-    console.log(error);
-    console.log("Errore salvataggio dati");
-    return null;
-  }
+    try {
+        let json = eventiToJson(myScheduler._get_serializable_data());
+        let result = await save(json);
+        return result;
+    } catch (error) {
+        console.log(error);
+        console.log('Errore salvataggio dati');
+        return null;
+    }
 }
 
 // carica i dati dal server
 async function loadDati() {
-  try {
-    let risorse = await loadRisorse();
-    myScheduler.serverList(LISTA_RISORSE, risorse);
-    filtraRisorse();
+    try {
+        let risorse = await loadRisorse();
+        let listaSelezioneRisorse = risorse.map(item => {
+            return { key: item.key, label: item.label + ' - ' + item.stallo };
+        });
+        myScheduler.updateCollection(LISTA_RISORSE, risorse);
 
-    let eventi = await loadDatiCiclatura();
-    myScheduler.parse(eventi);
-    return true;
-  } catch (error) {
-    console.log(error);
-    console.log("Errore caricamento dati");
-    return false;
-  }
+        filtraRisorse();
+
+        let eventi = await loadDatiCiclatura();
+        myScheduler.parse(eventi);
+
+        myScheduler.updateCollection(
+            LISTA_SELEZIONE_RISORSE,
+            listaSelezioneRisorse
+        );
+        return true;
+    } catch (error) {
+        console.log(error);
+        console.log('Errore caricamento dati');
+        return false;
+    }
 }
 
 function cambiaScala(valore) {
-  if (valore == SCALA_MENSILE) {
-    setScalaMensile();
-  } else {
-    setScalaSettimanale();
-  }
+    if (valore == SCALA_MENSILE) {
+        setScalaMensile();
+    } else {
+        setScalaSettimanale();
+    }
 }
 export const MyPlanner = {
-  init: initPlanner,
-  filtraRisorse,
-  loadDati,
-  saveDati,
-  cambiaScala
+    init: initPlanner,
+    filtraRisorse,
+    loadDati,
+    saveDati,
+    cambiaScala
 };

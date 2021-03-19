@@ -1,5 +1,5 @@
-import { myScheduler } from "./my-lib.js";
-import { ricavaNomeCaricoDaId } from "./my-func.js";
+import { myScheduler } from './my-lib.js';
+import { ricavaNomeCaricoDaId } from './my-func.js';
 /**
  * Crea il template per evento quando è mostrato nella pagina
  * @param {*} start
@@ -8,16 +8,17 @@ import { ricavaNomeCaricoDaId } from "./my-func.js";
  * @returns
  */
 export function creaTestoBarraEvento(start, end, event) {
-  let testo = "";
-  let carico =
-    event.idCarico != undefined ? ricavaNomeCaricoDaId(event.idCarico) : "";
-  let corrente = event.corrente + "A";
-  testo = `<div class='txt_ev'>${carico} <br> ${corrente}</div>`;
-  return testo;
+    let testo = '';
+    let carico =
+        event.idCarico != undefined ? ricavaNomeCaricoDaId(event.idCarico) : '';
+    let corrente = event.corrente + 'A';
+    testo = `<div class='txt_ev'>${carico} <br> ${corrente}</div>`;
+    // return testo;
+    return event.text;
 }
 
 //Formatta data testo evento
-let formattaData = myScheduler.date.date_to_str("%d %M %Y");
+let formattaData = myScheduler.date.date_to_str('%d %M %Y');
 
 /**
  * Imposta i valori delle colonne per le risorse
@@ -27,14 +28,14 @@ let formattaData = myScheduler.date.date_to_str("%d %M %Y");
  * @returns
  */
 export function creaTemplateColonneRisorse(key, label, risorsa) {
-  let stallo = risorsa.stallo;
-  return [
-    "<div class='timeline_item_cell'>" + key + "</div>",
-    "<div class='timeline_item_separator'></div>",
-    "<div class='timeline_item_cell'>" + label + "</div>",
-    "<div class='timeline_item_separator'></div>",
-    "<div class='timeline_item_cell'>" + stallo + "</div>"
-  ].join("");
+    let stallo = risorsa.stallo;
+    return [
+        "<div class='timeline_item_cell'>" + key + '</div>',
+        "<div class='timeline_item_separator'></div>",
+        "<div class='timeline_item_cell'>" + label + '</div>',
+        "<div class='timeline_item_separator'></div>",
+        "<div class='timeline_item_cell'>" + stallo + '</div>'
+    ].join('');
 }
 
 /**
@@ -45,17 +46,17 @@ export function creaTemplateColonneRisorse(key, label, risorsa) {
  * @returns
  */
 export function creaTempateTooltip(start, end, event) {
-  // var room = getRoom(event.room) || { label: '' };
+    // var room = getRoom(event.room) || { label: '' };
 
-  var html = [];
-  html.push("Info: <b>" + event.text + "</b>");
-  // html.push('Room: <b>' + room.label + '</b>');
-  html.push("Inzio: <b>" + formattaData(start) + "</b>");
-  html.push("Fine: <b>" + formattaData(end) + "</b>");
-  // html.push(
-  //   getBookingStatus(event.status) + ', ' + getPaidStatus(event.is_paid)
-  // );
-  return html.join("<br>");
+    var html = [];
+    html.push('Info: <b>' + event.text + '</b>');
+    // html.push('Room: <b>' + room.label + '</b>');
+    html.push('Inzio: <b>' + formattaData(start) + '</b>');
+    html.push('Fine: <b>' + formattaData(end) + '</b>');
+    // html.push(
+    //   getBookingStatus(event.status) + ', ' + getPaidStatus(event.is_paid)
+    // );
+    return html.join('<br>');
 }
 
 /**
@@ -66,5 +67,5 @@ export function creaTempateTooltip(start, end, event) {
  * @returns
  */
 export function creaTemplateClasseEvento(start, end, event) {
-  return "carico_" + (event.idCarico || "");
+    return 'carico_' + (event.idCarico || '');
 }
