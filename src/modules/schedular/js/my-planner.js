@@ -13,8 +13,7 @@ import {
 } from './my-view.js';
 
 import { save, loadRisorse, loadDatiCiclatura } from './api.js';
-import { eventiToJson } from './data-parser.js';
-import { calcolaCaricoRisorse } from './my-worload.js';
+import { eventiToJson,workloadToJson } from './data-parser.js';
 
 import {
     LISTA_RISORSE,
@@ -40,8 +39,8 @@ function initPlanner(container, dataInizio, view) {
 async function saveDati() {
     try {
         // let json = eventiToJson(myScheduler.myScheduler.getEvents());
-        let carico = calcolaCaricoRisorse(myScheduler, myScheduler.getEvents());
-        console.log(carico);        
+        let carico = workloadToJson(myScheduler, myScheduler.getEvents());
+        console.log(carico);
         // let result = await save(json);
         // return result;
         return true;

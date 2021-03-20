@@ -1,4 +1,4 @@
-import {    calcolaDatiDurata} from './my-func.js';
+import {    calcolaDatiDurata,dateToStr} from './my-func.js';
 /**
  * Calcola il carico per tutte le risorse in base ai task assegnati
  * @param {*} myScheduler 
@@ -190,6 +190,6 @@ function creaObjWeek(giorni, item) {
     return {
         days: giorni,
         idRequest: item.idRequest,
-        start_date:item.datiDurata.weekStartDate
+        start_date:dateToStr(item.datiDurata.weekStartDate)
     }
 }

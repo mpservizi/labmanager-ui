@@ -4,6 +4,7 @@ import {
     ricavaNomeCaricoDaId,
     ricavaIdCarico,
 } from './my-func.js';
+import { calcolaCaricoRisorse } from './my-worload.js';
 /**
  * Converte gli eventi del schedular in json per salvare sul server
  * @param {*} eventi
@@ -120,3 +121,16 @@ export async function parseRisorse(datiServer) {
     return [];
 }
 
+/**
+ * Converte il workload delle risorse in json per salvare sul server
+ */
+export function workloadToJson(myScheduler, eventi) {
+    let json = '[]';
+    let workloadRisorse = calcolaCaricoRisorse(myScheduler, eventi);
+    try {
+        json = JSON.stringify(workloadRisorse)
+    } catch (error) {
+        console.log(error);
+    }
+    return json;
+}
