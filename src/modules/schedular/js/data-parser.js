@@ -128,43 +128,82 @@ export async function parseRisorse(datiServer) {
  * @param {*} eventi 
  */
 export function calcolaCaricoRisorse(myScheduler, eventi) {
-    let caricoRisorse = {};
-    let filtri = eventi.filter(item=>item.idRisorsa==6);
+    let filtri = eventi.filter(item => item.idRisorsa == 1);
     let matrice = [];
     filtri.forEach(item => {
-        let caricoTask = ricavaCaricoRisorsaTask(myScheduler, caricoRisorse, item);
-        // sommaCaricoTaskAlWorkloadRisorse(caricoRisorse, item.idRisorsa, caricoTask);
+        let caricoTask = ricavaCaricoRisorsaTask(myScheduler, item);
         matrice.push(caricoTask);
-        
     });
-    sommaDatiRisorsa(matrice);
+    let caricoRisorse = sommaDatiRisorsa(matrice);
+    // console.log(JSON.stringify(caricoRisorse));
+    // console.log(caricoRisorse);    
     return caricoRisorse;
 }
 
-function sommaDatiRisorsa(matriceLoads){
+/**
+ * Calcola la somma del workload per ogni carico su ciascuna risorsa
+ * @param {*} matriceLoads : array con il workload dei singoli task per risorsa
+ */
+function sommaDatiRisorsa(matriceLoads) {
     let result = {}
-    matriceLoads.forEach(item=>{
+    // console.log(matriceLoads);    
+                let richiesteAnalizzate = {};
+    matriceLoads.forEach(item => {
         //Record per la risorsa nel ogetto globale
         let objRisorsa = result[item.idRisorsa];
         //Se l'ogetto globale non contiene i dati per questa risorsa
-        if(!objRisorsa){
+        if (!objRisorsa) {
             result[item.idRisorsa] = item.workLoad;
-        }else{
-            debugger
+        } else {
             let idCarichiItem = Object.keys(item.workLoad);
-            idCarichiItem.forEach(keyCarico=>{
+            idCarichiItem.forEach(keyCarico => {
                 let caricoItem = item.workLoad[keyCarico];
-                let objCarico = objRisorsa;
-
+                let caricoGlobale = objRisorsa[keyCarico];
+                //Se esite già un carico uguale nel oggetto globale
+                if (caricoGlobale) {
+                    sommaWorloadTaskInMatrice(caricoGlobale, caricoItem,richiesteAnalizzate);
+                }else{
+                    //aggiungo carico locale nel oggetto globale
+                    objRisorsa[keyCarico] = caricoItem;
+                }
             })
-        }
-        // console.log(item);        
+        }   
     })
 
-    // console.log(JSON.stringify(matriceLoads));
-    // console.log(JSON.stringify(result));
-    console.log(result);
+    return result;
+}
 
+/**
+ * Calcola il totale workload per un carico, integrando i dati del task e matrice carico risorse
+ * @param {*} objGlobale : Oggetto con il workload del carico, preso dalla matrice delle risorse
+ * @param {*} objLocale : Oggetto con il workload del tak
+ * @param {*} richiesteAnalizzate : varibile che tiene traccia delle richieste già analizzate
+ */
+function sommaWorloadTaskInMatrice(objGlobale, objLocale,richiesteAnalizzate) {
+    Object.keys(objGlobale).forEach(keyWeek => {
+        //Array workload carico, valori sono {days:n,idRequest:n}
+        let caricoGlobale = objGlobale[keyWeek];
+        let caricoLocale = objLocale[keyWeek];
+        //Loop per ogni valore in 2 array
+        if (caricoGlobale != undefined && caricoLocale != undefined) {
+            caricoGlobale.forEach(objGlobale => {
+                caricoLocale.forEach(objLocale => {
+                    //Se due carichi appartengono alla stessa richiesta di prova
+                    if (objGlobale.idRequest == objLocale.idRequest) {
+                        //Sommo i giorni del carico locale in carico globale
+                        objGlobale.days += objLocale.days;
+                    }else{
+                        // Stesso carico ma per una richiesta diversa
+                        //Per evitare doppioni, Controllo se ho già analizzato questa test request
+                        if(richiesteAnalizzate[objLocale.idRequest]==undefined){
+                            richiesteAnalizzate[objLocale.idRequest]=true;
+                            caricoGlobale.push(objLocale);
+                        }
+                    }
+                })
+            });
+        }
+    });
 }
 
 /**
@@ -193,13 +232,11 @@ function addValoreInKey(obj, key, valore) {
  * Risultato è un oggetto che per chiave ha id della risorsa
  * come valore un oggetto che ha come chiave il numero della settimana e come valore il giorno dei giorni occupati dal task
  */
-function ricavaCaricoRisorsaTask(myScheduler, workLoad, item) {
+function ricavaCaricoRisorsaTask(myScheduler,item) {
     let caricoRisorsa = {};
     let arrWorkload = creaArrayCaricoTask(item);
-    // caricoRisorsa[item.idRisorsa] = {
-    //     [item.idCarico]: arrWorkload
-    // }
     caricoRisorsa.idRisorsa = item.idRisorsa;
+    caricoRisorsa.idTask = item.id;
     caricoRisorsa.workLoad = {
         [item.idCarico]: arrWorkload
     }
@@ -237,13 +274,13 @@ function creaArrayCaricoTask(item) {
 
     // arrWorkload.push(creaObjWeek(keyWeek, giorni, item));
     result[keyWeek] = [];
-    result[keyWeek].push(creaObjWeek(keyWeek, giorni, item));
+    result[keyWeek].push(creaObjWeek(giorni, item));
 
     if (part2 > 0) {
         keyWeek = creaKeyWeek(startWeek + 1);
         // arrWorkload.push(creaObjWeek(keyWeek, part2, item))
         result[keyWeek] = [];
-        result[keyWeek].push(creaObjWeek(keyWeek, part2, item));
+        result[keyWeek].push(creaObjWeek(part2, item));
     }
 
     // return arrWorkload;
@@ -301,7 +338,7 @@ function aggiungereCarico(loadEsistente, loadAttuale) {
 
     bigArray.forEach(item => {
 
-        console.log(item);        
+        console.log(item);
     });
 }
 
@@ -318,13 +355,7 @@ function creaKeyWeek(numWeek) {
 }
 
 
-function creaObjWeek(keyWeek, giorni, item) {
-    // return {
-    //     [keyWeek]: {
-    //         days: giorni,
-    //         idRequest: item.idRequest
-    //     },
-    // }
+function creaObjWeek(giorni, item) {
     return {
         days: giorni,
         idRequest: item.idRequest
