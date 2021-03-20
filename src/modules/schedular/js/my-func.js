@@ -114,9 +114,8 @@ export function calcolaDatiDurata(start_date, end_date) {
         calcolaDifferenzaDateInGiorni(start_date, end_date) + 1;
 
     //Indica il numero dei giorni liberi tra inzio settimana e inizio task
-    let weekStartDate = myScheduler.date.week_start(start_date);
-    item.start_offset = calcolaDifferenzaDateInGiorni(
-        weekStartDate, start_date);
+    item.weekStartDate = myScheduler.date.week_start(start_date);
+    item.start_offset = calcolaDifferenzaDateInGiorni(item.weekStartDate, start_date);
 
     return item;
 }

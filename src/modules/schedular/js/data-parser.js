@@ -129,11 +129,42 @@ export async function parseRisorse(datiServer) {
  */
 export function calcolaCaricoRisorse(myScheduler, eventi) {
     let caricoRisorse = {};
-    eventi.forEach(item => {
-        let caricoTask=ricavaCaricoRisorsaTask(myScheduler, caricoRisorse, item);
-        sommaCaricoTaskAlWorkloadRisorse(caricoRisorse,item.idRisorsa,caricoTask);
+    let filtri = eventi.filter(item=>item.idRisorsa==6);
+    let matrice = [];
+    filtri.forEach(item => {
+        let caricoTask = ricavaCaricoRisorsaTask(myScheduler, caricoRisorse, item);
+        // sommaCaricoTaskAlWorkloadRisorse(caricoRisorse, item.idRisorsa, caricoTask);
+        matrice.push(caricoTask);
+        
     });
+    sommaDatiRisorsa(matrice);
     return caricoRisorse;
+}
+
+function sommaDatiRisorsa(matriceLoads){
+    let result = {}
+    matriceLoads.forEach(item=>{
+        //Record per la risorsa nel ogetto globale
+        let objRisorsa = result[item.idRisorsa];
+        //Se l'ogetto globale non contiene i dati per questa risorsa
+        if(!objRisorsa){
+            result[item.idRisorsa] = item.workLoad;
+        }else{
+            debugger
+            let idCarichiItem = Object.keys(item.workLoad);
+            idCarichiItem.forEach(keyCarico=>{
+                let caricoItem = item.workLoad[keyCarico];
+                let objCarico = objRisorsa;
+
+            })
+        }
+        // console.log(item);        
+    })
+
+    // console.log(JSON.stringify(matriceLoads));
+    // console.log(JSON.stringify(result));
+    console.log(result);
+
 }
 
 /**
@@ -144,11 +175,13 @@ export function calcolaCaricoRisorse(myScheduler, eventi) {
  */
 function addValoreInKey(obj, key, valore) {
     //Se il valore della chiave non esisto, imposto 0
-    if (!obj[key]) {
-        obj[key] = 0;
+    if (!obj.workload) {
+        obj.workload = { [key]: { days: 0 } }
     }
-    //Aggiungo il valore
-    obj[key] += valore;
+    if (!obj.workload[key]) {
+        obj.workload[key] = { days: 0 };
+    }
+    obj.workload[key].days += valore;
 }
 
 /**
@@ -162,9 +195,25 @@ function addValoreInKey(obj, key, valore) {
  */
 function ricavaCaricoRisorsaTask(myScheduler, workLoad, item) {
     let caricoRisorsa = {};
+    let arrWorkload = creaArrayCaricoTask(item);
+    // caricoRisorsa[item.idRisorsa] = {
+    //     [item.idCarico]: arrWorkload
+    // }
+    caricoRisorsa.idRisorsa = item.idRisorsa;
+    caricoRisorsa.workLoad = {
+        [item.idCarico]: arrWorkload
+    }
+    return caricoRisorsa;
+}
+
+/**
+ * Crea un array indicando i giorni occupati dal task nelle varie settimane
+ * @param {*} item : task del schedular
+ * @returns {Array} : Array di oggetti. Ogni oggetto ha come chiave il numero di settimana
+ */
+function creaArrayCaricoTask(item) {
     //Aggiungo i dati della durata al oggetto task
     item.datiDurata = calcolaDatiDurata(item.start_date, item.end_date);
-
     let startWeek = item.datiDurata.startWeek;
     let endWeek = item.datiDurata.endWeek;
     let durata = item.datiDurata.durata;
@@ -173,23 +222,33 @@ function ricavaCaricoRisorsaTask(myScheduler, workLoad, item) {
     let part1 = 7 - start_offset; //7 = numero di giorni nella settimana in cui inizia il task
     let part2 = durata - part1; // resto dal aggiungere nella settimana successiva
 
-    //Se task è incluso nella stessa settimana
+
     let keyWeek = creaKeyWeek(startWeek);
+    // let arrWorkload = [];
+
+    //Se task è incluso nella stessa settimana
     let giorni = durata;
     if (startWeek != endWeek) {
         //task tra 2 settimane
         giorni = part1;
     }
-    //Sommo il carico di lavoro
-    addValoreInKey(caricoRisorsa, keyWeek, giorni);
+
+    let result = {};
+
+    // arrWorkload.push(creaObjWeek(keyWeek, giorni, item));
+    result[keyWeek] = [];
+    result[keyWeek].push(creaObjWeek(keyWeek, giorni, item));
 
     if (part2 > 0) {
         keyWeek = creaKeyWeek(startWeek + 1);
-        addValoreInKey(caricoRisorsa, keyWeek, part2);
+        // arrWorkload.push(creaObjWeek(keyWeek, part2, item))
+        result[keyWeek] = [];
+        result[keyWeek].push(creaObjWeek(keyWeek, part2, item));
     }
-    return caricoRisorsa;
-}
 
+    // return arrWorkload;
+    return result;
+}
 /**
  * Somma il carico del task nella lista del carico di tutte le risorse
  * @param {*} workLoad : lista con carico di tutte le risorse
@@ -203,11 +262,47 @@ function sommaCaricoTaskAlWorkloadRisorse(workLoad, idRisorsa, caricoRisorsa) {
     if (!objRisorsa) {
         workLoad[idRisorsa] = caricoRisorsa;
     } else {
-        //se è presente devo aggiornar ei singoli valori delle settimane
-        Object.keys(caricoRisorsa).forEach(key => {
-            addValoreInKey(objRisorsa, key, caricoRisorsa[key]);
+        let loadCarichi = caricoRisorsa[idRisorsa];
+        //loadCarichi è un oggetto dove ogni chiave è id del carico        
+        //se è presente devo aggiornare i singoli valori delle settimane per ogni carico
+        Object.keys(loadCarichi).forEach(idCarico => {
+            let testo = `Input Risorsa : ${idRisorsa} - Carico : ${idCarico} - Workload: `;
+            console.log(testo);
+            //TODO: Sistemare la somma aggiunto oggetto workload
+            let caricoLoad = caricoRisorsa[idRisorsa][idCarico];
+            console.log(caricoLoad);
+            testo = `Workload Esistente per carico : ${idRisorsa} : `;
+            console.log(testo);
+            let loadCaricoEsistente = objRisorsa[idRisorsa][idCarico]
+            console.log(loadCaricoEsistente);
+
+
+            //Somma al workload essitente del carico
+            Object.keys(caricoLoad).forEach(idWeek => {
+                //array di worload esistente
+                let loadEsistente = loadCaricoEsistente[idWeek];
+                if (loadEsistente) {
+                    let attualeLoad = caricoLoad[idWeek];
+                    aggiungereCarico(loadEsistente, attualeLoad);
+                }
+            });
+            // addValoreInKey(objRisorsa, key, caricoRisorsa[key]);
         });
     }
+}
+
+function aggiungereCarico(loadEsistente, loadAttuale) {
+    let attualeBig = false;
+    let bigArray = loadEsistente;
+    if (loadEsistente.length > loadAttuale.length) {
+        attualeBig = true;
+        bigArray = loadAttuale;
+    }
+
+    bigArray.forEach(item => {
+
+        console.log(item);        
+    });
 }
 
 /**
@@ -220,4 +315,18 @@ function creaKeyWeek(numWeek) {
         prefix = prefix + '0';
     }
     return prefix + numWeek;
+}
+
+
+function creaObjWeek(keyWeek, giorni, item) {
+    // return {
+    //     [keyWeek]: {
+    //         days: giorni,
+    //         idRequest: item.idRequest
+    //     },
+    // }
+    return {
+        days: giorni,
+        idRequest: item.idRequest
+    }
 }
