@@ -13,7 +13,8 @@ import {
 } from './my-view.js';
 
 import { save, loadRisorse, loadDatiCiclatura } from './api.js';
-import { eventiToJson, calcolaCaricoRisorse } from './data-parser.js';
+import { eventiToJson } from './data-parser.js';
+import { calcolaCaricoRisorse } from './my-worload.js';
 
 import {
     LISTA_RISORSE,
