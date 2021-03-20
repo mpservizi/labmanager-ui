@@ -19,14 +19,14 @@
 
 <script>
 export default {
-  name: "TaskList",
+  name: 'TaskList',
   components: {},
   data() {
     return {
-      msg: "Componente modello",
+      msg: 'Componente modello',
       tasks: [
-        { id: 1, text: "rp21lab004" },
-        { id: 2, text: "rp21lab0015" }
+        { id: 1, text: 'rp21lab004' },
+        { id: 2, text: 'rp21lab0015' }
       ]
     };
   },

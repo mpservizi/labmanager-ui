@@ -30,11 +30,11 @@ let formattaData = myScheduler.date.date_to_str('%d %M %Y');
 export function creaTemplateColonneRisorse(key, label, risorsa) {
     let stallo = risorsa.stallo;
     return [
-        "<div class='timeline_item_cell'>" + key + '</div>',
-        "<div class='timeline_item_separator'></div>",
-        "<div class='timeline_item_cell'>" + label + '</div>',
-        "<div class='timeline_item_separator'></div>",
-        "<div class='timeline_item_cell'>" + stallo + '</div>'
+        '<div class=\'timeline_item_cell\'>' + key + '</div>',
+        '<div class=\'timeline_item_separator\'></div>',
+        '<div class=\'timeline_item_cell\'>' + label + '</div>',
+        '<div class=\'timeline_item_separator\'></div>',
+        '<div class=\'timeline_item_cell\'>' + stallo + '</div>'
     ].join('');
 }
 

@@ -21,6 +21,7 @@ export function initPreConfig(myScheduler) {
     //configurazioni globali
     myScheduler.config.drag_create = true; //diabilito creazioen eventi con mouse drag
     myScheduler.config.dblclick_create = true; //diabilito creazioen eventi con doppio click
+    myScheduler.config.start_on_monday = true;
     // myScheduler.config.drag_resize = false;
     // myScheduler.config.details_on_create = true;
     // myScheduler.config.details_on_dblclick = true;

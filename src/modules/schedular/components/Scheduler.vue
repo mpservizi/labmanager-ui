@@ -27,11 +27,11 @@
 </template>
 
 <script>
-import Filtro from "./Filtro.vue";
-import Scala from "./Scala.vue";
-import { MyPlanner } from "./../js/my-planner.js";
+import Filtro from './Filtro.vue';
+import Scala from './Scala.vue';
+import { MyPlanner } from './../js/my-planner.js';
 export default {
-  name: "Scheduler",
+  name: 'Scheduler',
   props: {},
   data() {
     return {

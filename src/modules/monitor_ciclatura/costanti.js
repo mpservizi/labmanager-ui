@@ -1,1 +1,1 @@
-export const NOME_MODULO = "MonitorCiclatura";
+export const NOME_MODULO = 'MonitorCiclatura';

@@ -2,8 +2,9 @@ import {
     strToDate,
     dateToStr,
     ricavaNomeCaricoDaId,
-    ricavaIdCarico
+    ricavaIdCarico,
 } from './my-func.js';
+import { calcolaCaricoRisorse } from './my-worload.js';
 /**
  * Converte gli eventi del schedular in json per salvare sul server
  * @param {*} eventi
@@ -19,6 +20,10 @@ export function eventiToJson(eventi) {
         //Per ogni evento
         keys.forEach(key => {
             let item = eventi[key];
+            if (!item.idRisorsa) {
+                console.log('Id risorsa non valido');
+                return;
+            }
             //campi modificati prima di salvare sul server
             let data_fine = dateToStr(item.end_date);
             let data_inizio = dateToStr(item.start_date);
@@ -26,11 +31,11 @@ export function eventiToJson(eventi) {
 
             let modello = {
                 id: item.id,
-                idRisorsa: item.idRisorsa,
+                idRisorsa: parseInt(item.idRisorsa),
                 text: item.text,
-                corrente: item.corrente,
+                corrente: parseInt(item.corrente),
                 carico: nomeCarico,
-                idRequest: item.idRequest,
+                idRequest: parseInt(item.idRequest),
                 start_date: data_inizio,
                 end_date: data_fine,
                 time: {
@@ -114,4 +119,18 @@ export async function parseRisorse(datiServer) {
     }
 
     return [];
+}
+
+/**
+ * Converte il workload delle risorse in json per salvare sul server
+ */
+export function workloadToJson(myScheduler, eventi) {
+    let json = '[]';
+    let workloadRisorse = calcolaCaricoRisorse(myScheduler, eventi);
+    try {
+        json = JSON.stringify(workloadRisorse)
+    } catch (error) {
+        console.log(error);
+    }
+    return json;
 }

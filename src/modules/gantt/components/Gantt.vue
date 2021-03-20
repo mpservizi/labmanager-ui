@@ -1,26 +1,32 @@
 <template>
-    <div ref="gantt" class="ganttBox"></div>
+    <div>
+        <div>
+            <v-btn @click="raggruppa">Raggruppa</v-btn>
+        </div>
+        <div ref="gantt" class="ganttBox"></div>
+    </div>
 </template>
  
 <script>
-import { gantt } from '../libs/gantt/dhtmlxgantt.js';
+import MyGantt from '../js/my-gantt.js';
+
 export default {
     name: 'gantt',
-    props: {
-        tasks: {
-            type: Object,
-            default() {
-                return { data: [], links: [] };
-            }
+    props: {},
+    data() {
+        return {
+            gruppoAttivo: false
+        };
+    },
+    mounted: function () {
+        MyGantt.init(this.$refs.gantt);
+    },
+    methods: {
+        raggruppa() {
+            MyGantt.raggruppa(this.gruppoAttivo);
+            this.gruppoAttivo = !this.gruppoAttivo;
         }
     },
-
-    mounted: function () {
-        gantt.config.xml_date = '%Y-%m-%d';
-
-        gantt.init(this.$refs.gantt);
-    },
-    methods: {},
     computed: {
         // Estaggo i dati dal store
         dati() {
@@ -30,7 +36,7 @@ export default {
     watch: {
         //  Quando cambiano i dati nel store ricarico nel gantt
         dati(newVal, oldVal) {
-            gantt.parse(newVal);
+            MyGantt.parseDati(newVal);
         }
     }
 };
@@ -39,7 +45,22 @@ export default {
 <style>
 @import '../libs/gantt/dhtmlxgantt.css';
 .ganttBox {
-    position: relative;
-    height: 100%;
+    /* position: relative; */
+    height: 800px;
+}
+
+.summary-row,
+.summary-row.odd {
+    background-color: #eeeeee;
+    font-weight: bold;
+}
+
+.gantt_grid div,
+.gantt_data_area div {
+    font-size: 12px;
+}
+
+.summary-bar {
+    opacity: 0;
 }
 </style>

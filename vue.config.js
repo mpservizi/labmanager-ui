@@ -1,4 +1,4 @@
-const path = require("path");
+const path = require('path');
 module.exports = {
   devServer: {
     disableHostCheck: true
@@ -7,11 +7,11 @@ module.exports = {
   configureWebpack: {
     resolve: {
       alias: {
-        Moduli: path.resolve(__dirname, "src/modules/")
+        Moduli: path.resolve(__dirname, 'src/modules/')
       },
-      extensions: [".js", ".vue", ".json"]
+      extensions: ['.js', '.vue', '.json']
     }
   },
 
-  transpileDependencies: ["vuetify"]
+  transpileDependencies: ['vuetify']
 };

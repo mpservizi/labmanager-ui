@@ -1,1 +1,1 @@
-export const NOME_MODULO = "TempalteModule";
+export const NOME_MODULO = 'TempalteModule';
