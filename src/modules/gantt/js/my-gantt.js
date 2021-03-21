@@ -1,11 +1,11 @@
 import { gantt } from '../libs/gantt/dhtmlxgantt.js';
 import { LISTA_CARICHI, NOME_LISTA_CARICHI } from '../costanti.js';
-import {parseDatiServer} from './data-parser.js';
-import {MyGruppi} from './gruppi.js';
+import { parseDatiServer } from './data-parser.js';
+import { MyGruppi } from './gruppi.js';
 
 let myGruppi;
 function init(divContainer) {
-    myGruppi= new MyGruppi(gantt);
+    myGruppi = new MyGruppi(gantt);
 
     gantt.plugins({
         drag_timeline: true,
@@ -32,33 +32,59 @@ function init(divContainer) {
 
     /** Fine setting scala */
 
-    gantt.serverList(NOME_LISTA_CARICHI,LISTA_CARICHI);
+gantt.config.columns = [
+    {name:"text",       label:"Risorsa",  width:"*", tree:true },
+    {name:"start_date", label:"Start time", align:"center" },
+    {name:"duration",   label:"Duration",   align:"center" }
+];
 
-    gantt.templates.grid_row_class = gantt.templates.task_row_class = function(
+    //Prima di mostrare task
+    gantt.attachEvent("onBeforeTaskDisplay", function (id, task) {
+        //Task gruppo creato in automatico
+        // if(task.subTasks){
+        //     task.text = task.subTasks.length
+        // }else{
+        //     task.text = '-';
+        // }
+        if (task.$virtual) {
+            if (task.type == 'project') {
+                task.render = 'split';
+            }
+            return gantt.hasChild(id); // hide groups without subtasks
+        }
+
+
+        return true;
+    });
+
+    gantt.serverList(NOME_LISTA_CARICHI, LISTA_CARICHI);
+
+    gantt.templates.grid_row_class = gantt.templates.task_row_class = function (
         start,
         end,
         task
     ) {
         if (task.$virtual) return 'summary-row';
     };
-    gantt.templates.task_class = function(start, end, task) {
+    gantt.templates.task_class = function (start, end, task) {
         if (task.$virtual) {
             return 'summary-bar';
         }
-        if(task.fromServer){
+        if (task.fromServer) {
             return 'server-task'
         }
         return 'normal-task'
     };
 
     // gantt.config.xml_date = '%Y-%m-%d';
-    gantt.config.xml_date = '%d-%m-%Y';
+    gantt.config.xml_date = '%d/%m/%Y';
 
     gantt.init(divContainer);
 }
 
-function raggruppa(){
-    myGruppi.groupByRisorse();
+function raggruppa() {
+    // myGruppi.groupByRisorse();
+    myGruppi.groupByCarico();
 }
 
 function raggruppa1(gruppoAttivo) {
@@ -81,7 +107,7 @@ function parseDati(dati) {
     let dataParsed = parseDatiServer(dati);
     gantt.parse(dataParsed);
 }
-function render(){
+function render() {
     gantt.render();
 }
 export default {

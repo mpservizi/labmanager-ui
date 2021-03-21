@@ -1,5 +1,5 @@
 import MyDate from '@/shared/my-date.js';
-import {getMacchinaDaIdRisorsa} from '@/shared/liste/risorse-ciclatura.js'
+import { getMacchinaDaIdRisorsa } from '@/shared/liste/risorse-ciclatura.js'
 
 export function parseWorload(dati) {
     let result = {
@@ -7,8 +7,36 @@ export function parseWorload(dati) {
         links: []
     }
     let tasksRisorse = loopRisorse(dati);
-    result.data = tasksRisorse;   
+    result.data = raggruppaTasks(tasksRisorse);
     return result;
+}
+
+function raggruppaTasks(tasks) {
+    let result = [];
+    let listaTasks = {};
+    tasks.forEach(item => {
+        let key = item.key_week;
+        let taskEsistente = listaTasks[key];
+
+        if (!taskEsistente) {
+            taskEsistente = item;
+            taskEsistente.subTasks = [];
+            listaTasks[key] = taskEsistente;
+        } else {
+            if (Array.isArray(taskEsistente.subTasks)) {
+                taskEsistente.subTasks.push(item);
+            } else {
+                taskEsistente.subTasks = [item];
+            }
+        }
+    })
+
+    Object.keys(listaTasks).forEach(key=>{
+        let task = listaTasks[key];
+        task.numChilds = task.subTasks.length;
+        result.push(task);
+    })
+    return result
 }
 
 /**
@@ -66,7 +94,7 @@ function loopWeeks(datiCarico, tmpObj) {
     //Per ogni settimana crea un gant task
     idWeeks.forEach(numWeek => {
         let workload = datiCarico[numWeek];
-        let taskWeek = creaTaskWeekWorkload(workload,numWeek, tmpObj);
+        let taskWeek = creaTaskWeekWorkload(workload, numWeek, tmpObj);
         tasks.push(taskWeek);
     });
 
@@ -82,7 +110,7 @@ function loopWeeks(datiCarico, tmpObj) {
  * @param {*} tmpObj : oggetto con riferimenti a oggetti parent. le chiavi di questo sono copiate nel oggetto details del task
  * @returns {Object} : Task per il gantt
  */
-function creaTaskWeekWorkload(workload, keyWeek,tmpObj) {
+function creaTaskWeekWorkload(workload, keyWeek, tmpObj) {
     // Workload contiene i dati per ogni test request. Fanno parte dello stesso carico
     //Creo un unico task per worload settimanale del carico
     //Memorrizzo le informazioni nel task
@@ -99,20 +127,27 @@ function creaTaskWeekWorkload(workload, keyWeek,tmpObj) {
     });
 
     //Ricavo il numero di settimana da WK??
-    let numWeek= parseInt(keyWeek.substr(-2));
+    let numWeek = parseInt(keyWeek.substr(-2));
     //Prendo ultime 4 cifre dal testo per estrarre anno
     let anno = parseInt(data_inizio.substr(-4));
     //Calcolo la data di inizio settimana
-    let start_date = MyDate.getDateOfWeek(numWeek,anno);
-    
+    let start_date = MyDate.getDateOfWeek(numWeek, anno);
+
     //Creo il task gantt con dati calcolati    
     let task = creaTask(start_date, durata);
     task.text = `R:${tmpObj.idRisorsa} C:${tmpObj.idCarico} ${keyWeek}`;
+
     task.idCarico = tmpObj.idCarico;
     task.idRisorsa = tmpObj.idRisorsa;
-    task.macchina = getMacchinaDaIdRisorsa(tmpObj.idRisorsa);
+    
+    let nomeMacchina = getMacchinaDaIdRisorsa(tmpObj.idRisorsa);
+    task.macchina = nomeMacchina;
+    //key per ragguppare in base carichi della stessa macchina
+    task.gr_macchina_carico = `${nomeMacchina}-C${tmpObj.idCarico}`;
+    task.key_week = `${nomeMacchina}-C${tmpObj.idCarico}-${keyWeek}`;
+    //task.titolo = `${nomeMacchina}-C${tmpObj.idCarico}`;
     //Salvo i dati addizionali nel task
-    task.details = {workload:workload};
+    task.details = { workload: workload };
     return task;
 }
 

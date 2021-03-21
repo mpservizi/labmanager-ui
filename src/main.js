@@ -1,6 +1,6 @@
 import Vue from 'vue';
-import App from './prove-codice/gantt/TestGruppo.vue';
-// import App from './prove-codice/gantt/TestGantt.vue';
+// import App from './prove-codice/gantt/TestGruppo.vue';
+import App from './prove-codice/gantt/TestGantt.vue';
 import vuetify from './plugins/vuetify';
 import 'roboto-fontface/css/roboto/roboto-fontface.css';
 import '@mdi/font/css/materialdesignicons.css';
