@@ -1,0 +1,14 @@
+/* Bordo del task tondo per creare un pò di spazio tra task adiacenti */
+.gantt_task_line{
+    border-radius: 20px;
+}
+/* Task parent quando viene mostrato su una riga */
+.gantt_split_parent, .gantt_split_subproject {
+    opacity: 0;
+    pointer-events: none;
+}
+/* Contenuto del task */
+.gantt_task_content{
+    /* Nascondo le scritte */
+    opacity: 0;
+}

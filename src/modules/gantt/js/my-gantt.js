@@ -1,4 +1,5 @@
 import { gantt } from '../libs/gantt/dhtmlxgantt.js';
+import { LISTA_CARICHI, NOME_LISTA_CARICHI } from '../costanti.js';
 
 function init(divContainer) {
     gantt.plugins({
@@ -8,6 +9,8 @@ function init(divContainer) {
     // gantt.config.task_height = 16;
     // gantt.config.row_height = 40;
 
+    //Mostrare progress bar in task
+    gantt.config.show_progress = false;
     /** Setting scala */
     gantt.config.min_column_width = 10;
     gantt.config.scale_height = 90;
@@ -19,11 +22,7 @@ function init(divContainer) {
 
     /** Fine setting scala */
 
-    gantt.serverList('carichi', [
-        { key: 1, label: '19.1' },
-        { key: 2, label: '19.2' },
-        { key: 3, label: '19.3' }
-    ]);
+    gantt.serverList(NOME_LISTA_CARICHI,LISTA_CARICHI);
 
     gantt.templates.grid_row_class = gantt.templates.task_row_class = function(
         start,
@@ -51,7 +50,7 @@ function raggruppa(gruppoAttivo) {
         gantt.groupBy(false);
     } else {
         gantt.groupBy({
-            groups: gantt.serverList('carichi'),
+            groups: gantt.serverList(LISTA_CARICHI),
             relation_property: 'idCarico',
             group_id: 'key',
             group_text: 'label'
