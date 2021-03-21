@@ -1,8 +1,12 @@
 import { gantt } from '../libs/gantt/dhtmlxgantt.js';
 import { LISTA_CARICHI, NOME_LISTA_CARICHI } from '../costanti.js';
 import {parseDatiServer} from './data-parser.js';
+import {MyGruppi} from './gruppi.js';
 
+let myGruppi;
 function init(divContainer) {
+    myGruppi= new MyGruppi(gantt);
+
     gantt.plugins({
         drag_timeline: true,
         grouping: true
@@ -53,7 +57,11 @@ function init(divContainer) {
     gantt.init(divContainer);
 }
 
-function raggruppa(gruppoAttivo) {
+function raggruppa(){
+    myGruppi.groupByRisorse();
+}
+
+function raggruppa1(gruppoAttivo) {
     if (gruppoAttivo) {
         gantt.groupBy(false);
     } else {

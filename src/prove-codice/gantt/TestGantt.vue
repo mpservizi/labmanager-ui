@@ -9,7 +9,7 @@
 
 <script>
 import MyGantt from 'Moduli/gantt/js/my-gantt.js';
-import { parseWorload } from './parse-worload.js';
+import { parseWorload } from 'Moduli/gantt/js/parse-worload.js';
 import {getWorloadDati} from './workload.js';
 export default {
     name: 'TestGantt',
@@ -20,7 +20,7 @@ export default {
     },
     methods: {
         raggruppa() {
-            // MyGantt.raggruppa();
+            MyGantt.raggruppa(1);
             MyGantt.render();
         }
     }

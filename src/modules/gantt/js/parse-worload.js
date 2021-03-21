@@ -1,11 +1,13 @@
 import MyDate from '@/shared/my-date.js';
+import {getMacchinaDaIdRisorsa} from '@/shared/liste/risorse-ciclatura.js'
+
 export function parseWorload(dati) {
     let result = {
         data: [],
         links: []
     }
     let tasksRisorse = loopRisorse(dati);
-    result.data = tasksRisorse;
+    result.data = tasksRisorse;   
     return result;
 }
 
@@ -106,8 +108,11 @@ function creaTaskWeekWorkload(workload, keyWeek,tmpObj) {
     //Creo il task gantt con dati calcolati    
     let task = creaTask(start_date, durata);
     task.text = `R:${tmpObj.idRisorsa} C:${tmpObj.idCarico} ${keyWeek}`;
+    task.idCarico = tmpObj.idCarico;
+    task.idRisorsa = tmpObj.idRisorsa;
+    task.macchina = getMacchinaDaIdRisorsa(tmpObj.idRisorsa);
     //Salvo i dati addizionali nel task
-    task.details = {...tmpObj,workload:workload};
+    task.details = {workload:workload};
     return task;
 }
 
