@@ -1,5 +1,6 @@
 import { myScheduler } from './my-lib.js';
-import MyDate from 'date-and-time';
+// import MyDate from 'date-and-time';
+import MyDate from '@/shared/my-date.js';
 import { getGiorniDelMese } from './util.js';
 
 import {
@@ -27,12 +28,12 @@ export function filtraRisorse(valore) {
 }
 
 export function strToDate(strDate) {
-    let data = MyDate.parse(strDate, 'DD/MM/YYYY');
+    let data = MyDate.strToDate(strDate, 'DD/MM/YYYY');
     return data;
 }
 
 export function dateToStr(data) {
-    let str = MyDate.format(data, 'DD/MM/YYYY');
+    let str = MyDate.dateToStr(data, 'DD/MM/YYYY');
     return str;
 }
 
@@ -69,7 +70,8 @@ export function ricavaNomeCaricoDaId(id) {
  * @param {*} end : data fine
  */
 export function calcolaDifferenzaDateInGiorni(start, end) {
-    return Math.floor(MyDate.subtract(end, start).toDays());
+    // return Math.floor(MyDate.subtract(end, start).toDays());
+    return MyDate.calcolaDifferenzaDateInGiorni(start, end);
 }
 
 export function getparametriScala() {

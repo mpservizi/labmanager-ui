@@ -1,4 +1,4 @@
-const json = {
+const datiWorload = {
   "1":{
     "3":{
       "WK10":[
@@ -352,7 +352,7 @@ const json = {
 }
 
 export function getWorloadDati(){
+    let json = JSON.stringify(datiWorload);
     let dati = JSON.parse(json);
-
     return dati;
 }

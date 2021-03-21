@@ -8,8 +8,9 @@
 </template>
 
 <script>
-import { dati } from './dati.js';
 import MyGantt from 'Moduli/gantt/js/my-gantt.js';
+import { parseWorload } from './parse-worload.js';
+import {getWorloadDati} from './workload.js';
 export default {
     name: 'TestGantt',
     components: {},
@@ -27,6 +28,8 @@ export default {
 
 function init() {
     MyGantt.init('gantt_here');
+    let workloadDati = getWorloadDati();
+    let dati = parseWorload(workloadDati);
     MyGantt.parseDati(dati);
 }
 </script>
