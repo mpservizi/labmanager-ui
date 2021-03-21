@@ -1,35 +1,36 @@
 <template>
+    <div>
         <div>
-            <div>
-                <v-btn @click="raggruppa">Raggruppa</v-btn>
-            </div>
-        <div id="gantt_here" style="width: 100%; height: 500px;"></div>
+            <v-btn @click="raggruppa">Raggruppa</v-btn>
         </div>
+        <div id="gantt_here" style="width: 100%; height: 800px"></div>
+    </div>
 </template>
 
 <script>
-import {dati} from  "./dati.js";
-import MyGantt from 'Moduli/gantt/js/my-gantt.js'
+import { dati } from './dati.js';
+import MyGantt from 'Moduli/gantt/js/my-gantt.js';
 export default {
     name: 'TestGantt',
-    components: { },
+    components: {},
     data: () => ({}),
-    mounted(){
+    mounted() {
         init();
     },
-    methods:{
-        raggruppa(){
-            MyGantt.raggruppa(1);
+    methods: {
+        raggruppa() {
+            // MyGantt.raggruppa();
+            MyGantt.render();
         }
     }
 };
 
-function init(){
+function init() {
     MyGantt.init('gantt_here');
     MyGantt.parseDati(dati);
 }
 </script>
 <style>
 @import "~Moduli/gantt/libs/gantt/dhtmlxgantt.css";
-@import "~Moduli/gantt/css/my-style.css"
+@import '~Moduli/gantt/css/my-style.css';
 </style>

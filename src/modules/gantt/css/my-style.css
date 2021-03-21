@@ -1,3 +1,8 @@
+html, body {
+    padding: 0px;
+    margin: 0px;
+}
+        
 /* Bordo del task tondo per creare un pò di spazio tra task adiacenti */
 .gantt_task_line{
     border-radius: 20px;
@@ -11,4 +16,14 @@
 .gantt_task_content{
     /* Nascondo le scritte */
     opacity: 0;
+}
+
+.server-task{
+    background-color: #ffb74d;
+    border-color: gray;
+}
+.normal-task{
+    background-color: #72ff78;
+    border-color: gray;
+
 }
