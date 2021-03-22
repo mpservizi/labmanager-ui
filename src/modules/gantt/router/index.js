@@ -1,4 +1,5 @@
 import Main from '../views/Main.vue';
+import Detail from '../views/Detail.vue';
 // import AddView from '../views/AddRequest.vue';
 
 export default [
@@ -12,16 +13,17 @@ export default [
                 { name: 'Planner' }
             ]
         }
+    },
+    {
+        path: '/gantt/detail/:id',
+        name: 'gantt_detail',
+        component: Detail,
+        props: true,
+        meta: {
+            breadcrumb: [
+                { name: 'Planner', link: 'gantt' },
+                { name: 'Task detail' }
+            ]
+        }
     }
-    // {
-    //     path: '/gantt/add',
-    //     name: 'gantt_add_request',
-    //     component: AddView,
-    //     meta: {
-    //         breadcrumb: [
-    //             { name: 'Planner', link: 'gantt' },
-    //             { name: 'New test request' }
-    //         ]
-    //     }
-    // }
 ];

@@ -1,8 +1,5 @@
 <template>
     <div>
-        <div>
-            <v-btn @click="raggruppa">Raggruppa</v-btn>
-        </div>
         <div id="gantt_here" style="width: 100%; height: 800px"></div>
     </div>
 </template>
@@ -11,10 +8,12 @@
 import MyGantt from 'Moduli/gantt/js/my-gantt.js';
 import { parseWorload } from 'Moduli/gantt/js/parse-worload.js';
 import { getWorloadDati } from './workload.js';
+
 export default {
     name: 'TestGantt',
     components: {},
-    data: () => ({}),
+    data: () => ({
+    }),
     mounted() {
         init();
     },

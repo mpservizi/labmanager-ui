@@ -5,6 +5,7 @@
 </template>
  
 <script>
+import { EventBus } from '@/shared/event-bus.js';
 import MyGantt from '../js/my-gantt.js';
 
 export default {
@@ -14,11 +15,19 @@ export default {
         return {
         };
     },
+    created() {
+        EventBus.$on('event-dblClick', (task) => {
+            // this.taskAttivo = task;
+            this.$router.push({
+                name: 'gantt_detail',
+                params: { id:task.id,task:task }
+            }).catch(err => {});
+        });
+    },
     mounted: function () {
         MyGantt.init(this.$refs.gantt);
     },
-    methods: {
-    },
+    methods: {},
     computed: {
         // Estaggo i dati dal store
         dati() {
