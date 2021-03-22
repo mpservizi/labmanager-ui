@@ -34,9 +34,9 @@ function initConfig(myGantt) {
     /** Fine setting scala */
 
     myGantt.config.columns = [
-        { name: "text", label: "Risorsa", width: "*", tree: true },
-        { name: "start_date", label: "Start time", align: "center" },
-        { name: "duration", label: "Duration", align: "center" }
+        { name: 'text', label: 'Risorsa', width: '*', tree: true },
+        { name: 'start_date', label: 'Start time', align: 'center' },
+        { name: 'duration', label: 'Duration', align: 'center' }
     ];
 
     // gantt.config.xml_date = '%Y-%m-%d';

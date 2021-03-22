@@ -10,7 +10,7 @@ export class MyEventi {
 
 function initEventi(myGantt){
      //doppio click task
-    myGantt.attachEvent("onTaskDblClick", function (id, e) {
+    myGantt.attachEvent('onTaskDblClick', function (id, e) {
         //any custom logic here
         let task = myGantt.getTask(id);
         console.log(task);
@@ -18,7 +18,7 @@ function initEventi(myGantt){
     }); 
     
     //Prima di mostrare task
-    myGantt.attachEvent("onBeforeTaskDisplay", function (id, task) {
+    myGantt.attachEvent('onBeforeTaskDisplay', function (id, task) {
         //Task gruppo creato in automatico
         // if(task.subTasks){
         //     task.text = task.subTasks.length

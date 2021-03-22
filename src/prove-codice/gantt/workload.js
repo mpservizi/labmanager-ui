@@ -1,350 +1,350 @@
 const datiWorload = {
-  "1":{
-    "3":{
-      "WK10":[
+  '1':{
+    '3':{
+      'WK10':[
         {
-          "days":4,
-          "idRequest":2,
-          "start_date":"08/03/2021"
+          'days':4,
+          'idRequest':2,
+          'start_date':'08/03/2021'
         }
       ],
-      "WK11":[
+      'WK11':[
         {
-          "days":2,
-          "idRequest":2,
-          "start_date":"15/03/2021"
+          'days':2,
+          'idRequest':2,
+          'start_date':'15/03/2021'
         }
       ]
     }
   },
-  "2":{
-    "3":{
-      "WK10":[
+  '2':{
+    '3':{
+      'WK10':[
         {
-          "days":4,
-          "idRequest":2,
-          "start_date":"08/03/2021"
+          'days':4,
+          'idRequest':2,
+          'start_date':'08/03/2021'
         }
       ],
-      "WK11":[
+      'WK11':[
         {
-          "days":2,
-          "idRequest":2,
-          "start_date":"15/03/2021"
+          'days':2,
+          'idRequest':2,
+          'start_date':'15/03/2021'
         }
       ]
     }
   },
-  "3":{
-    "1":{
-      "WK10":[
+  '3':{
+    '1':{
+      'WK10':[
         {
-          "days":3,
-          "idRequest":1,
-          "start_date":"08/03/2021"
+          'days':3,
+          'idRequest':1,
+          'start_date':'08/03/2021'
         },
         {
-          "days":3,
-          "idRequest":2,
-          "start_date":"08/03/2021"
+          'days':3,
+          'idRequest':2,
+          'start_date':'08/03/2021'
         }
       ],
-      "WK11":[
+      'WK11':[
         {
-          "days":1,
-          "idRequest":1,
-          "start_date":"08/03/2021"
+          'days':1,
+          'idRequest':1,
+          'start_date':'08/03/2021'
         }
       ]
     }
   },
-  "4":{
-    "1":{
-      "WK10":[
+  '4':{
+    '1':{
+      'WK10':[
         {
-          "days":3,
-          "idRequest":1,
-          "start_date":"08/03/2021"
+          'days':3,
+          'idRequest':1,
+          'start_date':'08/03/2021'
         },
         {
-          "days":3,
-          "idRequest":2,
-          "start_date":"08/03/2021"
+          'days':3,
+          'idRequest':2,
+          'start_date':'08/03/2021'
         }
       ],
-      "WK11":[
+      'WK11':[
         {
-          "days":1,
-          "idRequest":1,
-          "start_date":"08/03/2021"
+          'days':1,
+          'idRequest':1,
+          'start_date':'08/03/2021'
         }
       ]
     }
   },
-  "5":{
-    "1":{
-      "WK11":[
+  '5':{
+    '1':{
+      'WK11':[
         {
-          "days":2,
-          "idRequest":2,
-          "start_date":"15/03/2021"
+          'days':2,
+          'idRequest':2,
+          'start_date':'15/03/2021'
         }
       ]
     },
-    "2":{
-      "WK11":[
+    '2':{
+      'WK11':[
         {
-          "days":2,
-          "idRequest":1,
-          "start_date":"15/03/2021"
+          'days':2,
+          'idRequest':1,
+          'start_date':'15/03/2021'
         },
         {
-          "days":2,
-          "idRequest":2,
-          "start_date":"15/03/2021"
+          'days':2,
+          'idRequest':2,
+          'start_date':'15/03/2021'
         }
       ]
     },
-    "3":{
-      "WK10":[
+    '3':{
+      'WK10':[
         {
-          "days":4,
-          "idRequest":2,
-          "start_date":"08/03/2021"
+          'days':4,
+          'idRequest':2,
+          'start_date':'08/03/2021'
         }
       ]
     }
   },
-  "6":{
-    "1":{
-      "WK11":[
+  '6':{
+    '1':{
+      'WK11':[
         {
-          "days":2,
-          "idRequest":2,
-          "start_date":"15/03/2021"
+          'days':2,
+          'idRequest':2,
+          'start_date':'15/03/2021'
         }
       ]
     },
-    "2":{
-      "WK11":[
+    '2':{
+      'WK11':[
         {
-          "days":2,
-          "idRequest":1,
-          "start_date":"15/03/2021"
+          'days':2,
+          'idRequest':1,
+          'start_date':'15/03/2021'
         },
         {
-          "days":2,
-          "idRequest":2,
-          "start_date":"15/03/2021"
+          'days':2,
+          'idRequest':2,
+          'start_date':'15/03/2021'
         }
       ]
     },
-    "3":{
-      "WK10":[
+    '3':{
+      'WK10':[
         {
-          "days":4,
-          "idRequest":2,
-          "start_date":"08/03/2021"
+          'days':4,
+          'idRequest':2,
+          'start_date':'08/03/2021'
         }
       ]
     }
   },
-  "7":{
-    "1":{
-      "WK11":[
+  '7':{
+    '1':{
+      'WK11':[
         {
-          "days":2,
-          "idRequest":2,
-          "start_date":"15/03/2021"
+          'days':2,
+          'idRequest':2,
+          'start_date':'15/03/2021'
         }
       ]
     },
-    "2":{
-      "WK11":[
+    '2':{
+      'WK11':[
         {
-          "days":3,
-          "idRequest":1,
-          "start_date":"15/03/2021"
+          'days':3,
+          'idRequest':1,
+          'start_date':'15/03/2021'
         },
         {
-          "days":1,
-          "idRequest":2,
-          "start_date":"08/03/2021"
+          'days':1,
+          'idRequest':2,
+          'start_date':'08/03/2021'
         }
       ],
-      "WK10":[
+      'WK10':[
         {
-          "days":6,
-          "idRequest":2,
-          "start_date":"08/03/2021"
+          'days':6,
+          'idRequest':2,
+          'start_date':'08/03/2021'
         }
       ]
     }
   },
-  "8":{
-    "1":{
-      "WK11":[
+  '8':{
+    '1':{
+      'WK11':[
         {
-          "days":2,
-          "idRequest":2,
-          "start_date":"15/03/2021"
+          'days':2,
+          'idRequest':2,
+          'start_date':'15/03/2021'
         }
       ]
     },
-    "2":{
-      "WK11":[
+    '2':{
+      'WK11':[
         {
-          "days":3,
-          "idRequest":1,
-          "start_date":"15/03/2021"
+          'days':3,
+          'idRequest':1,
+          'start_date':'15/03/2021'
         },
         {
-          "days":1,
-          "idRequest":2,
-          "start_date":"08/03/2021"
+          'days':1,
+          'idRequest':2,
+          'start_date':'08/03/2021'
         }
       ],
-      "WK10":[
+      'WK10':[
         {
-          "days":6,
-          "idRequest":2,
-          "start_date":"08/03/2021"
+          'days':6,
+          'idRequest':2,
+          'start_date':'08/03/2021'
         }
       ]
     }
   },
-  "9":{
-    "1":{
-      "WK09":[
+  '9':{
+    '1':{
+      'WK09':[
         {
-          "days":4,
-          "idRequest":1,
-          "start_date":"01/03/2021"
+          'days':4,
+          'idRequest':1,
+          'start_date':'01/03/2021'
         }
       ],
-      "WK10":[
+      'WK10':[
         {
-          "days":7,
-          "idRequest":1,
-          "start_date":"01/03/2021"
+          'days':7,
+          'idRequest':1,
+          'start_date':'01/03/2021'
         }
       ],
-      "WK11":[
+      'WK11':[
         {
-          "days":1,
-          "idRequest":1,
-          "start_date":"08/03/2021"
+          'days':1,
+          'idRequest':1,
+          'start_date':'08/03/2021'
         }
       ]
     }
   },
-  "10":{
-    "1":{
-      "WK09":[
+  '10':{
+    '1':{
+      'WK09':[
         {
-          "days":4,
-          "idRequest":1,
-          "start_date":"01/03/2021"
+          'days':4,
+          'idRequest':1,
+          'start_date':'01/03/2021'
         }
       ],
-      "WK10":[
+      'WK10':[
         {
-          "days":7,
-          "idRequest":1,
-          "start_date":"01/03/2021"
+          'days':7,
+          'idRequest':1,
+          'start_date':'01/03/2021'
         }
       ],
-      "WK11":[
+      'WK11':[
         {
-          "days":1,
-          "idRequest":1,
-          "start_date":"08/03/2021"
+          'days':1,
+          'idRequest':1,
+          'start_date':'08/03/2021'
         }
       ]
     }
   },
-  "11":{
-    "3":{
-      "WK09":[
+  '11':{
+    '3':{
+      'WK09':[
         {
-          "days":4,
-          "idRequest":1,
-          "start_date":"01/03/2021"
+          'days':4,
+          'idRequest':1,
+          'start_date':'01/03/2021'
         }
       ],
-      "WK10":[
+      'WK10':[
         {
-          "days":7,
-          "idRequest":1,
-          "start_date":"01/03/2021"
+          'days':7,
+          'idRequest':1,
+          'start_date':'01/03/2021'
         }
       ],
-      "WK11":[
+      'WK11':[
         {
-          "days":2,
-          "idRequest":1,
-          "start_date":"08/03/2021"
+          'days':2,
+          'idRequest':1,
+          'start_date':'08/03/2021'
         }
       ]
     }
   },
-  "12":{
-    "3":{
-      "WK09":[
+  '12':{
+    '3':{
+      'WK09':[
         {
-          "days":4,
-          "idRequest":1,
-          "start_date":"01/03/2021"
+          'days':4,
+          'idRequest':1,
+          'start_date':'01/03/2021'
         }
       ],
-      "WK10":[
+      'WK10':[
         {
-          "days":7,
-          "idRequest":1,
-          "start_date":"01/03/2021"
+          'days':7,
+          'idRequest':1,
+          'start_date':'01/03/2021'
         }
       ],
-      "WK11":[
+      'WK11':[
         {
-          "days":2,
-          "idRequest":1,
-          "start_date":"08/03/2021"
+          'days':2,
+          'idRequest':1,
+          'start_date':'08/03/2021'
         }
       ]
     }
   },
-  "13":{
-    "3":{
-      "WK09":[
+  '13':{
+    '3':{
+      'WK09':[
         {
-          "days":4,
-          "idRequest":1,
-          "start_date":"01/03/2021"
+          'days':4,
+          'idRequest':1,
+          'start_date':'01/03/2021'
         }
       ],
-      "WK10":[
+      'WK10':[
         {
-          "days":5,
-          "idRequest":1,
-          "start_date":"01/03/2021"
+          'days':5,
+          'idRequest':1,
+          'start_date':'01/03/2021'
         }
       ]
     }
   },
-  "14":{
-    "3":{
-      "WK09":[
+  '14':{
+    '3':{
+      'WK09':[
         {
-          "days":4,
-          "idRequest":1,
-          "start_date":"01/03/2021"
+          'days':4,
+          'idRequest':1,
+          'start_date':'01/03/2021'
         }
       ],
-      "WK10":[
+      'WK10':[
         {
-          "days":5,
-          "idRequest":1,
-          "start_date":"01/03/2021"
+          'days':5,
+          'idRequest':1,
+          'start_date':'01/03/2021'
         }
       ]
     }
