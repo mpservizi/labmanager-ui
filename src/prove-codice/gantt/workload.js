@@ -352,7 +352,7 @@ const datiWorload = {
 }
 
 export function getWorloadDati(){
-    let json = JSON.stringify(datiWorload);
-    let dati = JSON.parse(json);
-    return dati;
+    // let json = JSON.stringify(datiWorload);
+    // let dati = JSON.parse(json);
+    return datiWorload;
 }

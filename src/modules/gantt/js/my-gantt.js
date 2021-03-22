@@ -25,37 +25,27 @@ function init(divContainer) {
     gantt.init(divContainer);
 }
 
-function raggruppa() {
-    // myGruppi.groupByRisorse();
-    myGruppi.groupByCarico();
-}
-
-function raggruppa1(gruppoAttivo) {
-    if (gruppoAttivo) {
-        gantt.groupBy(false);
-    } else {
-        gantt.groupBy({
-            groups: gantt.serverList(LISTA_CARICHI),
-            relation_property: 'idCarico',
-            group_id: 'key',
-            group_text: 'label'
-        });
-        // gantt.sort('start_date');
-    }
-
-    gantt.render();
-}
-
 function parseDati(dati) {
     let dataParsed = parseDatiServer(dati);
     gantt.parse(dataParsed);
+    myGruppi.groupByCarico();
 }
 function render() {
     gantt.render();
 }
+
+function creaTask(params) {
+    let taskId = gantt.addTask({
+        text: params.text,
+        start_date: params.start_date,
+        duration: params.durata
+    });
+    return taskId;
+}
+
 export default {
     init,
-    raggruppa,
     parseDati,
-    render
+    render,
+    creaTask
 };

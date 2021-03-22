@@ -1,5 +1,5 @@
 import MyDate from '@/shared/my-date.js';
-import { getMacchinaDaIdRisorsa } from '@/shared/liste/risorse-ciclatura.js'
+import { getMacchinaDaIdRisorsa, getRisorsaById } from '@/shared/liste/risorse-ciclatura.js'
 
 export function parseWorload(dati) {
     let result = {
@@ -8,6 +8,7 @@ export function parseWorload(dati) {
     }
     let tasksRisorse = loopRisorse(dati);
     result.data = raggruppaTasks(tasksRisorse);
+    // result.data = tasksRisorse;
     return result;
 }
 
@@ -15,6 +16,8 @@ function raggruppaTasks(tasks) {
     let result = [];
     let listaTasks = {};
     tasks.forEach(item => {
+        //${nomeMacchina}-C${tmpObj.idCarico}-${keyWeek}
+        //key_week = L180-C1-WK10
         let key = item.key_week;
         let taskEsistente = listaTasks[key];
 
@@ -23,15 +26,11 @@ function raggruppaTasks(tasks) {
             taskEsistente.subTasks = [];
             listaTasks[key] = taskEsistente;
         } else {
-            if (Array.isArray(taskEsistente.subTasks)) {
-                taskEsistente.subTasks.push(item);
-            } else {
-                taskEsistente.subTasks = [item];
-            }
+            taskEsistente.subTasks.push(item);
         }
     })
 
-    Object.keys(listaTasks).forEach(key=>{
+    Object.keys(listaTasks).forEach(key => {
         let task = listaTasks[key];
         task.numChilds = task.subTasks.length;
         result.push(task);
@@ -44,14 +43,11 @@ function raggruppaTasks(tasks) {
  * @param {*} dati : dati worload delle risorse
  */
 function loopRisorse(dati) {
-    let cont = 20;
     let tmpObj = {}; //Oggetto per scambio dati con nested loop
     let tasks = [];
     //Ogni key rappresenta id della risorsa
     let keys = Object.keys(dati);
     keys.forEach(idRisorsa => {
-        // if (idRisorsa != 3) return;
-
         let datiRisorsa = dati[idRisorsa];
         tmpObj.idRisorsa = idRisorsa;
         //Crea i task per ogni carico
@@ -135,17 +131,20 @@ function creaTaskWeekWorkload(workload, keyWeek, tmpObj) {
 
     //Creo il task gantt con dati calcolati    
     let task = creaTask(start_date, durata);
-    task.text = `R:${tmpObj.idRisorsa} C:${tmpObj.idCarico} ${keyWeek}`;
+    // task.text = `R:${tmpObj.idRisorsa} C:${tmpObj.idCarico} ${keyWeek}`;
 
     task.idCarico = tmpObj.idCarico;
     task.idRisorsa = tmpObj.idRisorsa;
-    
-    let nomeMacchina = getMacchinaDaIdRisorsa(tmpObj.idRisorsa);
+
+    let datiRisorsa = getRisorsaById(tmpObj.idRisorsa);
+    let nomeMacchina = datiRisorsa.nome_macchina;
+    // let nomeMacchina = getMacchinaDaIdRisorsa(tmpObj.idRisorsa);
     task.macchina = nomeMacchina;
+    task.stallo = datiRisorsa.stallo;
     //key per ragguppare in base carichi della stessa macchina
     task.gr_macchina_carico = `${nomeMacchina}-C${tmpObj.idCarico}`;
     task.key_week = `${nomeMacchina}-C${tmpObj.idCarico}-${keyWeek}`;
-    //task.titolo = `${nomeMacchina}-C${tmpObj.idCarico}`;
+    task.text = `${nomeMacchina}-C${tmpObj.idCarico}`;
     //Salvo i dati addizionali nel task
     task.details = { workload: workload };
     return task;

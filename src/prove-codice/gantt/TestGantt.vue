@@ -10,7 +10,7 @@
 <script>
 import MyGantt from 'Moduli/gantt/js/my-gantt.js';
 import { parseWorload } from 'Moduli/gantt/js/parse-worload.js';
-import {getWorloadDati} from './workload.js';
+import { getWorloadDati } from './workload.js';
 export default {
     name: 'TestGantt',
     components: {},
@@ -19,10 +19,7 @@ export default {
         init();
     },
     methods: {
-        raggruppa() {
-            MyGantt.raggruppa(1);
-            MyGantt.render();
-        }
+        raggruppa() {}
     }
 };
 
@@ -34,6 +31,6 @@ function init() {
 }
 </script>
 <style>
-@import "~Moduli/gantt/libs/gantt/dhtmlxgantt.css";
+@import '~Moduli/gantt/libs/gantt/dhtmlxgantt.css';
 @import '~Moduli/gantt/css/my-style.css';
 </style>

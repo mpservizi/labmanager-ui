@@ -1,8 +1,5 @@
 <template>
     <div>
-        <div>
-            <v-btn @click="raggruppa">Raggruppa</v-btn>
-        </div>
         <div ref="gantt" class="ganttBox"></div>
     </div>
 </template>
@@ -11,21 +8,16 @@
 import MyGantt from '../js/my-gantt.js';
 
 export default {
-    name: 'gantt',
+    name: 'Gantt',
     props: {},
     data() {
         return {
-            gruppoAttivo: false
         };
     },
     mounted: function () {
         MyGantt.init(this.$refs.gantt);
     },
     methods: {
-        raggruppa() {
-            MyGantt.raggruppa(this.gruppoAttivo);
-            this.gruppoAttivo = !this.gruppoAttivo;
-        }
     },
     computed: {
         // Estaggo i dati dal store
@@ -35,7 +27,7 @@ export default {
     },
     watch: {
         //  Quando cambiano i dati nel store ricarico nel gantt
-        dati(newVal, oldVal) {
+        dati(newVal) {
             MyGantt.parseDati(newVal);
         }
     }
@@ -44,23 +36,9 @@ export default {
  
 <style>
 @import '../libs/gantt/dhtmlxgantt.css';
+@import '~Moduli/gantt/css/my-style.css';
 .ganttBox {
     /* position: relative; */
     height: 800px;
-}
-
-.summary-row,
-.summary-row.odd {
-    background-color: #eeeeee;
-    font-weight: bold;
-}
-
-.gantt_grid div,
-.gantt_data_area div {
-    font-size: 12px;
-}
-
-.summary-bar {
-    opacity: 0;
 }
 </style>
