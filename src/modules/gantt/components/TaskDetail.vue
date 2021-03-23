@@ -1,29 +1,40 @@
 <template>
     <div>
         <v-container>
-            <h1>
+            <p class="text-h2 text-center mb-10">
                 {{ taskAttivo.txtMacchina }} - {{ taskAttivo.txtCarico }} -
                 {{ taskAttivo.txtWeek }}
-            </h1>
-            <ul>
-                <li v-for="(task, index) in listaTasks" :key="index">
-                    {{ task.msg }}
-                    <ul>
-                        <li
+            </p>
+            <v-row>
+                <v-col
+                    cols="6"
+                    v-for="(task, index) in listaTasks"
+                    :key="index"
+                >
+                    <v-card class="py-4">
+                        <p class="text-h4 text-center">{{ task.msg }}</p>
+                        <v-list-item
                             v-for="(item, index) in task.workloads"
                             :key="index"
+                            class="d-block"
                         >
-                            {{ item.msg }}
-                        </li>
-                    </ul>
-                </li>
-            </ul>
+                            <v-list-item-content class="text-left">
+                                <v-list-item-title>{{
+                                    item.msg
+                                }}</v-list-item-title>
+                            </v-list-item-content>
+                            <v-divider></v-divider>
+                        </v-list-item>
+                    </v-card>
+                </v-col>
+            </v-row>
         </v-container>
     </div>
 </template>
 
 <script>
 import { EventBus } from '@/shared/event-bus.js';
+import { creaListaTaskDetailUi } from '../js/my-ui.js';
 export default {
     name: 'TaskDetail',
     components: {},
@@ -46,46 +57,6 @@ export default {
         }
     }
 };
-
-function creaListaTaskDetailUi(task) {
-    let result = [];
-    let listaTasks = [];
-    listaTasks.push(task);
-
-    // console.log('Loop sub tasks');
-    task.subTasks.forEach((item) => {
-        listaTasks.push(item);
-    });
-
-    listaTasks.forEach((task) => {
-        let label = task.txtMacchina + '-' + task.stallo;
-        let totalDays = 0;
-        let numTasks = 0;
-        let workloads = [];
-
-        task.details.workload.forEach((item) => {
-            workloads.push({
-                days: item.days,
-                idRequest: item.idRequest,
-                msg: `Test request : ${item.idRequest} - Durata ${item.days} giorni`
-            });
-            totalDays += item.days;
-            numTasks++;
-        });
-
-        let msg = `${label} - occupato per ${totalDays} giorni:`;
-        let obj = {
-            msg: msg,
-            totalDays: totalDays,
-            numTasks: numTasks,
-            label: label,
-            workloads: workloads
-        };
-
-        result.push(obj);
-    });
-    return result;
-}
 </script>
 
 <style scoped></style>
