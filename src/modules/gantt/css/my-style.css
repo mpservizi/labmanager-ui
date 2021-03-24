@@ -1,29 +1,32 @@
-html, body {
+html,
+body {
     padding: 0px;
     margin: 0px;
 }
-        
+
 /* Bordo del task tondo per creare un pò di spazio tra task adiacenti */
-.gantt_task_line{
+.gantt_task_line {
     border-radius: 20px;
 }
 /* Task parent quando viene mostrato su una riga */
-.gantt_split_parent, .gantt_split_subproject {
+.gantt_split_parent,
+.gantt_split_subproject {
     opacity: 0;
     pointer-events: none;
 }
 /* Contenuto del task */
-.gantt_task_content{
+.gantt_task_content {
     /* Nascondo le scritte */
-    opacity: 0;
+    /* opacity: 0; */
+    font-size: smaller;
+    color: gray;
 }
 
-.server-task{
+.server-task {
     background-color: #ffb74d;
     border-color: gray;
 }
-.normal-task{
+.normal-task {
     background-color: #72ff78;
     border-color: gray;
-
 }

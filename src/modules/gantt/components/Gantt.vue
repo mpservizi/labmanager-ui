@@ -12,16 +12,17 @@ export default {
     name: 'Gantt',
     props: {},
     data() {
-        return {
-        };
+        return {};
     },
     created() {
         EventBus.$on('event-dblClick', (task) => {
             // this.taskAttivo = task;
-            this.$router.push({
-                name: 'gantt_detail',
-                params: { id:task.id,task:task }
-            }).catch(err => {});
+            this.$router
+                .push({
+                    name: 'gantt_detail',
+                    params: { id: task.id, task: task }
+                })
+                .catch((err) => {});
         });
     },
     mounted: function () {
@@ -43,7 +44,7 @@ export default {
 };
 </script>
  
-<style>
+<style scoped>
 @import '../libs/gantt/dhtmlxgantt.css';
 @import '~Moduli/gantt/css/my-style.css';
 .ganttBox {

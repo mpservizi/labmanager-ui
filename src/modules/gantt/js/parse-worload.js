@@ -10,10 +10,317 @@ export function parseWorload(dati) {
         data: [],
         links: []
     };
-    let tasksRisorse = loopRisorse(dati);
-    result.data = raggruppaTasks(tasksRisorse);
+    // let tasksRisorse = loopRisorse(dati);
+    // result.data = raggruppaTasks(tasksRisorse);
     // result.data = tasksRisorse;
+    result.data = creaTaskWorkload();
     return result;
+}
+
+function creaTaskWorkload() {
+    let json = [
+        {
+            id: 1,
+            type: 'project',
+            render: 'split',
+            parent: 0,
+            text: 'L180 - 8,9',
+            week: '',
+            start_date: '',
+            duration: '',
+            carico: '',
+            idRichiesta: ''
+        },
+        {
+            id: 2,
+            type: 'project',
+            render: 'split',
+            parent: 0,
+            text: 'L180 - 6,7',
+            week: '',
+            start_date: '',
+            duration: '',
+            carico: '',
+            idRichiesta: ''
+        },
+        {
+            id: 3,
+            type: 'project',
+            render: 'split',
+            parent: 0,
+            text: 'L232 - 6,7',
+            week: '',
+            start_date: '',
+            duration: '',
+            carico: '',
+            idRichiesta: ''
+        },
+        {
+            id: 4,
+            type: 'project',
+            render: 'split',
+            parent: 0,
+            text: 'L232 - 8,9',
+            week: '',
+            start_date: '',
+            duration: '',
+            carico: '',
+            idRichiesta: ''
+        },
+        {
+            id: 5,
+            type: 'project',
+            render: 'split',
+            parent: 0,
+            text: 'L2020 - 1,2',
+            week: '',
+            start_date: '',
+            duration: '',
+            carico: '',
+            idRichiesta: ''
+        },
+        {
+            id: 6,
+            type: 'project',
+            render: 'split',
+            parent: 0,
+            text: 'L2020 - 3,4',
+            week: '',
+            start_date: '',
+            duration: '',
+            carico: '',
+            idRichiesta: ''
+        },
+        {
+            id: 7,
+            type: 'project',
+            render: 'split',
+            parent: 0,
+            text: 'L2020 - 5,6',
+            week: '',
+            start_date: '',
+            duration: '',
+            carico: '',
+            idRichiesta: ''
+        },
+        {
+            id: 100,
+            type: 'task',
+            render: '',
+            parent: 1,
+            text: 19.1,
+            week: 'WK10',
+            start_date: '08/03/2021',
+            duration: 6,
+            carico: 19.1,
+            idRichiesta: 1
+        },
+        {
+            id: 101,
+            type: 'task',
+            render: '',
+            parent: 1,
+            text: 19.1,
+            week: 'WK11',
+            start_date: '15/03/2021',
+            duration: 1,
+            carico: 19.1,
+            idRichiesta: 1
+        },
+        {
+            id: 102,
+            type: 'task',
+            render: '',
+            parent: 2,
+            text: 19.3,
+            week: 'WK10',
+            start_date: '08/03/2021',
+            duration: 4,
+            carico: 19.3,
+            idRichiesta: 2
+        },
+        {
+            id: 103,
+            type: 'task',
+            render: '',
+            parent: 2,
+            text: 19.3,
+            week: 'WK11',
+            start_date: '15/03/2021',
+            duration: 2,
+            carico: 19.3,
+            idRichiesta: 2
+        },
+        {
+            id: 104,
+            type: 'task',
+            render: '',
+            parent: 3,
+            text: 19.3,
+            week: 'WK10',
+            start_date: '08/03/2021',
+            duration: 4,
+            carico: 19.3,
+            idRichiesta: 2
+        },
+        {
+            id: 105,
+            type: 'task',
+            render: '',
+            parent: 3,
+            text: 19.1,
+            week: 'WK11',
+            start_date: '19/03/2021',
+            duration: 2,
+            carico: 19.1,
+            idRichiesta: 1
+        },
+        {
+            id: 106,
+            type: 'task',
+            render: '',
+            parent: 3,
+            text: 19.2,
+            week: 'WK11',
+            start_date: '15/03/2021',
+            duration: 4,
+            carico: 19.2,
+            idRichiesta: 2
+        },
+        {
+            id: 107,
+            type: 'task',
+            render: '',
+            parent: 4,
+            text: 19.2,
+            week: 'WK10',
+            start_date: '08/03/2021',
+            duration: 6,
+            carico: 19.2,
+            idRichiesta: 2
+        },
+        {
+            id: 108,
+            type: 'task',
+            render: '',
+            parent: 4,
+            text: 19.1,
+            week: 'WK11',
+            start_date: '19/03/2021',
+            duration: 2,
+            carico: 19.1,
+            idRichiesta: 1
+        },
+        {
+            id: 109,
+            type: 'task',
+            render: '',
+            parent: 4,
+            text: 19.2,
+            week: 'WK11',
+            start_date: '15/03/2021',
+            duration: 4,
+            carico: 19.2,
+            idRichiesta: 2
+        },
+        {
+            id: 110,
+            type: 'task',
+            render: '',
+            parent: 5,
+            text: 19.1,
+            week: 'WK09',
+            start_date: '04/03/2021',
+            duration: 4,
+            carico: 19.1,
+            idRichiesta: 1
+        },
+        {
+            id: 111,
+            type: 'task',
+            render: '',
+            parent: 5,
+            text: 19.1,
+            week: 'WK10',
+            start_date: '08/03/2021',
+            duration: 7,
+            carico: 19.1,
+            idRichiesta: 1
+        },
+        {
+            id: 112,
+            type: 'task',
+            render: '',
+            parent: 5,
+            text: 19.1,
+            week: 'WK11',
+            start_date: '15/03/2021',
+            duration: 1,
+            carico: 19.1,
+            idRichiesta: 1
+        },
+        {
+            id: 113,
+            type: 'task',
+            render: '',
+            parent: 6,
+            text: 19.3,
+            week: 'WK09',
+            start_date: '04/03/2021',
+            duration: 4,
+            carico: 19.3,
+            idRichiesta: 1
+        },
+        {
+            id: 114,
+            type: 'task',
+            render: '',
+            parent: 6,
+            text: 19.3,
+            week: 'WK10',
+            start_date: '08/03/2021',
+            duration: 7,
+            carico: 19.3,
+            idRichiesta: 1
+        },
+        {
+            id: 115,
+            type: 'task',
+            render: '',
+            parent: 6,
+            text: 19.3,
+            week: 'WK11',
+            start_date: '15/03/2021',
+            duration: 2,
+            carico: 19.3,
+            idRichiesta: 1
+        },
+        {
+            id: 116,
+            type: 'task',
+            render: '',
+            parent: 7,
+            text: 19.3,
+            week: 'WK09',
+            start_date: '04/03/2021',
+            duration: 4,
+            carico: 19.3,
+            idRichiesta: 1
+        },
+        {
+            id: 117,
+            type: 'task',
+            render: '',
+            parent: 7,
+            text: 19.3,
+            week: 'WK10',
+            start_date: '08/03/2021',
+            duration: 5,
+            carico: 19.3,
+            idRichiesta: 1
+        }
+    ];
+    return json;
 }
 
 function raggruppaTasks(tasks) {

@@ -29,7 +29,7 @@ export default {
             let listaRouter = this.$route.meta.breadcrumb;
             let listaLinks = [];
             //Se ci sono più di 1 link, altrimenti nascondo breadcumb
-            if (listaRouter.length > 1) {
+            if (listaRouter?.length > 1) {
                 listaRouter.forEach((item) => {
                     if (item) {
                         let obj = {

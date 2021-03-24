@@ -28,7 +28,7 @@ function init(divContainer) {
 function parseDati(dati) {
     let dataParsed = parseDatiServer(dati);
     gantt.parse(dataParsed);
-    myGruppi.groupByCarico();
+    // myGruppi.groupByCarico();
 }
 function render() {
     gantt.render();
