@@ -3,11 +3,13 @@
  */
 import MyDate from '@/shared/my-date.js';
 import { getRisorsaById } from '@/shared/liste/risorse-ciclatura.js';
+import {creaTasksGanttWorkload} from './task-builder.js'
 
 export function parseDatiCiclatura(dati) {
     let risorse = groupByRisorsa(dati);
     calcolaDurataCarichi(risorse);
-    console.log(risorse);
+    let tasks = creaTasksGanttWorkload(risorse);
+    return tasks;
 }
 
 // console.log(dati);

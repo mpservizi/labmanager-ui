@@ -12,7 +12,10 @@ async function getAll() {
     // let workloadDati = getWorloadDati();
     // let result = parseWorload(workloadDati);
     let dati = getDatiCiclature();
-    parseDatiCiclatura(dati);
+    let tasks = parseDatiCiclatura(dati);
+    result.data = tasks;
+    console.log(result);
+    
     // console.log(result);
     await pausa(10);
     return result;

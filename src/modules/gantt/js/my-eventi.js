@@ -13,7 +13,6 @@ function initEventi(myGantt) {
     //doppio click task
     myGantt.attachEvent('onTaskDblClick', function(id, e) {
         let task = myGantt.getTask(id);
-        task.week = task.key_week.substr(-4);
         EventBus.$emit('event-dblClick', task);
         return false; //blocco il lightbox
     });
