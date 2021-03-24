@@ -1,3 +1,6 @@
+/**
+ * Prepara di dati exportati dal schedular, per essere importati in gantt per mostrare il workload generale delle macchine di ciclatura
+ */
 import MyDate from '@/shared/my-date.js';
 import { getRisorsaById } from '@/shared/liste/risorse-ciclatura.js';
 
