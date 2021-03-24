@@ -1,11 +1,12 @@
 import MyDate from 'date-and-time';
+import moment from 'moment';
 
-export function strToDate(strDate, formato) {
+function strToDate(strDate, formato) {
     let data = MyDate.parse(strDate, formato || 'DD/MM/YYYY');
     return data;
 }
 
-export function dateToStr(data, formato) {
+function dateToStr(data, formato) {
     let str = MyDate.format(data, formato || 'DD/MM/YYYY');
     return str;
 }
@@ -15,7 +16,7 @@ export function dateToStr(data, formato) {
  * @param {*} start : data inizio
  * @param {*} end : data fine
  */
-export function calcolaDifferenzaDateInGiorni(start, end) {
+function calcolaDifferenzaDateInGiorni(start, end) {
     return Math.floor(MyDate.subtract(end, start).toDays());
 }
 
@@ -25,20 +26,22 @@ export function calcolaDifferenzaDateInGiorni(start, end) {
  * @param {*} year : anno della settimana
  * @returns {Date} : data di inizio settimana
  */
-export function getDateOfWeek(weekNumber, year) {
+function getDateOfWeek(weekNumber, year) {
     var simple = new Date(year, 0, 1 + (weekNumber - 1) * 7);
     var dow = simple.getDay();
     var ISOweekStart = simple;
-    if (dow <= 4)
-        ISOweekStart.setDate(simple.getDate() - simple.getDay() + 1);
-    else
-        ISOweekStart.setDate(simple.getDate() + 8 - simple.getDay());
+    if (dow <= 4) ISOweekStart.setDate(simple.getDate() - simple.getDay() + 1);
+    else ISOweekStart.setDate(simple.getDate() + 8 - simple.getDay());
     return ISOweekStart;
-
+}
+function getWeekNumber(data) {
+    let week = moment(data).isoWeek();
+    return week;
 }
 export default {
     strToDate,
     dateToStr,
     calcolaDifferenzaDateInGiorni,
+    getWeekNumber,
     getDateOfWeek
-}
+};
