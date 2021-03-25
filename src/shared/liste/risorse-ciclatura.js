@@ -120,13 +120,13 @@ export function getTestoCaricoDaId(idCarico) {
 export function getGruppiCiclatura() {
     //Indica come sono composti i vari gruppi di ciclatura
     const gruppiCiclatura = [
-        { id: 1, label: 'L180-8+9' },
-        { id: 2, label: 'L180-6+7' },
-        { id: 3, label: 'L232-6+7' },
-        { id: 4, label: 'L232-8+9' },
-        { id: 5, label: 'L2020-1+2' },
-        { id: 6, label: 'L2020-3+4' },
-        { id: 7, label: 'L2020-5+6' },
+        { id: 1, label: 'L180-6+7',idsRisorse:[1,2]  },
+        { id: 2, label: 'L180-8+9',idsRisorse:[3,4]  },
+        { id: 3, label: 'L232-6+7',idsRisorse:[5,6]  },
+        { id: 4, label: 'L232-8+9',idsRisorse:[6,8]  },
+        { id: 5, label: 'L2020-1+2',idsRisorse:[9,10] },
+        { id: 6, label: 'L2020-3+4',idsRisorse:[11,12] },
+        { id: 7, label: 'L2020-5+6',idsRisorse:[13,14] },
     ];
     return gruppiCiclatura;
 }

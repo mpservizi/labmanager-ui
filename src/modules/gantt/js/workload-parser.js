@@ -26,20 +26,25 @@ export function parseDatiCiclatura(dati) {
  */
 function groupByRisorsa(dati) {
     let result = {};
+    let tmp=[1,2];
     dati.forEach(item => {
         let idRisorsa = item.idRisorsa;
+        if(!tmp.includes(idRisorsa)) return;
         let itemRisorsa = getRisorsaById(idRisorsa);
         // console.log(itemRisorsa);
         if (!result[idRisorsa]) {
             result[idRisorsa] = {
                 idRisorsa: idRisorsa,
                 macchina: itemRisorsa.nome_macchina,
-                stallo: itemRisorsa.stallo,
+                stallo: '-',
                 prove: []
             };
         }
 
-        result[idRisorsa].prove.push(creaObjTask(item));
+        let task= creaObjTask(item);
+        task.stallo = itemRisorsa.stallo;
+        task.macchina = itemRisorsa.nome_macchina;
+        result[idRisorsa].prove.push(task);
     });
 
     return result;
