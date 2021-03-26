@@ -3,7 +3,7 @@
  */
 import MyDate from '@/shared/my-date.js';
 import { getRisorsaById } from '@/shared/liste/risorse-ciclatura.js';
-import {creaTasksGanttWorkload} from './task-builder.js'
+import { creaTasksGanttWorkload } from './task-builder.js';
 
 export function parseDatiCiclatura(dati) {
     let risorse = groupByRisorsa(dati);
@@ -26,10 +26,10 @@ export function parseDatiCiclatura(dati) {
  */
 function groupByRisorsa(dati) {
     let result = {};
-    let tmp=[1,2];
+    let tmp = [7, 8];
     dati.forEach(item => {
         let idRisorsa = item.idRisorsa;
-        if(!tmp.includes(idRisorsa)) return;
+        // if (!tmp.includes(idRisorsa)) return;
         let itemRisorsa = getRisorsaById(idRisorsa);
         // console.log(itemRisorsa);
         if (!result[idRisorsa]) {
@@ -41,7 +41,7 @@ function groupByRisorsa(dati) {
             };
         }
 
-        let task= creaObjTask(item);
+        let task = creaObjTask(item);
         task.stallo = itemRisorsa.stallo;
         task.macchina = itemRisorsa.nome_macchina;
         result[idRisorsa].prove.push(task);
