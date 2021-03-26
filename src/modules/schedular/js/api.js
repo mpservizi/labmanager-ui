@@ -16,7 +16,8 @@ export async function loadRisorse() {
  */
 export async function loadDatiCiclatura() {
     let data = await getRequest(URL_CICLATURA);
-    return parseEventiServer(data);
+    let dati = JSON.parse(data.eventi);
+    return parseEventiServer(dati);
 }
 
 /**
@@ -24,8 +25,13 @@ export async function loadDatiCiclatura() {
  * @param {*} dati
  * @returns
  */
-export async function save(dati) {
-    let result = await postRequest(URL_CICLATURA, dati);
+export async function save(eventi, workload) {
+    let dati = {
+        eventi: eventi,
+        workload: workload
+    };
+    let json = JSON.stringify(dati);
+    let result = await postRequest(URL_CICLATURA, json);
     return result;
 }
 

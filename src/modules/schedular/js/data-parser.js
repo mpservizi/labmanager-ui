@@ -2,7 +2,7 @@ import {
     strToDate,
     dateToStr,
     ricavaNomeCaricoDaId,
-    ricavaIdCarico,
+    ricavaIdCarico
 } from './my-func.js';
 import { calcolaCaricoRisorse } from './my-worload.js';
 /**
@@ -128,7 +128,7 @@ export function workloadToJson(myScheduler, eventi) {
     let json = '[]';
     let workloadRisorse = calcolaCaricoRisorse(myScheduler, eventi);
     try {
-        json = JSON.stringify(workloadRisorse)
+        json = JSON.stringify(workloadRisorse);
     } catch (error) {
         console.log(error);
     }

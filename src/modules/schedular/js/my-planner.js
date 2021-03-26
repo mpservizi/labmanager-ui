@@ -13,7 +13,7 @@ import {
 } from './my-view.js';
 
 import { save, loadRisorse, loadDatiCiclatura } from './api.js';
-import { eventiToJson,workloadToJson } from './data-parser.js';
+import { eventiToJson, workloadToJson } from './data-parser.js';
 
 import {
     LISTA_RISORSE,
@@ -38,15 +38,16 @@ function initPlanner(container, dataInizio, view) {
 // Salva i dati sul server
 async function saveDati() {
     try {
-        // let json = eventiToJson(myScheduler.myScheduler.getEvents());
-        let carico = workloadToJson(myScheduler, myScheduler.getEvents());
-        console.log(carico);
-        // let result = await save(json);
-        // return result;
+        debugger;
+        let datiEv = myScheduler.getEvents();
+        let eventi = eventiToJson(datiEv);
+        let workload = workloadToJson(myScheduler, datiEv);
+        let result = await save(eventi, workload);
+        return result;
         return true;
     } catch (error) {
         console.log(error);
-        console.log('Errore salvataggio dati');
+        alert('Errore salvataggio dati');
         return null;
     }
 }
@@ -72,7 +73,7 @@ async function loadDati() {
         return true;
     } catch (error) {
         console.log(error);
-        console.log('Errore caricamento dati');
+        alert('Errore caricamento dati');
         return false;
     }
 }
