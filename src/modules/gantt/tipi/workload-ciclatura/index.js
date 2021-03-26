@@ -8,7 +8,6 @@ export  function preConfig(myGantt){
     initWorkloadGantt(myGantt);
 }
 export function parseDati(myGantt,dati){
-    debugger
     let parsedData = parseDatiServer(dati);
     myGantt.parseDati(parsedData);
 
