@@ -1,9 +1,6 @@
-import {
-    strToDate,
-    dateToStr,
-    ricavaNomeCaricoDaId,
-    ricavaIdCarico
-} from './my-func.js';
+import { ricavaNomeCaricoDaId, ricavaIdCarico } from './my-func.js';
+import MyDate from '@/shared/my-date.js';
+
 import { calcolaCaricoRisorse } from './my-worload.js';
 /**
  * Converte gli eventi del schedular in json per salvare sul server
@@ -25,8 +22,10 @@ export function eventiToJson(eventi) {
                 return;
             }
             //campi modificati prima di salvare sul server
-            let data_fine = dateToStr(item.end_date);
-            let data_inizio = dateToStr(item.start_date);
+            // let data_fine = dateToStr(item.end_date);
+            // let data_inizio = dateToStr(item.start_date);
+            let data_fine = MyDate.dateToStr(item.end_date);
+            let data_inizio = MyDate.dateToStr(item.start_date);
             let nomeCarico = ricavaNomeCaricoDaId(item.idCarico);
 
             let modello = {
@@ -64,8 +63,10 @@ export function parseEventiServer(datiServer) {
     try {
         let dati = datiServer.map(item => {
             //campi modificati prima di caricare nel schedular
-            let s_d = strToDate(item.start_date);
-            let e_d = strToDate(item.end_date);
+            // let s_d = strToDate(item.start_date);
+            // let e_d = strToDate(item.end_date);
+            let s_d = MyDate.strToDate(item.start_date, 'DD/MM/YYYY');
+            let e_d = MyDate.strToDate(item.end_date, 'DD/MM/YYYY');
             //Imposto ora per evitare bug reszise on drag
             s_d.setHours(13);
             e_d.setHours(20);

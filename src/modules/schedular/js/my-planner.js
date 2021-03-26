@@ -38,7 +38,6 @@ function initPlanner(container, dataInizio, view) {
 // Salva i dati sul server
 async function saveDati() {
     try {
-        debugger;
         let datiEv = myScheduler.getEvents();
         let eventi = eventiToJson(datiEv);
         let workload = workloadToJson(myScheduler, datiEv);

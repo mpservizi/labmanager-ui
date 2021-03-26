@@ -1,8 +1,9 @@
-import {    calcolaDatiDurata,dateToStr} from './my-func.js';
+import MyDate from '@/shared/my-date.js';
+import { calcolaDatiDurata, dateToStr } from './my-func.js';
 /**
  * Calcola il carico per tutte le risorse in base ai task assegnati
- * @param {*} myScheduler 
- * @param {*} eventi 
+ * @param {*} myScheduler
+ * @param {*} eventi
  */
 export function calcolaCaricoRisorse(myScheduler, eventi) {
     let filtri = eventi.filter(item => item.idRisorsa < 50);
@@ -11,9 +12,8 @@ export function calcolaCaricoRisorse(myScheduler, eventi) {
         let caricoTask = ricavaCaricoRisorsaTask(myScheduler, item);
         matrice.push(caricoTask);
     });
+
     let caricoRisorse = sommaDatiRisorsa(matrice);
-    // console.log(JSON.stringify(caricoRisorse));
-    // console.log(caricoRisorse);    
     return caricoRisorse;
 }
 
@@ -22,15 +22,15 @@ export function calcolaCaricoRisorse(myScheduler, eventi) {
  * @param {*} matriceLoads : array con il workload dei singoli task per risorsa
  */
 function sommaDatiRisorsa(matriceLoads) {
-    let result = {}
-    // console.log(matriceLoads);    
+    let result = {};
+    // console.log(matriceLoads);
     let richiesteAnalizzate = {};
     matriceLoads.forEach(item => {
         //Record per la risorsa nel ogetto globale
         let objRisorsa = result[item.idRisorsa];
         //Inizializzo la chiave id risorsa nel oggetto globale
         if (!richiesteAnalizzate[item.idRisorsa]) {
-            richiesteAnalizzate[item.idRisorsa] = {}
+            richiesteAnalizzate[item.idRisorsa] = {};
         }
         //Se l'ogetto globale non contiene i dati per questa risorsa
         if (!objRisorsa) {
@@ -46,15 +46,20 @@ function sommaDatiRisorsa(matriceLoads) {
                 let caricoGlobale = objRisorsa[keyCarico];
                 //Se esite già, vado ad integrare i dati
                 if (caricoGlobale) {
-                    sommaWorloadTaskInMatrice(caricoGlobale, caricoItem, richiesteAnalizzate, item.idRisorsa);
+                    sommaWorloadTaskInMatrice(
+                        caricoGlobale,
+                        caricoItem,
+                        richiesteAnalizzate,
+                        item.idRisorsa
+                    );
                 } else {
                     //Se il carico non è presente nel oggetto globale
                     //Copio il carico
                     objRisorsa[keyCarico] = caricoItem;
                 }
-            })
+            });
         }
-    })
+    });
 
     return result;
 }
@@ -65,9 +70,14 @@ function sommaDatiRisorsa(matriceLoads) {
  * @param {*} objLocale : Oggetto con il workload del tak
  * @param {*} richiesteAnalizzate : varibile che tiene traccia delle richieste già analizzate
  */
-function sommaWorloadTaskInMatrice(objGlobale, objLocale, richiesteAnalizzate, idRisorsa) {
+function sommaWorloadTaskInMatrice(
+    objGlobale,
+    objLocale,
+    richiesteAnalizzate,
+    idRisorsa
+) {
     //Creo un array con tutti i dati con tutt le chavi del oggetto locale e globale
-    let tmpObj = { ...objGlobale, ...objLocale }
+    let tmpObj = { ...objGlobale, ...objLocale };
     let chiaviWeek = Object.keys(tmpObj);
 
     //Gli oggeti del workload hanno come chiave il numero della settiamana WK??
@@ -98,12 +108,18 @@ function sommaWorloadTaskInMatrice(objGlobale, objLocale, richiesteAnalizzate, i
                     } else {
                         // Stesso carico ma per una richiesta diversa
                         //Per evitare doppioni, Controllo se ho già analizzato questa test request
-                        if (richiesteAnalizzate[idRisorsa][objLocale.idRequest] == undefined) {
-                            richiesteAnalizzate[idRisorsa][objLocale.idRequest] = true;
+                        if (
+                            richiesteAnalizzate[idRisorsa][
+                                objLocale.idRequest
+                            ] == undefined
+                        ) {
+                            richiesteAnalizzate[idRisorsa][
+                                objLocale.idRequest
+                            ] = true;
                             caricoGlobale.push(objLocale);
                         }
                     }
-                })
+                });
             });
         }
     });
@@ -125,7 +141,7 @@ function ricavaCaricoRisorsaTask(myScheduler, item) {
     caricoRisorsa.idTask = item.id;
     caricoRisorsa.workLoad = {
         [item.idCarico]: arrWorkload
-    }
+    };
     return caricoRisorsa;
 }
 
@@ -144,7 +160,6 @@ function creaArrayCaricoTask(item) {
 
     let part1 = 7 - start_offset; //7 = numero di giorni nella settimana in cui inizia il task
     let part2 = durata - part1; // resto dal aggiungere nella settimana successiva
-
 
     let keyWeek = creaKeyWeek(startWeek);
     // let arrWorkload = [];
@@ -173,7 +188,7 @@ function creaArrayCaricoTask(item) {
 
 /**
  * Crea la chiave da usare nell'oggetto per rappresentare il numero di settimana
- * @param {*} numWeek 
+ * @param {*} numWeek
  */
 function creaKeyWeek(numWeek) {
     let prefix = 'WK';
@@ -190,6 +205,7 @@ function creaObjWeek(giorni, item) {
     return {
         days: giorni,
         idRequest: item.idRequest,
-        start_date:dateToStr(item.datiDurata.weekStartDate)
-    }
+        start_date: MyDate.dateToStr(item.datiDurata.weekStartDate)
+        // start_date: dateToStr(item.datiDurata.weekStartDate)
+    };
 }

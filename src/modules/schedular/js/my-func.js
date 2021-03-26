@@ -19,22 +19,12 @@ export function filtraRisorse(valore) {
     if (valore == 'all') {
         itemsFiltrati = risorse.slice();
     } else {
-        itemsFiltrati = risorse.filter(function (room) {
+        itemsFiltrati = risorse.filter(function(room) {
             return room.label == valore;
         });
     }
 
     myScheduler.updateCollection(LISTA_RISORSE_FILTRATA, itemsFiltrati);
-}
-
-export function strToDate(strDate) {
-    let data = MyDate.strToDate(strDate, 'DD/MM/YYYY');
-    return data;
-}
-
-export function dateToStr(data) {
-    let str = MyDate.dateToStr(data, 'DD/MM/YYYY');
-    return str;
 }
 
 /**
@@ -62,16 +52,6 @@ export function ricavaNomeCaricoDaId(id) {
             return item.label;
         }
     }
-}
-
-/**
- * Restituisce la differenza in giorni tra le date indicate
- * @param {*} start : data inizio
- * @param {*} end : data fine
- */
-export function calcolaDifferenzaDateInGiorni(start, end) {
-    // return Math.floor(MyDate.subtract(end, start).toDays());
-    return MyDate.calcolaDifferenzaDateInGiorni(start, end);
 }
 
 export function getparametriScala() {
@@ -105,19 +85,22 @@ export function showMessage(testo, tipo) {
 
 /**
  * Calcola i dati relativi alla durata in base alle date indicate
- * @param {Date} start_date 
- * @param {Date} end_date 
+ * @param {Date} start_date
+ * @param {Date} end_date
  */
 export function calcolaDatiDurata(start_date, end_date) {
     let item = {};
     item.startWeek = myScheduler.date.getISOWeek(start_date);
     item.endWeek = myScheduler.date.getISOWeek(end_date);
     item.durata =
-        calcolaDifferenzaDateInGiorni(start_date, end_date) + 1;
+        MyDate.calcolaDifferenzaDateInGiorni(start_date, end_date) + 1;
 
     //Indica il numero dei giorni liberi tra inzio settimana e inizio task
     item.weekStartDate = myScheduler.date.week_start(start_date);
-    item.start_offset = calcolaDifferenzaDateInGiorni(item.weekStartDate, start_date);
+    item.start_offset = MyDate.calcolaDifferenzaDateInGiorni(
+        item.weekStartDate,
+        start_date
+    );
 
     return item;
 }
