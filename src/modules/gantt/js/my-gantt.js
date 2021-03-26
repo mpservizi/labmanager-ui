@@ -1,49 +1,48 @@
 import { gantt } from '../libs/gantt/dhtmlxgantt.js';
-import { LISTA_CARICHI, NOME_LISTA_CARICHI } from '../costanti.js';
-import { parseDatiServer } from './data-parser.js';
-import { MyGruppi } from './gruppi.js';
-import { MyEventi } from './my-eventi.js';
-import { MyConfig } from './my-config.js';
-import { MyTemplates } from './my-templates.js';
 
-let myGruppi;
-let myEventi;
-let myConfig;
-let myTemplates;
+/**
+ * Funzione custom da chiamare prima di init gantt
+ * @param {*} callback : funzione che riceve come parametro instanza di gantt
+ */
+function preconfig(callback) {
+    callback(gantt);
+}
 
+/**
+ * Inizializza il gantt nel contenitore indicato
+ * @param {*} divContainer 
+ */
 function init(divContainer) {
-    myGruppi = new MyGruppi(gantt);
-    myEventi = new MyEventi(gantt);
-    myConfig = new MyConfig(gantt);
-    myTemplates = new MyTemplates(gantt);
-
-    myConfig.init();
-    myEventi.init();
-    myTemplates.init();
-
-    gantt.serverList(NOME_LISTA_CARICHI, LISTA_CARICHI);
     gantt.init(divContainer);
 }
 
+/**
+ * Carica nel gantt i dati indicati
+ * @param {*} dati 
+ */
 function parseDati(dati) {
-    let dataParsed = parseDatiServer(dati);
-    gantt.parse(dataParsed);
-    // myGruppi.groupByCarico();
+    gantt.parse(dati);
 }
+
+/**
+ * Esegue in render del gantt
+ */
 function render() {
     gantt.render();
 }
 
-function creaTask(params) {
-    let taskId = gantt.addTask({
-        text: params.text,
-        start_date: params.start_date,
-        duration: params.durata
-    });
+/**
+ * Crea il task nel gantt con i parametri ini
+ * @param {Object} taskParams : Oggetto con i parametri del task 
+ * @returns 
+ */
+function creaTask(taskParams) {
+    let taskId = gantt.addTask(taskParams);
     return taskId;
 }
 
 export default {
+    preconfig,
     init,
     parseDati,
     render,

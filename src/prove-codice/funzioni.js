@@ -57,7 +57,44 @@ function test_calcolaDurataTotale() {
     console.log(calcolaDurataTotale(2, 4) == 4);
 }
 
-console.log('Test durata carico');
-test_getDurataProva();
-console.log('Test durata totale');
-test_calcolaDurataTotale();
+function avvia_test(){
+    console.log('Test durata carico');
+    test_getDurataProva();
+    console.log('Test durata totale');
+    test_calcolaDurataTotale();
+    
+}
+
+/**
+ * Genera i tasks con durata totale per ciascun gruppo di prove
+ * @param {Array} testPlan : array con i gruppi i prova
+ * @returns {Array} : array con i tasks
+ */
+function generaTasks(testPlan){
+    let tasks = [];
+    testPlan.forEach(item=>{
+        let durataProva = getDurataProva(item.carico,item.corrente);
+        let durataTotale = calcolaDurataTotale(durataProva,item.campioni);
+    
+        let task = {
+            durataTotale:durataTotale,
+            durataProva:durataProva,
+            ...item
+        }
+        tasks.push(task);
+    
+    })
+    return tasks;
+}
+
+function test_generaTasks(){
+    let testPlan = [
+        {carico:1,corrente:10,campioni:3},
+        {carico:2,corrente:10,campioni:3},
+        {carico:3,corrente:10,campioni:3},
+    ];
+
+    let tasks = generaTasks(testPlan);
+    console.log( tasks);
+}
+test_generaTasks();

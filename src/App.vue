@@ -35,7 +35,8 @@ export default {
     name: 'App',
     components: { Breadcrumbs },
     data: () => ({
-        drawer: false
+        drawer: false,
+        dev:true
     })
 };
 </script>

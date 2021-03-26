@@ -7,7 +7,7 @@
 <script>
 import { EventBus } from '@/shared/event-bus.js';
 import MyGantt from '../js/my-gantt.js';
-
+import {preConfig,parseDati} from '../tipi/workload-ciclatura/index.js';
 export default {
     name: 'Gantt',
     props: {},
@@ -26,6 +26,7 @@ export default {
         });
     },
     mounted: function () {
+        MyGantt.preconfig(preConfig);
         MyGantt.init(this.$refs.gantt);
     },
     methods: {},
@@ -38,7 +39,7 @@ export default {
     watch: {
         //  Quando cambiano i dati nel store ricarico nel gantt
         dati(newVal) {
-            MyGantt.parseDati(newVal);
+            parseDati(MyGantt,newVal);
         }
     }
 };
