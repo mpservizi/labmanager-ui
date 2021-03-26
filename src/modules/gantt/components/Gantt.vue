@@ -15,7 +15,7 @@ export default {
         return {};
     },
     created() {
-        EventBus.$on('event-dblClick', (task) => {
+        EventBus.on('event-dblClick', (task) => {
             // this.taskAttivo = task;
             this.$router
                 .push({

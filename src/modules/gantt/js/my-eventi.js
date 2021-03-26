@@ -14,7 +14,7 @@ function initEventi(myGantt) {
     myGantt.attachEvent('onTaskDblClick', function(id, e) {
         let task = myGantt.getTask(id);
         // console.log(task);
-        EventBus.$emit('event-dblClick', task);
+        EventBus.emit('event-dblClick', task);
         return false; //blocco il lightbox
     });
 

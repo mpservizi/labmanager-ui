@@ -31,7 +31,6 @@
 </template>
 
 <script>
-import { EventBus } from '@/shared/event-bus.js';
 import { creaListaTaskDetailUi } from '../js/my-ui.js';
 export default {
     name: 'TaskDetail',
