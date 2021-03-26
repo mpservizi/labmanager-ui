@@ -65,8 +65,8 @@ export function parseEventiServer(datiServer) {
             //campi modificati prima di caricare nel schedular
             // let s_d = strToDate(item.start_date);
             // let e_d = strToDate(item.end_date);
-            let s_d = MyDate.strToDate(item.start_date, 'DD/MM/YYYY');
-            let e_d = MyDate.strToDate(item.end_date, 'DD/MM/YYYY');
+            let s_d = MyDate.strToDate(item.start_date);
+            let e_d = MyDate.strToDate(item.end_date);
             //Imposto ora per evitare bug reszise on drag
             s_d.setHours(13);
             e_d.setHours(20);

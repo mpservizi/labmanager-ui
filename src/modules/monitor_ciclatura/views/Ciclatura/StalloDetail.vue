@@ -33,7 +33,7 @@ export default {
     },
     methods: {
         goBack: function () {
-            this.$router.push({ name: 'macchina' });
+            this.$router.push({ name: 'monitor_ciclatura' });
         }
     }
 };

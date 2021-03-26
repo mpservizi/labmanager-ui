@@ -1,15 +1,15 @@
 /**
  * Fornisce tutti i dati riguardanti la ciclatura
  */
-import { BaseApi } from '../base_api';
+import HttpRequest from '@/shared/http_request';
 import { isFake } from '@/shared/ambiente';
 import { fake_getDatiCiclatura } from '../fake/ciclatura';
 
 export const Endpoints = {
-    GET_DATI: 'api/ciclatura'
+    GET_DATI: 'ciclatura'
 };
 
-export class CiclaturaApi extends BaseApi {
+export class CiclaturaApi extends HttpRequest {
     /**
      * Restiuisce i dati di tutte le macchine di cicaltura
      */

@@ -1,5 +1,5 @@
 import MyDate from '@/shared/my-date.js';
-import { calcolaDatiDurata, dateToStr } from './my-func.js';
+import { calcolaDatiDurata } from './my-func.js';
 /**
  * Calcola il carico per tutte le risorse in base ai task assegnati
  * @param {*} myScheduler
