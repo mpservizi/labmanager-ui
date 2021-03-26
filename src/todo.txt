@@ -1,3 +1,1 @@
-File:task-builder, funzione: raggruppaRisorseInGruppiCiclatura
-se la risorsa contiene già questo tipo di carico, viene sovrascritto con nuovo valore.
-Esempio se i due stalli del gruppo hanno durata diversa bisogna scegliere quella che dura di più
+

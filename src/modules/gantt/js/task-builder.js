@@ -55,10 +55,26 @@ function raggruppaRisorseInGruppiCiclatura(risorse) {
                 //TODO:
                 let caricoEsistente = objGruppo[tipo];
                 if (caricoEsistente) {
-                    // console.log(idRisorsa, caricoEsistente);
-                    // console.log(idRisorsa, caricoRisorsa);
+                    try {
+                        //Per verificare il carico che dura di più
+                        //Creo un array con elenco del numero di settimana ci ciascuna risorsa
+                        let weeksEsitente = Object.keys(caricoEsistente);
+                        let weeksRisorsa = Object.keys(caricoRisorsa);
+                        //Confronto quale array ha l'ultimo valore maggiore.
+                        let a = parseInt(
+                            weeksEsitente[weeksEsitente.length - 1]
+                        );
+                        let b = parseInt(weeksRisorsa[weeksRisorsa.length - 1]);
+                        if (a > b) {
+                            objGruppo[tipo] = caricoEsistente;
+                        }
+                    } catch (error) {
+                        console.log('Errore Ricerca settimana massima');
+                        console.log(error);
+                    }
+                } else {
+                    objGruppo[tipo] = caricoRisorsa;
                 }
-                objGruppo[tipo] = caricoRisorsa;
             }
         });
 

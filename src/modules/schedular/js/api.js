@@ -26,8 +26,8 @@ export async function loadDatiCiclatura() {
  */
 export async function save(eventi, workload) {
     let dati = {
-        eventi: eventi,
-        workload: workload
+        eventi: eventi
+        // workload: workload
     };
     let result = await CiclaturaService.saveDatiCiclatura(dati);
     return result;

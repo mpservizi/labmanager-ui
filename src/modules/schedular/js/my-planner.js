@@ -13,7 +13,7 @@ import {
 } from './my-view.js';
 
 import { save, loadRisorse, loadDatiCiclatura } from './api.js';
-import { eventiToJson, workloadToJson } from './data-parser.js';
+import { eventiToJson } from './data-parser.js';
 
 import {
     LISTA_RISORSE,
@@ -40,10 +40,11 @@ async function saveDati() {
     try {
         let datiEv = myScheduler.getEvents();
         let eventi = eventiToJson(datiEv);
-        let workload = workloadToJson(myScheduler, datiEv);
-        let result = await save(eventi, workload);
+        // let workload = workloadToJson(myScheduler, datiEv);
+        // let result = await save(eventi, workload);
+        //Adesso workload è calcolato in base ai eventi direttamente dal gantt
+        let result = await save(eventi);
         return result;
-        return true;
     } catch (error) {
         console.log(error);
         alert('Errore salvataggio dati');
