@@ -9,14 +9,9 @@ async function getAll() {
         data: [],
         links: []
     };
-    // let workloadDati = getWorloadDati();
-    // let result = parseWorload(workloadDati);
     let dati = getDatiCiclature();
     let tasks = parseDatiCiclatura(dati);
     result.data = tasks;
-    console.log(result);
-    
-    // console.log(result);
     await pausa(10);
     return result;
 }

@@ -25,7 +25,7 @@ export function parseDatiCiclatura(dati) {
  */
 function groupByRisorsa(dati) {
     let result = {};
-    // let tmp = [7, 8];
+    // let tmp = [1, 2];
     dati.forEach(item => {
         let idRisorsa = item.idRisorsa;
         // if (!tmp.includes(idRisorsa)) return;

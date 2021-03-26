@@ -13,23 +13,18 @@ function initEventi(myGantt) {
     //doppio click task
     myGantt.attachEvent('onTaskDblClick', function(id, e) {
         let task = myGantt.getTask(id);
-        console.log(task);
-        // EventBus.$emit('event-dblClick', task);
+        // console.log(task);
+        EventBus.$emit('event-dblClick', task);
         return false; //blocco il lightbox
     });
 
     //Prima di mostrare task
     myGantt.attachEvent('onBeforeTaskDisplay', function(id, task) {
         //Task gruppo creato in automatico
-        // if(task.subTasks){
-        //     task.text = task.subTasks.length
-        // }else{
-        //     task.text = '-';
-        // }
         if (task.$virtual) {
-            if (task.type == 'project') {
-                task.render = 'split';
-            }
+            // if (task.type == 'project') {
+            //     task.render = 'split';
+            // }
             return myGantt.hasChild(id); // hide groups without subtasks
         }
 

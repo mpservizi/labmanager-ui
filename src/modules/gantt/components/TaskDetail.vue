@@ -2,29 +2,27 @@
     <div>
         <v-container>
             <p class="text-h2 text-center mb-10">
-                {{ taskAttivo.txtMacchina }} - {{ taskAttivo.txtCarico }} -
-                {{ taskAttivo.txtWeek }}
+                {{ taskAttivo.macchina }} - {{ taskAttivo.carico }} - WK{{
+                    taskAttivo.week
+                }}
             </p>
+            <p>Carico è occupato per : {{ taskAttivo.duration }} giorni</p>
             <v-row>
                 <v-col
                     cols="6"
                     v-for="(task, index) in listaTasks"
                     :key="index"
                 >
-                    <v-card class="py-4">
-                        <p class="text-h4 text-center">{{ task.msg }}</p>
-                        <v-list-item
-                            v-for="(item, index) in task.workloads"
-                            :key="index"
-                            class="d-block"
-                        >
-                            <v-list-item-content class="text-left">
-                                <v-list-item-title>{{
-                                    item.msg
-                                }}</v-list-item-title>
-                            </v-list-item-content>
-                            <v-divider></v-divider>
-                        </v-list-item>
+                    <v-card class="py-4 px-2">
+                        <p class="text-h4 text-center">
+                            {{ task.titolo }}
+                        </p>
+                        <p>Numero prove : {{ task.numProve }}</p>
+                        <ul>
+                            <li v-for="(prova, k) in task.prove" :key="k">
+                                {{ prova.msg }}
+                            </li>
+                        </ul>
                     </v-card>
                 </v-col>
             </v-row>

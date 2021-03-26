@@ -38,23 +38,25 @@ function raggruppaRisorseInGruppiCiclatura(risorse) {
         //Inizializzo key gruppo se non esiste
         if (!result[gruppo]) {
             result[gruppo] = {
-                dati: []
+                dati: [],
+                prove: {}
             };
         }
         //Recupero oggetto
         let objGruppo = result[gruppo];
         //Copio il workload per ogni tipo di carico
         TIPI_CARICHI.forEach(tipo => {
+            // console.log(idRisorsa);
             let caricoRisorsa = datiRisorsa.loadCarichi[tipo];
             //Se la risorsa contiene questo tipo di carico, copio il workload del carico
             if (caricoRisorsa) {
                 //se la risorsa contiene già questo tipo di carico, viene sovrascritto con nuovo valore.
                 //Esempio se i due stalli del gruppo hanno durata diversa bisogna scegliere quella che dura di più
-                //Da fare :
+                //TODO:
                 let caricoEsistente = objGruppo[tipo];
                 if (caricoEsistente) {
-                    console.log(caricoEsistente);
-                    console.log(caricoRisorsa);
+                    // console.log(idRisorsa, caricoEsistente);
+                    // console.log(idRisorsa, caricoRisorsa);
                 }
                 objGruppo[tipo] = caricoRisorsa;
             }
@@ -62,9 +64,8 @@ function raggruppaRisorseInGruppiCiclatura(risorse) {
 
         //Imposto i parametri del oggetto da aggiungere nel risultato
         objGruppo.gruppo = gruppo; //il gruppo viene usato come parametro parent del task
-        objGruppo.prove = datiRisorsa.prove; //dati dei singoli task schedular
+        objGruppo.prove[idRisorsa] = datiRisorsa.prove; //dati dei singoli task schedular
         objGruppo.macchina = datiRisorsa.macchina; //nome della macchina
-        objGruppo.mkt = 'ss';
         objGruppo.dati.push(datiRisorsa);
     });
     return result;
