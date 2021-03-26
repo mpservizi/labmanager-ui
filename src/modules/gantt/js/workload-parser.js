@@ -161,5 +161,6 @@ function calcolaWeek(data) {
 
 function calcolaDurataGiorni(inizio, fine) {
     let giorni = MyDate.calcolaDifferenzaDateInGiorni(inizio, fine);
+    //Aggiungo 1 alla differenza per includere anche l'ultimo giorno
     return giorni + 1;
 }

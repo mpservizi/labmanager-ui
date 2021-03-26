@@ -17,7 +17,9 @@ function dateToStr(data, formato) {
  * @param {*} end : data fine
  */
 function calcolaDifferenzaDateInGiorni(start, end) {
-    return Math.floor(MyDate.subtract(end, start).toDays());
+    let giorni = moment(end).diff(moment(start), 'days');
+    // return Math.floor(MyDate.subtract(end, start).toDays());
+    return giorni;
 }
 
 /**

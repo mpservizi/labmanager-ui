@@ -54,6 +54,7 @@ function raggruppaRisorseInGruppiCiclatura(risorse) {
                 let caricoEsistente = objGruppo[tipo];
                 if (caricoEsistente) {
                     console.log(caricoEsistente);
+                    console.log(caricoRisorsa);
                 }
                 objGruppo[tipo] = caricoRisorsa;
             }
@@ -63,6 +64,7 @@ function raggruppaRisorseInGruppiCiclatura(risorse) {
         objGruppo.gruppo = gruppo; //il gruppo viene usato come parametro parent del task
         objGruppo.prove = datiRisorsa.prove; //dati dei singoli task schedular
         objGruppo.macchina = datiRisorsa.macchina; //nome della macchina
+        objGruppo.mkt = 'ss';
         objGruppo.dati.push(datiRisorsa);
     });
     return result;
@@ -158,9 +160,12 @@ function buildTaskProgetto(id, label) {
  * @param {*} workload : dati su workload
  */
 function buildTaskProva(workload) {
+    //Se utilizzo end date il task finisce un giorni prima graficamente
+    //Il valore di durata viene incrementato di 1 nel workload parser
     let modello = {
         start_date: workload.start_date,
         duration: workload.durata,
+        // end_date: workload.end_date,
         numProve: workload.numProve
     };
     return modello;
