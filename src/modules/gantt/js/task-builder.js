@@ -4,42 +4,65 @@
 import { getGruppiCiclatura } from '@/shared/liste/risorse-ciclatura.js';
 const TIPI_CARICHI = ['19.1', '19.2', '19.3'];
 
+/**
+ * Crea i task per caricare nel gant con metodo parse
+ * @param {*} risorse : dati del schedular formattati da workload-parser
+ * @returns {Array} : array di tasks
+ */
 export function creaTasksGanttWorkload(risorse) {
+    //I gruppi di ciclatiura sono rappresentati come task di tipo progetto
     let tasksRisorse = creaTaskProgetto();
-    // debugger;
-    let datiGruppo = raggruppaDati(risorse);
-    //Come creare il task a video per il gruppo? da fare
+    //Ragruppo i task workload risorse in gruppi di ciclatura
+    let datiGruppo = raggruppaRisorseInGruppiCiclatura(risorse);
+    //Creo i task del gantt in base ai dati raggruppati
     let tasksWorkload = creaTasksWorload(datiGruppo);
+    //Unisco tutti i task in un array
     let tasks = [...tasksRisorse, ...tasksWorkload];
     return tasks;
 }
 
 /**
- * Raggruppa i dati in base ai gruppi di ciclatura
+ * Raggruppa i dati delle risorse in vari gruppi di ciclatura
  * @param {*} risorse : dati delle risorse
+ * @returns {Object} : Oggetto che ha come chiave id gruppo e contiene i dati delle risorse
  */
-function raggruppaDati(risorse) {
-    let keysRisorse = Object.keys(risorse);
+function raggruppaRisorseInGruppiCiclatura(risorse) {
     let result = {};
+    //Ogni key del oggetto rappresenta id della risorsa
+    let keysRisorse = Object.keys(risorse);
+    //Loop risorse
     keysRisorse.forEach(idRisorsa => {
-        let durataCarico = 0;
-        let datiRisorsa = risorse[idRisorsa];
-
+        //Gli stalli di ciclatura sono divisi in 7 gruppi
         let gruppo = getGruppoByIdRisorsa(idRisorsa);
+        let datiRisorsa = risorse[idRisorsa];
+        //Inizializzo key gruppo se non esiste
         if (!result[gruppo]) {
             result[gruppo] = {
                 dati: []
             };
         }
-
+        //Recupero oggetto
         let objGruppo = result[gruppo];
+        //Copio il workload per ogni tipo di carico
         TIPI_CARICHI.forEach(tipo => {
-            if (datiRisorsa.loadCarichi[tipo]) {
-                objGruppo[tipo] = datiRisorsa.loadCarichi[tipo];
+            let caricoRisorsa = datiRisorsa.loadCarichi[tipo];
+            //Se la risorsa contiene questo tipo di carico, copio il workload del carico
+            if (caricoRisorsa) {
+                //se la risorsa contiene già questo tipo di carico, viene sovrascritto con nuovo valore.
+                //Esempio se i due stalli del gruppo hanno durata diversa bisogna scegliere quella che dura di più
+                //Da fare :
+                let caricoEsistente = objGruppo[tipo];
+                if (caricoEsistente) {
+                    console.log(caricoEsistente);
+                }
+                objGruppo[tipo] = caricoRisorsa;
             }
         });
-        objGruppo.gruppo = gruppo;
-        objGruppo.macchina = datiRisorsa.macchina;
+
+        //Imposto i parametri del oggetto da aggiungere nel risultato
+        objGruppo.gruppo = gruppo; //il gruppo viene usato come parametro parent del task
+        objGruppo.prove = datiRisorsa.prove; //dati dei singoli task schedular
+        objGruppo.macchina = datiRisorsa.macchina; //nome della macchina
         objGruppo.dati.push(datiRisorsa);
     });
     return result;
@@ -76,11 +99,11 @@ function creaTasksWorload(risorse) {
     let tasks = [];
 
     for (const [idRisorsa, risorsa] of Object.entries(risorse)) {
-        TIPI_CARICHI.forEach(tipo => {
-            let loadCarichi = risorsa[tipo];
+        TIPI_CARICHI.forEach(tipoCarico => {
+            let loadCarichi = risorsa[tipoCarico];
             if (loadCarichi) {
                 let tasksCarico = creaTasksWorkloadCarico(
-                    tipo,
+                    tipoCarico,
                     loadCarichi,
                     risorsa
                 );
@@ -88,20 +111,6 @@ function creaTasksWorload(risorse) {
             }
         });
     }
-    // let tmp = [1, 2];
-    // for (const [, risorsa] of Object.entries(risorse)) {
-    //     let loadCarichi = risorsa.loadCarichi;
-    //     if (!tmp.includes(risorsa.idRisorsa)) continue;
-    //     Object.keys(loadCarichi).forEach(keyCarico => {
-    //         let valori = loadCarichi[keyCarico];
-    //         let tasksCarico = creaTasksWorkloadCarico(
-    //             keyCarico,
-    //             valori,
-    //             risorsa
-    //         );
-    //         tasks.push(...tasksCarico);
-    //     });
-    // }
     return tasks;
 }
 
@@ -120,7 +129,7 @@ function creaTasksWorkloadCarico(keyCarico, valoriCarico, risorsa) {
         task.carico = keyCarico;
         task.text = keyCarico;
         task.parent = risorsa.gruppo;
-        // task.prove = risorsa.prove;
+        task.prove = risorsa.prove;
         // task.stallo = risorsa.stallo;
         task.macchina = risorsa.macchina;
         tasks.push(task);

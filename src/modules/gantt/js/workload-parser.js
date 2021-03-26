@@ -12,7 +12,6 @@ export function parseDatiCiclatura(dati) {
     return tasks;
 }
 
-// console.log(dati);
 /**
  * Raggruppa le prove dei task per risorsa
  * @param {*} dati : dati esportati dal schedular
@@ -26,12 +25,11 @@ export function parseDatiCiclatura(dati) {
  */
 function groupByRisorsa(dati) {
     let result = {};
-    let tmp = [7, 8];
+    // let tmp = [7, 8];
     dati.forEach(item => {
         let idRisorsa = item.idRisorsa;
         // if (!tmp.includes(idRisorsa)) return;
         let itemRisorsa = getRisorsaById(idRisorsa);
-        // console.log(itemRisorsa);
         if (!result[idRisorsa]) {
             result[idRisorsa] = {
                 idRisorsa: idRisorsa,
@@ -56,7 +54,7 @@ function groupByRisorsa(dati) {
  * @returns : Aggiunge chaive loadCarichi al oggetto risorse, con i dati del workload del carico
  */
 function calcolaDurataCarichi(risorse) {
-    for (const [idRisorsa, risorsa] of Object.entries(risorse)) {
+    for (const [, risorsa] of Object.entries(risorse)) {
         let prove = risorsa.prove;
         let loadCarichi = sommaDurataProveCarichi(prove);
         risorsa.loadCarichi = loadCarichi;
@@ -91,23 +89,39 @@ function sommaDurataProveCarichi(prove) {
         if (!obj[keyWeek]) {
             obj[keyWeek] = {
                 start_date: null,
+                end_date: null,
                 durata: 0,
                 numProve: 0
             };
         }
-        obj[keyWeek].durata += prova.durata;
-        obj[keyWeek].numProve += 1;
 
-        //Seleziono la data minima tra tutti i task dello stesso carico
-        let oldDate = obj[keyWeek].start_date;
-        let taskDate = prova.start_date;
-        let minDate = taskDate;
-        if (oldDate && taskDate.getTime() > oldDate.getTime()) {
-            minDate = oldDate;
+        //Seleziono la data minima e massima tra tutti i task dello stesso carico
+        let oldStart_date = obj[keyWeek].start_date;
+        let oldEnd_date = obj[keyWeek].end_date;
+
+        //Calcolo la data minima tra quella memorizzata e quella del task
+        let minDate = prova.start_date;
+        if (
+            oldStart_date &&
+            prova.start_date.getTime() > oldStart_date.getTime()
+        ) {
+            minDate = oldStart_date;
+        }
+
+        //calcola la data massima
+        let maxDate = prova.end_date;
+        if (oldEnd_date && oldEnd_date.getTime() > prova.end_date.getTime()) {
+            maxDate = oldEnd_date;
         }
         //Aggiorno la data nel oggetto
         obj[keyWeek].start_date = minDate;
+        obj[keyWeek].end_date = maxDate;
+        //Sommo la durata esistente
+        obj[keyWeek].durata += prova.durata;
+        //Incremento il numero di prove
+        obj[keyWeek].numProve += 1;
     });
+
     return loadCarichi;
 }
 
