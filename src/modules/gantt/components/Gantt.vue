@@ -92,6 +92,7 @@ function creaTaskTestPlan() {
         task.start_date = data_inizio;
         task.text = '19.' + task.carico;
         task.toPlan = true;
+        task.parent = 'p0';
         MyGantt.creaTask(task);
     });
     MyGantt.render();
@@ -103,7 +104,7 @@ function creaTaskTestPlan() {
 @import '~Moduli/gantt/css/my-style.css';
 .ganttBox {
     /* position: relative; */
-    height: 400px;
+    height: 450px;
     /* width: 800px; */
 }
 </style>

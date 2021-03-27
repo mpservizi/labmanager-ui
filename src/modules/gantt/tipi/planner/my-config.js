@@ -39,10 +39,13 @@ function initConfig(myGantt) {
         { name: 'duration', label: 'Duration', align: 'center' }
     ];
 
+    /**
+     * Lightbox per selezionare la risorsa
+     */
     myGantt.config.lightbox.sections = [
         {name:'parent',height:60, type:'parent', allow_root:'false',focus:true,
         filter:function(id, task){ 
-            if(task.isRisorsa || id=='p0'){         
+            if(task.isRisorsa){         
                 return true;     
             }else{  
                 return false; 

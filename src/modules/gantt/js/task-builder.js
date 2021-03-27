@@ -187,6 +187,7 @@ function buildTaskToPlan() {
         type: 'project',
         render: '',
         isRisorsa:true,
+        isPlan:true,
         parent: 0
     };
     return result;
