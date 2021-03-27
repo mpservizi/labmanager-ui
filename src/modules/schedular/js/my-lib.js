@@ -12,6 +12,8 @@ import '../libs/schedular/scripts/dhtmlxscheduler_editors';
 import '../libs/schedular/scripts/dhtmlxscheduler_collision';
 //Serializer
 import '../libs/schedular/scripts/dhtmlxscheduler_serialize';
+//Drag external items
+import '../libs/schedular/scripts/dhtmlxscheduler_outerdrag';
 
 //Raccolta risorse
 // import "../libs/schedular/dhtmlxscheduler_treetimeline";
