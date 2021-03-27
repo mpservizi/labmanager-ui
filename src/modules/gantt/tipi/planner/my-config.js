@@ -53,7 +53,7 @@ function initConfig(myGantt) {
                 }
             }
         },
-        { name: "dati", height: 40, map_to: "tmp_dati", type: "template" },
+        { name: 'dati', height: 40, map_to: 'tmp_dati', type: 'template' },
     ];
     gantt.locale.labels['section_parent'] = 'Gruppo ciclatura';
     gantt.locale.labels['section_dati'] = 'Dati task';

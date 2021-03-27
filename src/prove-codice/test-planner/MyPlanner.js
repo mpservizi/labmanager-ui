@@ -6,13 +6,13 @@ class TestPlanner{
     init(container){
         prova(this.lib);
         // this.lib.init(container);
-        this.lib.init(container,new Date(),"timeline");
+        this.lib.init(container,new Date(),'timeline');
     }
 }
 
 function prova(ms){
-    ms.locale.labels.timeline_tab = "Timeline";
-    ms.locale.labels.section_risorsa="Risorsa";
+    ms.locale.labels.timeline_tab = 'Timeline';
+    ms.locale.labels.section_risorsa='Risorsa';
     ms.config.details_on_dblclick=true;
 
     //No creazione con drag e doppio click
@@ -58,9 +58,9 @@ function prova(ms){
     //Data loading
     //===============
     ms.config.lightbox.sections=[
-        {name:"description", height:50, map_to:"text", type:"textarea" , focus:true},
-        {name:"risorsa", height:30, type:"select", options:sections, map_to:"idRisorsa" },
-        {name:"time", height:72, type:"time", map_to:"auto"}
+        {name:'description', height:50, map_to:'text', type:'textarea' , focus:true},
+        {name:'risorsa', height:30, type:'select', options:sections, map_to:'idRisorsa' },
+        {name:'time', height:72, type:'time', map_to:'auto'}
     ];
 
     ms.attachEvent('onCellDblClick', function (x_ind, y_ind, x_val, y_val, e){

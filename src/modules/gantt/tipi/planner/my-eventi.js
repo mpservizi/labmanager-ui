@@ -39,7 +39,7 @@ function initEventi(myGantt) {
     });
 
     //Modificare i bottoni presenti in lightbox
-    myGantt.attachEvent("onGanttReady", function(){
+    myGantt.attachEvent('onGanttReady', function(){
         // myGantt.config.buttons_left = ["gantt_save_btn","gantt_cancel_btn"];   
         // myGantt.config.buttons_right = ["gantt_delete_btn"];               
         myGantt.config.buttons_right = [];               
