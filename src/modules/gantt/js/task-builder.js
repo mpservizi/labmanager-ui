@@ -103,11 +103,14 @@ function getGruppoByIdRisorsa(idRisorsa) {
  */
 function creaTaskProgetto() {
     let result = [];
+    let taskPlan = buildTaskToPlan();
+    result.push(taskPlan);    
     let gruppi = getGruppiCiclatura();
     gruppi.forEach(item => {
         let task = buildTaskProgetto(item.id, item.label);
         result.push(task);
     });
+
     return result;
 }
 
@@ -167,11 +170,27 @@ function buildTaskProgetto(id, label) {
         text: label,
         type: 'project',
         render: 'split',
+        isRisorsa:true,
         parent: 0
     };
     return result;
 }
 
+/**
+ * Task per raggruppare le prove da pianificare
+ * @returns 
+ */
+function buildTaskToPlan() {
+    let result = {
+        id: 'p0',
+        text: 'To Plan',
+        type: 'project',
+        render: '',
+        isRisorsa:true,
+        parent: 0
+    };
+    return result;
+}
 /**
  * Crea il task che rappresenta il worload del carico nel gantt
  * @param {*} workload : dati su workload
