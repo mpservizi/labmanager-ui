@@ -17,7 +17,8 @@
             <v-container fluid>
                 <breadcrumbs class="app-links"></breadcrumbs>
                 <div class="rw">
-                    <router-view></router-view>
+                    <!-- <router-view></router-view> -->
+                    <test-planner-view ></test-planner-view>
                 </div>
             </v-container>
         </v-main>
@@ -31,9 +32,10 @@
 
 <script>
 import Breadcrumbs from './components/Breadcrumbs';
+import TestPlannerView from '@/prove-codice/test-planner/PlannerView.vue';
 export default {
     name: 'App',
-    components: { Breadcrumbs },
+    components: { Breadcrumbs,TestPlannerView },
     data: () => ({
         drawer: false,
         dev:true
