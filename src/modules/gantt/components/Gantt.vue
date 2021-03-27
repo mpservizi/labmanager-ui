@@ -86,11 +86,8 @@ function creaTaskTestPlan() {
     ];
 
     let data_inizio = '26/03/2021';
-    let tasks = TaskGenerator.generaTasks(testPlan);
-    console.log(tasks);
+    let tasks = TaskGenerator.generaTasks(testPlan,data_inizio);
     tasks.forEach((task) => {
-        task.start_date = data_inizio;
-        task.text = '19.' + task.carico;
         task.toPlan = true;
         task.parent = 'p0';
         MyGantt.creaTask(task);

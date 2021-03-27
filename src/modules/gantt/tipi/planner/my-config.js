@@ -43,7 +43,7 @@ function initConfig(myGantt) {
      * Lightbox per selezionare la risorsa
      */
     myGantt.config.lightbox.sections = [
-        {name:'parent',height:60, type:'parent', allow_root:'false',focus:true,
+        {name:'parent',height:30, type:'parent', allow_root:'false',focus:true,
         filter:function(id, task){ 
             if(task.isRisorsa){         
                 return true;     
@@ -51,9 +51,11 @@ function initConfig(myGantt) {
                 return false; 
             } 
         }
-    }
+    },
+    {name:"dati", height:40, map_to:"tmp_dati", type:"template"},
     ];
-    gantt.locale.labels["section_parent"] = "Parent task";
+    gantt.locale.labels['section_parent'] = 'Gruppo ciclatura';
+    gantt.locale.labels['section_dati'] = 'Dati task';
     // gantt.config.xml_date = '%Y-%m-%d';
     myGantt.config.xml_date = '%d/%m/%Y';    
 }

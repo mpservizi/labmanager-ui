@@ -34,6 +34,19 @@ function initEventi(myGantt) {
             return myGantt.hasChild(id); // hide groups without subtasks
         }
 
+        task.tmp_dati = creaTemplateDatiTask(task);
         return true;
     });
+
+    myGantt.attachEvent("onGanttReady", function(){
+        // myGantt.config.buttons_left = ["gantt_save_btn","gantt_cancel_btn"];   
+        // myGantt.config.buttons_right = ["gantt_delete_btn"];               
+        myGantt.config.buttons_right = [];               
+     });
+
+
+}
+function creaTemplateDatiTask(task){
+    let result = `<span> Carico : ${task.text} Durata: ${task.duration} giorni`;
+    return result;
 }

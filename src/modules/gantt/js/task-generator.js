@@ -3,7 +3,7 @@
  * @param {Array} testPlan : array con i gruppi i prova
  * @returns {Array} : array con i tasks
  */
- function generaTasks(testPlan){
+ function generaTasks(testPlan,data_inizio){
     let tasks = [];
     testPlan.forEach(item=>{
         let durataProva = getDurataProva(item.carico,item.corrente);
@@ -12,6 +12,8 @@
         let task = {
             durataProva:durataProva,
             duration:durataTotale,
+            text: '19.' + item.carico,
+            start_date : data_inizio,
             ...item
         }
         tasks.push(task);
