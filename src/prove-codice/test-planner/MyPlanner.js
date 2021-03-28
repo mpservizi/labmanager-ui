@@ -21,7 +21,7 @@ export const MyPlanner = new TestPlanner();
 function myConfig() {
     setConfig();
     setLabels();
-    
+
     const listaRisorse = creaListaRisorse();
     ms.serverList(NOME_LISTA_RISORSE, listaRisorse);
     
@@ -29,7 +29,7 @@ function myConfig() {
     timelineView.creaView();
     timelineView.onCellDblClick(function(task){
         EventBus.emit('cell_click', task);
-    })
+    });
     setLightbox(listaRisorse);
 }
 
@@ -98,6 +98,7 @@ function setConfig() {
 
     //Numero massimo di task in un slot
     ms.config.collision_limit = 4;
+    ms.config.start_on_monday = true;    
 }
 
 function setLabels() {
