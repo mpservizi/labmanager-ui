@@ -1,10 +1,7 @@
 import { myScheduler } from 'Moduli/schedular/js/my-lib.js';
 import { EventBus } from '@/shared/event-bus.js';
-
-const NOME_LISTA_RISORSE = 'risorse';
-const CAMPO_RISORSA = 'idRisorsa';
-const CAMPO_STATO = 'stato';
-
+import {NOME_LISTA_RISORSE,CAMPO_RISORSA,CAMPO_STATO} from './costanti.js';
+import {TimelineView} from './TimelineView.js';
 const ms = myScheduler;
 class TestPlanner {
     constructor() {
@@ -22,24 +19,18 @@ class TestPlanner {
 export const MyPlanner = new TestPlanner();
 
 function myConfig() {
-    setConfig(ms);
+    setConfig();
+    setLabels();
+    
     const listaRisorse = creaListaRisorse();
     ms.serverList(NOME_LISTA_RISORSE, listaRisorse);
-    creaView();
+    
+    let timelineView = new TimelineView(ms);
+    timelineView.creaView();
+    timelineView.onCellDblClick(function(task){
+        EventBus.emit('cell_click', task);
+    })
     setLightbox(listaRisorse);
-    handleEventi(listaRisorse);
-}
-
-function handleEventi() {
-    ms.attachEvent('onCellDblClick', function (x_ind, y_ind, x_val, y_val, e) {
-        let listaRisorse = ms.serverList(NOME_LISTA_RISORSE);
-        let risorsa = listaRisorse[y_ind];
-        let obj = {
-            data_inzio: x_val,
-            risorsa: risorsa
-        }
-        EventBus.emit('cell_click', obj);
-    });
 }
 
 function creaTask(payload) {
@@ -76,28 +67,6 @@ function setLightbox(listaRisorse) {
     ];
 }
 
-function creaView() {
-    let listaRisorse = ms.serverList(NOME_LISTA_RISORSE);
-    ms.createTimelineView({
-        name: 'timeline',
-        x_unit: 'day',
-        x_date: '%j',
-        x_step: 1,
-        x_size: 21,
-        section_autoheight: false,
-        y_unit: listaRisorse,
-        y_property: CAMPO_RISORSA,
-        render: 'bar',
-        round_position: true,
-        dy: 40,
-        event_dy: 'full',
-        second_scale: {
-            x_unit: 'week',
-            x_date: '%F, %Y'
-        }
-    });
-}
-
 function creaListaRisorse() {
     return [
         { key: 1, label: 'To Plan' },
@@ -121,7 +90,6 @@ function creaListaRisorse() {
 }
 
 function setConfig() {
-    setLabels();
     ms.config.details_on_dblclick = true;
 
     //No creazione con drag e doppio click
