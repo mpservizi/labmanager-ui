@@ -1,4 +1,6 @@
-import {myScheduler} from 'Moduli/schedular/js/my-lib.js'
+import {myScheduler} from 'Moduli/schedular/js/my-lib.js';
+import { EventBus } from '@/shared/event-bus.js';
+
 const NOME_LISTA_RISORSE = 'risorse';
 const CAMPO_RISORSA = 'idRisorsa';
 const CAMPO_STATO = 'stato';
@@ -10,6 +12,11 @@ class TestPlanner{
         myConfig(this.lib);
         this.lib.init(container,new Date(),'timeline');
     }
+    creaTaskProva(params){
+        let task = creaTask(this.lib,params);
+        this.lib.addEvent(task);
+       return task;
+    }    
 }
 
 function myConfig(ms){
@@ -24,26 +31,29 @@ function myConfig(ms){
 export const MyPlanner = new TestPlanner();
 
 function handleEventi(ms) {
-    let listaRisorse = ms.serverList(NOME_LISTA_RISORSE);
     ms.attachEvent('onCellDblClick', function (x_ind, y_ind, x_val, y_val, e) {
-        // console.log(x_ind, y_ind, x_val, y_val);
-        // console.log(y_ind);
-        let task = creaTask(ms,y_ind, x_val);
-        ms.addEvent(task);
+        let listaRisorse = ms.serverList(NOME_LISTA_RISORSE);
+        let risorsa = listaRisorse[y_ind];    
+        let obj = {
+            data_inzio:x_val,
+            risorsa:risorsa
+        }
+        EventBus.emit('cell_click',obj);
     });
 }
 
-function creaTask(ms,indexRisorsa, data_inizio) {
-    let durata = 2;
+function creaTask(ms,payload) {
+    let data_inizio = payload.data_inzio;
+    let durata = payload.durata;
+    let risorsa = payload.risorsa;
+    let testo = payload.label;
     let dataFine = ms.date.add(data_inizio, durata, 'day');
-    let listaRisorse = ms.serverList(NOME_LISTA_RISORSE);
-    let risorsa = listaRisorse[indexRisorsa];
     let task = {
         start_date: data_inizio,
         [CAMPO_RISORSA]: risorsa.key,
         end_date: dataFine,
         [CAMPO_STATO]:1,
-        text: 'From code'
+        text: testo
     };
     return task;
 }
