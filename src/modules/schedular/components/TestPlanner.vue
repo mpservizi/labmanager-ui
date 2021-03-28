@@ -31,11 +31,12 @@ export default {
   methods: {
   },
   mounted: function() {
+    this.$emit('ready','scheduler_here')
   }
 };
 </script>
 
-<style>
+<style scoped>
 @import "./../libs/schedular/dhtmlxscheduler.css";
 @import "./../css/my-style.css";
 </style>

@@ -4,7 +4,7 @@
             <v-col cols="9">
                 <div class="planner">
                     <p>Test planner</p>
-                    <TestPlanner />
+                    <TestPlanner @ready="init"/>
                 </div>
             </v-col>
             <v-col cols="3">
@@ -23,11 +23,14 @@ export default {
     name: 'TestPlannerView',
     components: { TestPlanner },
     data: () => ({}),
-    mounted() {
-        MyPlanner.init('scheduler_here');
-        init();
+    mounted() {        
     },
-    methods: {}
+    methods: {
+        init(containerId){
+        MyPlanner.init(containerId);
+        init();
+        }
+    }
 };
 
 function init() {
