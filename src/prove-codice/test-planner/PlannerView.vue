@@ -3,7 +3,6 @@
         <v-row>
             <v-col cols="9">
                 <div class="planner">
-                    <p>Test planner</p>
                     <TestPlanner @ready="init" />
                 </div>
             </v-col>

@@ -1,18 +1,17 @@
-import { NOME_LISTA_RISORSE, CAMPO_RISORSA, CAMPO_STATO } from './costanti.js';
-
 const TIMELINE_VIEW = 'timeline';//Nome del view
 
 export class TimelineView {
     constructor(myScheduler) {
         this.ms = myScheduler;
-        evidenziaWeekends(this.ms);
         this.navigationUnit = 'week';
+        this.listaRisorse = [];
+        this.campoRisorsa = '';
         addNavigationHadler(this);
     }
     creaView() {
-        creaTimelineView(this.ms,this.navigationHadler);
+        creaTimelineView(this);
     }
-    
+
     getView() {
         return this.ms.getView(TIMELINE_VIEW);
     }
@@ -20,12 +19,23 @@ export class TimelineView {
     setNavigationUnit(unit) {
         this.navigationUnit = unit;
     }
+    setListaRiosrse(listaRisorse) {
+        this.listaRisorse = listaRisorse;
+
+    }
+    setCampoRisorsa(campoRisorsa) {
+        this.campoRisorsa = campoRisorsa;
+    }
+
+    evidenziaWeekends() {
+        evidenziaWeekends(this.ms);
+    }
 
     onCellDblClick(callback) {
         let ms = this.ms;
+        let listaRisorse = this.listaRisorse;
         ms.attachEvent('onCellDblClick', function (x_ind, y_ind, x_val, y_val, e) {
             if (callback) {
-                let listaRisorse = ms.serverList(NOME_LISTA_RISORSE);
                 let risorsa = listaRisorse[y_ind];
                 let obj = {
                     data_inzio: x_val,
@@ -41,7 +51,7 @@ export class TimelineView {
  * Gestisce la navigazione con tasti avanti e indietro
  * @param {TimelineView} cls : istanza classe TimelineView
  */
-function addNavigationHadler(cls){
+function addNavigationHadler(cls) {
     cls.navigationHadler = function (date, step) {
         if (step > 0) {
             step = 1;
@@ -53,8 +63,11 @@ function addNavigationHadler(cls){
 }
 
 
-function creaTimelineView(ms, callbackNavigation) {
-    let listaRisorse = ms.serverList(NOME_LISTA_RISORSE);
+function creaTimelineView(cls) {
+    let ms = cls.ms;
+    let listaRisorse = cls.listaRisorse;
+    let campoRiorsa = cls.campoRisorsa;
+
     ms.createTimelineView({
         name: TIMELINE_VIEW,
         x_unit: 'day',
@@ -63,10 +76,10 @@ function creaTimelineView(ms, callbackNavigation) {
         x_size: 2 * 7,
         section_autoheight: false,
         y_unit: listaRisorse,
-        y_property: CAMPO_RISORSA,
+        y_property: campoRiorsa,
         render: 'bar',
         round_position: true,
-        dy: 20,
+        dy: 25,
         event_dy: 'full',
         second_scale: {
             x_unit: 'week',
@@ -77,7 +90,7 @@ function creaTimelineView(ms, callbackNavigation) {
     //Primo giorno di timeline view
     ms.date[TIMELINE_VIEW + '_start'] = ms.date.week_start;
     //Handel click tasto avanti e indietro
-    ms.date['add_' + TIMELINE_VIEW] = callbackNavigation;
+    ms.date['add_' + TIMELINE_VIEW] = cls.navigationHadler;
 
 }
 

@@ -26,6 +26,8 @@ function myConfig() {
     ms.serverList(NOME_LISTA_RISORSE, listaRisorse);
     
     let timelineView = new TimelineView(ms);
+    timelineView.setListaRiosrse(listaRisorse);
+    timelineView.setCampoRisorsa(CAMPO_RISORSA);
     timelineView.creaView();
     timelineView.onCellDblClick(function(task){
         EventBus.emit('cell_click', task);
