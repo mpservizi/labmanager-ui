@@ -67,7 +67,7 @@ export default {
                 let obj = {...params,...prova}
                 let result = MyPlanner.creaTaskProva(obj);
                 if(result){
-                    let cont = this.provaAttiva.campioni-2;
+                    let cont = this.provaAttiva.campioni-1;
                     if(cont>0){
                         this.provaAttiva.campioni = cont; 
                     }else{
