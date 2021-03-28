@@ -1,0 +1,87 @@
+<template>
+    <div>
+        <v-row>
+            <v-col cols="12">
+                <v-card flat>
+                    <v-card-title>
+                        Seleziona il gruppo prove da pianificare
+                    </v-card-title>
+                </v-card>
+            </v-col>
+        </v-row>
+        <v-row>
+            <v-col cols="12">
+                <v-data-table
+                    dense
+                    :headers="headers"
+                    :items="listaRichieste"
+                    disable-pagination
+                    hide-default-footer
+                    show-select
+                    v-model="selected"
+                    single-select
+                    item-key="Id"
+                    class="elevation-1"
+                >
+                </v-data-table>
+            </v-col>
+        </v-row>
+        <v-row>
+            <v-col cols="12">
+                <v-card flat>
+                    <v-card-actions class="px-10">
+                        <v-btn color="primary" @click="cancel">
+                            Cancel
+                        </v-btn>
+                        <v-spacer></v-spacer>
+                        <v-btn color="success" @click="save"> Save </v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-col>
+        </v-row>
+    </div>
+</template>
+
+<script>
+export default {
+    name: 'FormRichieste',
+    components: {},
+    props:{
+        listaRichieste:Array
+    },
+    data() {
+        return {
+            singleSelect: false,
+            selected: [],
+            headers: [
+                { text: 'IdRequest', value: 'IdRequest' },
+                { text: 'Titolo', value: 'Titolo' },
+                { text: '19.1', value: '19.1' },
+                { text: '19.2', value: '19.2' },
+                { text: '19.3', value: '19.3' }
+            ]
+        };
+    },
+    created(){
+    },
+    mounted() {
+
+    },
+    methods: {
+        save() {
+            let result = this.selected[0];
+            if (!result) {
+                alert('Nessun dato selezionato');
+                return;
+            }
+            this.$emit('save', result);
+        },
+        cancel() {
+            this.$emit('close');
+        },
+    },
+    computed: {}
+};
+</script>
+
+<style scoped></style>

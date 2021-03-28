@@ -32,6 +32,7 @@ function myConfig() {
     timelineView.onCellDblClick(function(task){
         EventBus.emit('cell_click', task);
     });
+    timelineView.evidenziaWeekends();
     setLightbox(listaRisorse);
 }
 
