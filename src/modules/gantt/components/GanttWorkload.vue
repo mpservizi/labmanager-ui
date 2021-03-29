@@ -50,6 +50,6 @@ export default {
 @import '~Moduli/gantt/css/my-style.css';
 .ganttBox {
     /* position: relative; */
-    height: 800px;
+    height: 100%;
 }
 </style>

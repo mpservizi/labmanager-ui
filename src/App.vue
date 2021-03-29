@@ -11,22 +11,22 @@
             <v-btn icon to="/" class="ml-5">
                 <v-icon>mdi-home</v-icon>
             </v-btn>
+            <div><breadcrumbs class="app-links"></breadcrumbs></div>
         </v-app-bar>
 
         <v-main>
-            <v-container fluid>
-                <breadcrumbs class="app-links"></breadcrumbs>
-                <div class="rw">
+            <v-container fluid class="app_box">
+                <div class="router_box">
                     <router-view></router-view>
-                    <!-- <test-planner-view></test-planner-view> -->
+                <!-- <test-planner-view></test-planner-view> -->
                 </div>
             </v-container>
         </v-main>
-        <!-- <v-footer padless dense>
+        <v-footer padless dense>
             <v-col class="text-center" cols="12">
                 <span>Made with passion by </span><strong>Malkit Sandhu</strong>
             </v-col>
-        </v-footer> -->
+        </v-footer>
     </v-app>
 </template>
 
@@ -47,15 +47,18 @@ html,
 body {
     margin: 0;
     padding: 0;
-    /* height: 100%; */
+    height: 100vh;
     /* overflow: hidden; */
 }
-.prova {
-    background: green;
-    height: 100%;
+.app_box {
+    background-color: pink;
+    min-height: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
 }
-.rw {
-    /* background: gray; */
-    height: 850px;
+.router_box {
+    display: grid;
+    background-color: green;
 }
 </style>
