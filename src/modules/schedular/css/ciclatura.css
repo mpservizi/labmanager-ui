@@ -1,0 +1,29 @@
+/* Carico 19.1 */
+.carico_1 {
+    background-color: #ffb74d !important;
+}
+/* Carico 19.2 */
+.carico_2 {
+    background-color: #9ccc65 !important;
+}
+
+/* Carico 19.3 */
+.carico_3 {
+    background-color: #40c4ff !important;
+}
+/* Nessun carico assegnato */
+.carico_ {
+    background-color: #2abbda !important;
+}
+/* Celle weekend */
+.timeline_weekend {
+    background-color: #e6e6e6;
+}
+/* Testo deentro evento */
+.txt_ev {
+    /* background: red; */
+    text-align: center;
+    /* display: block; */
+    margin-left: -10px;
+    color: white;
+}

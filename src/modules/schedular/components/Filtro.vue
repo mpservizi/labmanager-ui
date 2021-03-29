@@ -1,5 +1,5 @@
 <template>
-    <div class="boxFiltro">
+    <div class="boxFiltro d-flex">
         <v-select
             :items="items"
             label="Filtra macchine"
@@ -9,7 +9,7 @@
             item-value="key"
             @change="filtraRisorse"
         ></v-select>
-        <v-btn @click="save">Salva dati</v-btn>
+        <v-btn @click="save" class="ml-3">Salva dati</v-btn>
     </div>
 </template>
 <script>
@@ -34,6 +34,6 @@ export default {
 </script>
 <style scoped>
 .boxFiltro {
-    border: 1px solid green;
+    /* border: 1px solid green; */
 }
 </style>

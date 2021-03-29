@@ -1,28 +1,14 @@
 <template>
-    <div style="width: 100%; height: 800px; border: 1px solid black">
-        <v-row>
-            <v-col cols="4">
-                <scala @cambio="cambiaScala"></scala>
-            </v-col>
-            <v-col cols="6">
-                <filtro @cambio="filtra" @save="save"></filtro>
-            </v-col>
-        </v-row>
-        <div
-            ref="scheduler_here"
-            id="scheduler_here"
-            class="dhx_cal_container"
-            style="width: 100%; height: 100%"
-        >
-            <div class="dhx_cal_navline">
-                <div class="dhx_cal_prev_button">&nbsp;</div>
-                <div class="dhx_cal_next_button">&nbsp;</div>
-                <div class="dhx_cal_today_button"></div>
-                <div class="dhx_cal_date"></div>
-            </div>
-            <div class="dhx_cal_header"></div>
-            <div class="dhx_cal_data"></div>
+    <!-- <div style="width: 100%; height: 800px; border: 1px solid black"> -->
+    <div class="box_planner" ref="scheduler_here" id="scheduler_here">
+        <div class="dhx_cal_navline">
+            <div class="dhx_cal_prev_button">&nbsp;</div>
+            <div class="dhx_cal_next_button">&nbsp;</div>
+            <div class="dhx_cal_today_button"></div>
+            <!-- <div class="dhx_cal_date"></div> -->
         </div>
+        <div class="dhx_cal_header"></div>
+        <div class="dhx_cal_data"></div>
     </div>
 </template>
 
@@ -31,7 +17,7 @@ import Filtro from './Filtro.vue';
 import { MyPlanner } from './../js/my-planner.js';
 export default {
     name: 'Scheduler',
-    props: ['scala'],
+    props: ['scala', 'filtro', 'needSave'],
     data() {
         return {
             pronto: false
@@ -64,12 +50,24 @@ export default {
     watch: {
         scala: function (valore) {
             this.cambiaScala(valore);
+        },
+        filtro: function (valore) {
+            console.log(valore);
+            this.filtra(valore);
+        },
+        needSave: function () {
+            this.save();
         }
     }
 };
 </script>
 
-<style>
+<style scoped>
 @import './../libs/schedular/dhtmlxscheduler.css';
-@import './../css/my-style.css';
+/* @import './../css/my-style.css'; */
+</style>
+<style scoped>
+.box_planner {
+    height: 700px;
+}
 </style>

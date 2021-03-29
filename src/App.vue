@@ -22,11 +22,11 @@
                 </div>
             </v-container>
         </v-main>
-        <v-footer padless dense>
+        <!-- <v-footer padless dense>
             <v-col class="text-center" cols="12">
                 <span>Made with passion by </span><strong>Malkit Sandhu</strong>
             </v-col>
-        </v-footer>
+        </v-footer> -->
     </v-app>
 </template>
 

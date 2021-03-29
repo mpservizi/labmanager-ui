@@ -1,0 +1,37 @@
+/* Celle titolo risorse */
+.timeline_item_cell {
+    width: 30%;
+    font-size: 12px;
+    text-align: center;
+}
+
+/* Separatore celle risorse */
+.timeline_item_separator {
+    background-color: #cecece;
+    width: 1px;
+    height: 100% !important;
+}
+/* Cella risora */
+.dhx_matrix_scell {
+    text-align: center;
+}
+
+/* Righe risorse */
+.timeline_item_separator,
+.timeline_item_cell {
+    vertical-align: top;
+    height: 100% !important;
+    display: inline-block;
+    line-height: 50px;
+    vertical-align: top;
+}
+
+/* Handler per resize del task */
+.dhx_event_resize {
+    background: none !important;
+}
+
+/* Dialog conferma eliminazione evento. Default 19999 non è possibile cliccare i pulsanti */
+body > div.dhx_modal_cover {
+    z-index: 15;
+}

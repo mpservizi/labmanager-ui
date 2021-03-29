@@ -1,15 +1,10 @@
 <template>
-    <v-row>
-        <v-col>
-            <div class="pa-2 boxScala">
-                <p class="">Seleziona scala</p>
-                <v-radio-group mandatory @change="aggiorna">
-                    <v-radio label="Settimanale" value="2"></v-radio>
-                    <v-radio label="Mensile" value="1"></v-radio>
-                </v-radio-group>
-            </div>
-        </v-col>
-    </v-row>
+    <div class="boxScala">
+        <v-radio-group mandatory @change="aggiorna">
+            <v-radio label="Settimanale" value="2"></v-radio>
+            <v-radio label="Mensile" value="1"></v-radio>
+        </v-radio-group>
+    </div>
 </template>
 <script>
 export default {
@@ -28,6 +23,6 @@ export default {
 </script>
 <style scoped>
 .boxScala {
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
 }
 </style>

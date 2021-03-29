@@ -1,17 +1,21 @@
 <template>
-    <div id="samples_box" class="text-left pl-1">
-        <p>{{ msgRichieste }}</p>
-        <p>Prova Attiva : {{ provaSelezionata }}</p>
-        <v-badge
-            overlap
-            v-for="(item, index) in samples"
-            :key="index"
-            :content="item.campioni"
-        >
-            <v-chip class="ma-1" @click="provaClick(item)">{{
-                item.label
-            }}</v-chip>
-        </v-badge>
+    <div id="samples_box" class="text-left pl-1 d-flex">
+        <div>
+            <p>{{ msgRichieste }}</p>
+            <p>Prova Attiva : {{ provaSelezionata }}</p>
+        </div>
+        <div class="py-4 ml-2 box_chip">
+            <v-badge
+                overlap
+                v-for="(item, index) in samples"
+                :key="index"
+                :content="item.campioni"
+            >
+                <v-chip class="ma-1" @click="provaClick(item)">{{
+                    item.label
+                }}</v-chip>
+            </v-badge>
+        </div>
     </div>
 </template>
 <script>
@@ -89,4 +93,7 @@ export default {
 };
 </script>
 <style scoped>
+.box_chip {
+    /* border: 1px solid orange; */
+}
 </style>

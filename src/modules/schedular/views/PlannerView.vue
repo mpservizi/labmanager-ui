@@ -1,5 +1,6 @@
 <template>
     <div>
+        <!-- Dialog test plans -->
         <v-dialog
             v-model="dialog"
             fullscreen
@@ -15,34 +16,48 @@
                 />
             </v-card>
         </v-dialog>
+
+        <!-- riga Toolbar -->
+        <div class="ms_toolbar">
+            <v-row no-gutters>
+                <!-- scala -->
+                <v-col cols="2">
+                    <scala @cambio="cambiaScala"></scala>
+                </v-col>
+                <!-- Filtreo -->
+                <v-col cols="4">
+                    <filtro @cambio="filtra" @save="save"></filtro>
+                </v-col>
+                <!-- Test request -->
+                <v-col cols="4">
+                    <div class="toPlan">
+                        <div class="text-left pl-1 d-flex ml-2">
+                            <form-prove
+                                :numRichieste="numRichieste"
+                                :needUpdate="aggiornareConteggio"
+                                :itemProva="gruppoProve"
+                                @provaChanged="changeProvaAttiva"
+                            ></form-prove>
+                            <div></div>
+                        </div>
+                    </div>
+                </v-col>
+                <v-col cols="2" class="text-right pa-3">
+                    <v-btn @click.stop="dialog = true" color="success"
+                        >Mostra richieste</v-btn
+                    ></v-col
+                >
+            </v-row>
+        </div>
+        <!-- riga planner -->
         <v-row>
-            <v-col cols="9">
-                <div><scala @cambio="cambiaScala"></scala></div>
-                <div class="planner">
-                    <TestPlanner :scala="scalaAttiva" />
-                </div>
-            </v-col>
-            <v-col cols="3">
-                <div class="toPlan">
-                    <div class="text-left pl-1">
-                        <p>
-                            <v-btn
-                                @click.stop="dialog = true"
-                                color="success"
-                                class="ma-1"
-                                >Mostra richieste</v-btn
-                            >
-                        </p>
-                    </div>
-                    <div>
-                        <form-prove
-                            :numRichieste="numRichieste"
-                            :needUpdate="aggiornareConteggio"
-                            :itemProva="gruppoProve"
-                            @provaChanged="changeProvaAttiva"
-                        ></form-prove>
-                    </div>
-                </div>
+            <v-col cols="12">
+                <TestPlanner
+                    class="px-5"
+                    :scala="scalaAttiva"
+                    :filtro="filtro"
+                    :needSave="needSave"
+                />
             </v-col>
         </v-row>
     </div>
@@ -50,6 +65,7 @@
 
 <script>
 import Scala from '../components/Scala.vue';
+import Filtro from '../components/Filtro.vue';
 import TestPlanner from 'Moduli/schedular/components/Scheduler.vue';
 import FormProve from '../components/FormProve.vue';
 import FormRichieste from '../components/FormRichieste.vue';
@@ -59,7 +75,7 @@ import { getDatiTestRequests } from '@/data/db-test-plans.js';
 
 export default {
     name: 'TestPlannerView',
-    components: { TestPlanner, FormRichieste, FormProve, Scala },
+    components: { TestPlanner, FormRichieste, FormProve, Scala, Filtro },
     data: () => ({
         dialog: false,
         listaPlannnig: [],
@@ -67,7 +83,9 @@ export default {
         aggiornareConteggio: false,
         provaAttiva: null,
         numRichieste: 0,
-        scalaAttiva: 1
+        scalaAttiva: 1,
+        filtro: 'all',
+        needSave: false
     }),
     created() {
         EventBus.on('cell_click', this.handleCellDblClick);
@@ -110,18 +128,33 @@ export default {
             console.log('prova cambiata');
             this.provaAttiva = payload;
         },
-
+        //Cambio scala
         cambiaScala(valore) {
             this.scalaAttiva = valore;
+        },
+        //Filtro macchina
+        filtra(valore) {
+            this.filtro = valore;
+        },
+        save() {
+            this.needSave = !this.needSave;
         }
     }
 };
 </script>
 <style scoped>
+/* @import './../css/my-style.css'; */
+@import './../css/planner.css';
+@import './../css/ciclatura.css';
 .toPlan {
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
 .planner {
     border: 1px solid red;
+}
+.ms_toolbar {
+    border: 1px solid pink;
+    height: 100px;
+    margin-bottom: 10px;
 }
 </style>
