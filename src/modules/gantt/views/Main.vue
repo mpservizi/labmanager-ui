@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Gantt from '../components/Gantt.vue';
+import Gantt from '../components/GanttWorkload.vue';
 export default {
     name: 'GanttView',
     components: { Gantt },

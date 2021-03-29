@@ -53,7 +53,9 @@ export default {
                         carico: i,
                         durata: 2,
                         label: carico + '-10A',
-                        campioni: numCampioni
+                        campioni: numCampioni,
+                        idRequest: result.IdRequest,
+                        titolo: result.Titolo
                     });
 
                     cont++;

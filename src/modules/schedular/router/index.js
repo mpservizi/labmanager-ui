@@ -1,6 +1,7 @@
 import Main from '../views/Main.vue';
 // import TestRequestView from '../views/TestRequestView.vue';
-import SchedularView from '../views/SchedularView.vue';
+// import SchedularView from '../views/SchedularView.vue';
+import SchedularView from '../views/PlannerView.vue';
 import { ROOT_PATH } from '../costanti.js';
 
 const ENTRY_ROUTE = {

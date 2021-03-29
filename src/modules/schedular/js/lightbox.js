@@ -5,19 +5,13 @@ export function initLightbox(myScheduler) {
             map_to: 'text',
             name: 'text',
             type: 'textarea',
-            height: 24
+            height: 30
         },
         {
             map_to: 'idRequest',
             name: 'request',
             type: 'textarea',
-            height: 24
-        },
-        {
-            map_to: 'idRisorsa',
-            name: 'risorsa',
-            type: 'select',
-            options: myScheduler.serverList(LISTA_SELEZIONE_RISORSE)
+            height: 30
         },
         {
             map_to: 'idCarico',
@@ -25,6 +19,19 @@ export function initLightbox(myScheduler) {
             type: 'radio',
             options: LISTA_CARICHI
         },
+        {
+            map_to: 'idRisorsa',
+            name: 'risorsa',
+            type: 'select',
+            options: myScheduler.serverList(LISTA_SELEZIONE_RISORSE)
+        },
+
+        {
+            map_to: 'sampleCode',
+            name: 'sample',
+            type: 'textarea',
+            height: 30
+        }
         // {
         //   map_to: "is_paid",
         //   name: "is_paid",
@@ -32,11 +39,11 @@ export function initLightbox(myScheduler) {
         //   checked_value: true,
         //   unchecked_value: false,
         // },
-        {
-            map_to: 'time',
-            name: 'time',
-            type: 'calendar_time'
-        }
+        // {
+        //     map_to: 'time',
+        //     name: 'time',
+        //     type: 'calendar_time'
+        // }
     ];
 
     //labels
@@ -45,10 +52,12 @@ export function initLightbox(myScheduler) {
     myScheduler.locale.labels.section_time = 'Time';
     myScheduler.locale.labels.section_request = 'Test request';
     myScheduler.locale.labels.section_risorsa = 'Risorsa';
+    myScheduler.locale.labels.section_sample = 'Sample code';
 
     //Disabilito i campi nel lightbox
     myScheduler.attachEvent('onLightbox', function(task_id) {
-        // document.getElementsByTagName('textarea')[0].disabled = true;
+        document.getElementsByTagName('textarea')[0].disabled = true;
+        document.getElementsByTagName('textarea')[1].disabled = true;
     });
 
     // myScheduler.attachEvent('onBeforeLightbox', function(id) {
