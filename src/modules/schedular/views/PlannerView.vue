@@ -18,7 +18,7 @@
         <v-row>
             <v-col cols="9">
                 <div class="planner">
-                    <TestPlanner @ready="init" />
+                    <TestPlanner />
                 </div>
             </v-col>
             <v-col cols="3">
@@ -48,12 +48,10 @@
 </template>
 
 <script>
-// import TestPlanner from 'Moduli/schedular/components/TestPlanner.vue';
 import TestPlanner from 'Moduli/schedular/components/Scheduler.vue';
-import FormProve from './FormProve.vue';
-import FormRichieste from './FormRichieste.vue';
-// import { MyPlanner } from './MyPlanner.js';
-import { creaTaskPerProva } from './TaskMaker.js';
+import FormProve from '../components/FormProve.vue';
+import FormRichieste from '../components/FormRichieste.vue';
+import { creaTaskPerProva } from '../js/TaskMaker.js';
 import { EventBus } from '@/shared/event-bus.js';
 import { getDatiTestRequests } from '@/data/db-test-plans.js';
 
@@ -75,9 +73,6 @@ export default {
     mounted() {},
     computed: {},
     methods: {
-        init(containerId) {
-            // MyPlanner.init(containerId);
-        },
         //Doppio click sulla cella schedular
         handleCellDblClick(params) {
             //Se è selezionata una prova

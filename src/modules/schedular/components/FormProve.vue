@@ -87,7 +87,4 @@ export default {
 };
 </script>
 <style scoped>
-.toPlan {
-    border: 1px solid red;
-}
 </style>

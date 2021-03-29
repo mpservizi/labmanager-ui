@@ -6,6 +6,8 @@ export const LISTA_RISORSE = 'risorse';
 export const LISTA_RISORSE_FILTRATA = 'risorseFiltrate';
 //Lista per selezioanre le risorse dal combobox
 export const LISTA_SELEZIONE_RISORSE = 'selezioneRisorse';
+//campo per lo stato del task
+export const CAMPO_STATO = 'stato';
 
 //nome deafult view timeline
 export const VIEW_TIMELINE = 'timeline';

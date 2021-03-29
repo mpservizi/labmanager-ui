@@ -18,7 +18,7 @@
                 <breadcrumbs class="app-links"></breadcrumbs>
                 <div class="rw">
                     <!-- <router-view></router-view> -->
-                    <test-planner-view ></test-planner-view>
+                    <test-planner-view></test-planner-view>
                 </div>
             </v-container>
         </v-main>
@@ -32,13 +32,13 @@
 
 <script>
 import Breadcrumbs from './components/Breadcrumbs';
-import TestPlannerView from '@/prove-codice/test-planner/PlannerView.vue';
+import TestPlannerView from 'Moduli/schedular/views/PlannerView.vue';
 export default {
     name: 'App',
-    components: { Breadcrumbs,TestPlannerView },
+    components: { Breadcrumbs, TestPlannerView },
     data: () => ({
         drawer: false,
-        dev:true
+        dev: true
     })
 };
 </script>

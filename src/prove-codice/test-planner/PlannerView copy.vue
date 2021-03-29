@@ -58,9 +58,9 @@
 <script>
 // import TestPlanner from 'Moduli/schedular/components/TestPlanner.vue';
 import TestPlanner from 'Moduli/schedular/components/Scheduler.vue';
-import FormRichieste from './FormRichieste.vue';
+import FormRichieste from '../../modules/schedular/components/FormRichieste.vue';
 // import { MyPlanner } from './MyPlanner.js';
-import { creaTaskPlanner } from './TaskMaker.js';
+import { creaTaskPlanner } from '../../modules/schedular/js/TaskMaker.js';
 import { EventBus } from '@/shared/event-bus.js';
 import { getDatiTestRequests } from '@/data/db-test-plans.js';
 
