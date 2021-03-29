@@ -1,13 +1,15 @@
 <template>
     <div>
-        <v-row>
-            <v-col v-for="app in listaApp" :key="app.id">
-                <div>
-                    <h1>{{ app.label }}</h1>
-                    <router-link :to="{ name: app.routeName }"
-                        >Open</router-link
+        <v-row justify="start">
+            <v-col cols="4" v-for="app in listaApp" :key="app.id" class="px-10">
+                <v-card color="#385F73" dark  :to="{ name: app.routeName }" max-width="250">
+                    <v-card-title class="headline text-center">
+                       {{ app.label }}
+                    </v-card-title>
+
+                    <v-card-subtitle>{{app.descrizione}}</v-card-subtitle
                     >
-                </div>
+                </v-card>
             </v-col>
         </v-row>
     </div>

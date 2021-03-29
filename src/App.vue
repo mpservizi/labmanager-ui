@@ -7,11 +7,11 @@
         <v-app-bar app color="primary" dark dense>
             <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
-            <v-toolbar-title>My-App</v-toolbar-title>
-            <v-btn icon to="/" class="ml-5">
+            <v-toolbar-title>Brescia-Lab</v-toolbar-title>
+            <v-btn icon to="/" class="ml-5" plain>
                 <v-icon>mdi-home</v-icon>
             </v-btn>
-            <div><breadcrumbs class="app-links"></breadcrumbs></div>
+            <breadcrumbs class="app_links"></breadcrumbs>
         </v-app-bar>
 
         <v-main>
@@ -51,7 +51,7 @@ body {
     /* overflow: hidden; */
 }
 .app_box {
-    background-color: pink;
+    /* background-color: pink; */
     min-height: 100%;
     display: grid;
     grid-template-columns: 1fr;
@@ -59,6 +59,9 @@ body {
 }
 .router_box {
     display: grid;
-    background-color: green;
+    /* background-color: green; */
+}
+a.v-breadcrumbs__item {
+    color: white !important;
 }
 </style>
