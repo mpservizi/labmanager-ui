@@ -1,3 +1,4 @@
+import { EventBus } from '@/shared/event-bus.js';
 import {
     creaTestoBarraEvento,
     creaTemplateColonneRisorse,
@@ -7,7 +8,7 @@ import {
 
 import { filtraRisorse, showMessage } from './my-func.js';
 import { centraViewOggi } from './my-view.js';
-
+import { LISTA_RISORSE } from './costanti.js';
 export function initEventi(myScheduler) {
     /** Default values per new event */
     myScheduler.attachEvent('onEventCreated', handleNewEvento);
@@ -70,6 +71,22 @@ export function initEventi(myScheduler) {
         ev.end_date.setHours(20);
         // console.log(ev);
         return true; // Con true prosegue le azioni di default
+    });
+
+    myScheduler.attachEvent('onCellDblClick', function(
+        x_ind,
+        y_ind,
+        x_val,
+        y_val,
+        e
+    ) {
+        let listaRisorse = myScheduler.serverList(LISTA_RISORSE);
+        let risorsa = listaRisorse[y_ind];
+        let obj = {
+            data_inzio: x_val,
+            risorsa: risorsa
+        };
+        EventBus.emit('cell_click', obj);
     });
 
     /**

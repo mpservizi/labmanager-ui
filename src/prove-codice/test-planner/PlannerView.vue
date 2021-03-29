@@ -25,29 +25,21 @@
                 <div class="toPlan">
                     <div class="text-left pl-1">
                         <p>
-                            {{ msgRichieste }}
-                            <span>
-                                <v-btn
-                                    @click.stop="dialog = true"
-                                    color="success"
-                                    class="ma-1"
-                                    >Mostra</v-btn
-                                >
-                            </span>
+                            <v-btn
+                                @click.stop="dialog = true"
+                                color="success"
+                                class="ma-1"
+                                >Mostra richieste</v-btn
+                            >
                         </p>
                     </div>
-                    <div id="samples_box" class="text-left pl-1">
-                        <p>Prova Attiva : {{ provaSelezionata }}</p>
-                        <v-badge
-                            overlap
-                            v-for="(item, index) in samples"
-                            :key="index"
-                            :content="item.campioni"
-                        >
-                            <v-chip class="ma-1" @click="provaClick(item)">{{
-                                item.label
-                            }}</v-chip>
-                        </v-badge>
+                    <div>
+                        <form-prove
+                            :numRichieste="numRichieste"
+                            :needUpdate="aggiornareConteggio"
+                            :itemProva="gruppoProve"
+                            @provaChanged="changeProvaAttiva"
+                        ></form-prove>
                     </div>
                 </div>
             </v-col>
@@ -58,19 +50,21 @@
 <script>
 // import TestPlanner from 'Moduli/schedular/components/TestPlanner.vue';
 import TestPlanner from 'Moduli/schedular/components/Scheduler.vue';
+import FormProve from './FormProve.vue';
 import FormRichieste from './FormRichieste.vue';
 // import { MyPlanner } from './MyPlanner.js';
-import { creaTaskPlanner } from './TaskMaker.js';
+import { creaTaskPerProva } from './TaskMaker.js';
 import { EventBus } from '@/shared/event-bus.js';
 import { getDatiTestRequests } from '@/data/db-test-plans.js';
 
 export default {
     name: 'TestPlannerView',
-    components: { TestPlanner, FormRichieste },
+    components: { TestPlanner, FormRichieste, FormProve },
     data: () => ({
         dialog: false,
         listaPlannnig: [],
-        samples: [],
+        gruppoProve: [],
+        aggiornareConteggio: false,
         provaAttiva: null,
         numRichieste: 0
     }),
@@ -79,80 +73,44 @@ export default {
         this.loadDati();
     },
     mounted() {},
-    computed: {
-        provaSelezionata() {
-            return this.provaAttiva ? this.provaAttiva.label : 'Nessuna';
-        },
-        msgRichieste() {
-            let msg = 'Nessuna richiesta da pianificare';
-            if (this.numRichieste > 0) {
-                msg = 'Richieste da pianificare : ' + this.numRichieste;
-            }
-            return msg;
-        }
-    },
+    computed: {},
     methods: {
         init(containerId) {
             // MyPlanner.init(containerId);
         },
-        provaClick(item) {
-            this.provaAttiva = item;
-        },
+        //Doppio click sulla cella schedular
         handleCellDblClick(params) {
-            let prova = this.provaAttiva ? { ...this.provaAttiva } : null;
-            if (prova) {
-                let obj = { ...params, ...prova };
-                // let result = MyPlanner.creaTaskProva(obj);
-                let result = creaTaskPlanner(obj);
+            //Se è selezionata una prova
+            if (this.provaAttiva) {
+                let obj = { ...params, ...this.provaAttiva };
+                //Creo in task in schedular
+                let result = creaTaskPerProva(obj);
                 if (result) {
-                    let cont = this.provaAttiva.campioni - 1;
-                    if (cont > 0) {
-                        this.provaAttiva.campioni = cont;
-                    } else {
-                        let id = prova.id;
-                        let resto = this.samples.filter(
-                            (item) => item.id != id
-                        );
-                        this.samples = resto;
-                        this.provaAttiva = null;
-                    }
+                    //Tolgo la prova dalla lista da pianificare
+                    //Inverto la variabile ad ogni cambiamento, il componente ha il watch su questa prop
+                    this.aggiornareConteggio = !this.aggiornareConteggio;
                 }
-            } else {
-                console.log('nessuna prova');
             }
         },
+
+        //Save button dialog
         handleSaveForm(result) {
-            console.log(result);
-            let lista = [];
-            let cont = 1;
-            for (let i = 1; i < 4; i++) {
-                let carico = '19.' + i;
-                let numCampioni = result[carico];
-                if (numCampioni > 0) {
-                    lista.push({
-                        id: cont,
-                        carico: i,
-                        durata: 2,
-                        label: carico + '-10A',
-                        campioni: numCampioni
-                    });
-
-                    cont++;
-                }
-            }
-
+            this.gruppoProve = result;
             this.dialog = false;
-            this.samples = lista;
         },
+        //Close button dialog
         handleCloseForm() {
             this.dialog = false;
         },
-        listaPronta(numItems) {
-            this.numRichieste = numItems;
-        },
+        //Carica la lista delle preove da pianificare
         loadDati() {
             this.listaPlannnig = getDatiTestRequests();
             this.numRichieste = this.listaPlannnig.length;
+        },
+        //Quando cambia la prova da pianificare nel form prove
+        changeProvaAttiva(payload) {
+            console.log('prova cambiata');
+            this.provaAttiva = payload;
         }
     }
 };
