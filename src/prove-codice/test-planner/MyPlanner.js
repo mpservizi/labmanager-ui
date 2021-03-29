@@ -1,14 +1,27 @@
 import { myScheduler } from 'Moduli/schedular/js/my-lib.js';
 import { EventBus } from '@/shared/event-bus.js';
-import {NOME_LISTA_RISORSE,CAMPO_RISORSA,CAMPO_STATO} from './costanti.js';
-import {TimelineView} from './TimelineView.js';
+import { NOME_LISTA_RISORSE, CAMPO_RISORSA, CAMPO_STATO } from './costanti.js';
+import { TimelineView } from './TimelineView.js';
+import {
+    save,
+    loadRisorse,
+    loadDatiCiclatura
+} from 'Moduli/schedular/js/api.js';
 const ms = myScheduler;
+let timelineView;
+
 class TestPlanner {
-    constructor() {
-    }
-    init(container) {
+    constructor() {}
+    async init(container) {
         myConfig();
+        let listaSelezioneRisorse = await loadDatiRisorse();
+        ms.serverList(NOME_LISTA_RISORSE, listaSelezioneRisorse);
+
+        initTimelineView();
         ms.init(container, new Date(), 'timeline');
+
+        let eventi = await loadEventi();
+        ms.parse(eventi);
     }
     creaTaskProva(params) {
         let task = creaTask(params);
@@ -18,22 +31,47 @@ class TestPlanner {
 }
 export const MyPlanner = new TestPlanner();
 
+async function loadDatiRisorse() {
+    try {
+        let risorse = await loadRisorse();
+        let listaSelezioneRisorse = risorse.map(item => {
+            return { key: item.key, label: item.label + ' - ' + item.stallo };
+        });
+        return listaSelezioneRisorse;
+    } catch (error) {
+        console.log(error);
+        alert('Errore caricamento dati');
+        return false;
+    }
+}
+
+async function loadEventi() {
+    try {
+        let eventi = await loadDatiCiclatura();
+        return eventi;
+    } catch (error) {
+        console.log(error);
+        alert('Errore caricamento dati');
+        return false;
+    }
+}
+
 function myConfig() {
     setConfig();
     setLabels();
+    setLightbox();
+}
 
-    const listaRisorse = creaListaRisorse();
-    ms.serverList(NOME_LISTA_RISORSE, listaRisorse);
-    
-    let timelineView = new TimelineView(ms);
+function initTimelineView() {
+    const listaRisorse = ms.serverList(NOME_LISTA_RISORSE);
+    timelineView = new TimelineView(ms);
     timelineView.setListaRiosrse(listaRisorse);
     timelineView.setCampoRisorsa(CAMPO_RISORSA);
     timelineView.creaView();
-    timelineView.onCellDblClick(function(task){
+    timelineView.onCellDblClick(function(task) {
         EventBus.emit('cell_click', task);
     });
     timelineView.evidenziaWeekends();
-    setLightbox(listaRisorse);
 }
 
 function creaTask(payload) {
@@ -58,16 +96,57 @@ function calcolaDataFine(data_inizio, durata) {
     return dataFine;
 }
 
-function setLightbox(listaRisorse) {
+/**
+ * Configura il lightbox
+ */
+function setLightbox() {
+    const listaRisorse = ms.serverList(NOME_LISTA_RISORSE);
     let listaStati = [
         { key: 1, label: 'Pianificato' },
         { key: 2, label: 'In corso' },
-        { key: 3, label: 'Finito' },
+        { key: 3, label: 'Finito' }
     ];
     ms.config.lightbox.sections = [
-        { name: 'risorsa', height: 30, type: 'select', options: listaRisorse, map_to: CAMPO_RISORSA, focus: true },
-        { name: 'stato', height: 30, type: 'select', options: listaStati, map_to: CAMPO_STATO }
+        {
+            name: 'risorsa',
+            height: 30,
+            type: 'select',
+            options: listaRisorse,
+            map_to: CAMPO_RISORSA,
+            focus: true
+        },
+        {
+            name: 'stato',
+            height: 30,
+            type: 'select',
+            options: listaStati,
+            map_to: CAMPO_STATO
+        }
     ];
+}
+
+/**
+ * Imposta i parametri del schedular
+ */
+function setConfig() {
+    ms.config.details_on_dblclick = true;
+
+    //No creazione con drag e doppio click
+    ms.config.dblclick_create = false;
+    ms.config.drag_create = false;
+
+    //Numero massimo di task in un slot
+    ms.config.collision_limit = 4;
+    ms.config.start_on_monday = true;
+}
+
+/**
+ * Imposta tutte le labels
+ */
+function setLabels() {
+    ms.locale.labels.timeline_tab = 'Timeline';
+    ms.locale.labels.section_risorsa = 'Risorsa';
+    ms.locale.labels.section_stato = 'Stato prova';
 }
 
 function creaListaRisorse() {
@@ -91,22 +170,3 @@ function creaListaRisorse() {
         { key: 15, label: 'L2020-6' }
     ];
 }
-
-function setConfig() {
-    ms.config.details_on_dblclick = true;
-
-    //No creazione con drag e doppio click
-    ms.config.dblclick_create = false;
-    ms.config.drag_create = false;
-
-    //Numero massimo di task in un slot
-    ms.config.collision_limit = 4;
-    ms.config.start_on_monday = true;    
-}
-
-function setLabels() {
-    ms.locale.labels.timeline_tab = 'Timeline';
-    ms.locale.labels.section_risorsa = 'Risorsa';
-    ms.locale.labels.section_stato = 'Stato prova';
-}
-

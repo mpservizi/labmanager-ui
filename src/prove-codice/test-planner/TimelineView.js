@@ -1,4 +1,4 @@
-const TIMELINE_VIEW = 'timeline';//Nome del view
+const TIMELINE_VIEW = 'timeline'; //Nome del view
 
 export class TimelineView {
     constructor(myScheduler) {
@@ -21,7 +21,6 @@ export class TimelineView {
     }
     setListaRiosrse(listaRisorse) {
         this.listaRisorse = listaRisorse;
-
     }
     setCampoRisorsa(campoRisorsa) {
         this.campoRisorsa = campoRisorsa;
@@ -34,13 +33,19 @@ export class TimelineView {
     onCellDblClick(callback) {
         let ms = this.ms;
         let listaRisorse = this.listaRisorse;
-        ms.attachEvent('onCellDblClick', function (x_ind, y_ind, x_val, y_val, e) {
+        ms.attachEvent('onCellDblClick', function(
+            x_ind,
+            y_ind,
+            x_val,
+            y_val,
+            e
+        ) {
             if (callback) {
                 let risorsa = listaRisorse[y_ind];
                 let obj = {
                     data_inzio: x_val,
                     risorsa: risorsa
-                }
+                };
                 callback(obj);
             }
         });
@@ -52,7 +57,7 @@ export class TimelineView {
  * @param {TimelineView} cls : istanza classe TimelineView
  */
 function addNavigationHadler(cls) {
-    cls.navigationHadler = function (date, step) {
+    cls.navigationHadler = function(date, step) {
         if (step > 0) {
             step = 1;
         } else if (step < 0) {
@@ -61,7 +66,6 @@ function addNavigationHadler(cls) {
         return cls.ms.date.add(date, step, cls.navigationUnit);
     };
 }
-
 
 function creaTimelineView(cls) {
     let ms = cls.ms;
@@ -79,7 +83,7 @@ function creaTimelineView(cls) {
         y_property: campoRiorsa,
         render: 'bar',
         round_position: true,
-        dy: 25,
+        dy: 30,
         event_dy: 'full',
         second_scale: {
             x_unit: 'week',
@@ -91,7 +95,6 @@ function creaTimelineView(cls) {
     ms.date[TIMELINE_VIEW + '_start'] = ms.date.week_start;
     //Handel click tasto avanti e indietro
     ms.date['add_' + TIMELINE_VIEW] = cls.navigationHadler;
-
 }
 
 /** Evidenzia i giorni del calendario */
@@ -101,5 +104,4 @@ function evidenziaWeekends(ms) {
         zones: 'fullday',
         css: 'timeline_weekend'
     });
-
 }
