@@ -8,7 +8,11 @@
             transition="dialog-top-transition"
         >
             <v-card>
-            <FormRichieste :lista-richieste="listaPlannnig" @save="handleSaveForm" @close="dialog = false"/>
+                <FormRichieste
+                    :lista-richieste="listaPlannnig"
+                    @save="handleSaveForm"
+                    @close="dialog = false"
+                />
             </v-card>
         </v-dialog>
         <v-row>
@@ -21,12 +25,16 @@
                 <div class="toPlan">
                     <div class="text-left pl-1">
                         <p>
-                            {{msgRichieste}}
-                        <span>
-                        <v-btn @click.stop="dialog = true" color="success" class="ma-1"
-                            >Mostra</v-btn>
-                          </span>
-                          </p>
+                            {{ msgRichieste }}
+                            <span>
+                                <v-btn
+                                    @click.stop="dialog = true"
+                                    color="success"
+                                    class="ma-1"
+                                    >Mostra</v-btn
+                                >
+                            </span>
+                        </p>
                     </div>
                     <div id="samples_box" class="text-left pl-1">
                         <p>Prova Attiva : {{ provaSelezionata }}</p>
@@ -48,9 +56,11 @@
 </template>
 
 <script>
-import TestPlanner from 'Moduli/schedular/components/TestPlanner.vue';
+// import TestPlanner from 'Moduli/schedular/components/TestPlanner.vue';
+import TestPlanner from 'Moduli/schedular/components/Scheduler.vue';
 import FormRichieste from './FormRichieste.vue';
-import { MyPlanner } from './MyPlanner.js';
+// import { MyPlanner } from './MyPlanner.js';
+import { creaTaskPlanner } from './TaskMaker.js';
 import { EventBus } from '@/shared/event-bus.js';
 import { getDatiTestRequests } from '@/data/db-test-plans.js';
 
@@ -62,21 +72,20 @@ export default {
         listaPlannnig: [],
         samples: [],
         provaAttiva: null,
-        numRichieste:0
+        numRichieste: 0
     }),
     created() {
         EventBus.on('cell_click', this.handleCellDblClick);
         this.loadDati();
     },
-    mounted() {
-    },
+    mounted() {},
     computed: {
         provaSelezionata() {
             return this.provaAttiva ? this.provaAttiva.label : 'Nessuna';
         },
-        msgRichieste(){
+        msgRichieste() {
             let msg = 'Nessuna richiesta da pianificare';
-            if(this.numRichieste>0){
+            if (this.numRichieste > 0) {
                 msg = 'Richieste da pianificare : ' + this.numRichieste;
             }
             return msg;
@@ -84,8 +93,7 @@ export default {
     },
     methods: {
         init(containerId) {
-            MyPlanner.init(containerId);
-            init();
+            // MyPlanner.init(containerId);
         },
         provaClick(item) {
             this.provaAttiva = item;
@@ -94,7 +102,8 @@ export default {
             let prova = this.provaAttiva ? { ...this.provaAttiva } : null;
             if (prova) {
                 let obj = { ...params, ...prova };
-                let result = MyPlanner.creaTaskProva(obj);
+                // let result = MyPlanner.creaTaskProva(obj);
+                let result = creaTaskPlanner(obj);
                 if (result) {
                     let cont = this.provaAttiva.campioni - 1;
                     if (cont > 0) {
@@ -138,19 +147,15 @@ export default {
         handleCloseForm() {
             this.dialog = false;
         },
-        listaPronta(numItems){
+        listaPronta(numItems) {
             this.numRichieste = numItems;
         },
-        loadDati(){
+        loadDati() {
             this.listaPlannnig = getDatiTestRequests();
             this.numRichieste = this.listaPlannnig.length;
         }
     }
 };
-
-function init() {
-    const box = document.getElementById('samples_box');
-}
 </script>
 <style scoped>
 .toPlan {

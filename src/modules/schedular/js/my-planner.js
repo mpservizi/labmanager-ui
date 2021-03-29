@@ -85,10 +85,12 @@ function cambiaScala(valore) {
         setScalaSettimanale();
     }
 }
+function creaTaskPlanner(params) {}
 export const MyPlanner = {
     init: initPlanner,
     filtraRisorse,
     loadDati,
     saveDati,
-    cambiaScala
+    cambiaScala,
+    creaTaskPlanner
 };

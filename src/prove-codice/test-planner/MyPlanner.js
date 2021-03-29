@@ -7,6 +7,8 @@ import {
     loadRisorse,
     loadDatiCiclatura
 } from 'Moduli/schedular/js/api.js';
+
+import { creaTaskPerProva } from './TaskMaker.js';
 const ms = myScheduler;
 let timelineView;
 
@@ -24,7 +26,7 @@ class TestPlanner {
         ms.parse(eventi);
     }
     creaTaskProva(params) {
-        let task = creaTask(params);
+        let task = creaTaskPerProva(ms, params);
         ms.addEvent(task);
         return task;
     }
@@ -72,28 +74,6 @@ function initTimelineView() {
         EventBus.emit('cell_click', task);
     });
     timelineView.evidenziaWeekends();
-}
-
-function creaTask(payload) {
-    let data_inizio = payload.data_inzio;
-    let durata = payload.durata;
-    let idRisorsa = payload.risorsa.key;
-    let testo = payload.label;
-    let dataFine = calcolaDataFine(data_inizio, durata);
-
-    let task = {
-        start_date: data_inizio,
-        end_date: dataFine,
-        [CAMPO_RISORSA]: idRisorsa,
-        [CAMPO_STATO]: 1,
-        text: testo
-    };
-    return task;
-}
-
-function calcolaDataFine(data_inizio, durata) {
-    let dataFine = ms.date.add(data_inizio, durata, 'day');
-    return dataFine;
 }
 
 /**
