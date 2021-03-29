@@ -17,8 +17,9 @@
         </v-dialog>
         <v-row>
             <v-col cols="9">
+                <div><scala @cambio="cambiaScala"></scala></div>
                 <div class="planner">
-                    <TestPlanner />
+                    <TestPlanner :scala="scalaAttiva" />
                 </div>
             </v-col>
             <v-col cols="3">
@@ -48,6 +49,7 @@
 </template>
 
 <script>
+import Scala from '../components/Scala.vue';
 import TestPlanner from 'Moduli/schedular/components/Scheduler.vue';
 import FormProve from '../components/FormProve.vue';
 import FormRichieste from '../components/FormRichieste.vue';
@@ -57,14 +59,15 @@ import { getDatiTestRequests } from '@/data/db-test-plans.js';
 
 export default {
     name: 'TestPlannerView',
-    components: { TestPlanner, FormRichieste, FormProve },
+    components: { TestPlanner, FormRichieste, FormProve, Scala },
     data: () => ({
         dialog: false,
         listaPlannnig: [],
         gruppoProve: [],
         aggiornareConteggio: false,
         provaAttiva: null,
-        numRichieste: 0
+        numRichieste: 0,
+        scalaAttiva: 1
     }),
     created() {
         EventBus.on('cell_click', this.handleCellDblClick);
@@ -106,6 +109,10 @@ export default {
         changeProvaAttiva(payload) {
             console.log('prova cambiata');
             this.provaAttiva = payload;
+        },
+
+        cambiaScala(valore) {
+            this.scalaAttiva = valore;
         }
     }
 };

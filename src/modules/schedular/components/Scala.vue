@@ -1,26 +1,33 @@
 <template>
-  <v-row>
-    <v-col>
-      <v-radio-group mandatory @change="aggiorna" row>
-        <span class="pr-2">Seleziona scala</span>
-        <v-radio label="Settimanale" value="2"></v-radio>
-        <v-radio label="Mensile" value="1"></v-radio>
-      </v-radio-group>
-    </v-col>
-  </v-row>
+    <v-row>
+        <v-col>
+            <div class="pa-2 boxScala">
+                <p class="">Seleziona scala</p>
+                <v-radio-group mandatory @change="aggiorna">
+                    <v-radio label="Settimanale" value="2"></v-radio>
+                    <v-radio label="Mensile" value="1"></v-radio>
+                </v-radio-group>
+            </div>
+        </v-col>
+    </v-row>
 </template>
 <script>
 export default {
-  name: 'Scala',
-  props: {},
-  data() {
-    return {};
-  },
-  methods: {
-    aggiorna(valore) {
-      this.$emit('cambio', parseInt(valore));
-    }
-  },
-  mounted: function() {}
+    name: 'Scala',
+    props: {},
+    data() {
+        return {};
+    },
+    methods: {
+        aggiorna(valore) {
+            this.$emit('cambio', parseInt(valore));
+        }
+    },
+    mounted: function () {}
 };
 </script>
+<style scoped>
+.boxScala {
+    border: 1px solid blue;
+}
+</style>

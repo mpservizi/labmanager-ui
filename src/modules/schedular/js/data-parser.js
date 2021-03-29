@@ -34,6 +34,8 @@ export function eventiToJson(eventi) {
                 text: item.text,
                 corrente: parseInt(item.corrente),
                 carico: nomeCarico,
+                sampleCode: item.sampleCode,
+                titolo: item.titolo,
                 idRequest: parseInt(item.idRequest),
                 start_date: data_inizio,
                 end_date: data_fine,
@@ -79,6 +81,8 @@ export function parseEventiServer(datiServer) {
                 corrente: item.corrente,
                 idCarico: idCarico,
                 idRequest: item.idRequest,
+                sampleCode: item.sampleCode,
+                titolo: item.titolo,
                 start_date: s_d,
                 end_date: e_d,
                 time: {
