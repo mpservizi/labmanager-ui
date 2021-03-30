@@ -1,18 +1,13 @@
 <template>
     <div>
         <!-- Dialog test plans -->
-        <v-dialog
-            v-model="dialog"
-            fullscreen
-            scrollable
-            hide-overlay
-            transition="dialog-top-transition"
-        >
-            <v-card>
+        <v-dialog v-model="dialog" max-width="750" scrollable persistent>
+            <v-card class="my_dialog">
                 <FormRichieste
                     :lista-richieste="listaPlannnig"
                     @save="handleSaveForm"
                     @close="dialog = false"
+                    @completa="gruppoPlanned"
                 />
             </v-card>
         </v-dialog>
@@ -32,7 +27,7 @@
                     <v-btn @click="save" class="success">Salva dati</v-btn>
                 </v-col>
                 <!-- Test request -->
-                <v-col cols="2" class="text-left pt-3">
+                <v-col cols="2" class="text-left pt-3" v-show="hasRichieste">
                     <p>{{ msgRichieste }}</p>
                     <p>Prova Attiva : {{ provaSelezionata }}</p>
                 </v-col>
@@ -44,10 +39,14 @@
                     ></form-prove>
                 </v-col>
                 <v-col cols="2" class="text-center pt-3">
-                    <v-btn @click.stop="dialog = true" color="info" class=""
+                    <v-btn
+                        v-show="hasRichieste"
+                        @click.stop="dialog = true"
+                        color="info"
+                        class=""
                         >Mostra richieste</v-btn
-                    ></v-col
-                >
+                    >
+                </v-col>
             </v-row>
         </div>
         <!-- riga planner -->
@@ -83,7 +82,6 @@ export default {
         gruppoProve: [],
         aggiornareConteggio: false,
         provaAttiva: null,
-        numRichieste: 0,
         scalaAttiva: 1,
         filtro: 'all',
         needSave: false
@@ -103,6 +101,12 @@ export default {
         },
         provaSelezionata() {
             return this.provaAttiva ? this.provaAttiva.label : 'Nessuna';
+        },
+        numRichieste() {
+            return this.listaPlannnig.length;
+        },
+        hasRichieste() {
+            return this.numRichieste > 0;
         }
     },
     methods: {
@@ -133,7 +137,7 @@ export default {
         //Carica la lista delle preove da pianificare
         loadDati() {
             this.listaPlannnig = getDatiTestRequests();
-            this.numRichieste = this.listaPlannnig.length;
+            // this.numRichieste = this.listaPlannnig.length;
         },
         //Quando cambia la prova da pianificare nel form prove
         changeProvaAttiva(payload) {
@@ -147,8 +151,23 @@ export default {
         filtra(valore) {
             this.filtro = valore;
         },
+        //Salvataggio dati
         save() {
             this.needSave = !this.needSave;
+        },
+        //Segnare gruppo prove come pianificato
+        gruppoPlanned(result) {
+            this.listaPlannnig = this.listaPlannnig.filter(
+                (item) => item.Id != result.Id
+            );
+            this.dialog = false;
+        },
+        //mostra dialog per richieste da pianificare
+        handleMostraRichieste() {
+            if (numRichieste > 0) {
+                this.dialog = true;
+            } else {
+            }
         }
     }
 };
@@ -157,15 +176,12 @@ export default {
 /* @import './../css/my-style.css'; */
 @import './../css/planner.css';
 @import './../css/ciclatura.css';
-.toPlan {
-    border: 1px solid blue;
-}
-.planner {
-    border: 1px solid red;
-}
 .ms_toolbar {
-    border: 1px solid pink;
+    /* border: 1px solid pink; */
     height: 100px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
+}
+.my_dialog {
+    overflow: hidden !important;
 }
 </style>

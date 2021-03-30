@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-row>
-            <v-col cols="12">
+            <v-col cols="12" class="">
                 <v-card flat>
                     <v-card-title>
                         Seleziona il gruppo prove da pianificare
@@ -30,11 +30,15 @@
             <v-col cols="12">
                 <v-card flat>
                     <v-card-actions class="px-10">
-                        <v-btn color="primary" @click="cancel">
+                        <v-btn color="primary" @click.stop="cancel">
                             Cancel
                         </v-btn>
                         <v-spacer></v-spacer>
-                        <v-btn color="success" @click="save"> Save </v-btn>
+                        <v-btn color="info" @click.stop="completa">
+                            Pianificato
+                        </v-btn>
+                        <v-spacer></v-spacer>
+                        <v-btn color="success" @click.stop="save"> Save </v-btn>
                     </v-card-actions>
                 </v-card>
             </v-col>
@@ -46,8 +50,8 @@
 export default {
     name: 'FormRichieste',
     components: {},
-    props:{
-        listaRichieste:Array
+    props: {
+        listaRichieste: Array
     },
     data() {
         return {
@@ -62,11 +66,8 @@ export default {
             ]
         };
     },
-    created(){
-    },
-    mounted() {
-
-    },
+    created() {},
+    mounted() {},
     methods: {
         save() {
             let result = this.selected[0];
@@ -79,9 +80,19 @@ export default {
         cancel() {
             this.$emit('close');
         },
+        completa() {
+            let result = this.selected[0];
+            if (result) {
+                this.$emit('completa', result);
+            }
+        }
     },
     computed: {}
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.tab_richieste {
+    overflow: hidden;
+}
+</style>
