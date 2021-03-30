@@ -5,7 +5,7 @@
             <div class="dhx_cal_prev_button">&nbsp;</div>
             <div class="dhx_cal_next_button">&nbsp;</div>
             <div class="dhx_cal_today_button"></div>
-            <!-- <div class="dhx_cal_date"></div> -->
+            <div class="dhx_cal_date"></div>
         </div>
         <div class="dhx_cal_header"></div>
         <div class="dhx_cal_data"></div>

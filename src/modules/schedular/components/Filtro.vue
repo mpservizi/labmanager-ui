@@ -9,7 +9,6 @@
             item-value="key"
             @change="filtraRisorse"
         ></v-select>
-        <v-btn @click="save" class="ml-3">Salva dati</v-btn>
     </div>
 </template>
 <script>
@@ -24,16 +23,13 @@ export default {
     methods: {
         filtraRisorse(valore) {
             this.$emit('cambio', valore);
-        },
-        save() {
-            this.$emit('save');
         }
     },
     mounted: function () {}
 };
 </script>
 <style scoped>
-.boxFiltro {
-    /* border: 1px solid green; */
-}
+/* .boxFiltro {
+    border: 1px solid green;
+} */
 </style>

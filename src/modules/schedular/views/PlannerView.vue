@@ -21,29 +21,30 @@
         <div class="ms_toolbar">
             <v-row no-gutters>
                 <!-- scala -->
-                <v-col cols="2">
+                <v-col cols="1" class="pt-0">
                     <scala @cambio="cambiaScala"></scala>
                 </v-col>
                 <!-- Filtreo -->
-                <v-col cols="4">
+                <v-col cols="2" class="pt-3">
                     <filtro @cambio="filtra" @save="save"></filtro>
                 </v-col>
-                <!-- Test request -->
-                <v-col cols="4">
-                    <div class="toPlan">
-                        <div class="text-left pl-1 d-flex ml-2">
-                            <form-prove
-                                :numRichieste="numRichieste"
-                                :needUpdate="aggiornareConteggio"
-                                :itemProva="gruppoProve"
-                                @provaChanged="changeProvaAttiva"
-                            ></form-prove>
-                            <div></div>
-                        </div>
-                    </div>
+                <v-col cols="2" class="pt-3 text-center">
+                    <v-btn @click="save" class="success">Salva dati</v-btn>
                 </v-col>
-                <v-col cols="2" class="text-right pa-3">
-                    <v-btn @click.stop="dialog = true" color="success"
+                <!-- Test request -->
+                <v-col cols="2" class="text-left pt-3">
+                    <p>{{ msgRichieste }}</p>
+                    <p>Prova Attiva : {{ provaSelezionata }}</p>
+                </v-col>
+                <v-col cols="3" class="pt-3">
+                    <form-prove
+                        :needUpdate="aggiornareConteggio"
+                        :itemProva="gruppoProve"
+                        @provaChanged="changeProvaAttiva"
+                    ></form-prove>
+                </v-col>
+                <v-col cols="2" class="text-center pt-3">
+                    <v-btn @click.stop="dialog = true" color="info" class=""
                         >Mostra richieste</v-btn
                     ></v-col
                 >
@@ -92,7 +93,18 @@ export default {
         this.loadDati();
     },
     mounted() {},
-    computed: {},
+    computed: {
+        msgRichieste() {
+            let msg = 'Nessuna richiesta da pianificare';
+            if (this.numRichieste > 0) {
+                msg = 'Richieste da pianificare : ' + this.numRichieste;
+            }
+            return msg;
+        },
+        provaSelezionata() {
+            return this.provaAttiva ? this.provaAttiva.label : 'Nessuna';
+        }
+    },
     methods: {
         //Doppio click sulla cella schedular
         handleCellDblClick(params) {
@@ -125,7 +137,6 @@ export default {
         },
         //Quando cambia la prova da pianificare nel form prove
         changeProvaAttiva(payload) {
-            console.log('prova cambiata');
             this.provaAttiva = payload;
         },
         //Cambio scala
@@ -147,7 +158,7 @@ export default {
 @import './../css/planner.css';
 @import './../css/ciclatura.css';
 .toPlan {
-    /* border: 1px solid red; */
+    border: 1px solid blue;
 }
 .planner {
     border: 1px solid red;

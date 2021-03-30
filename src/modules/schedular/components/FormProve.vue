@@ -1,21 +1,15 @@
 <template>
-    <div id="samples_box" class="text-left pl-1 d-flex">
-        <div>
-            <p>{{ msgRichieste }}</p>
-            <p>Prova Attiva : {{ provaSelezionata }}</p>
-        </div>
-        <div class="py-4 ml-2 box_chip">
-            <v-badge
-                overlap
-                v-for="(item, index) in samples"
-                :key="index"
-                :content="item.campioni"
-            >
-                <v-chip class="ma-1" @click="provaClick(item)">{{
-                    item.label
-                }}</v-chip>
-            </v-badge>
-        </div>
+    <div class="py-5">
+        <v-badge
+            overlap
+            v-for="(item, index) in samples"
+            :key="index"
+            :content="item.campioni"
+        >
+            <v-chip class="ml-4" @click="provaClick(item)">{{
+                item.label
+            }}</v-chip>
+        </v-badge>
     </div>
 </template>
 <script>
@@ -26,21 +20,10 @@ export default {
         samples: [],
         provaAttiva: null
     }),
-    props: ['itemProva', 'numRichieste', 'needUpdate'],
+    props: ['itemProva', 'needUpdate'],
     created() {},
     mounted() {},
-    computed: {
-        provaSelezionata() {
-            return this.provaAttiva ? this.provaAttiva.label : 'Nessuna';
-        },
-        msgRichieste() {
-            let msg = 'Nessuna richiesta da pianificare';
-            if (this.numRichieste > 0) {
-                msg = 'Richieste da pianificare : ' + this.numRichieste;
-            }
-            return msg;
-        }
-    },
+    computed: {},
     methods: {
         provaClick(item) {
             this.provaAttiva = item;
@@ -93,7 +76,4 @@ export default {
 };
 </script>
 <style scoped>
-.box_chip {
-    /* border: 1px solid orange; */
-}
 </style>
