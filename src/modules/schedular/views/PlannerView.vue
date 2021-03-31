@@ -4,7 +4,7 @@
         <v-dialog v-model="dialog" max-width="750" scrollable persistent>
             <v-card class="my_dialog">
                 <FormRichieste
-                    :lista-richieste="listaPlannnig"
+                    :lista-richieste="listaValoriRichieste"
                     @save="handleSaveForm"
                     @close="dialog = false"
                     @completa="gruppoPlanned"
@@ -80,7 +80,8 @@ import FormProve from '../components/FormProve.vue';
 import FormRichieste from '../components/FormRichieste.vue';
 import { creaTaskPerProva } from '../js/TaskMaker.js';
 import { EventBus } from '@/shared/event-bus.js';
-import { getDatiTestRequests } from '@/data/db-test-plans.js';
+// import { getDatiTestRequests } from '@/data/db-test-plans.js';
+import { TestRequetService } from '@/api/TestRequetService.js';
 
 export default {
     name: 'TestPlannerView',
@@ -116,6 +117,24 @@ export default {
         },
         hasRichieste() {
             return this.numRichieste > 0;
+        },
+        //Conversione lista richieste server in lista ui form
+        listaValoriRichieste() {
+            let result = [];
+            this.listaPlannnig.forEach((item) => {
+                item.prove.forEach((prova) => {
+                    let obj = {
+                        ...item,
+                        id: `${item.id}-${prova.id}`,
+                        titoloProva: prova.titolo,
+                        19.1: prova['19.1'],
+                        19.2: prova['19.2'],
+                        19.3: prova['19.3']
+                    };
+                    result.push(obj);
+                });
+            });
+            return result;
         }
     },
     methods: {
@@ -144,8 +163,8 @@ export default {
             this.dialog = false;
         },
         //Carica la lista delle preove da pianificare
-        loadDati() {
-            this.listaPlannnig = getDatiTestRequests();
+        async loadDati() {
+            this.listaPlannnig = await TestRequetService.getRichieste();
             // this.numRichieste = this.listaPlannnig.length;
         },
         //Quando cambia la prova da pianificare nel form prove

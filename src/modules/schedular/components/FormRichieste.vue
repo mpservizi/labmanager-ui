@@ -20,7 +20,7 @@
                     show-select
                     v-model="selected"
                     single-select
-                    item-key="Id"
+                    item-key="id"
                     class="elevation-1"
                 >
                 </v-data-table>
@@ -58,8 +58,8 @@ export default {
             singleSelect: false,
             selected: [],
             headers: [
-                { text: 'IdRequest', value: 'IdRequest' },
-                { text: 'Titolo', value: 'Titolo' },
+                { text: 'Progetto', value: 'titoloProgetto' },
+                { text: 'Gruppo prove', value: 'titoloProva' },
                 { text: '19.1', value: '19.1' },
                 { text: '19.2', value: '19.2' },
                 { text: '19.3', value: '19.3' }
