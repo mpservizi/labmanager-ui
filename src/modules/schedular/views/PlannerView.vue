@@ -4,7 +4,7 @@
         <v-dialog v-model="dialog" max-width="750" scrollable persistent>
             <v-card class="my_dialog">
                 <FormRichieste
-                    :lista-richieste="listaValoriRichieste"
+                    :lista-richieste="listaPlannnig"
                     @save="handleSaveForm"
                     @close="dialog = false"
                     @completa="gruppoPlanned"
@@ -88,13 +88,14 @@ export default {
     components: { TestPlanner, FormRichieste, FormProve, Scala, Filtro },
     data: () => ({
         dialog: false,
-        listaPlannnig: [],
+        listaPlannnig: [], //lista per test request dialog
         gruppoProve: [],
         aggiornareConteggio: false,
         provaAttiva: null,
         scalaAttiva: 1,
         filtro: 'all',
-        needSave: false
+        needSave: false,
+        datiRichieste: {} //dati test request da server
     }),
     created() {
         EventBus.on('cell_click', this.handleCellDblClick);
@@ -119,22 +120,9 @@ export default {
             return this.numRichieste > 0;
         },
         //Conversione lista richieste server in lista ui form
-        listaValoriRichieste() {
-            let result = [];
-            this.listaPlannnig.forEach((item) => {
-                item.prove.forEach((prova) => {
-                    let obj = {
-                        ...item,
-                        id: `${item.id}-${prova.id}`,
-                        titoloProva: prova.titolo,
-                        19.1: prova['19.1'],
-                        19.2: prova['19.2'],
-                        19.3: prova['19.3']
-                    };
-                    result.push(obj);
-                });
-            });
-            return result;
+        listaUiRichieste() {
+            let lista = this.datiRichieste.plans;
+            return lista;
         }
     },
     methods: {
@@ -164,7 +152,9 @@ export default {
         },
         //Carica la lista delle preove da pianificare
         async loadDati() {
-            this.listaPlannnig = await TestRequetService.getRichieste();
+            // this.listaPlannnig = await TestRequetService.getRichieste();
+            this.datiRichieste = this.prova();
+            this.listaPlannnig = this.datiRichieste.plans;
             // this.numRichieste = this.listaPlannnig.length;
         },
         //Quando cambia la prova da pianificare nel form prove
@@ -186,7 +176,7 @@ export default {
         //Segnare gruppo prove come pianificato
         gruppoPlanned(result) {
             this.listaPlannnig = this.listaPlannnig.filter(
-                (item) => item.Id != result.Id
+                (item) => item.id != result.id
             );
             this.dialog = false;
         },
@@ -196,6 +186,186 @@ export default {
                 this.dialog = true;
             } else {
             }
+        },
+        //Esempio dati test request e test plans
+        prova() {
+            let result = {
+                richieste: [
+                    {
+                        id: 1,
+                        codiceProgetto: 'PR-03488',
+                        titoloProgetto: 'Universal range',
+                        descrizione: 'Switch gallery schema 1 testato a 16A',
+                        dataInizio: '04/03/2021',
+                        dataFine: '28/03/2021',
+                        weekInizio: 8,
+                        weekFine: 12,
+                        tecnico: 'Malkit',
+                        cliente: 'Andrea Barbero',
+                        stato: 4,
+                        c1: 6,
+                        c2: 6,
+                        c3: 6
+                    },
+                    {
+                        id: 2,
+                        codiceProgetto: 'PR-03488',
+                        titoloProgetto: 'Universal range',
+                        descrizione: 'Switch gallery schema 6 testato a 16A',
+                        dataInizio: '04/03/2021',
+                        dataFine: '28/03/2021',
+                        weekInizio: 8,
+                        weekFine: 12,
+                        tecnico: 'Malkit',
+                        cliente: 'Andrea Barbero',
+                        stato: 4,
+                        c1: 6,
+                        c2: 6,
+                        c3: 6
+                    },
+                    {
+                        id: 3,
+                        codiceProgetto: 'PR-00017',
+                        titoloProgetto: 'Makel',
+                        descrizione:
+                            'Verificare conformità prodotti Makel con IEC-606691-ED.4',
+                        dataInizio: '05/04/2021',
+                        dataFine: '28/04/2021',
+                        weekInizio: 14,
+                        weekFine: 17,
+                        tecnico: 'Malkit',
+                        cliente: 'Matteo Roncalli',
+                        stato: 1,
+                        c1: 30,
+                        c2: 0,
+                        c3: 24
+                    }
+                ],
+                plans: [
+                    {
+                        id: 1,
+                        idRequest: 1,
+                        titoloProgetto: 'Universal range',
+                        titolo: 'Schema 1',
+                        stato: 4,
+                        c1: 6,
+                        c2: 6,
+                        c3: 6
+                    },
+                    {
+                        id: 2,
+                        idRequest: 2,
+                        titoloProgetto: 'Universal range',
+                        titolo: 'Schema 6',
+                        stato: 4,
+                        c1: 6,
+                        c2: 6,
+                        c3: 6
+                    },
+                    {
+                        id: 3,
+                        idRequest: 3,
+                        titoloProgetto: 'Makel',
+                        titolo: 'WL0010 - 19.1',
+                        stato: 1,
+                        c1: 3,
+                        c2: 0,
+                        c3: 3
+                    },
+                    {
+                        id: 4,
+                        idRequest: 3,
+                        titoloProgetto: 'Makel',
+                        titolo: 'WL0030 - 19.1',
+                        stato: 1,
+                        c1: 3,
+                        c2: 0,
+                        c3: 3
+                    },
+                    {
+                        id: 5,
+                        idRequest: 3,
+                        titoloProgetto: 'Makel',
+                        titolo: 'WL0220 - 19.1',
+                        stato: 1,
+                        c1: 3,
+                        c2: 0,
+                        c3: 3
+                    },
+                    {
+                        id: 6,
+                        idRequest: 3,
+                        titoloProgetto: 'Makel',
+                        titolo: 'WL0410 - 19.1-PB',
+                        stato: 1,
+                        c1: 3,
+                        c2: 0,
+                        c3: 0
+                    },
+                    {
+                        id: 7,
+                        idRequest: 3,
+                        titoloProgetto: 'Makel',
+                        titolo: 'WL0240 - 19.1',
+                        stato: 1,
+                        c1: 3,
+                        c2: 0,
+                        c3: 3
+                    },
+                    {
+                        id: 8,
+                        idRequest: 3,
+                        titoloProgetto: 'Makel',
+                        titolo: 'WL0210 - 19.1',
+                        stato: 1,
+                        c1: 3,
+                        c2: 0,
+                        c3: 3
+                    },
+                    {
+                        id: 9,
+                        idRequest: 3,
+                        titoloProgetto: 'Makel',
+                        titolo: 'WL0040 - 19.1',
+                        stato: 1,
+                        c1: 3,
+                        c2: 0,
+                        c3: 3
+                    },
+                    {
+                        id: 10,
+                        idRequest: 3,
+                        titoloProgetto: 'Makel',
+                        titolo: 'WL0110 - 19.1-PB',
+                        stato: 1,
+                        c1: 3,
+                        c2: 0,
+                        c3: 0
+                    },
+                    {
+                        id: 11,
+                        idRequest: 3,
+                        titoloProgetto: 'Makel',
+                        titolo: 'WL0020 - 19.3',
+                        stato: 1,
+                        c1: 3,
+                        c2: 0,
+                        c3: 3
+                    },
+                    {
+                        id: 12,
+                        idRequest: 3,
+                        titoloProgetto: 'Makel',
+                        titolo: 'WL0310 - 19.3',
+                        stato: 1,
+                        c1: 3,
+                        c2: 0,
+                        c3: 3
+                    }
+                ]
+            };
+            console.log(JSON.stringify(result));
+            return result;
         }
     }
 };

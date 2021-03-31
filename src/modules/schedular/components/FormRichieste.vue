@@ -59,10 +59,10 @@ export default {
             selected: [],
             headers: [
                 { text: 'Progetto', value: 'titoloProgetto' },
-                { text: 'Gruppo prove', value: 'titoloProva' },
-                { text: '19.1', value: '19.1' },
-                { text: '19.2', value: '19.2' },
-                { text: '19.3', value: '19.3' }
+                { text: 'Gruppo prove', value: 'titolo' },
+                { text: '19.1', value: 'c1' },
+                { text: '19.2', value: 'c2' },
+                { text: '19.3', value: 'c3' }
             ]
         };
     },
