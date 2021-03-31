@@ -24,6 +24,8 @@ export function eventiToJson(eventi) {
             //campi modificati prima di salvare sul server
             // let data_fine = dateToStr(item.end_date);
             // let data_inizio = dateToStr(item.start_date);
+            item.start_date.setHours(13);
+            item.end_date.setHours(20);
             let data_fine = MyDate.dateToStr(item.end_date);
             let data_inizio = MyDate.dateToStr(item.start_date);
             let nomeCarico = ricavaNomeCaricoDaId(item.idCarico);

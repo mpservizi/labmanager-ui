@@ -1,5 +1,5 @@
 import { parseEventiServer, parseRisorse } from './data-parser.js';
-import { CiclaturaService } from './../api/index.js';
+import { CiclaturaService } from '@/api/CiclaturaService.js';
 /**
  * Carica la liste delle risorse dal server
  * @returns

@@ -12,54 +12,63 @@
             </v-card>
         </v-dialog>
 
-        <!-- riga Toolbar -->
-        <div class="ms_toolbar">
-            <v-row no-gutters>
-                <!-- scala -->
-                <v-col cols="1" class="pt-0">
-                    <scala @cambio="cambiaScala"></scala>
-                </v-col>
-                <!-- Filtreo -->
-                <v-col cols="2" class="pt-3">
-                    <filtro @cambio="filtra" @save="save"></filtro>
-                </v-col>
-                <v-col cols="2" class="pt-3 text-center">
-                    <v-btn @click="save" class="success">Salva dati</v-btn>
-                </v-col>
-                <!-- Test request -->
-                <v-col cols="2" class="text-left pt-3" v-show="hasRichieste">
-                    <p>{{ msgRichieste }}</p>
-                    <p>Prova Attiva : {{ provaSelezionata }}</p>
-                </v-col>
-                <v-col cols="3" class="pt-3">
-                    <form-prove
-                        :needUpdate="aggiornareConteggio"
-                        :itemProva="gruppoProve"
-                        @provaChanged="changeProvaAttiva"
-                    ></form-prove>
-                </v-col>
-                <v-col cols="2" class="text-center pt-3">
-                    <v-btn
+        <!-- Contenitore per tollbar e schedular -->
+        <div class="box_view">
+            <!-- riga Toolbar -->
+            <div class="ms_toolbar">
+                <v-row no-gutters>
+                    <!-- scala -->
+                    <v-col cols="2" class="pt-0">
+                        <scala @cambio="cambiaScala"></scala>
+                    </v-col>
+                    <!-- Filtreo -->
+                    <v-col cols="2" class="pt-3">
+                        <filtro @cambio="filtra" @save="save"></filtro>
+                    </v-col>
+                    <v-col cols="1" class="pt-3 text-center">
+                        <v-btn @click="save" class="success">Salva dati</v-btn>
+                    </v-col>
+                    <!-- Test request -->
+                    <v-col
+                        cols="2"
+                        class="text-left pt-3"
                         v-show="hasRichieste"
-                        @click.stop="dialog = true"
-                        color="info"
-                        class=""
-                        >Mostra richieste</v-btn
                     >
-                </v-col>
-            </v-row>
+                        <p>{{ msgRichieste }}</p>
+                        <p>Prova Attiva : {{ provaSelezionata }}</p>
+                    </v-col>
+                    <v-col cols="3" class="pt-3">
+                        <form-prove
+                            :needUpdate="aggiornareConteggio"
+                            :itemProva="gruppoProve"
+                            @provaChanged="changeProvaAttiva"
+                        ></form-prove>
+                    </v-col>
+                    <v-col cols="2" class="text-center pt-3">
+                        <v-btn
+                            v-show="hasRichieste"
+                            @click.stop="dialog = true"
+                            color="info"
+                            class=""
+                            >Mostra richieste</v-btn
+                        >
+                    </v-col>
+                </v-row>
+            </div>
+            <!-- riga planner -->
+            <div class="box_planner_view">
+                <v-row no-gutters>
+                    <v-col cols="12" class="">
+                        <TestPlanner
+                            class="px-5"
+                            :scala="scalaAttiva"
+                            :filtro="filtro"
+                            :needSave="needSave"
+                        />
+                    </v-col>
+                </v-row>
+            </div>
         </div>
-        <!-- riga planner -->
-        <v-row>
-            <v-col cols="12">
-                <TestPlanner
-                    class="px-5"
-                    :scala="scalaAttiva"
-                    :filtro="filtro"
-                    :needSave="needSave"
-                />
-            </v-col>
-        </v-row>
     </div>
 </template>
 
@@ -176,12 +185,25 @@ export default {
 /* @import './../css/my-style.css'; */
 @import './../css/planner.css';
 @import './../css/ciclatura.css';
-.ms_toolbar {
-    /* border: 1px solid pink; */
-    height: 100px;
-    margin-bottom: 5px;
-}
+
 .my_dialog {
     overflow: hidden !important;
+}
+.box_view {
+    display: grid;
+    min-height: 100%;
+    grid-template-rows: 100px 1fr;
+    /* padding: 10px; */
+}
+.ms_toolbar {
+    /* border: 1px solid pink; */
+    display: grid;
+    height: 100px;
+    /* background-color: rgb(250, 153, 229); */
+}
+.box_planner_view {
+    display: grid;
+    /* background-color: green; */
+    margin-top: 20px;
 }
 </style>

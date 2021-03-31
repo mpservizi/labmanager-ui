@@ -1,14 +1,16 @@
 <template>
     <!-- <div style="width: 100%; height: 800px; border: 1px solid black"> -->
     <div class="box_planner" ref="scheduler_here" id="scheduler_here">
-        <div class="dhx_cal_navline">
-            <div class="dhx_cal_prev_button">&nbsp;</div>
-            <div class="dhx_cal_next_button">&nbsp;</div>
-            <div class="dhx_cal_today_button"></div>
-            <div class="dhx_cal_date"></div>
+        <div class="box_data">
+            <div class="dhx_cal_navline">
+                <div class="dhx_cal_prev_button">&nbsp;</div>
+                <div class="dhx_cal_next_button">&nbsp;</div>
+                <div class="dhx_cal_today_button"></div>
+                <div class="dhx_cal_date"></div>
+            </div>
+            <div class="dhx_cal_header"></div>
+            <div class="dhx_cal_data"></div>
         </div>
-        <div class="dhx_cal_header"></div>
-        <div class="dhx_cal_data"></div>
     </div>
 </template>
 
@@ -68,6 +70,16 @@ export default {
 </style>
 <style scoped>
 .box_planner {
-    height: 700px;
+    position: relative;
+    width: 100%;
+    min-height: 100%;
+    display: grid;
+    grid-template-rows: 1fr;
+    overflow: hidden;
+    background-color: #fff;
+    font-family: Arial, san-serif;
+}
+.box_data {
+    display: grid;
 }
 </style>
