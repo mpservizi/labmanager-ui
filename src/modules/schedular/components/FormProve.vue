@@ -33,7 +33,8 @@ export default {
             let cont = 1;
             for (let i = 1; i < 4; i++) {
                 let carico = '19.' + i;
-                let numCampioni = result[carico];
+                let idCarico = 'c' + i;
+                let numCampioni = result[idCarico];
                 if (numCampioni > 0) {
                     lista.push({
                         id: cont,
