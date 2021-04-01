@@ -18,11 +18,15 @@
                 </v-col>
 
                 <v-col cols="12">
-                    <v-text-field
+                    <v-textarea
                         v-model="descrizione"
                         label="Descrizione"
-                        required
-                    ></v-text-field>
+                        auto-grow
+                        counter
+                        clearable
+                        rows="1"
+                        row-height="15"
+                    ></v-textarea>
                 </v-col>
             </v-row>
             <v-row>
@@ -72,7 +76,7 @@
                 </v-col>
                 <v-col cols="4">
                     <v-text-field
-                        v-model="c3"
+                        v-model="c2"
                         label="Samples for 19.2"
                         required
                     ></v-text-field
@@ -112,19 +116,28 @@ export default {
             descrizione: '',
             inizio: '',
             fine: '',
-            prova: '',
             valid: true
         };
     },
     methods: {
         salva() {
-            let obj = {
-                progetto: this.progetto,
+            let modello = {
+                codiceProgetto: this.codiceprogetto,
+                titoloProgetto: this.progetto,
                 descrizione: this.descrizione,
-                inizio: this.inizio,
-                fine: this.fine
+                dataInizio: this.inizio,
+                dataFine: this.fine,
+                weekInizio: '',
+                weekFine: '',
+                tecnico: this.tecnico,
+                cliente: this.richiedente,
+                priority: this.priority,
+                stato: 1,
+                c1: this.c1,
+                c2: this.c2,
+                c3: this.c3
             };
-            console.log(obj);
+            this.$store.dispatch('TestRequestModule/saveRichiesta', modello);
         },
         handleInizio(valore) {
             this.inizio = valore;

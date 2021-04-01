@@ -3,7 +3,8 @@ import TestRequestService from './../servizi/index.js';
 export default {
     namespaced: true,
     state: {
-        lista: []
+        lista: [],
+        saveEnd: true
     },
     getters: {
         listaRichieste: function(state) {
@@ -13,6 +14,9 @@ export default {
     mutations: {
         SET_DATI(state, payload) {
             state.lista = payload;
+        },
+        SET_SAVE(state, payload) {
+            state.saveEnd = payload;
         }
     },
     actions: {
@@ -24,6 +28,11 @@ export default {
         async loadRichieste({ commit }) {
             let dati = await TestRequestService.getAll();
             commit('SET_DATI', dati);
+        },
+        async saveRichiesta({ commit }, payload) {
+            commit('SET_SAVE', false);
+            let result = await TestRequestService.save(payload);
+            commit('SET_SAVE', true);
         }
     }
 };
