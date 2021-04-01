@@ -7,8 +7,8 @@ async function getAll() {
     await pausa(100);
     return lista;
 }
-async function save(payload1) {
-    let payload = {
+async function save(payload) {
+    let payload1 = {
         c1: '30',
         c2: '18',
         c3: '24',
