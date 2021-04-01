@@ -10,14 +10,14 @@
         >
             <template v-slot:activator="{ on, attrs }">
                 <v-text-field
-                    v-model="valore"
+                    :value="formatDate"
                     :label="label"
                     readonly
                     v-bind="attrs"
                     v-on="on"
                 ></v-text-field>
             </template>
-            <v-date-picker v-model="valore" @input="salva"></v-date-picker>
+            <v-date-picker v-model="dataSelect" @input="salva"></v-date-picker>
         </v-menu>
     </div>
 </template>
@@ -30,13 +30,27 @@ export default {
     data() {
         return {
             menu: false,
-            valore: ''
+            dataSelect: ''
         };
     },
     methods: {
         salva() {
             this.menu = false;
-            this.$emit('cambio', this.valore);
+            this.$emit('cambio', this.formatDate);
+        }
+    },
+    computed: {
+        //Formatta la data selezionata nel data picker
+        formatDate() {
+            let strDate = '';
+            //Data default è in questo format 'YYYY-MM-DD'
+            if (this.dataSelect) {
+                let arr = this.dataSelect.split('-');
+                //Converto in DD/MM/YYYY
+                let formatArr = [arr[2], arr[1], arr[0]];
+                strDate = formatArr.join('/');
+            }
+            return strDate;
         }
     }
 };
