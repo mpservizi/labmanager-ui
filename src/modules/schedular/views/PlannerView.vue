@@ -81,7 +81,6 @@ import FormRichieste from '../components/FormRichieste.vue';
 import { creaTaskPerProva } from '../js/TaskMaker.js';
 import { EventBus } from '@/shared/event-bus.js';
 import { TestRequetService } from '@/api/TestRequetService.js';
-import { CiclaturaService } from '../../monitor_ciclatura/resource';
 
 export default {
     name: 'TestPlannerView',

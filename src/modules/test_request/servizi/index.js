@@ -1,4 +1,6 @@
 import { pausa } from '@/shared/util.js';
+import { TestRequetService } from '@/api/TestRequetService.js';
+
 async function getAll() {
     let lista = [
         {
@@ -16,6 +18,8 @@ async function getAll() {
             fine: '28/03/2021'
         }
     ];
+    let dati = await TestRequetService.getRichieste();
+    lista = dati.richieste;
     await pausa(1000);
     return lista;
 }

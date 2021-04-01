@@ -24,10 +24,16 @@ export default {
                     sortable: false,
                     value: 'id'
                 },
-                { text: 'Progetto', value: 'progetto' },
+                { text: 'Progetto', value: 'titoloProgetto' },
                 { text: 'Descrizione', value: 'descrizione' },
-                { text: 'Data Inizio', value: 'inizio' },
-                { text: 'Data Fine', value: 'fine' }
+                { text: 'Week Inizio', value: 'weekInizio' },
+                { text: 'Week Fine', value: 'weekFine' },
+                { text: 'Priorità', value: 'priority' },
+                { text: 'Richiedente', value: 'cliente' },
+                { text: 'Tecnico', value: 'tecnico' },
+                { text: '19.1', value: 'c1' },
+                { text: '19.2', value: 'c2' },
+                { text: '19.3', value: 'c3' }
             ]
         };
     },
