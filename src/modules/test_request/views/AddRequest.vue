@@ -152,17 +152,18 @@ export default {
                 priority: this.priority,
                 stato: 1,
                 testPlan: this.testPlan,
-                19.1: this.c1,
-                19.2: this.c2,
-                19.3: this.c3
+                c1: this.c1,
+                c2: this.c2,
+                c3: this.c3
             };
 
-            //Risoctruisco nuovo oggetto eliminado i campi reattivi di vue. Forse non serve
-            let copiaPulita = JSON.parse(JSON.stringify(modello));
+            //Ricostruisco nuovo oggetto eliminado i campi reattivi di vue. Forse non serve
             this.$store.dispatch(
                 'TestRequestModule/saveRichiesta',
-                copiaPulita
+                modello
             );
+
+            this.$router.push({ name: 'test_requests' });
         },
         handleInizio(valore) {
             this.inizio = valore;
@@ -172,7 +173,6 @@ export default {
         },
         //Click save su dialog test plan
         handleSaveTestPlan(result) {
-            console.log(result);
             this.c1 = result.totProveCarichi.c1;
             this.c2 = result.totProveCarichi.c2;
             this.c3 = result.totProveCarichi.c3;

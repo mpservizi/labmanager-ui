@@ -17,7 +17,10 @@ export default {
         },
         SET_SAVE(state, payload) {
             state.saveEnd = payload;
-        }
+        },
+        ADD_RICHIESTA(state, payload) {
+            state.lista.push(payload);
+        },
     },
     actions: {
         /** Metodo per inizializzare il modulo. Chiamato dopo la registrazione */
@@ -25,13 +28,15 @@ export default {
             console.info('Installazione modulo : ' + NOME_MODULO);
             return true; //Risultato funzione RegistraModulo
         },
-        async loadRichieste({ commit }) {
+        async loadRichieste({ commit,state }) {
+            if(state.lista.length>0) return;
             let dati = await TestRequestService.getAll();
             commit('SET_DATI', dati);
         },
         async saveRichiesta({ commit }, payload) {
             commit('SET_SAVE', false);
             let result = await TestRequestService.save(payload);
+            commit('ADD_RICHIESTA', result);
             commit('SET_SAVE', true);
         }
     }

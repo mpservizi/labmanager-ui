@@ -7,36 +7,23 @@ async function getAll() {
     await pausa(100);
     return lista;
 }
+/**
+ * Salva la nuova richiesta di prova nel db
+ * @param {Object} payload : oggetto creato con i campi del form
+ * @returns {Object} Restituisce oggetto test request dopo l'insermento nel db
+ */
 async function save(payload) {
-    let payload1 = {
-        c1: '30',
-        c2: '18',
-        c3: '24',
-        cliente: 'Matteo Roncalli',
-        codiceProgetto: 'PR-00345',
-        dataInizio: '05/04/2021',
-        dataFine: '30/04/2021',
-        descrizione: 'Gallery switch testato a 16A',
-        priority: '1',
-        stato: 1,
-        tecnico: 'Malkit Sandhu',
-        titoloProgetto: 'Universal range',
-        weekFine: '',
-        weekInizio: ''
-    };
-
     //Ricavo il numero di settimana in base alle date
     let di = MyDate.strToDate(payload.dataInizio);
     let df = MyDate.strToDate(payload.dataFine);
-    let wkInizio = MyDate.getWeekNumber(di);
-    let wkFine = MyDate.getWeekNumber(df);
 
-    payload.weekInizio = wkInizio;
-    payload.weekFine = wkFine;
+    payload.weekInizio = MyDate.getWeekNumber(di);
+    payload.weekFine =  MyDate.getWeekNumber(df);
 
-    console.log(payload);
+    // TestRequetService.saveDatiRichieste();
+    payload.id=new Date().getTime();
     await pausa(100);
-    return true;
+    return payload;
 }
 export default {
     getAll,

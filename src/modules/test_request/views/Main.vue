@@ -18,12 +18,6 @@ export default {
         return {
             msg: 'Test request page in modulo',
             headers: [
-                {
-                    text: 'Id Richiesta',
-                    align: 'start',
-                    sortable: false,
-                    value: 'id'
-                },
                 { text: 'Progetto', value: 'titoloProgetto' },
                 { text: 'Descrizione', value: 'descrizione' },
                 { text: 'Week Inizio', value: 'weekInizio' },
