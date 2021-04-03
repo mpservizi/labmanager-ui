@@ -28,6 +28,13 @@ export default {
         DETAIL_REQUEST(state, payload) {
             state.detail=payload;
         },
+        AGGIORNA_REQUEST(state, payload) {
+            state.lista.forEach(item=>{
+                if(item.id==payload.id){
+                    item=payload;
+                }
+            });
+        },
     },
     actions: {
         /** Metodo per inizializzare il modulo. Chiamato dopo la registrazione */
@@ -49,6 +56,7 @@ export default {
         async aggiornaRichiesta({commit},payload){
             commit('SET_SAVE', false);
             let result = await datiProvider.aggiorna(payload);
+            commit('AGGIORNA_REQUEST', result);
             commit('SET_SAVE', true);
 
         }

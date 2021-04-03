@@ -94,7 +94,8 @@ export default {
         scalaAttiva: 1, //cambio scala schedular
         filtro: 'all', //cambio filtro macchine schedular
         needSave: false, //bottone save dati schedular
-        datiRichieste: {} //dati test request da server
+        datiRichieste: {}, //dati test request da server,
+        numProveToPlan:0    //Numero di prove ancora da pianificare
     }),
     created() {
         EventBus.on('cell_click', this.handleCellDblClick);
@@ -114,6 +115,7 @@ export default {
         },
         numRichieste() {
             return this.listaPlannnig.length;
+            // return this.numProveToPlan;
         },
         hasRichieste() {
             return this.numRichieste > 0;
@@ -152,7 +154,26 @@ export default {
         //Carica la lista delle preove da pianificare
         async loadDati() {
             this.datiRichieste = await TestRequetService.getRichieste();
-            this.listaPlannnig = this.datiRichieste.plans;
+            let lista = [];
+            let cont = 0;
+            //Creo al lista da passare al dialog richieste da pianificare solo con richieste 
+            //che contengono prove
+            this.datiRichieste.forEach(item=>{
+                if(item.testProgram && item.testProgram.length>0) {
+                    cont += item.testProgram.length;
+                    //Aggiuongo id rechiesta ad ogni valore della item test program
+                    //
+                    item.testProgram.forEach((prova,index)=>{
+                        //Aggiungere id request nel form di creazione della richiesta                        
+                        prova.id= index
+                        prova.idRequest = item.id;
+                        prova.titoloProgetto = item.titoloProgetto;
+                        lista.push(prova);
+                    });
+                }
+            })
+            this.numProveToPlan = cont;
+            this.listaPlannnig = lista;
         },
         //Quando cambia la prova da pianificare nel form prove
         changeProvaAttiva(payload) {
@@ -173,7 +194,11 @@ export default {
         //Segnare gruppo prove come pianificato
         gruppoPlanned(result) {
             this.listaPlannnig = this.listaPlannnig.filter(
-                (item) => item.id != result.id
+                (item) =>{
+                    let key1 = item.idRequest + '-' + item.id;
+                    let key2 = result.idRequest + '-' + result.id;
+                    return key1!=key2;
+                }
             );
             //Aggiornare lo stato nella matrice originale dei dati
             //TBD
