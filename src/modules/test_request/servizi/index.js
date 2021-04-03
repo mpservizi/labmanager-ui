@@ -23,7 +23,15 @@ async function save(payload) {
     await pausa(100);
     return result;
 }
+async function aggiorna(payload){
+    console.log(payload);
+    let idRequest = payload.id;
+    console.log('Aggiornare test request id : ' + idRequest);
+    await pausa(200);
+    return payload;
+}
 export default {
     getAll,
-    save
+    save,
+    aggiorna
 };

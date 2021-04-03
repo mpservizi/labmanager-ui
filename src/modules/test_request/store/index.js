@@ -46,8 +46,10 @@ export default {
             commit('ADD_RICHIESTA', result);
             commit('SET_SAVE', true);
         },
-        setDetailRequest({commit},payload){
-            commit('DETAIL_REQUEST', payload);
+        async aggiornaRichiesta({commit},payload){
+            commit('SET_SAVE', false);
+            let result = await datiProvider.aggiorna(payload);
+            commit('SET_SAVE', true);
 
         }
     }
