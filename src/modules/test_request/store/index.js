@@ -4,12 +4,16 @@ export default {
     namespaced: true,
     state: {
         lista: [],
+        detail:null,
         saveEnd: true
     },
     getters: {
         listaRichieste: function(state) {
             return state.lista;
-        }
+        },
+        detailRequest: function(state) {
+            return state.detail;
+        },
     },
     mutations: {
         SET_DATI(state, payload) {
@@ -20,6 +24,9 @@ export default {
         },
         ADD_RICHIESTA(state, payload) {
             state.lista.push(payload);
+        },
+        DETAIL_REQUEST(state, payload) {
+            state.detail=payload;
         },
     },
     actions: {
@@ -38,6 +45,10 @@ export default {
             let result = await datiProvider.save(payload);
             commit('ADD_RICHIESTA', result);
             commit('SET_SAVE', true);
+        },
+        setDetailRequest({commit},payload){
+            commit('DETAIL_REQUEST', payload);
+
         }
     }
 };

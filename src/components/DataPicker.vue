@@ -23,10 +23,11 @@
 </template>
 
 <script>
+import MyDate from '@/shared/my-date.js';
 export default {
     name: 'DataPicker',
     components: {},
-    props: ['label'],
+    props: ['label', 'dataAvvio'],
     data() {
         return {
             menu: false,
@@ -37,20 +38,42 @@ export default {
         salva() {
             this.menu = false;
             this.$emit('cambio', this.formatDate);
+        },
+        //Formatta la data per visualizzare in data picker
+        formattaPerDataPicker(strInput) {
+            //Input = DD/MM/YYYY
+            let arr = strInput.split('/');
+            //Output YYYY-MM-DD
+            let formatArr = [arr[2], arr[1], arr[0]];
+            return formatArr.join('-');
+        },
+        //Formatta la data scelta in datapicker
+        formattaDaDataPicker(strInput) {
+            //Input YYYY-MM-DD
+            let arr = strInput.split('-');
+            //Output in DD/MM/YYYY
+            let formatArr = [arr[2], arr[1], arr[0]];
+            return formatArr.join('/');
         }
+    },
+    mounted() {
+        // this.dataSelect = new Date().toISOString().substr(0, 10)
     },
     computed: {
         //Formatta la data selezionata nel data picker
         formatDate() {
             let strDate = '';
-            //Data default è in questo format 'YYYY-MM-DD'
             if (this.dataSelect) {
-                let arr = this.dataSelect.split('-');
-                //Converto in DD/MM/YYYY
-                let formatArr = [arr[2], arr[1], arr[0]];
-                strDate = formatArr.join('/');
+                strDate = this.formattaDaDataPicker(this.dataSelect);
             }
             return strDate;
+        }
+    },
+    watch: {
+        dataAvvio: function (newVal) {
+            if (newVal) {
+                this.dataSelect = this.formattaPerDataPicker(newVal);
+            }
         }
     }
 };

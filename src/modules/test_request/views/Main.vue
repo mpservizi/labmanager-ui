@@ -4,8 +4,9 @@
         <v-data-table
             :headers="headers"
             :items="listaRichieste"
-            hide-default-footer
-            class="elevation-1"
+            @click:row="handleInfo"
+            hide-default-footer            
+            class="elevation-1 mytab"
         ></v-data-table>
     </div>
 </template>
@@ -35,7 +36,12 @@ export default {
     mounted() {
         this.$store.dispatch('TestRequestModule/loadRichieste');
     },
-    methods: {},
+    methods: {
+        handleInfo(item) {
+            this.$store.dispatch('TestRequestModule/setDetailRequest',item);
+            this.$router.push({name:'request_detail'})
+        }
+    },
     computed: {
         listaRichieste() {
             return this.$store.getters['TestRequestModule/listaRichieste'];
@@ -44,4 +50,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.mytab{
+    cursor: pointer;
+}
+</style>
