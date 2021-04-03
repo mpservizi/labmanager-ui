@@ -9,16 +9,6 @@
                 <v-btn @click="handleSave" text color="success"> Chiudi </v-btn>
             </v-col>
         </v-row>
-        <!--  -->
-        <!-- <v-row>
-            <v-col cols="4">{{ msgRiepilogo }}</v-col>
-            <v-spacer></v-spacer>
-            <v-col cols="2">
-                <v-btn @click="handleSave" text color="success text-center">
-                    Chiudi
-                </v-btn>
-            </v-col>
-        </v-row> -->
         <!-- Riga inserimento valori  -->
         <v-row>
             <v-col cols="4">
@@ -115,9 +105,9 @@ export default {
             let obj = {
                 id:this.prove.length+1,
                 titolo: this.p1,
-                c1: this.p2,
-                c2: this.p3,
-                c3: this.p4
+                c1: this.p2*1,
+                c2: this.p3*1,
+                c3: this.p4*1
             };
             this.prove.push(obj);
             this.p1 = '';
@@ -127,7 +117,7 @@ export default {
         },
         handleSave() {
             let tmp = {
-                gruppi: this.prove,
+                prove: this.prove,
                 numGruppi: this.numGruppi,
                 totProveCarichi: this.totProve
             };
@@ -141,7 +131,6 @@ export default {
     },
     watch:{
         listaProve:function(arrProve){
-            console.log(arrProve);
             if(arrProve){
                 this.prove = arrProve;
             }

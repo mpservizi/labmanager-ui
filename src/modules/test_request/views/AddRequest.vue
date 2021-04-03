@@ -2,8 +2,8 @@
     <div>
         <v-container>
             <form-request :richiesta="objRequest" @save="handleSaveForm">
-                <template v-slot:dialogBtn> Prova </template>
-                <template v-slot:saveBtn> Salva </template>
+                <template v-slot:dialogBtn> Imposta prove </template>
+                <template v-slot:saveBtn> Salva</template>
             </form-request>
         </v-container>
     </div>
@@ -68,7 +68,9 @@ export default {
             console.log(result);
         },
         //Save form con dati
-        handleSaveForm(result) {}
+        handleSaveForm(result) {
+            console.log(result);
+        }
     },
     computed: {}
 };

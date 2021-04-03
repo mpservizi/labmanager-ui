@@ -93,7 +93,7 @@
         </v-row>
         <v-row>
             <v-col cols="4">
-                <v-btn @click="dialog = true"
+                <v-btn @click="dialog = true" class="info"
                     ><slot name="dialogBtn"></slot
                 ></v-btn>
             </v-col>
@@ -121,31 +121,34 @@ export default {
                 descrizione: '',
                 cliente: '',
                 tecnico: '',
-                priority: '',
+                priority: 3,
                 c1: 0,
                 c2: 0,
                 c3: 0,
                 dataInizio: '',
-                dataFine: ''
+                dataFine: '',
+                testProgram:[]
             },
-            objPlan: {},
             dialog: false
         };
     },
     props: ['richiesta'],
     methods: {
         handleInizio(valore) {
-            this.dataInizio = valore;
+            this.campi.dataInizio = valore;
         },
         handleFine(valore) {
-            this.dataFine = valore;
+            this.campi.dataFine = valore;
         },
         salva() {
-            console.log('Salvare form');
+            this.$emit('save',this.campi);
         },
         //Click save su dialog test plan
         handleSaveTestPlan(result) {
-            this.objPlan = result;
+            this.campi.c1 = result.c1;
+            this.campi.c2 = result.c2;
+            this.campi.c3 = result.c3;
+            this.campi.testProgram = result.testProgram;
             this.dialog=false;
         }
     },

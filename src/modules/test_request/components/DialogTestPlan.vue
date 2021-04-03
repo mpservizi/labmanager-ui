@@ -30,7 +30,7 @@ export default {
             this.obj.c1 = result.totProveCarichi.c1;
             this.obj.c2 = result.totProveCarichi.c2;
             this.obj.c3 = result.totProveCarichi.c3;
-            this.obj.testProgram = result.gruppi.slice();
+            this.obj.testProgram = result.prove.slice();
             this.dialog = false;
             this.$emit('chiudi',this.obj);
         }
