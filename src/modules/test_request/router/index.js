@@ -29,6 +29,7 @@ export default [
         path: '/test_request/detail',
         name: 'request_detail',
         component: DetailView,
+        props: true,
         meta: {
             breadcrumb: [
                 { name: 'Lista richieste', link: 'test_requests' },

@@ -38,8 +38,9 @@ export default {
     },
     methods: {
         handleInfo(item) {
-            this.$store.dispatch('TestRequestModule/setDetailRequest',item);
-            this.$router.push({name:'request_detail'})
+            // this.$store.dispatch('TestRequestModule/setDetailRequest',item);
+            this.$store.commit('TestRequestModule/DETAIL_REQUEST',item);
+            this.$router.push({name:'request_detail', params: { testRequest:item} })
         }
     },
     computed: {

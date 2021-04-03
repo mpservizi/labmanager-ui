@@ -67,6 +67,7 @@
 export default {
     name: 'FormTestplan',
     components: {},
+    props:['listaProve'],
     data() {
         return {
             p1: '',
@@ -133,6 +134,17 @@ export default {
             let json = JSON.stringify(tmp);
             let result = JSON.parse(json);
             this.$emit('salva', result);
+        }
+    },
+    mounted(){
+        this.prove = this.listaProve;
+    },
+    watch:{
+        listaProve:function(arrProve){
+            console.log(arrProve);
+            if(arrProve){
+                this.prove = arrProve;
+            }
         }
     }
 };

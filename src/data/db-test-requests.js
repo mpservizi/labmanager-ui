@@ -52,7 +52,7 @@ let testRequests = [
         c1: 30,
         c2: 0,
         c3: 24,
-        testProgram: []
+        testProgram: [{titolo:'WS100',c1:2,c2:3,c3:5}]
     }
 ];
 

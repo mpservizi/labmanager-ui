@@ -132,7 +132,7 @@ export default {
             descrizione: '',
             inizio: '',
             fine: '',
-            testPlan: {},
+            testProgram: {},
             dialog: false,
             valid: true
         };
@@ -151,7 +151,7 @@ export default {
                 cliente: this.richiedente,
                 priority: this.priority,
                 stato: 1,
-                testPlan: this.testPlan,
+                testProgram: this.testProgram,
                 c1: this.c1,
                 c2: this.c2,
                 c3: this.c3
@@ -175,7 +175,7 @@ export default {
             this.c1 = result.totProveCarichi.c1;
             this.c2 = result.totProveCarichi.c2;
             this.c3 = result.totProveCarichi.c3;
-            this.testPlan = result.gruppi.slice();
+            this.testProgram = result.gruppi.slice();
             this.dialog = false;
         }
     }
