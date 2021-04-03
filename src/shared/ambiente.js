@@ -2,7 +2,8 @@
  * Fornisce i parametri in base al ambiente di sviluppo
  */
 export function getServerUrl() {
-    let baseUrl = 'http://localhost:3000/api/';
+    // let baseUrl = 'http://localhost:3000/api/';
+    let baseUrl = '/api/';
     return baseUrl;
 }
 

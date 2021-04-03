@@ -1,7 +1,15 @@
 const path = require('path');
 module.exports = {
   devServer: {
-    disableHostCheck: true
+    disableHostCheck: true,
+    proxy: {
+      '^/api': {
+        target: 'http://localhost:3000',
+        ws: true,
+        changeOrigin: true,
+        logLevel: "debug",
+      }
+    }
   },
 
   configureWebpack: {
