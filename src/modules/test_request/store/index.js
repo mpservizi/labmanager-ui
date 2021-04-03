@@ -1,5 +1,5 @@
 import { NOME_MODULO } from './../costanti.js';
-import TestRequestService from './../servizi/index.js';
+import datiProvider from './../servizi/index.js';
 export default {
     namespaced: true,
     state: {
@@ -30,12 +30,12 @@ export default {
         },
         async loadRichieste({ commit,state }) {
             if(state.lista.length>0) return;
-            let dati = await TestRequestService.getAll();
+            let dati = await datiProvider.getAll();
             commit('SET_DATI', dati);
         },
         async saveRichiesta({ commit }, payload) {
             commit('SET_SAVE', false);
-            let result = await TestRequestService.save(payload);
+            let result = await datiProvider.save(payload);
             commit('ADD_RICHIESTA', result);
             commit('SET_SAVE', true);
         }

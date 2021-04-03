@@ -10,20 +10,16 @@ class TestRequestProvider extends HttpRequest {
     }
     /**
      * Salva i dati di test request sul server
-     * @param {*} dati : Dati test request scaricati da server
-     * @param {*} item : item con stato aggrionato
+     * @param {*} item : oggetto test request
      * @returns
      */
-    async saveDatiRichieste(dati, item) {
+    async saveTestRequest(item) {
         // let response = await this.create(URL_RICHIESTE, payload);
         // return response.data;
         console.log('Salvare dati richieste su server');
-        let result = dati.plans.find(riga => riga.id == item.id);
-        if (result) {
-            result.stato = item.stato;
-        }
-        console.log(JSON.stringify(dati));
-        return { result: true };
+        item.id = new Date().getTime();
+        console.log(JSON.stringify(item));
+        return item;
     }
 }
 

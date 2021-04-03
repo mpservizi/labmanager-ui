@@ -112,6 +112,7 @@ export default {
             if (!valid) return;
 
             let obj = {
+                id:this.prove.length+1,
                 titolo: this.p1,
                 c1: this.p2,
                 c2: this.p3,

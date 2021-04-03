@@ -157,7 +157,6 @@ export default {
                 c3: this.c3
             };
 
-            //Ricostruisco nuovo oggetto eliminado i campi reattivi di vue. Forse non serve
             this.$store.dispatch(
                 'TestRequestModule/saveRichiesta',
                 modello

@@ -11,7 +11,7 @@ export function getServerUrl() {
  * Indica se è attivo il flag per caricare dati fake
  */
 export function isFake() {
-    if (process.env.VUE_APP_IS_FAKE == 'true') {
+    if (process.env.VUE_APP_IS_FAKE == '1') {
         return true;
     }
     return false;

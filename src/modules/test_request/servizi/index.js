@@ -3,9 +3,8 @@ import { TestRequetService } from '@/api/TestRequetService.js';
 import MyDate from '@/shared/my-date.js';
 async function getAll() {
     let dati = await TestRequetService.getRichieste();
-    let lista = dati.richieste;
     await pausa(100);
-    return lista;
+    return dati;
 }
 /**
  * Salva la nuova richiesta di prova nel db
@@ -20,10 +19,9 @@ async function save(payload) {
     payload.weekInizio = MyDate.getWeekNumber(di);
     payload.weekFine =  MyDate.getWeekNumber(df);
 
-    // TestRequetService.saveDatiRichieste();
-    payload.id=new Date().getTime();
+    let result = await TestRequetService.saveTestRequest(payload);
     await pausa(100);
-    return payload;
+    return result;
 }
 export default {
     getAll,
