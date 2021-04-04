@@ -139,6 +139,7 @@ function creaObjTask(item) {
         carico: item.carico,
         corrente: item.corrente,
         idRequest: item.idRequest,
+        progetto:item.progetto,
         idRisorsa: item.idRisorsa,
         sample: item.text,
         start_date: data_inizio,

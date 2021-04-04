@@ -38,7 +38,6 @@ export default {
         },
         async save() {
             let result = await MyPlanner.saveDati();
-            console.log(result);
         },
         async load() {
             await MyPlanner.loadDati();

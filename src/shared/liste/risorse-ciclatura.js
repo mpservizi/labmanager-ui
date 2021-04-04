@@ -5,90 +5,20 @@
 export function getListaRisorse() {
     //La lista delle risorse per la ciclatura
     const LISTA_RISORSE_CICLATURA = [
-        {
-            id: 1,
-            id_macchina: 1,
-            nome_macchina: 'L180',
-            stallo: 6
-        },
-        {
-            id: 2,
-            id_macchina: 1,
-            nome_macchina: 'L180',
-            stallo: 7
-        },
-        {
-            id: 3,
-            id_macchina: 1,
-            nome_macchina: 'L180',
-            stallo: 8
-        },
-        {
-            id: 4,
-            id_macchina: 1,
-            nome_macchina: 'L180',
-            stallo: 9
-        },
-        {
-            id: 5,
-            id_macchina: 2,
-            nome_macchina: 'L232',
-            stallo: 6
-        },
-        {
-            id: 6,
-            id_macchina: 2,
-            nome_macchina: 'L232',
-            stallo: 7
-        },
-        {
-            id: 7,
-            id_macchina: 2,
-            nome_macchina: 'L232',
-            stallo: 8
-        },
-        {
-            id: 8,
-            id_macchina: 2,
-            nome_macchina: 'L232',
-            stallo: 9
-        },
-        {
-            id: 9,
-            id_macchina: 3,
-            nome_macchina: 'L2020',
-            stallo: 1
-        },
-        {
-            id: 10,
-            id_macchina: 3,
-            nome_macchina: 'L2020',
-            stallo: 2
-        },
-        {
-            id: 11,
-            id_macchina: 3,
-            nome_macchina: 'L2020',
-            stallo: 3
-        },
-        {
-            id: 12,
-            id_macchina: 3,
-            nome_macchina: 'L2020',
-            stallo: 4
-        },
-        {
-            id: 13,
-            id_macchina: 3,
-            nome_macchina: 'L2020',
-            stallo: 5
-        },
-        {
-            id: 14,
-            id_macchina: 3,
-            nome_macchina: 'L2020',
-            stallo: 6
-        }
+        { _id: 1, label: "L180-6", id_macchina: 1, nome_macchina: "L180", stallo: "6" },
+        { _id: 2, label: "L180-7", id_macchina: 1, nome_macchina: "L180", stallo: "7" },
+        { _id: 3, label: "L180-8", id_macchina: 1, nome_macchina: "L180", stallo: "8" },
+        { _id: 4, label: "L180-9", id_macchina: 1, nome_macchina: "L180", stallo: "9" },
+        { _id: 5, label: "L232-6", id_macchina: 2, nome_macchina: "L232", stallo: "6" },
+        { _id: 6, label: "L232-7", id_macchina: 2, nome_macchina: "L232", stallo: "7" },
+        { _id: 7, label: "L232-8", id_macchina: 2, nome_macchina: "L232", stallo: "8" },
+        { _id: 8, label: "L232-9", id_macchina: 2, nome_macchina: "L232", stallo: "9" },
+        { _id: 9, label: "L2020-1", id_macchina: 3, nome_macchina: "L2020", stallo: "1" },
+        { _id: 10, label: "L2020-2", id_macchina: 3, nome_macchina: "L2020", stallo: "2" },
+        { _id: 11, label: "L2020-3", id_macchina: 3, nome_macchina: "L2020", stallo: "3" },
+        { _id: 12, label: "L2020-4", id_macchina: 3, nome_macchina: "L2020", stallo: "4" },
+        { _id: 13, label: "L2020-5", id_macchina: 3, nome_macchina: "L2020", stallo: "5" },
+        { _id: 14, label: "L2020-6", id_macchina: 3, nome_macchina: "L2020", stallo: "6" }
     ];
     return LISTA_RISORSE_CICLATURA;
 }
@@ -101,7 +31,7 @@ export function getMacchinaDaIdRisorsa(idRisorsa) {
 export function getRisorsaById(idRisorsa) {
     let lista = getListaRisorse();
     let result = lista.find(item => {
-        return item.id == idRisorsa;
+        return item._id == idRisorsa;
     });
 
     return result;

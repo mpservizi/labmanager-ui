@@ -1,12 +1,12 @@
 <template>
     <div>
         <v-container>
-            <p class="text-h2 text-center mb-10">
-                {{ taskAttivo.macchina }} - {{ taskAttivo.carico }} - WK{{
+            <p class="text-h3 text-center mb-10">
+                {{ taskAttivo.macchina }} - WK{{
                     taskAttivo.week
                 }}
             </p>
-            <p>Carico è occupato per : {{ taskAttivo.duration }} giorni</p>
+            <p>Carico {{ taskAttivo.carico }} è occupato per {{ taskAttivo.duration }} giorni</p>
             <v-row>
                 <v-col
                     cols="6"
@@ -20,6 +20,7 @@
                         <p>Numero prove : {{ task.numProve }}</p>
                         <ul>
                             <li v-for="(prova, k) in task.prove" :key="k">
+                                <p class="text-h6">{{prova.progetto}}</p>
                                 {{ prova.msg }}
                             </li>
                         </ul>

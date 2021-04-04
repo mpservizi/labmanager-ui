@@ -44,17 +44,18 @@ export function creaListaTaskDetailUi(task) {
 function creaObjTask(prova) {
     let result = {
         idRequest: prova.idRequest,
+        progetto: prova.progetto,
         txtMacchina: prova.macchina + '-' + prova.stallo,
         desc: prova.sample,
         carico: prova.carico,
-        corrente: prova.corrente + 'A',
+        corrente: prova.corrente,
         start_date: MyDate.dateToStr(prova.start_date),
         durata: prova.durata,
         start_week: prova.week,
         end_week: prova.end_week
     };
     //Testo default da mostrare in detail task view
-    let msg = `Test request: ${result.idRequest} - ${result.carico}-${result.corrente} - ${result.durata} giorni -${result.desc}`;
+    let msg = `${result.carico}-${result.corrente}A- ${result.durata} giorni -${result.desc}`;
     result.msg = msg;
     return result;
 }

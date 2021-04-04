@@ -12,7 +12,8 @@ async function getAll() {
     };
     // let dati = getDatiCiclature();
     let datiCiclatura = await CiclaturaService.getDatiCiclatura();
-    let dati = JSON.parse(datiCiclatura.eventi);
+    // let dati = JSON.parse(datiCiclatura.eventi);
+    let dati = datiCiclatura.eventi;
     let tasks = parseDatiCiclatura(dati);
     result.data = tasks;
     await pausa(10);
