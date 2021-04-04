@@ -3,7 +3,7 @@ import MyDate from '@/shared/my-date.js';
 
 // import { calcolaCaricoRisorse } from './my-worload.js';
 /**
- * Converte gli eventi del schedular in json per salvare sul server
+ * Prepara gli eventi del schedular per salvare sul server
  * @param {*} eventi
  */
 export function eventiToJson(eventi) {
@@ -32,13 +32,13 @@ export function eventiToJson(eventi) {
 
             let modello = {
                 id: item.id,
-                idRisorsa: parseInt(item.idRisorsa),
+                idRisorsa: item.idRisorsa,
                 text: item.text,
-                corrente: parseInt(item.corrente),
+                corrente: item.corrente,
+                idRequest: item.idRequest,
+                progetto: item.progetto,
+                //Nel db salvo il titolo del carico
                 carico: nomeCarico,
-                sampleCode: item.sampleCode,
-                titolo: item.titolo,
-                idRequest: parseInt(item.idRequest),
                 start_date: data_inizio,
                 end_date: data_fine,
                 time: {
@@ -50,7 +50,8 @@ export function eventiToJson(eventi) {
             lista.push(modello);
         });
 
-        json = JSON.stringify(lista);
+        // json = JSON.stringify(lista);
+        json = lista;
     } catch (error) {
         console.log(error);
         console.log('Errore conversione eventi in Json');
@@ -69,23 +70,24 @@ export function parseEventiServer(datiServer) {
             //campi modificati prima di caricare nel schedular
             // let s_d = strToDate(item.start_date);
             // let e_d = strToDate(item.end_date);
-            // let s_d = MyDate.strToDate(item.start_date);
-            // let e_d = MyDate.strToDate(item.end_date);
-            let s_d = MyDate.strToDateServer(item.start_date);
-            let e_d = MyDate.strToDateServer(item.end_date);
+            let s_d = MyDate.strToDate(item.start_date);
+            let e_d = MyDate.strToDate(item.end_date);
+            // let s_d = MyDate.strToDateServer(item.start_date);
+            // let e_d = MyDate.strToDateServer(item.end_date);
             //Imposto ora per evitare bug reszise on drag
             s_d.setHours(13);
             e_d.setHours(20);
             let idCarico = ricavaIdCarico(item.carico);
 
             return {
-                id: item._id,
+                id: item.id,
                 idRisorsa: item.idRisorsa,
                 text: item.text,
                 corrente: item.corrente,
-                idCarico: idCarico,
                 idRequest: item.idRequest,
-                progetto: item.titolo,
+                progetto: item.progetto,
+                //nel task memorizzo id del carico
+                idCarico: idCarico,
                 start_date: s_d,
                 end_date: e_d,
                 time: {

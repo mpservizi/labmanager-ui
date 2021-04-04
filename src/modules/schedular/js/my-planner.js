@@ -64,7 +64,6 @@ async function loadDati() {
         filtraRisorse();
 
         let eventi = await loadDatiCiclatura();
-        console.log(eventi);
         myScheduler.parse(eventi);
 
         myScheduler.updateCollection(

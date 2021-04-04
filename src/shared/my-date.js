@@ -3,13 +3,13 @@ import moment from 'moment';
 
 function strToDate(strDate, formato) {
     // let data = MyDate.parse(strDate, formato || 'DD/MM/YYYY');
-    let data=moment(strDate,formato || 'DD/MM/YYYY')
+    let data=moment(strDate,formato || 'DD/MM/YYYY').toDate();
     return data;
 }
 
 function dateToStr(data, formato) {
     // let str = MyDate.format(data, formato || 'DD/MM/YYYY');
-    let str = moment(data).format(formato || 'DD/MM/YYYY')
+    let str = moment(data).format(formato || 'DD/MM/YYYY');
     return str;
 }
 
