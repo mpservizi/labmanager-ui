@@ -1,4 +1,4 @@
-import HttpRequest from '@/shared/http_request';
+import {HttpRequest} from '@/shared/http_request';
 
 const URL_RISORSE = 'planner/risorse';
 const URL_DATI_CICLATURA = 'planner/dati_ciclatura';

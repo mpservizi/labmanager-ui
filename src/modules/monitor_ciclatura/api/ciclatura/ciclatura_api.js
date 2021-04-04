@@ -1,7 +1,7 @@
 /**
  * Fornisce tutti i dati riguardanti la ciclatura
  */
-import HttpRequest from '@/shared/http_request';
+import {HttpRequest} from '@/shared/http_request';
 import { isFake } from '@/shared/ambiente';
 import { fake_getDatiCiclatura } from '../fake/ciclatura';
 

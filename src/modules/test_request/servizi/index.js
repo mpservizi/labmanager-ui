@@ -24,11 +24,9 @@ async function save(payload) {
     return result;
 }
 async function aggiorna(payload){
-    console.log(payload);
-    let idRequest = payload.id;
-    console.log('Aggiornare test request id : ' + idRequest);
+    let result = await TestRequetService.updateTestRequest(payload);
     await pausa(200);
-    return payload;
+    return result;
 }
 export default {
     getAll,

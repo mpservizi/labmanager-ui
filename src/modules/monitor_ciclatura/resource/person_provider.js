@@ -1,4 +1,4 @@
-import HttpRequest from '@/shared/http_request';
+import {HttpRequest} from '@/shared/http_request';
 
 class PersonProvider extends HttpRequest {
     createUser(data) {

@@ -3,8 +3,8 @@
  * Scegliere qui il tipo di libreria da usare
  */
 import axios from 'axios';
-import { getServerUrl } from './ambiente';
-
+import { getServerUrl } from './ambiente.js';
+import {FakeHttpRequest} from './Fakedb.js';
 //imposto url del server in base al ambiente di sviluppo
 let axiosInstance = axios.create({
     baseURL: getServerUrl(),
@@ -34,7 +34,7 @@ axiosInstance.interceptors.response.use(
     }
 );
 
-class HttpRequest {
+class ApiHttpRequest {
     constructor() {
         this.axios = axios;
     }
@@ -86,4 +86,8 @@ class HttpRequest {
     }
 }
 
-export default HttpRequest;
+export let HttpRequest = ApiHttpRequest;
+
+if(false){
+    HttpRequest = FakeHttpRequest;
+};

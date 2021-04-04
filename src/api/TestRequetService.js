@@ -1,4 +1,4 @@
-import HttpRequest from '@/shared/http_request';
+import {HttpRequest} from '@/shared/http_request';
 import { getDatiTestRequests } from '@/data/db-test-requests.js';
 const URL_RICHIESTE = 'planner/richieste';
 
@@ -21,6 +21,15 @@ class TestRequestProvider extends HttpRequest {
         console.log(JSON.stringify(item));
         return item;
     }
+    async updateTestRequest(payload) {
+        // let response = await this.create(URL_RICHIESTE, payload);
+        // return response.data;
+        console.log(payload);
+        let idRequest = payload.id;
+        console.log('Aggiornare test request id : ' + idRequest);
+        return payload;
+    }
+
 }
 
 export const TestRequetService = new TestRequestProvider('TestRequestProvider');
