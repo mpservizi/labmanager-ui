@@ -1,5 +1,5 @@
 import {HttpRequest} from '@/shared/http_request';
-import { getDatiTestRequests } from '@/data/db-test-requests.js';
+// import { getDatiTestRequests } from '@/data/db-test-requests.js';
 const URL_RICHIESTE = 'testrequest';
 
 class TestRequestProvider extends HttpRequest {

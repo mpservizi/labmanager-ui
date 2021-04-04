@@ -166,7 +166,7 @@ export default {
                     item.testProgram.forEach((prova,index)=>{
                         //Aggiungere id request nel form di creazione della richiesta                        
                         prova.id= index
-                        prova.idRequest = item.id;
+                        prova.idRequest = item._id;
                         prova.titoloProgetto = item.titoloProgetto;
                         lista.push(prova);
                     });

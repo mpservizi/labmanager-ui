@@ -38,12 +38,13 @@ export default {
                 if (numCampioni > 0) {
                     lista.push({
                         id: cont,
-                        carico: i,
-                        durata: 2,
-                        label: carico + '-10A',
+                        idCarico: i,
+                        label: `${carico}-${result.corrente}A`,
+                        corrente:result.corrente,
                         campioni: numCampioni,
-                        idRequest: result.IdRequest,
-                        titolo: result.Titolo
+                        idRequest: result.idRequest,
+                        titolo: result.titolo,
+                        titoloProgetto:result.titoloProgetto
                     });
 
                     cont++;
