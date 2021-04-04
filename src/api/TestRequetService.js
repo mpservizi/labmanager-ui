@@ -1,12 +1,12 @@
 import {HttpRequest} from '@/shared/http_request';
 import { getDatiTestRequests } from '@/data/db-test-requests.js';
-const URL_RICHIESTE = 'planner/richieste';
+const URL_RICHIESTE = 'testrequest';
 
 class TestRequestProvider extends HttpRequest {
     async getRichieste() {
-        // let response = await this.getRequest(URL_RICHIESTE);
-        // return response.data;
-        return getDatiTestRequests();
+        let response = await this.getRequest(URL_RICHIESTE);
+        return response.data;
+        // return getDatiTestRequests();
     }
     /**
      * Salva i dati di test request sul server
@@ -14,20 +14,12 @@ class TestRequestProvider extends HttpRequest {
      * @returns
      */
     async saveTestRequest(item) {
-        // let response = await this.create(URL_RICHIESTE, payload);
-        // return response.data;
-        console.log('Salvare dati richieste su server');
-        item.id = new Date().getTime();
-        console.log(JSON.stringify(item));
-        return item;
+        let response = await this.create(URL_RICHIESTE, item);
+        return response.data;
     }
     async updateTestRequest(payload) {
-        // let response = await this.create(URL_RICHIESTE, payload);
-        // return response.data;
-        console.log(payload);
-        let idRequest = payload.id;
-        console.log('Aggiornare test request id : ' + idRequest);
-        return payload;
+        let response = await this.update(URL_RICHIESTE, payload);
+        return response.data;
     }
 
 }

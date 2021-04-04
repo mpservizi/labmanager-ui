@@ -4,8 +4,7 @@ export default {
     namespaced: true,
     state: {
         lista: [],
-        detail:null,
-        saveEnd: true
+        detail:null
     },
     getters: {
         listaRichieste: function(state) {
@@ -19,9 +18,6 @@ export default {
         SET_DATI(state, payload) {
             state.lista = payload;
         },
-        SET_SAVE(state, payload) {
-            state.saveEnd = payload;
-        },
         ADD_RICHIESTA(state, payload) {
             state.lista.push(payload);
         },
@@ -29,11 +25,8 @@ export default {
             state.detail=payload;
         },
         AGGIORNA_REQUEST(state, payload) {
-            state.lista.forEach(item=>{
-                if(item.id==payload.id){
-                    item=payload;
-                }
-            });
+            const index = state.lista.map(o => o._id).indexOf(payload._id);
+            state.lista.splice(index, 1, payload);            
         },
     },
     actions: {
@@ -42,23 +35,22 @@ export default {
             console.info('Installazione modulo : ' + NOME_MODULO);
             return true; //Risultato funzione RegistraModulo
         },
-        async loadRichieste({ commit,state }) {
+        async loadRichieste({ commit,state,rootState }) {
             if(state.lista.length>0) return;
             let dati = await datiProvider.getAll();
             commit('SET_DATI', dati);
         },
         async saveRichiesta({ commit }, payload) {
-            commit('SET_SAVE', false);
+            // commit('SHOW_LOADING', null, { root: true });
             let result = await datiProvider.save(payload);
             commit('ADD_RICHIESTA', result);
-            commit('SET_SAVE', true);
+            // commit('HIDE_LOADING', null, { root: true });
         },
         async aggiornaRichiesta({commit},payload){
-            commit('SET_SAVE', false);
+            // commit('SHOW_LOADING', null, { root: true });
             let result = await datiProvider.aggiorna(payload);
             commit('AGGIORNA_REQUEST', result);
-            commit('SET_SAVE', true);
-
+            // commit('HIDE_LOADING', null, { root: true });
         }
     }
 };

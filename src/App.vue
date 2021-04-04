@@ -39,7 +39,12 @@ export default {
     data: () => ({
         drawer: false,
         dev: true
-    })
+    }),
+    computed:{
+        msgLoading(){
+            return this.$store.state.isLoading;
+        }
+    }
 };
 </script>
 <style>
