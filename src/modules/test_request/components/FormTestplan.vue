@@ -10,7 +10,19 @@
             </v-col>
         </v-row>
         <!-- Riga inserimento valori  -->
-        <v-row>
+        <v-row dense>
+            <v-col cols="12">
+                <v-radio-group class="d-flex" row mandatory v-model="corrente">
+                    <template v-slot:label>
+                        <div>Corrente di prova : </div>
+                    </template>
+                    <v-radio label="10A" value="10"></v-radio>
+                    <v-radio label="16A" value="16"></v-radio>
+                </v-radio-group>
+            </v-col>
+        </v-row>
+        <!--  -->
+        <v-row dense>
             <v-col cols="4">
                 <v-text-field
                     v-model="p1"
@@ -57,13 +69,14 @@
 export default {
     name: 'FormTestplan',
     components: {},
-    props:['listaProve'],
+    props: ['listaProve'],
     data() {
         return {
             p1: '',
             p2: '',
             p3: '',
             p4: '',
+            corrente: '',
             prove: []
         };
     },
@@ -103,12 +116,14 @@ export default {
             if (!valid) return;
 
             let obj = {
-                id:this.prove.length+1,
+                id: this.prove.length + 1,
                 titolo: this.p1,
-                c1: this.p2*1,
-                c2: this.p3*1,
-                c3: this.p4*1
+                c1: this.p2 * 1,
+                c2: this.p3 * 1,
+                c3: this.p4 * 1,
+                corrente: this.corrente * 1
             };
+            console.log(obj);
             this.prove.push(obj);
             this.p1 = '';
             this.p2 = '';
@@ -126,12 +141,12 @@ export default {
             this.$emit('salva', result);
         }
     },
-    mounted(){
+    mounted() {
         this.prove = this.listaProve;
     },
-    watch:{
-        listaProve:function(arrProve){
-            if(arrProve){
+    watch: {
+        listaProve: function (arrProve) {
+            if (arrProve) {
                 this.prove = arrProve;
             }
         }
