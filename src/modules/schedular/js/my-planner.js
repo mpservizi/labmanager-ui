@@ -57,13 +57,14 @@ async function loadDati() {
     try {
         let risorse = await loadRisorse();
         let listaSelezioneRisorse = risorse.map(item => {
-            return { key: item.key, label: item.label + ' - ' + item.stallo };
+            return { key: item.key, label: item.label};
         });
         myScheduler.updateCollection(LISTA_RISORSE, risorse);
 
         filtraRisorse();
 
         let eventi = await loadDatiCiclatura();
+        console.log(eventi);
         myScheduler.parse(eventi);
 
         myScheduler.updateCollection(
@@ -73,7 +74,6 @@ async function loadDati() {
         return true;
     } catch (error) {
         console.log(error);
-        alert('Errore caricamento dati');
         return false;
     }
 }

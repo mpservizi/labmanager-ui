@@ -69,22 +69,23 @@ export function parseEventiServer(datiServer) {
             //campi modificati prima di caricare nel schedular
             // let s_d = strToDate(item.start_date);
             // let e_d = strToDate(item.end_date);
-            let s_d = MyDate.strToDate(item.start_date);
-            let e_d = MyDate.strToDate(item.end_date);
+            // let s_d = MyDate.strToDate(item.start_date);
+            // let e_d = MyDate.strToDate(item.end_date);
+            let s_d = MyDate.strToDateServer(item.start_date);
+            let e_d = MyDate.strToDateServer(item.end_date);
             //Imposto ora per evitare bug reszise on drag
             s_d.setHours(13);
             e_d.setHours(20);
             let idCarico = ricavaIdCarico(item.carico);
 
             return {
-                id: item.id,
+                id: item._id,
                 idRisorsa: item.idRisorsa,
                 text: item.text,
                 corrente: item.corrente,
                 idCarico: idCarico,
                 idRequest: item.idRequest,
-                sampleCode: item.sampleCode,
-                titolo: item.titolo,
+                progetto: item.titolo,
                 start_date: s_d,
                 end_date: e_d,
                 time: {
@@ -111,14 +112,13 @@ export async function parseRisorse(datiServer) {
         //Creo array rinominando i campi del array ricevuto
         let dati = datiServer.map(item => {
             return {
-                key: item.id, //obbligatorio
-                label: item.nome_macchina, //obbligatiorio
+                key: item._id, //obbligatorio
+                label: item.label, //obbligatiorio
                 // id_macchina: item.id_macchina,
-                stallo: item.stallo
+                // stallo: item.stallo
             };
         });
 
-        // console.log(dati);
         return dati;
     } catch (error) {
         console.log(error);

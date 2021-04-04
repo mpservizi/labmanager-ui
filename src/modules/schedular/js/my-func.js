@@ -20,7 +20,8 @@ export function filtraRisorse(valore) {
         itemsFiltrati = risorse.slice();
     } else {
         itemsFiltrati = risorse.filter(function(room) {
-            return room.label == valore;
+            // return room.label == valore;
+            return room.label.includes(valore);
         });
     }
 

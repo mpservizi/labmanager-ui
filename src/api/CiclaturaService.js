@@ -1,7 +1,7 @@
 import {HttpRequest} from '@/shared/http_request';
 
-const URL_RISORSE = 'planner/risorse';
-const URL_DATI_CICLATURA = 'planner/dati_ciclatura';
+const URL_RISORSE = 'risorse';
+const URL_DATI_CICLATURA = 'ciclatura';
 
 class CiclaturaProvider extends HttpRequest {
     async getRisorse() {

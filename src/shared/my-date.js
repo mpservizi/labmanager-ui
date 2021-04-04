@@ -1,16 +1,35 @@
-import MyDate from 'date-and-time';
+// import MyDate from 'date-and-time';
 import moment from 'moment';
 
 function strToDate(strDate, formato) {
-    let data = MyDate.parse(strDate, formato || 'DD/MM/YYYY');
+    // let data = MyDate.parse(strDate, formato || 'DD/MM/YYYY');
+    let data=moment(strDate,formato || 'DD/MM/YYYY')
     return data;
 }
 
 function dateToStr(data, formato) {
-    let str = MyDate.format(data, formato || 'DD/MM/YYYY');
+    // let str = MyDate.format(data, formato || 'DD/MM/YYYY');
+    let str = moment(data).format(formato || 'DD/MM/YYYY')
     return str;
 }
 
+/**
+ * Converte testo in formato di data usato dal Server
+ * @param {*} strDate 
+ */
+function strToDateServer(strDate){
+    let data = moment(strDate).toDate();
+    return data;
+}
+/**
+ * Converte data in formato di testo usato dal server
+ * @param {*} data 
+ * @returns 
+ */
+function dateToStrServer(data){
+    let str = moment(data).format();
+    return str;
+}
 /**
  * Restituisce la differenza in giorni tra le date indicate
  * @param {*} start : data inizio
@@ -18,7 +37,6 @@ function dateToStr(data, formato) {
  */
 function calcolaDifferenzaDateInGiorni(start, end) {
     let giorni = moment(end).diff(moment(start), 'days');
-    // return Math.floor(MyDate.subtract(end, start).toDays());
     return giorni;
 }
 
@@ -43,6 +61,8 @@ function getWeekNumber(data) {
 export default {
     strToDate,
     dateToStr,
+    strToDateServer,
+    dateToStrServer,
     calcolaDifferenzaDateInGiorni,
     getWeekNumber,
     getDateOfWeek

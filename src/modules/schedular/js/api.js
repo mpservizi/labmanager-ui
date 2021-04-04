@@ -15,7 +15,8 @@ export async function loadRisorse() {
  */
 export async function loadDatiCiclatura() {
     let data = await CiclaturaService.getDatiCiclatura();
-    let dati = JSON.parse(data.eventi);
+    // let dati = JSON.parse(data.eventi);
+    let dati = data;
     return parseEventiServer(dati);
 }
 

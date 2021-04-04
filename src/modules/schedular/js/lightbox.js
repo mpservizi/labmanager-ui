@@ -2,17 +2,17 @@ import { LISTA_CARICHI, LISTA_SELEZIONE_RISORSE } from './costanti.js';
 export function initLightbox(myScheduler) {
     myScheduler.config.lightbox.sections = [
         {
-            map_to: 'text',
-            name: 'text',
+            map_to: 'progetto',
+            name: 'progetto',
             type: 'textarea',
             height: 30
         },
-        {
-            map_to: 'idRequest',
-            name: 'request',
-            type: 'textarea',
-            height: 30
-        },
+        // {
+        //     map_to: 'idRequest',
+        //     name: 'request',
+        //     type: 'textarea',
+        //     height: 30
+        // },
         {
             map_to: 'idCarico',
             name: 'carico',
@@ -27,7 +27,7 @@ export function initLightbox(myScheduler) {
         },
 
         {
-            map_to: 'sampleCode',
+            map_to: 'text',
             name: 'sample',
             type: 'textarea',
             height: 30
@@ -47,17 +47,17 @@ export function initLightbox(myScheduler) {
     ];
 
     //labels
-    myScheduler.locale.labels.section_text = 'Titolo';
+    myScheduler.locale.labels.section_progetto = 'Progetto';
     myScheduler.locale.labels.section_carico = 'Carico';
-    myScheduler.locale.labels.section_time = 'Time';
-    myScheduler.locale.labels.section_request = 'Test request';
+    // myScheduler.locale.labels.section_request = 'Test request';
     myScheduler.locale.labels.section_risorsa = 'Risorsa';
     myScheduler.locale.labels.section_sample = 'Sample code';
+    // myScheduler.locale.labels.section_time = 'Time';
 
     //Disabilito i campi nel lightbox
     myScheduler.attachEvent('onLightbox', function(task_id) {
         document.getElementsByTagName('textarea')[0].disabled = true;
-        document.getElementsByTagName('textarea')[1].disabled = true;
+        // document.getElementsByTagName('textarea')[1].disabled = true;
     });
 
     // myScheduler.attachEvent('onBeforeLightbox', function(id) {
