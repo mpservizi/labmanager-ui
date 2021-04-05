@@ -1,12 +1,12 @@
 <template>
     <div>
         <v-row justify="start">
-            <v-col cols="3" v-for="app in listaApp" :key="app.id" class="px-10">
+            <v-col cols="4" v-for="app in listaApp" :key="app.id" class="px-10">
                 <v-card
                     color="#385F73"
                     dark
                     :to="{ name: app.routeName }"
-                    max-width="250"
+                    max-width="300"
                 >
                     <v-card-title class="headline text-center">
                         {{ app.label }}

@@ -3,6 +3,10 @@
     <div class="box_planner" ref="scheduler_here" id="scheduler_here">
         <div class="box_data">
             <div class="dhx_cal_navline">
+                <div>
+                    <v-btn text small class="mr-1" :class="{info:scalaAttiva==2}" @click="handleScalaSettimanale">Settimanale</v-btn>                    
+                    <v-btn text small :class="{info:scalaAttiva==1}" @click="handleScalaMensile">Mensile</v-btn>
+                </div>
                 <div class="dhx_cal_prev_button">&nbsp;</div>
                 <div class="dhx_cal_next_button">&nbsp;</div>
                 <div class="dhx_cal_today_button"></div>
@@ -19,10 +23,11 @@ import Filtro from './Filtro.vue';
 import { MyPlanner } from './../js/my-planner.js';
 export default {
     name: 'Scheduler',
-    props: ['scala', 'filtro', 'needSave'],
+    props: ['filtro', 'needSave'],
     data() {
         return {
-            pronto: false
+            pronto: false,
+            scalaAttiva:2//deafult settimanale
         };
     },
     components: { Filtro },
@@ -42,6 +47,12 @@ export default {
         async load() {
             await MyPlanner.loadDati();
             this.pronto = true;
+        },
+        handleScalaMensile() {
+            this.scalaAttiva=1;
+        },
+        handleScalaSettimanale() {
+            this.scalaAttiva=2;
         }
     },
     mounted: function () {
@@ -58,6 +69,9 @@ export default {
         },
         needSave: function () {
             this.save();
+        },
+        scalaAttiva:function(newVal){
+            this.cambiaScala(newVal);
         }
     }
 };
@@ -80,5 +94,8 @@ export default {
 }
 .box_data {
     display: grid;
+}
+.attivo {
+    background-color: green;
 }
 </style>

@@ -17,17 +17,14 @@
             <!-- riga Toolbar -->
             <div class="ms_toolbar">
                 <v-row no-gutters>
-                    <!-- scala -->
-                    <v-col cols="2" class="pt-0">
-                        <scala @cambio="cambiaScala"></scala>
-                    </v-col>
                     <!-- Filtreo -->
                     <v-col cols="2" class="pt-3">
                         <filtro @cambio="filtra" @save="save"></filtro>
                     </v-col>
-                    <v-col cols="1" class="pt-3 text-center">
-                        <v-btn @click="save" class="success">Salva dati</v-btn>
+                    <v-col cols="2" class="pt-3 text-center">
+                        <v-btn @click="save" class="success">Salva</v-btn>
                     </v-col>
+                    <v-spacer></v-spacer>
                     <!-- Test request -->
                     <v-col
                         cols="2"
@@ -50,7 +47,7 @@
                             @click.stop="dialog = true"
                             color="info"
                             class=""
-                            >Mostra richieste</v-btn
+                            >Richieste</v-btn
                         >
                     </v-col>
                 </v-row>
@@ -59,9 +56,8 @@
             <div class="box_planner_view">
                 <v-row no-gutters>
                     <v-col cols="12" class="">
-                        <TestPlanner
+                        <Scheduler
                             class="px-5"
-                            :scala="scalaAttiva"
                             :filtro="filtro"
                             :needSave="needSave"
                         />
@@ -73,9 +69,8 @@
 </template>
 
 <script>
-import Scala from '../components/Scala.vue';
 import Filtro from '../components/Filtro.vue';
-import TestPlanner from 'Moduli/schedular/components/Scheduler.vue';
+import Scheduler from 'Moduli/schedular/components/Scheduler.vue';
 import FormProve from '../components/FormProve.vue';
 import FormRichieste from '../components/FormRichieste.vue';
 import { creaTaskPerProva } from '../js/TaskMaker.js';
@@ -84,20 +79,19 @@ import { TestRequetService } from '@/api/TestRequetService.js';
 import { ENUM_STATI_RICHIESTE } from '@/data/front-db.js';
 export default {
     name: 'TestPlannerView',
-    components: { TestPlanner, FormRichieste, FormProve, Scala, Filtro },
+    components: { Scheduler, FormRichieste, FormProve, Filtro },
     data: () => ({
         dialog: false,
         listaPlannnig: [], //lista per test request dialog
         gruppoProve: [], //Riga selezionata nel request dialog
         aggiornareConteggio: false, //per aggioranare il numero di prove da pianificare nel gruppo prove
         provaAttiva: null, //prova selezionat anel gruppo prove
-        scalaAttiva: 1, //cambio scala schedular
         filtro: 'all', //cambio filtro macchine schedular
         needSave: false, //bottone save dati schedular
         datiRichieste: {}, //dati test request da server,
         numProveToPlan: 0, //Numero di prove ancora da pianificare,
         palnnedResult: null, //Valore riga passato da tasto pianificato nel dialog
-        showPlanned: true //Se mostrare richieste già pianificate nella lista
+        showPlanned: false //Se mostrare richieste già pianificate nella lista
     }),
     created() {
         EventBus.on('cell_click', this.handleCellDblClick);
@@ -185,10 +179,6 @@ export default {
         //Quando cambia la prova da pianificare nel form prove
         changeProvaAttiva(payload) {
             this.provaAttiva = payload;
-        },
-        //Cambio scala
-        cambiaScala(valore) {
-            this.scalaAttiva = valore;
         },
         //Filtro macchina
         filtra(valore) {

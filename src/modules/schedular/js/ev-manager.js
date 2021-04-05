@@ -80,6 +80,8 @@ export function initEventi(myScheduler) {
         y_val,
         e
     ) {
+        // console.log('Col: ' + x_ind);
+        // console.log('Data: ' + x_val);
         let listaRisorse = myScheduler.serverList(LISTA_RISORSE);
         let risorsa = listaRisorse[y_ind];
         let obj = {
