@@ -22,11 +22,20 @@ class TestRequestProvider extends HttpRequest {
         return response.data;
     }
 
-    async aggiornaStatoGruppo(listaRichieste,gruppoProve,newStato){
+    /**
+     * Aggiorna lo stato del gruppo test program
+     * @param {*} listaRichieste : lista con tutte le test request
+     * @param {*} gruppoProve :Gruppo prove modificato
+     * @returns 
+     */
+    async aggiornaStatoGruppo(listaRichieste,gruppoProve){
+        //Cerco la test request in base al id
         let richiesta = listaRichieste.find(item=>item._id==gruppoProve.idRequest);
+        //Creo array con id dei gruppi e ricavo la posizione
         const indexProva = richiesta.testProgram.map(o => o.id).indexOf(gruppoProve.id); 
-        let itemProva =  richiesta.testProgram[indexProva];
-        itemProva.stato = newStato;
+        //Sostituisco il valore nel array
+        richiesta.testProgram[indexProva] = gruppoProve;
+        //Aggiorno la richista in db
         return this.updateTestRequest(richiesta);  
     }
 

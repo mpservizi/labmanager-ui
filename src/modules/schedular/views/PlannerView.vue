@@ -81,7 +81,7 @@ import FormRichieste from '../components/FormRichieste.vue';
 import { creaTaskPerProva } from '../js/TaskMaker.js';
 import { EventBus } from '@/shared/event-bus.js';
 import { TestRequetService } from '@/api/TestRequetService.js';
-
+import { ENUM_STATI_RICHIESTE } from '@/data/front-db.js';
 export default {
     name: 'TestPlannerView',
     components: { TestPlanner, FormRichieste, FormProve, Scala, Filtro },
@@ -95,8 +95,9 @@ export default {
         filtro: 'all', //cambio filtro macchine schedular
         needSave: false, //bottone save dati schedular
         datiRichieste: {}, //dati test request da server,
-        numProveToPlan:0,    //Numero di prove ancora da pianificare
-        showPlanned:false //Se mostrare richieste già pianificate nella lista
+        numProveToPlan: 0, //Numero di prove ancora da pianificare,
+        palnnedResult: null, //Valore riga passato da tasto pianificato nel dialog
+        showPlanned: true //Se mostrare richieste già pianificate nella lista
     }),
     created() {
         EventBus.on('cell_click', this.handleCellDblClick);
@@ -120,11 +121,6 @@ export default {
         },
         hasRichieste() {
             return this.numRichieste > 0;
-        },
-        //Conversione lista richieste server in lista ui form
-        listaUiRichieste() {
-            let lista = this.datiRichieste.plans;
-            return lista;
         }
     },
     methods: {
@@ -155,26 +151,36 @@ export default {
         //Carica la lista delle preove da pianificare
         async loadDati() {
             this.datiRichieste = await TestRequetService.getRichieste();
+            this.creaListaToPlan();
+        },
+        creaListaToPlan() {
             let lista = [];
             let cont = 0;
-            //Creo al lista da passare al dialog richieste da pianificare solo con richieste 
+            //Creo al lista da passare al dialog richieste da pianificare solo con richieste
             //che contengono prove
-            this.datiRichieste.forEach(item=>{
-                if(item.testProgram && item.testProgram.length>0) {
-                    cont += item.testProgram.length;
+            this.datiRichieste.forEach((item) => {
+                if (item.testProgram && item.testProgram.length > 0) {
+                    // cont += item.testProgram.length;
                     //Aggiuongo id rechiesta ad ogni valore della item test program
                     //
-                    item.testProgram.forEach((prova,index)=>{
-                        //Aggiungere id request nel form di creazione della richiesta                        
-                        prova.id= index
-                        prova.idRequest = item._id;
-                        prova.titoloProgetto = item.titoloProgetto;
-                        lista.push(prova);
+                    item.testProgram.forEach((prova, index) => {
+                        if (
+                            this.showPlanned ||
+                            prova.stato == ENUM_STATI_RICHIESTE.TO_PLAN
+                        ) {
+                            //Aggiungere id request nel form di creazione della richiesta
+                            prova.id = index;
+                            prova.idRequest = item._id;
+                            prova.titoloProgetto = item.titoloProgetto;
+                            lista.push(prova);
+                            cont++;
+                        }
                     });
                 }
-            })
+            });
             this.numProveToPlan = cont;
             this.listaPlannnig = lista;
+            return lista;
         },
         //Quando cambia la prova da pianificare nel form prove
         changeProvaAttiva(payload) {
@@ -192,17 +198,20 @@ export default {
         save() {
             this.needSave = !this.needSave;
         },
+        filtraListaProve() {
+            let result = this.palnnedResult;
+            this.listaPlannnig = this.listaPlannnig.filter((item) => {
+                let key1 = item.idRequest + '-' + item.id;
+                let key2 = result.idRequest + '-' + result.id;
+                return key1 != key2;
+            });
+        },
         //Segnare gruppo prove come pianificato
         async gruppoPlanned(result) {
-            this.listaPlannnig = this.listaPlannnig.filter(
-                (item) =>{
-                    let key1 = item.idRequest + '-' + item.id;
-                    let key2 = result.idRequest + '-' + result.id;
-                    return key1!=key2;
-                }
-            );
+            this.palnnedResult = result;
             //Aggiornare lo stato nella matrice originale dei dati
-            TestRequetService.aggiornaStatoGruppo(this.datiRichieste, result,2);
+            result.stato = ENUM_STATI_RICHIESTE.PLANNED;
+            TestRequetService.aggiornaStatoGruppo(this.datiRichieste, result);
             this.dialog = false;
         },
         //mostra dialog per richieste da pianificare
@@ -211,6 +220,11 @@ export default {
                 this.dialog = true;
             } else {
             }
+        }
+    },
+    watch:{
+        palnnedResult:function(){
+            this.filtraListaProve();
         }
     }
 };
