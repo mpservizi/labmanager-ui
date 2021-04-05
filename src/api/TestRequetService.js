@@ -2,10 +2,13 @@ import {HttpRequest} from '@/shared/http_request';
 // import { getDatiTestRequests } from '@/data/db-test-requests.js';
 const URL_RICHIESTE = 'testrequest';
 
+let richiste_cache;
 class TestRequestProvider extends HttpRequest {
     async getRichieste() {
-        let response = await this.getRequest(URL_RICHIESTE);
-        return response.data;
+        if(richiste_cache) return richiste_cache;
+        let response = await this.getRequest(URL_RICHIESTE);        
+        richiste_cache = response.data;
+        return richiste_cache;
         // return getDatiTestRequests();
     }
     /**
@@ -15,10 +18,13 @@ class TestRequestProvider extends HttpRequest {
      */
     async saveTestRequest(item) {
         let response = await this.create(URL_RICHIESTE, item);
+        richiste_cache=null;
         return response.data;
     }
+    
     async updateTestRequest(payload) {
         let response = await this.update(URL_RICHIESTE, payload);
+        richiste_cache=null;
         return response.data;
     }
 
