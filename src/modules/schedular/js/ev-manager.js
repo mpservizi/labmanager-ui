@@ -19,17 +19,14 @@ export function initEventi(myScheduler) {
     });
 
     /** Prima di cambiare view*/
-    myScheduler.attachEvent('onBeforeViewChange', function(
-        old_mode,
-        old_date,
-        mode,
-        date
-    ) {
-        // let oggiStr = new Date().toLocaleDateString();
-        // let dateStr = date != undefined ? date.toLocaleDateString() : '';
-        // console.log(oggiStr + ' == ' + dateStr);
-        return true;
-    });
+    // myScheduler.attachEvent('onBeforeViewChange', function(
+    //     old_mode,
+    //     old_date,
+    //     mode,
+    //     date
+    // ) {
+    //     return true;
+    // });
 
     /** Collisione eventi */
     myScheduler.attachEvent('onEventCollision', handleEventCollsion);
@@ -49,11 +46,17 @@ export function initEventi(myScheduler) {
         /** testo tooltip */
         myScheduler.templates.tooltip_text = creaTempateTooltip;
 
+        // myScheduler.templates.timeline_scalex_class = function(date){
+        //     return 'S1';
+        // };
+        // myScheduler.templates.timeline_second_scalex_class  = function(date){
+        //     return 'S2';
+        // };
         /** Titolo finestra lightbox */
-        myScheduler.templates.lightbox_header = function(start, end, ev) {
-            var formatFunc = myScheduler.date.date_to_str('%d.%m.%Y');
-            return formatFunc(start) + ' - ' + formatFunc(end);
-        };
+        // myScheduler.templates.lightbox_header = function(start, end, ev) {
+        //     var formatFunc = myScheduler.date.date_to_str('%d.%m.%Y');
+        //     return formatFunc(start) + ' - ' + formatFunc(end);
+        // };
     });
 
     /**

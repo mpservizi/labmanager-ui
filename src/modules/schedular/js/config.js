@@ -43,6 +43,8 @@ export function initPreConfig(myScheduler) {
         x_step: 1,
         x_size: paramsScala.giorniView,
         section_autoheight: false,
+        fit_events:false,
+        resize_events:false,
         y_unit: myScheduler.serverList(LISTA_RISORSE_FILTRATA),
         y_property: EV_ID_RISORSA,
         render: 'bar',

@@ -22,14 +22,18 @@ import {
 } from './costanti.js';
 
 function initPlanner(container, dataInizio, view) {
-    // Inizalizzo le liste vuote per le risrose
-    myScheduler.serverList(LISTA_SELEZIONE_RISORSE);
-    myScheduler.serverList(LISTA_RISORSE);
-    creaParamteriCustom(myScheduler);
-    initPreConfig(myScheduler); //Configuration
-    initLightbox(myScheduler); //Lightbox
-    initEventi(myScheduler); //Eventi
-
+    //Il componente viene ricilato. Inizializzo solo se non esiste in memoria
+    if(!myScheduler.myConfig){
+        // Inizalizzo le liste vuote per le risrose
+        myScheduler.serverList(LISTA_SELEZIONE_RISORSE);
+        myScheduler.serverList(LISTA_RISORSE);
+        //Imposto oggetto myConfig sul schedular
+        creaParamteriCustom(myScheduler);
+        initPreConfig(myScheduler); //Configuration
+        initLightbox(myScheduler); //Lightbox
+        initEventi(myScheduler); //Eventi    
+        myScheduler.xy.scale_height=30; //Altezza riga scala
+    }
     //Init schedular
     myScheduler.init(container, new Date(), 'timeline');
     centraViewOggi();

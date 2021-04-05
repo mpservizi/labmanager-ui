@@ -8,11 +8,11 @@ import { ricavaNomeCaricoDaId } from './my-func.js';
  * @returns
  */
 export function creaTestoBarraEvento(start, end, event) {
-    let testo = '';
-    let carico =
-        event.idCarico != undefined ? ricavaNomeCaricoDaId(event.idCarico) : '';
-    let corrente = event.corrente + 'A';
-    testo = `<div class='txt_ev'>${carico} <br> ${corrente}</div>`;
+    // let testo = '';
+    // let carico =
+    //     event.idCarico != undefined ? ricavaNomeCaricoDaId(event.idCarico) : '';
+    // let corrente = event.corrente + 'A';
+    // testo = `<div class='txt_ev'>${carico} <br> ${corrente}</div>`;
     // return testo;
     return event.text;
 }

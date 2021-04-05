@@ -95,7 +95,4 @@ export default {
 .box_data {
     display: grid;
 }
-.attivo {
-    background-color: green;
-}
 </style>
