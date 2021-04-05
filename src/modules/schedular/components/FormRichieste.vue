@@ -1,15 +1,13 @@
 <template>
     <div>
-        <v-row>
+        <v-row dense>
             <v-col cols="12" class="">
-                <v-card flat>
-                    <v-card-title>
-                        Seleziona il gruppo prove da pianificare
-                    </v-card-title>
-                </v-card>
+                <p class="text-h6 pa-2">
+                    Seleziona il gruppo prove da pianificare
+                </p>
             </v-col>
         </v-row>
-        <v-row>
+        <v-row dense>
             <v-col cols="12">
                 <v-data-table
                     dense
@@ -23,10 +21,13 @@
                     item-key="id"
                     class="elevation-1"
                 >
+                    <template v-slot:[`item.stato`]="{ item }">
+                        {{ labelStato(item.stato) }}
+                    </template>
                 </v-data-table>
             </v-col>
         </v-row>
-        <v-row>
+        <v-row dense>
             <v-col cols="12">
                 <v-card flat>
                     <v-card-actions class="px-10">
@@ -47,6 +48,7 @@
 </template>
 
 <script>
+import { getStatoById } from '@/data/front-db.js';
 export default {
     name: 'FormRichieste',
     components: {},
@@ -60,6 +62,7 @@ export default {
             headers: [
                 { text: 'Progetto', value: 'titoloProgetto' },
                 { text: 'Gruppo prove', value: 'titolo' },
+                { text: 'Stato', value: 'stato' },
                 { text: '19.1', value: 'c1' },
                 { text: '19.2', value: 'c2' },
                 { text: '19.3', value: 'c3' }
@@ -85,6 +88,10 @@ export default {
             if (result) {
                 this.$emit('completa', result);
             }
+        },
+        labelStato(idStato) {
+            let result = getStatoById(idStato);
+            return result;
         }
     },
     computed: {}

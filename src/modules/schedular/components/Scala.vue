@@ -22,7 +22,7 @@ export default {
 };
 </script>
 <style scoped>
-.boxScala {
-    /* border: 1px solid blue; */
-}
+/* .boxScala {
+    border: 1px solid blue;
+} */
 </style>

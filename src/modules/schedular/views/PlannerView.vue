@@ -95,7 +95,8 @@ export default {
         filtro: 'all', //cambio filtro macchine schedular
         needSave: false, //bottone save dati schedular
         datiRichieste: {}, //dati test request da server,
-        numProveToPlan:0    //Numero di prove ancora da pianificare
+        numProveToPlan:0,    //Numero di prove ancora da pianificare
+        showPlanned:false //Se mostrare richieste già pianificate nella lista
     }),
     created() {
         EventBus.on('cell_click', this.handleCellDblClick);
@@ -192,7 +193,7 @@ export default {
             this.needSave = !this.needSave;
         },
         //Segnare gruppo prove come pianificato
-        gruppoPlanned(result) {
+        async gruppoPlanned(result) {
             this.listaPlannnig = this.listaPlannnig.filter(
                 (item) =>{
                     let key1 = item.idRequest + '-' + item.id;
@@ -201,10 +202,8 @@ export default {
                 }
             );
             //Aggiornare lo stato nella matrice originale dei dati
-            //TBD
-            result.stato = 2; //Planned
+            TestRequetService.aggiornaStatoGruppo(this.datiRichieste, result,2);
             this.dialog = false;
-            TestRequetService.saveDatiRichieste(this.datiRichieste, result);
         },
         //mostra dialog per richieste da pianificare
         handleMostraRichieste() {
