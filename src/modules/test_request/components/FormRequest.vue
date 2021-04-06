@@ -122,12 +122,13 @@ export default {
                 cliente: '',
                 tecnico: '',
                 priority: 3,
+                stato: 1,
                 c1: 0,
                 c2: 0,
                 c3: 0,
                 dataInizio: '',
                 dataFine: '',
-                testProgram:[]
+                testProgram: []
             },
             dialog: false
         };
@@ -141,7 +142,7 @@ export default {
             this.campi.dataFine = valore;
         },
         salva() {
-            this.$emit('save',this.campi);
+            this.$emit('save', this.campi);
         },
         //Click save su dialog test plan
         handleSaveTestPlan(result) {
@@ -149,7 +150,7 @@ export default {
             this.campi.c2 = result.c2;
             this.campi.c3 = result.c3;
             this.campi.testProgram = result.testProgram;
-            this.dialog=false;
+            this.dialog = false;
         }
     },
     mounted() {

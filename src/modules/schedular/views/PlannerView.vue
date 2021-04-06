@@ -212,9 +212,12 @@ export default {
             }
         }
     },
-    watch:{
-        palnnedResult:function(){
+    watch: {
+        palnnedResult: function () {
             this.filtraListaProve();
+        },
+        showPlanned: function () {
+            this.creaListaToPlan();
         }
     }
 };
