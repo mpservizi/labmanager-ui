@@ -71,13 +71,23 @@
                     required
                 ></v-text-field>
             </v-col>
-            <v-col cols="4">
-                <v-text-field
-                    v-model="campi.priority"
+            <v-col cols="2">
+                <v-combobox
                     label="Priorità"
-                    required
-                    type="number"
-                ></v-text-field>
+                    :items="listaPrio"
+                    return-object
+                    v-model="prioForm"
+                >
+                </v-combobox>
+            </v-col>
+            <v-col cols="2">
+                <v-combobox
+                    label="Stato"
+                    :items="listaStati"
+                    return-object
+                    v-model="statoForm"
+                >
+                </v-combobox>
             </v-col>
         </v-row>
         <!-- riga totale prove carichi -->
@@ -111,6 +121,14 @@
 <script>
 import DataPicker from '@/components/DataPicker.vue';
 import DialogTestPlan from '../components/DialogTestPlan.vue';
+import {
+    LISTA_LABEL_PRIO,
+    LISTA_LABEL_STATI,
+    getStatoIdByLabel,
+    getPrioIdBylabel,
+    getStatoById,
+    getPrioById
+} from '@/data/front-db.js';
 export default {
     name: 'FormRequest',
     components: { DataPicker, DialogTestPlan },
@@ -131,6 +149,10 @@ export default {
                 dataFine: '',
                 testProgram: []
             },
+            prioForm: '',
+            statoForm: '',
+            listaPrio: LISTA_LABEL_PRIO,
+            listaStati: LISTA_LABEL_STATI,
             dialog: false
         };
     },
@@ -143,6 +165,8 @@ export default {
             this.campi.dataFine = valore;
         },
         salva() {
+            this.campi.priority = getPrioIdBylabel(this.prioForm);
+            this.campi.stato = getStatoIdByLabel(this.statoForm);
             this.$emit('save', this.campi);
         },
         //Click save su dialog test plan
@@ -168,6 +192,8 @@ export default {
     watch: {
         richiesta: function (newVal) {
             this.campi = { ...newVal };
+            this.prioForm = getPrioById(newVal.priority * 1);
+            this.statoForm = getStatoById(newVal.stato * 1);
         }
     }
 };
