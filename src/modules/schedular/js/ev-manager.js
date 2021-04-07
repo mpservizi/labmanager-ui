@@ -53,10 +53,11 @@ export function initEventi(myScheduler) {
         //     return 'S2';
         // };
         /** Titolo finestra lightbox */
-        // myScheduler.templates.lightbox_header = function(start, end, ev) {
-        //     var formatFunc = myScheduler.date.date_to_str('%d.%m.%Y');
-        //     return formatFunc(start) + ' - ' + formatFunc(end);
-        // };
+        myScheduler.templates.lightbox_header = function(start, end, ev) {
+            // var formatFunc = myScheduler.date.date_to_str('%d.%m.%Y');
+            // return formatFunc(start) + ' - ' + formatFunc(end);
+            return 'Detail prova';
+        };
     });
 
     /**

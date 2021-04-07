@@ -37,6 +37,8 @@ export function eventiToJson(eventi) {
                 corrente: item.corrente,
                 idRequest: item.idRequest,
                 progetto: item.progetto,
+                stato: item.stato,
+                descrizione: item.descrizione,
                 //Nel db salvo il titolo del carico
                 carico: nomeCarico,
                 start_date: data_inizio,
@@ -86,6 +88,8 @@ export function parseEventiServer(datiServer) {
                 corrente: item.corrente,
                 idRequest: item.idRequest,
                 progetto: item.progetto,
+                stato: item.stato,
+                descrizione: item.descrizione,
                 //nel task memorizzo id del carico
                 idCarico: idCarico,
                 start_date: s_d,
@@ -115,7 +119,7 @@ export async function parseRisorse(datiServer) {
         let dati = datiServer.map(item => {
             return {
                 key: item._id, //obbligatorio
-                label: item.label, //obbligatiorio
+                label: item.label //obbligatiorio
                 // id_macchina: item.id_macchina,
                 // stallo: item.stallo
             };

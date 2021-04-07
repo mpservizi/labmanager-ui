@@ -1,4 +1,9 @@
-import { LISTA_CARICHI, LISTA_SELEZIONE_RISORSE } from './costanti.js';
+import {
+    LISTA_CARICHI,
+    LISTA_SELEZIONE_RISORSE,
+    LISTA_STATI
+} from './costanti.js';
+
 export function initLightbox(myScheduler) {
     myScheduler.config.lightbox.sections = [
         {
@@ -17,13 +22,22 @@ export function initLightbox(myScheduler) {
             map_to: 'idCarico',
             name: 'carico',
             type: 'radio',
-            options: LISTA_CARICHI
+            options: LISTA_CARICHI,
+            height: 30
         },
         {
             map_to: 'idRisorsa',
             name: 'risorsa',
             type: 'select',
-            options: myScheduler.serverList(LISTA_SELEZIONE_RISORSE)
+            options: myScheduler.serverList(LISTA_SELEZIONE_RISORSE),
+            height: 30
+        },
+        {
+            map_to: 'stato',
+            name: 'stato',
+            type: 'select',
+            options: LISTA_STATI,
+            height: 30
         },
 
         {
@@ -50,6 +64,7 @@ export function initLightbox(myScheduler) {
     myScheduler.locale.labels.section_progetto = 'Progetto';
     myScheduler.locale.labels.section_descrizione = 'Descrizione';
     myScheduler.locale.labels.section_carico = 'Carico';
+    myScheduler.locale.labels.section_stato = 'Stato';
     // myScheduler.locale.labels.section_request = 'Test request';
     myScheduler.locale.labels.section_risorsa = 'Risorsa';
     myScheduler.locale.labels.section_sample = 'Sample code';

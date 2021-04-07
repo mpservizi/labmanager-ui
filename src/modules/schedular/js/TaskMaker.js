@@ -1,6 +1,7 @@
 import { EV_ID_RISORSA, CAMPO_STATO } from './costanti.js';
 import { myScheduler } from 'Moduli/schedular/js/my-lib.js';
 import { getDurataProva } from '@/shared/func-ciclatura.js';
+import { ENUM_STATI_RICHIESTE } from '@/data/front-db.js';
 export function creaTaskPerProva(payload) {
     let data_inizio = payload.data_inzio;
     //Calcolare la durata in base alla prova e corrente
@@ -11,9 +12,9 @@ export function creaTaskPerProva(payload) {
         start_date: data_inizio,
         end_date: dataFine,
         [EV_ID_RISORSA]: payload.risorsa.key,
-        [CAMPO_STATO]: 1,
+        [CAMPO_STATO]: ENUM_STATI_RICHIESTE.PLANNED, //stato planned quando inserico nel schedular
         idCarico: payload.idCarico,
-        text: payload.label,
+        text: payload.label, //salvare qui numero di campione, default carico-corrente
         corrente: payload.corrente,
         idRequest: payload.idRequest, //id test request
         progetto: payload.titoloProgetto, //test request progetto

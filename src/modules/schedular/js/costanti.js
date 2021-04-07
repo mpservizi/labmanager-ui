@@ -1,3 +1,4 @@
+import { getStatoById } from '@/data/front-db.js';
 // nome da assegnare al campo del evento per memorizzare id risorsa
 export const EV_ID_RISORSA = 'idRisorsa';
 //Lista tutte le risorse
@@ -20,7 +21,12 @@ export const LISTA_CARICHI = [
     { key: 2, label: '19.2' },
     { key: 3, label: '19.3' }
 ];
-
+export const LISTA_STATI = [
+    { key: 1, label: getStatoById(1) },
+    { key: 2, label: getStatoById(2) },
+    { key: 3, label: getStatoById(3) },
+    { key: 4, label: getStatoById(4) }
+];
 //Eleno dei valori per filtrare le risorse
 //Filtra le macchine in base al valore di key. Confronto label della risorsa con questo valore
 export const LISTA_FILTRO_RISORSE = [

@@ -42,6 +42,7 @@ export default {
                         label: `${carico}-${result.corrente}A`,
                         corrente: result.corrente,
                         campioni: numCampioni,
+                        stato: result.stato, //id stato prova
                         titolo: result.titolo, //Gruppo prova
                         idRequest: result.idRequest, //id test request
                         titoloProgetto: result.titoloProgetto, //prfogetto test request

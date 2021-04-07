@@ -17,7 +17,7 @@
 }
 /* Celle weekend */
 .timeline_weekend {
-    background-color: #e6e6e6;
+    background-color: #ffe9e9;
 }
 /* Testo deentro evento */
 .txt_ev {
@@ -26,4 +26,10 @@
     /* display: block; */
     margin-left: -10px;
     color: white;
+}
+/* Lista selezione in lighbox */
+.dhx_cal_light select {
+    background-color: #f9f9f9;
+    width: 99% !important;
+    height: calc(100% - 10px);
 }
