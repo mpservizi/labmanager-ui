@@ -1,0 +1,7 @@
+schedular:
+-quando inizia lo spostamento del task, la durata viene aumentata di un giorno
+-azzerare al cache delle prove da pianificare al cariamento della schermata del schedular, 
+per evitare incongruenze causate dal cambio della pagina durante la programmazioen delle prove
+-Quando ci sono 2 task nella stessa cella, uno sparisce e poi ricompare
+-Mettere la schermata di planner come default
+-Eliminare navigazione con breadcumb links
