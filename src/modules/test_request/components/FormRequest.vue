@@ -92,14 +92,17 @@
         </v-row>
         <!-- riga totale prove carichi -->
         <v-row>
-            <v-col cols="4">
+            <v-col cols="3">
                 <p>Samples for 19.1 = {{ campi.c1 }}</p>
             </v-col>
-            <v-col cols="4"
+            <v-col cols="3"
                 ><p>Samples for 19.2 = {{ campi.c2 }}</p>
             </v-col>
-            <v-col cols="4">
+            <v-col cols="3">
                 <p>Samples for 19.3 = {{ campi.c3 }}</p>
+            </v-col>
+            <v-col cols="3">
+                <p>Total samples = {{ campi.samples }}</p>
             </v-col>
         </v-row>
         <v-row>
@@ -145,6 +148,7 @@ export default {
                 c1: 0,
                 c2: 0,
                 c3: 0,
+                samples: 0,
                 dataInizio: '',
                 dataFine: '',
                 testProgram: []
@@ -174,6 +178,7 @@ export default {
             this.campi.c1 = result.c1;
             this.campi.c2 = result.c2;
             this.campi.c3 = result.c3;
+            this.campi.samples = result.samples;
             this.campi.testProgram = result.testProgram;
             this.dialog = false;
         }

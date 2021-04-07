@@ -1,12 +1,16 @@
 <template>
     <div>
         <v-row>
-            <v-col cols="4">{{ msgRiepilogo }}</v-col>
+            <!-- <v-col cols="4">{{ msgRiepilogo }}</v-col> -->
+            <v-col cols="2">Gruppi : {{ numGruppi }}</v-col>
+            <v-col cols="3">Prove totali : {{ totAllProve }}</v-col>
             <v-col cols="2">19.1 = {{ totProve.c1 }}</v-col>
             <v-col cols="2">19.2 = {{ totProve.c2 }}</v-col>
             <v-col cols="2">19.3 = {{ totProve.c3 }}</v-col>
-            <v-col cols="2">
-                <v-btn @click="handleSave" text color="success"> Chiudi </v-btn>
+            <v-col cols="1">
+                <v-btn @click="handleSave" color="">
+                    <v-icon>mdi-close</v-icon>
+                </v-btn>
             </v-col>
         </v-row>
         <!-- Riga inserimento valori  -->
@@ -19,7 +23,7 @@
                     v-model="itemEdit.corrente"
                 >
                     <template v-slot:label>
-                        <div>Corrente di prova :</div>
+                        <div class="text-h5">Corrente nominale :</div>
                     </template>
                     <v-radio label="10A" value="10"></v-radio>
                     <v-radio label="16A" value="16"></v-radio>
@@ -212,7 +216,8 @@ export default {
             let tmp = {
                 prove: this.prove,
                 numGruppi: this.numGruppi,
-                totProveCarichi: this.totProve
+                totProveCarichi: this.totProve,
+                totSamples: this.totAllProve
             };
             let json = JSON.stringify(tmp);
             let result = JSON.parse(json);

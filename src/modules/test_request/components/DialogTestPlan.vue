@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-dialog v-model="dialog" max-width="750" persistent>
+        <v-dialog v-model="dialog" max-width="850" persistent>
             <v-card class="pa-5">
                 <form-testplan
                     @salva="handleSaveTestPlan"
@@ -30,13 +30,13 @@ export default {
             this.obj.c1 = result.totProveCarichi.c1;
             this.obj.c2 = result.totProveCarichi.c2;
             this.obj.c3 = result.totProveCarichi.c3;
+            this.obj.samples = result.totSamples;
             this.obj.testProgram = result.prove.slice();
             this.dialog = false;
-            this.$emit('chiudi',this.obj);
+            this.$emit('chiudi', this.obj);
         }
     },
-    computed: {
-    },
+    computed: {},
     watch: {
         mostra: function (valore) {
             this.dialog = valore;
