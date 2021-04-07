@@ -40,11 +40,12 @@ export default {
                         id: cont,
                         idCarico: i,
                         label: `${carico}-${result.corrente}A`,
-                        corrente:result.corrente,
+                        corrente: result.corrente,
                         campioni: numCampioni,
-                        idRequest: result.idRequest,
-                        titolo: result.titolo,
-                        titoloProgetto:result.titoloProgetto
+                        titolo: result.titolo, //Gruppo prova
+                        idRequest: result.idRequest, //id test request
+                        titoloProgetto: result.titoloProgetto, //prfogetto test request
+                        descrizione: result.descrizione //Descrione test request
                     });
 
                     cont++;

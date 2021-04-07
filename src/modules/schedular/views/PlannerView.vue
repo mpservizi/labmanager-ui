@@ -166,6 +166,7 @@ export default {
                             // prova.id = item;
                             prova.idRequest = item._id;
                             prova.titoloProgetto = item.titoloProgetto;
+                            prova.descrizione = item.descrizione;
                             lista.push(prova);
                             cont++;
                         }

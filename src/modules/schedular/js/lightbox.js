@@ -7,12 +7,12 @@ export function initLightbox(myScheduler) {
             type: 'textarea',
             height: 30
         },
-        // {
-        //     map_to: 'idRequest',
-        //     name: 'request',
-        //     type: 'textarea',
-        //     height: 30
-        // },
+        {
+            map_to: 'descrizione',
+            name: 'descrizione',
+            type: 'textarea',
+            height: 30
+        },
         {
             map_to: 'idCarico',
             name: 'carico',
@@ -48,6 +48,7 @@ export function initLightbox(myScheduler) {
 
     //labels
     myScheduler.locale.labels.section_progetto = 'Progetto';
+    myScheduler.locale.labels.section_descrizione = 'Descrizione';
     myScheduler.locale.labels.section_carico = 'Carico';
     // myScheduler.locale.labels.section_request = 'Test request';
     myScheduler.locale.labels.section_risorsa = 'Risorsa';
@@ -57,7 +58,7 @@ export function initLightbox(myScheduler) {
     //Disabilito i campi nel lightbox
     myScheduler.attachEvent('onLightbox', function(task_id) {
         document.getElementsByTagName('textarea')[0].disabled = true;
-        // document.getElementsByTagName('textarea')[1].disabled = true;
+        document.getElementsByTagName('textarea')[1].disabled = true;
     });
 
     // myScheduler.attachEvent('onBeforeLightbox', function(id) {
