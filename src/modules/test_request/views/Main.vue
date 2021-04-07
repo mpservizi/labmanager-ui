@@ -1,6 +1,14 @@
 <template>
     <div>
-        <v-btn class="mb-5" :to="{ name: 'add_request' }">Add new</v-btn>
+        <v-row>
+            <v-spacer></v-spacer>
+            <v-col cols="1">
+                <v-btn class="mb-5 info" solo :to="{ name: 'add_request' }"
+                    >Add new</v-btn
+                >
+            </v-col>
+        </v-row>
+
         <v-data-table
             :headers="headers"
             :items="listaRichieste"
@@ -12,7 +20,9 @@
                 {{ labelStato(item.stato) }}
             </template>
             <template v-slot:[`item.priority`]="{ item }">
-                {{ labelPrio(item.priority) }}
+                <v-chip :color="getColor(item.priority)" dark>
+                    {{ labelPrio(item.priority) }}
+                </v-chip>
             </template>
         </v-data-table>
     </div>
@@ -61,6 +71,11 @@ export default {
         labelPrio(idPrio) {
             let result = getPrioById(idPrio);
             return result;
+        },
+        getColor(prio) {
+            if (prio == 1) return 'red';
+            else if (prio == 2) return 'orange';
+            else return 'green';
         }
     },
     computed: {
