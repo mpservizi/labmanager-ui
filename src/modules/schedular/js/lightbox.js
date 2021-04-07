@@ -45,19 +45,13 @@ export function initLightbox(myScheduler) {
             name: 'sample',
             type: 'textarea',
             height: 30
+        },
+        {
+            map_to: 'time',
+            name: 'time',
+            type: 'calendar_time',
+            height: 30
         }
-        // {
-        //   map_to: "is_paid",
-        //   name: "is_paid",
-        //   type: "checkbox",
-        //   checked_value: true,
-        //   unchecked_value: false,
-        // },
-        // {
-        //     map_to: 'time',
-        //     name: 'time',
-        //     type: 'calendar_time'
-        // }
     ];
 
     //labels
@@ -68,7 +62,7 @@ export function initLightbox(myScheduler) {
     // myScheduler.locale.labels.section_request = 'Test request';
     myScheduler.locale.labels.section_risorsa = 'Risorsa';
     myScheduler.locale.labels.section_sample = 'Sample code';
-    // myScheduler.locale.labels.section_time = 'Time';
+    myScheduler.locale.labels.section_time = 'Data';
 
     //Disabilito i campi nel lightbox
     myScheduler.attachEvent('onLightbox', function(task_id) {
