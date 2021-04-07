@@ -203,7 +203,7 @@ export default {
                 this.prove.splice(posItem, 1);
             } else {
                 //Genero id per nuovo item
-                obj.id = this.prove.length + 1;
+                obj.id = 'tp-' + new Date().getTime();
             }
             //Inserisco oggetto nella matrice
             this.prove.push(obj);

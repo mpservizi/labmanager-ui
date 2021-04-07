@@ -163,7 +163,7 @@ export default {
                             prova.stato == ENUM_STATI_RICHIESTE.TO_PLAN
                         ) {
                             //Aggiungere id request nel form di creazione della richiesta
-                            prova.id = index;
+                            // prova.id = item;
                             prova.idRequest = item._id;
                             prova.titoloProgetto = item.titoloProgetto;
                             lista.push(prova);
