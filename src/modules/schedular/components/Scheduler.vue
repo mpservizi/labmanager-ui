@@ -4,8 +4,21 @@
         <div class="box_data">
             <div class="dhx_cal_navline">
                 <div>
-                    <v-btn text small class="mr-1" :class="{info:scalaAttiva==2}" @click="handleScalaSettimanale">Settimanale</v-btn>                    
-                    <v-btn text small :class="{info:scalaAttiva==1}" @click="handleScalaMensile">Mensile</v-btn>
+                    <v-btn
+                        text
+                        small
+                        class="mr-1"
+                        :class="{ info: scalaAttiva == 2 }"
+                        @click="handleScalaSettimanale"
+                        >Settimanale</v-btn
+                    >
+                    <v-btn
+                        text
+                        small
+                        :class="{ info: scalaAttiva == 1 }"
+                        @click="handleScalaMensile"
+                        >Mensile</v-btn
+                    >
                 </div>
                 <div class="dhx_cal_prev_button">&nbsp;</div>
                 <div class="dhx_cal_next_button">&nbsp;</div>
@@ -27,10 +40,11 @@ export default {
     data() {
         return {
             pronto: false,
-            scalaAttiva:2//deafult settimanale
+            scalaAttiva: 2 //deafult settimanale
         };
     },
     components: { Filtro },
+    created() {},
     methods: {
         filtra(valore) {
             MyPlanner.filtraRisorse(valore);
@@ -49,13 +63,14 @@ export default {
             this.pronto = true;
         },
         handleScalaMensile() {
-            this.scalaAttiva=1;
+            this.scalaAttiva = 1;
         },
         handleScalaSettimanale() {
-            this.scalaAttiva=2;
+            this.scalaAttiva = 2;
         }
     },
     mounted: function () {
+        this.scalaAttiva = MyPlanner.getScalaAttiva();
         MyPlanner.init(this.$refs.scheduler_here);
         this.load();
     },
@@ -70,7 +85,7 @@ export default {
         needSave: function () {
             this.save();
         },
-        scalaAttiva:function(newVal){
+        scalaAttiva: function (newVal) {
             this.cambiaScala(newVal);
         }
     }

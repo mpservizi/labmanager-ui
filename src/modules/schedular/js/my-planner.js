@@ -18,12 +18,13 @@ import { eventiToJson } from './data-parser.js';
 import {
     LISTA_RISORSE,
     SCALA_MENSILE,
+    SCALA_SETTIMANALE,
     LISTA_SELEZIONE_RISORSE
 } from './costanti.js';
 
 function initPlanner(container, dataInizio, view) {
     //Il componente viene ricilato. Inizializzo solo se non esiste in memoria
-    if(!myScheduler.myConfig){
+    if (!myScheduler.myConfig) {
         // Inizalizzo le liste vuote per le risrose
         myScheduler.serverList(LISTA_SELEZIONE_RISORSE);
         myScheduler.serverList(LISTA_RISORSE);
@@ -31,8 +32,8 @@ function initPlanner(container, dataInizio, view) {
         creaParamteriCustom(myScheduler);
         initPreConfig(myScheduler); //Configuration
         initLightbox(myScheduler); //Lightbox
-        initEventi(myScheduler); //Eventi    
-        myScheduler.xy.scale_height=30; //Altezza riga scala
+        initEventi(myScheduler); //Eventi
+        myScheduler.xy.scale_height = 30; //Altezza riga scala
     }
     //Init schedular
     myScheduler.init(container, new Date(), 'timeline');
@@ -61,7 +62,7 @@ async function loadDati() {
     try {
         let risorse = await loadRisorse();
         let listaSelezioneRisorse = risorse.map(item => {
-            return { key: item.key, label: item.label};
+            return { key: item.key, label: item.label };
         });
         myScheduler.updateCollection(LISTA_RISORSE, risorse);
 
@@ -88,12 +89,16 @@ function cambiaScala(valore) {
         setScalaSettimanale();
     }
 }
-function creaTaskPlanner(params) {}
+function getScalaAttiva() {
+    //Se non è ancora inizializzato l'oggetto custom
+    if (!myScheduler.myConfig) return SCALA_SETTIMANALE;
+    return myScheduler.myConfig.paramScala.scala;
+}
 export const MyPlanner = {
     init: initPlanner,
     filtraRisorse,
     loadDati,
     saveDati,
     cambiaScala,
-    creaTaskPlanner
+    getScalaAttiva
 };
