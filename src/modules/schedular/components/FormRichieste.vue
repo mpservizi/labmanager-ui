@@ -35,11 +35,13 @@
                             Cancel
                         </v-btn>
                         <v-spacer></v-spacer>
-                        <v-btn color="info" @click.stop="completa">
+                        <v-btn color="success" @click.stop="completa">
                             Pianificato
                         </v-btn>
                         <v-spacer></v-spacer>
-                        <v-btn color="success" @click.stop="save"> Save </v-btn>
+                        <v-btn color="info" @click.stop="save">
+                            Seleziona
+                        </v-btn>
                     </v-card-actions>
                 </v-card>
             </v-col>

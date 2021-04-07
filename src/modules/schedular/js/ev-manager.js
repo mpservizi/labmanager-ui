@@ -8,7 +8,7 @@ import {
 
 import { filtraRisorse, showMessage } from './my-func.js';
 import { centraViewOggi } from './my-view.js';
-import { LISTA_RISORSE } from './costanti.js';
+import { LISTA_RISORSE, LISTA_RISORSE_FILTRATA } from './costanti.js';
 export function initEventi(myScheduler) {
     /** Default values per new event */
     myScheduler.attachEvent('onEventCreated', handleNewEvento);
@@ -85,7 +85,8 @@ export function initEventi(myScheduler) {
     ) {
         // console.log('Col: ' + x_ind);
         // console.log('Data: ' + x_val);
-        let listaRisorse = myScheduler.serverList(LISTA_RISORSE);
+        // let listaRisorse = myScheduler.serverList(LISTA_RISORSE);
+        let listaRisorse = myScheduler.serverList(LISTA_RISORSE_FILTRATA);
         let risorsa = listaRisorse[y_ind];
         let obj = {
             data_inzio: x_val,
