@@ -76,6 +76,7 @@
                     v-model="campi.priority"
                     label="Priorità"
                     required
+                    type="number"
                 ></v-text-field>
             </v-col>
         </v-row>
