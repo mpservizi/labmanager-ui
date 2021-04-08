@@ -1,24 +1,23 @@
 <template>
     <v-app>
-        <v-navigation-drawer v-model="drawer" app>
-            <!--  -->
-        </v-navigation-drawer>
+        <!-- <v-navigation-drawer v-model="drawer" app>
+        </v-navigation-drawer> -->
 
         <v-app-bar app color="primary" dark dense>
-            <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+            <!-- <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon> -->
 
             <v-toolbar-title>Brescia-Lab</v-toolbar-title>
             <v-btn icon to="/" class="ml-5" plain>
                 <v-icon>mdi-home</v-icon>
             </v-btn>
-            <breadcrumbs class="app_links"></breadcrumbs>
+            <!-- <breadcrumbs class="app_links"></breadcrumbs> -->
         </v-app-bar>
 
         <v-main>
             <v-container fluid class="app_box">
                 <div class="router_box">
                     <router-view></router-view>
-                <!-- <test-planner-view></test-planner-view> -->
+                    <!-- <test-planner-view></test-planner-view> -->
                 </div>
             </v-container>
         </v-main>
@@ -31,17 +30,16 @@
 </template>
 
 <script>
-import Breadcrumbs from './components/Breadcrumbs';
+// import Breadcrumbs from './components/Breadcrumbs';
 // import TestPlannerView from 'Moduli/schedular/views/PlannerView.vue';
 export default {
     name: 'App',
-    components: { Breadcrumbs },
+    components: {},
     data: () => ({
-        drawer: false,
-        dev: true
+        // drawer: false,
     }),
-    computed:{
-        msgLoading(){
+    computed: {
+        msgLoading() {
             return this.$store.state.isLoading;
         }
     }
