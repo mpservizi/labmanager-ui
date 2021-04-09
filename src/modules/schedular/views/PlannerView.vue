@@ -126,7 +126,6 @@ export default {
         handleCellDblClick(params) {
             //Se è selezionata una prova
             if (this.provaAttiva) {
-                console.log(this.provaAttiva);
                 let obj = { ...params, ...this.provaAttiva };
                 //Creo in task in schedular
                 let result = creaTaskPerProva(obj);

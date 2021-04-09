@@ -24,8 +24,8 @@ export function eventiToJson(eventi) {
             //campi modificati prima di salvare sul server
             // let data_fine = dateToStr(item.end_date);
             // let data_inizio = dateToStr(item.start_date);
-            item.start_date.setHours(13);
-            item.end_date.setHours(20);
+            item.start_date.setHours(0);
+            item.end_date.setHours(23);
             let data_fine = MyDate.dateToStr(item.end_date);
             let data_inizio = MyDate.dateToStr(item.start_date);
             let nomeCarico = ricavaNomeCaricoDaId(item.idCarico);
@@ -77,8 +77,8 @@ export function parseEventiServer(datiServer) {
             // let s_d = MyDate.strToDateServer(item.start_date);
             // let e_d = MyDate.strToDateServer(item.end_date);
             //Imposto ora per evitare bug reszise on drag
-            s_d.setHours(13);
-            e_d.setHours(20);
+            s_d.setHours(0);
+            e_d.setHours(23);
             let idCarico = ricavaIdCarico(item.carico);
 
             return {

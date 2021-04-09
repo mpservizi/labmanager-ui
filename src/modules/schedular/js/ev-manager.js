@@ -9,6 +9,7 @@ import {
 import { filtraRisorse, showMessage } from './my-func.js';
 import { centraViewOggi } from './my-view.js';
 import { LISTA_RISORSE, LISTA_RISORSE_FILTRATA } from './costanti.js';
+import MyDate from '@/shared/my-date.js';
 export function initEventi(myScheduler) {
     /** Default values per new event */
     myScheduler.attachEvent('onEventCreated', handleNewEvento);
@@ -60,6 +61,27 @@ export function initEventi(myScheduler) {
         };
     });
 
+    /** Fine drag task, eseguo arrotondamento della data */
+    myScheduler.attachEvent('onDragEnd', function(id, mode, e) {
+        let event_obj = scheduler.getEvent(id);
+
+        //Calcolo la durata in giorni del task
+        let durata = MyDate.calcolaDifferenzaDateInGiorni(
+            event_obj.start_date,
+            event_obj.end_date
+        );
+        //Cre o la data di inizio con l'orario a 0:00
+        let sd = myScheduler.date.copy(
+            myScheduler.date.date_part(event_obj.start_date)
+        );
+        //Calcola la data di fine sommando la durata
+        let ed = myScheduler.date.add(sd, durata, 'day');
+        event_obj.start_date = sd;
+        event_obj.end_date = ed;
+        //Aggiorno evento
+        myScheduler.updateEvent(id);
+    });
+
     /**
      * Al click sul tasto Today
      */
@@ -71,8 +93,8 @@ export function initEventi(myScheduler) {
     /** Al clik su taso save in lightbox */
     myScheduler.attachEvent('onEventSave', function(id, ev, is_new) {
         //impoposto l'orario per la data di inizio e fine
-        ev.start_date.setHours(13);
-        ev.end_date.setHours(20);
+        ev.start_date.setHours(0);
+        ev.end_date.setHours(23);
         // console.log(ev);
         return true; // Con true prosegue le azioni di default
     });
