@@ -15,7 +15,7 @@ export function initEventi(myScheduler) {
     myScheduler.attachEvent('onEventCreated', handleNewEvento);
 
     /** Dopo il parsing dei dati */
-    myScheduler.attachEvent('onParse', function() {
+    myScheduler.attachEvent('onParse', function () {
         filtraRisorse('all');
     });
 
@@ -33,7 +33,7 @@ export function initEventi(myScheduler) {
     myScheduler.attachEvent('onEventCollision', handleEventCollsion);
 
     //** Quando i templates sono pronti. Definire qui i custom templates */
-    myScheduler.attachEvent('onTemplatesReady', function() {
+    myScheduler.attachEvent('onTemplatesReady', function () {
         //
         //Templates
         //
@@ -54,54 +54,40 @@ export function initEventi(myScheduler) {
         //     return 'S2';
         // };
         /** Titolo finestra lightbox */
-        myScheduler.templates.lightbox_header = function(start, end, ev) {
+        myScheduler.templates.lightbox_header = function (start, end, ev) {
             // var formatFunc = myScheduler.date.date_to_str('%d.%m.%Y');
             // return formatFunc(start) + ' - ' + formatFunc(end);
             return 'Detail prova';
         };
     });
 
-    /** Fine drag task, eseguo arrotondamento della data */
-    myScheduler.attachEvent('onDragEnd', function(id, mode, e) {
-        let event_obj = scheduler.getEvent(id);
-
-        //Calcolo la durata in giorni del task
-        let durata = MyDate.calcolaDifferenzaDateInGiorni(
-            event_obj.start_date,
-            event_obj.end_date
-        );
-        //Cre o la data di inizio con l'orario a 0:00
-        let sd = myScheduler.date.copy(
-            myScheduler.date.date_part(event_obj.start_date)
-        );
-        //Calcola la data di fine sommando la durata
-        let ed = myScheduler.date.add(sd, durata, 'day');
-        event_obj.start_date = sd;
-        event_obj.end_date = ed;
-        // event_obj.time = {
-        //     start_date: sd,
-        //     end_date: ed
-        // };
-        //Aggiorno evento
-        myScheduler.updateEvent(id);
-    });
-
-    myScheduler.attachEvent('onDblClick', function(id, e) {
-        console.log('dbl click');
-        //any custom logic here
+    /** Doppio click sul evento */
+    myScheduler.attachEvent('onDblClick', function (id, e) {
         return true;
     });
+
+
+    /** Quando cambia Evento con drag, eseguo arrotondamento della data */
+    myScheduler.attachEvent("onBeforeEventChanged", function (ev, e, is_new, original) {
+        //Se la data viene cambiata in onDragEnd non funziona più il doppio click sul evento
+        arrotondaEvento(ev);
+        return true;
+    });
+
+
+    // myScheduler.attachEvent('onDragEnd', function (id, mode, e) {
+    // });
 
     /**
      * Al click sul tasto Today
      */
-    myScheduler.attachEvent('onBeforeTodayDisplayed', function() {
+    myScheduler.attachEvent('onBeforeTodayDisplayed', function () {
         centraViewOggi();
         return false; //diabilito comportamento di default
     });
 
     /** Al clik su taso save in lightbox */
-    myScheduler.attachEvent('onEventSave', function(id, ev, is_new) {
+    myScheduler.attachEvent('onEventSave', function (id, ev, is_new) {
         //impoposto l'orario per la data di inizio e fine
         ev.start_date.setHours(2);
         ev.end_date.setHours(23);
@@ -109,14 +95,13 @@ export function initEventi(myScheduler) {
         return true; // Con true prosegue le azioni di default
     });
 
-    myScheduler.attachEvent('onCellDblClick', function(
+    myScheduler.attachEvent('onCellDblClick', function (
         x_ind,
         y_ind,
         x_val,
         y_val,
         e
     ) {
-        console.log('Col: ' + x_ind);
         // console.log('Data: ' + x_val);
         // let listaRisorse = myScheduler.serverList(LISTA_RISORSE);
         let listaRisorse = myScheduler.serverList(LISTA_RISORSE_FILTRATA);
@@ -139,6 +124,26 @@ export function initEventi(myScheduler) {
         // console.log(ev);
         ev.text = 'New test';
     }
+
+    /**
+ * Arrotonda la data del evento mantenendo la stessa durata
+ * @param {*} event_obj : evento da modifiare
+ */
+    function arrotondaEvento(event_obj) {
+        //Calcolo la durata in giorni del task
+        let durata = MyDate.calcolaDifferenzaDateInGiorni(
+            event_obj.start_date,
+            event_obj.end_date
+        );
+        //Cre o la data di inizio con l'orario a 0:00
+        let sd = myScheduler.date.date_part(event_obj.start_date);
+        //Calcola la data di fine sommando la durata
+        let ed = myScheduler.date.add(sd, durata, 'day');
+        //Aggiorna la data sul evento
+        event_obj.start_date = sd;
+        event_obj.end_date = ed;
+    }
+
 }
 
 function handleEventCollsion(ev, evs) {
