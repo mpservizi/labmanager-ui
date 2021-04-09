@@ -23,6 +23,8 @@
 <script>
 import Macchina from '../../components/Macchina';
 import { NOME_MODULO } from './../../costanti.js';
+const UPDATE_UI_SECONDS = 30; //Ogni quanti secondi aggiornare ui
+let pingTimer;
 export default {
     name: 'MacchinaView',
     components: {
@@ -34,6 +36,7 @@ export default {
         };
     },
     mounted() {
+        clearInterval(pingTimer);
         this.checkStore();
     },
     computed: {
@@ -86,23 +89,35 @@ export default {
         }
     },
     methods: {
+        //Verifica se lo store è pronto prima di richiedere i dati
         checkStore() {
-            //Se non esiste il modulo nello strore
+            //Se non esiste lo store gelobale
             if (!self.$store) {
                 let self = this;
                 //Controllo ogni 100ms
                 let timer = setInterval(function () {
+                    //Verifico se è presente lo stato del modulo nel store globale
                     if (self.$store?.state[NOME_MODULO]) {
                         clearInterval(timer);
                         self.storeReady = true;
                     }
-                }, 100);
+                }, 100); //Ripeto check ogni 100ms
             } else {
                 this.storeReady = true;
             }
+            //Al cambiamento di storeReady in true watcher chiama il metodo loadDati
         },
         async loadDati() {
             await this.$store.dispatch(NOME_MODULO + '/loadDati');
+            this.pingDati();
+        },
+        //Loop per richiedere dati al store
+        pingDati() {
+            let self = this;
+            clearInterval(pingTimer);
+            pingTimer = setInterval(() => {
+                self.loadDati();
+            }, UPDATE_UI_SECONDS * 1000);
         }
     },
     watch: {

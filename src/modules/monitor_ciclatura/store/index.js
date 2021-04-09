@@ -15,11 +15,8 @@ export default {
     },
     actions: {
         /** Metodo per inizializzare il modulo. Chiamato dopo la registrazione */
-        async init({ dispatch }) {
+        async init() {
             console.info('Installazione modulo : ' + NOME_MODULO);
-            setInterval(() => {
-                dispatch('loadDati');
-            }, 5000);
             return true; //Risultato funzione RegistraModulo
         },
         /** Richiede nuovi dati*/

@@ -8,7 +8,7 @@
  * @param {Number} secondi : numero dei secondi da verificare
  * @returns {Boolean}
  */
-function checkTempo(lastUpdate, secondi) {
+export function checkTempo(lastUpdate, secondi) {
     //  primo avvio
     if (lastUpdate == undefined) return true;
 
