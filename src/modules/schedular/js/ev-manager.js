@@ -78,8 +78,18 @@ export function initEventi(myScheduler) {
         let ed = myScheduler.date.add(sd, durata, 'day');
         event_obj.start_date = sd;
         event_obj.end_date = ed;
+        event_obj.time = {
+            start_date: sd,
+            end_date: ed
+        };
         //Aggiorno evento
         myScheduler.updateEvent(id);
+    });
+
+    myScheduler.attachEvent('onDblClick', function(id, e) {
+        console.log('dbl click');
+        //any custom logic here
+        return true;
     });
 
     /**
@@ -93,7 +103,7 @@ export function initEventi(myScheduler) {
     /** Al clik su taso save in lightbox */
     myScheduler.attachEvent('onEventSave', function(id, ev, is_new) {
         //impoposto l'orario per la data di inizio e fine
-        ev.start_date.setHours(0);
+        ev.start_date.setHours(2);
         ev.end_date.setHours(23);
         // console.log(ev);
         return true; // Con true prosegue le azioni di default
@@ -106,7 +116,7 @@ export function initEventi(myScheduler) {
         y_val,
         e
     ) {
-        // console.log('Col: ' + x_ind);
+        console.log('Col: ' + x_ind);
         // console.log('Data: ' + x_val);
         // let listaRisorse = myScheduler.serverList(LISTA_RISORSE);
         let listaRisorse = myScheduler.serverList(LISTA_RISORSE_FILTRATA);
@@ -123,6 +133,7 @@ export function initEventi(myScheduler) {
      * @param {*} event_id
      */
     function handleNewEvento(event_id) {
+        console.log('New event');
         //  Imposto i valori di default per nuovo evento
         let ev = myScheduler.getEvent(event_id);
         // console.log(ev);
