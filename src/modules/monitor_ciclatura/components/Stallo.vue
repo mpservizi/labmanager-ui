@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { STATI_STALLI } from '../store/ciclatura_module.js';
+import { STATI_STALLI } from '../costanti.js';
 export default {
     name: 'Stallo',
     props: ['params'],

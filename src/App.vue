@@ -10,6 +10,9 @@
             <v-btn icon to="/" class="ml-5" plain>
                 <v-icon>mdi-home</v-icon>
             </v-btn>
+            <v-btn icon :to="{ name: 'apps' }" class="ml-5" plain>
+                <v-icon>mdi-apps</v-icon>
+            </v-btn>
             <!-- <breadcrumbs class="app_links"></breadcrumbs> -->
         </v-app-bar>
 

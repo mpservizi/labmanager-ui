@@ -72,14 +72,14 @@ export default {
             return result;
         },
         ...mapGetters({
-            l180: 'MonitorCiclatura/Ciclatura/getL180',
-            l232: 'MonitorCiclatura/Ciclatura/getL232',
-            l2020: 'MonitorCiclatura/Ciclatura/getL2020'
+            l180: 'MonitorCiclatura/getL180',
+            l232: 'MonitorCiclatura/getL232',
+            l2020: 'MonitorCiclatura/getL2020'
         })
     },
     methods: {
         ...mapActions({
-            loadDati: 'MonitorCiclatura/Ciclatura/loadDati'
+            loadDati: 'MonitorCiclatura/loadDati'
         }),
         async caricaDati() {
             await this.loadDati();

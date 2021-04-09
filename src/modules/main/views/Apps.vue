@@ -7,6 +7,7 @@
                     dark
                     :to="{ name: app.routeName }"
                     max-width="300"
+                    height="150"
                 >
                     <v-card-title class="headline text-center">
                         {{ app.label }}

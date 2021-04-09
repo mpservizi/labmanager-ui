@@ -1,4 +1,6 @@
-import Main from '../views/Apps.vue';
+import AppsView from '../views/Apps.vue';
+// import GanttView from 'Moduli/gantt/views/Main.vue';
+import MacchinaPage from 'Moduli/monitor_ciclatura/views/Ciclatura/MacchinaView.vue';
 // import { LISTA_MODULI } from '@/shared/info-moduli';
 
 // LISTA_MODULI.forEach(item => {
@@ -8,8 +10,16 @@ import Main from '../views/Apps.vue';
 export default [
     {
         path: '',
-        component: Main,
+        component: MacchinaPage,
         name: 'home',
+        meta: {
+            breadcrumb: [{ name: 'Homepage' }]
+        }
+    },
+    {
+        path: '/apps',
+        component: AppsView,
+        name: 'apps',
         meta: {
             breadcrumb: [{ name: 'Homepage' }]
         }
