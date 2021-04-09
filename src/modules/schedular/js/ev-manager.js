@@ -153,8 +153,16 @@ export function initEventi(myScheduler) {
             event_obj.start_date,
             event_obj.end_date
         );
+        if(durata<1) durata=1;
+
+        let ore = event_obj.start_date.getHours();
+        let sd = event_obj.start_date;
+        //Verifico se arrotondare la data d'inizo al giorno successivo
+        if(ore>12){
+            sd = myScheduler.date.add( event_obj.start_date, 1, 'day')
+        }
         //Cre o la data di inizio con l'orario a 0:00
-        let sd = myScheduler.date.date_part(event_obj.start_date);
+        sd = myScheduler.date.date_part(sd);
         //Calcola la data di fine sommando la durata
         let ed = myScheduler.date.add(sd, durata, 'day');
         //Aggiorna la data sul evento
