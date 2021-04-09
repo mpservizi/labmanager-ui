@@ -69,6 +69,8 @@ async function loadDati() {
         filtraRisorse();
 
         let eventi = await loadDatiCiclatura();
+        //Cancello tutti gli eventi esistenti prima di caricare nuovi dati
+        myScheduler.clearAll();
         myScheduler.parse(eventi);
 
         myScheduler.updateCollection(

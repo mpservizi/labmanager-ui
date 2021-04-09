@@ -98,6 +98,10 @@ export default {
         this.loadDati();
     },
     mounted() {},
+    destroyed() {
+        console.log('reset');
+        this.resetCampi();
+    },
     computed: {
         msgRichieste() {
             let msg = 'Nessuna richiesta da pianificare';
@@ -122,6 +126,7 @@ export default {
         handleCellDblClick(params) {
             //Se è selezionata una prova
             if (this.provaAttiva) {
+                console.log(this.provaAttiva);
                 let obj = { ...params, ...this.provaAttiva };
                 //Creo in task in schedular
                 let result = creaTaskPerProva(obj);
@@ -211,13 +216,29 @@ export default {
                 this.dialog = true;
             } else {
             }
+        },
+        //resetto i valori memorizzati nella cache del componente
+        resetCampi() {
+            this.dialog = false;
+            this.listaPlannnig = []; //lista per test request dialog
+            this.gruppoProve = []; //Riga selezionata nel request dialog
+            this.aggiornareConteggio = false; //per aggioranare il numero di prove da pianificare nel gruppo prove
+            this.provaAttiva = null; //prova selezionat anel gruppo prove
+            this.filtro = 'all'; //cambio filtro macchine schedular
+            this.needSave = false; //bottone save dati schedular
+            this.datiRichieste = {}; //dati test request da server,
+            this.numProveToPlan = 0; //Numero di prove ancora da pianificare,
+            this.palnnedResult = null; //Valore riga passato da tasto pianificato nel dialog
+            this.showPlanned = false; //Se mostrare richieste già pianificate nella lista
         }
     },
     watch: {
         palnnedResult: function () {
+            console.log('watch filtra risorse');
             this.filtraListaProve();
         },
         showPlanned: function () {
+            console.log('watch planned');
             this.creaListaToPlan();
         }
     }
