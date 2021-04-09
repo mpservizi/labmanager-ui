@@ -1,14 +1,7 @@
 <template>
     <div>
         <div class="container">
-            <v-row v-if="isFake">
-                <v-col cols="12">
-                    <v-btn @click="loadDati" class="primary"
-                        >Load fake dati</v-btn
-                    >
-                </v-col>
-            </v-row>
-            <v-row>
+            <v-row v-if="pronto">
                 <v-col
                     :cols="sizeCols"
                     v-for="(macchina, pos) in macchine"
@@ -20,16 +13,16 @@
                     ></macchina>
                 </v-col>
             </v-row>
+            <v-row v-else>
+                <v-col cols="12" class="text-h1">Loading...</v-col>
+            </v-row>
         </div>
     </div>
 </template>
 
 <script>
 import Macchina from '../../components/Macchina';
-import { isFake } from '@/shared/ambiente';
-import { mapGetters, mapActions } from 'vuex';
-import CiclaturaConfig from '../../configs/ciclatura.js';
-
+import { NOME_MODULO } from './../../costanti.js';
 export default {
     name: 'MacchinaView',
     components: {
@@ -37,18 +30,16 @@ export default {
     },
     data() {
         return {
-            isFake: false,
-            macchine: []
+            storeReady: false
         };
     },
     mounted() {
-        this.isFake = isFake();
-        this.caricaDati();
-        setInterval(() => {
-            this.caricaDati();
-        }, CiclaturaConfig.INTERVALLO_CHECK);
+        this.checkStore();
     },
     computed: {
+        pronto() {
+            return this.storeReady;
+        },
         //  Size della colonna Macchina
         sizeCols: function () {
             let result = 6;
@@ -63,44 +54,62 @@ export default {
                     result = 6;
                     break;
                 case 'lg':
-                    result = 6;
+                    result = 4;
                     break;
                 case 'xl':
-                    result = 3;
+                    result = 4;
                     break;
             }
             return result;
         },
-        ...mapGetters({
-            l180: 'MonitorCiclatura/getL180',
-            l232: 'MonitorCiclatura/getL232',
-            l2020: 'MonitorCiclatura/getL2020'
-        })
-    },
-    methods: {
-        ...mapActions({
-            loadDati: 'MonitorCiclatura/loadDati'
-        }),
-        async caricaDati() {
-            await this.loadDati();
-            this.macchine = [
+        macchine() {
+            if (!this.pronto) return [];
+            let dati = this.$store.state[NOME_MODULO].dati;
+            return [
                 {
-                    config: this.l180,
+                    config: dati['L180'],
                     titolo: 'L180'
                 },
                 {
-                    config: this.l232,
+                    config: dati['L232'],
                     titolo: 'L232'
                 },
                 {
-                    config: this.l2020,
+                    config: dati['L2020'],
                     titolo: 'L2020'
-                },
-                {
-                    config: this.l180,
-                    titolo: 'L2021'
                 }
+                // {
+                //     config: dati['L2021'],
+                //     titolo: 'L2021'
+                // }
             ];
+        }
+    },
+    methods: {
+        checkStore() {
+            //Se non esiste il modulo nello strore
+            if (!self.$store) {
+                let self = this;
+                //Controllo ogni 100ms
+                let timer = setInterval(function () {
+                    if (self.$store?.state[NOME_MODULO]) {
+                        clearInterval(timer);
+                        self.storeReady = true;
+                    }
+                }, 100);
+            } else {
+                this.storeReady = true;
+            }
+        },
+        async loadDati() {
+            await this.$store.dispatch(NOME_MODULO + '/loadDati');
+        }
+    },
+    watch: {
+        storeReady: function (newval) {
+            if (newval) {
+                this.loadDati();
+            }
         }
     }
 };
