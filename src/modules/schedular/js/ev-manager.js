@@ -78,10 +78,10 @@ export function initEventi(myScheduler) {
         let ed = myScheduler.date.add(sd, durata, 'day');
         event_obj.start_date = sd;
         event_obj.end_date = ed;
-        event_obj.time = {
-            start_date: sd,
-            end_date: ed
-        };
+        // event_obj.time = {
+        //     start_date: sd,
+        //     end_date: ed
+        // };
         //Aggiorno evento
         myScheduler.updateEvent(id);
     });
