@@ -1,4 +1,7 @@
 export const NOME_MODULO = 'MonitorCiclatura';
+
+export const UPDATE_UI_SECONDS = 30; //Ogni quanti secondi aggiornare ui
+export const DURATA_CACHE_SECONDS = 50; //Dopo quanti secondi aggiornare la cache
 //  Elenco dei possibili stati per gli stalli
 export const LISTA_STATI = [
     'In progress',

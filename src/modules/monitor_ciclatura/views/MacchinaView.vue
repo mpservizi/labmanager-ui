@@ -22,8 +22,7 @@
 
 <script>
 import Macchina from '../components/Macchina.vue';
-import { NOME_MODULO } from '../costanti.js';
-const UPDATE_UI_SECONDS = 30; //Ogni quanti secondi aggiornare ui
+import { NOME_MODULO, UPDATE_UI_SECONDS } from '../costanti.js';
 let pingTimer;
 export default {
     name: 'MacchinaView',
@@ -38,6 +37,9 @@ export default {
     mounted() {
         clearInterval(pingTimer);
         this.checkStore();
+    },
+    destroyed() {
+        clearInterval(pingTimer);
     },
     computed: {
         pronto() {
@@ -112,14 +114,15 @@ export default {
         },
         async loadDati() {
             await this.$store.dispatch(NOME_MODULO + '/loadDati');
-            this.pingDati();
         },
         //Loop per richiedere dati al store
         pingDati() {
             let self = this;
             clearInterval(pingTimer);
             pingTimer = setInterval(() => {
-                self.loadDati();
+                if (self.storeReady) {
+                    self.loadDati();
+                }
             }, UPDATE_UI_SECONDS * 1000);
         }
     },
@@ -127,6 +130,7 @@ export default {
         storeReady: function (newval) {
             if (newval) {
                 this.loadDati();
+                this.pingDati();
             }
         }
     }
