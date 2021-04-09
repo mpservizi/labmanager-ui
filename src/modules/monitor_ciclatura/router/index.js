@@ -1,16 +1,10 @@
-import MacchinaPage from '../views/Ciclatura/MacchinaView.vue';
-import StalloDetailPage from '../views/Ciclatura/StalloDetail.vue';
+import MacchinaPage from 'Moduli/monitor_ciclatura/views/MacchinaView.vue';
+import StalloDetailPage from 'Moduli/monitor_ciclatura/views/StalloDetail.vue';
 export default [
     {
         path: '/monitor_ciclatura',
         name: 'monitor_ciclatura',
-        component: MacchinaPage,
-        meta: {
-            breadcrumb: [
-                { name: 'Homepage', link: 'home' },
-                { name: 'Monitor ciclatura' }
-            ]
-        }
+        component: MacchinaPage
     },
     {
         path: '/detail',

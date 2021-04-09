@@ -1,5 +1,14 @@
 import { STATI_STALLI, TIPI_PRODOTTO } from '../costanti.js';
+/**
+ * Esegue il parsing dei dati da Api
+ * @param {Array} dati : Array con dati della ciclatura
+ * @returns {Object}  :Oggetto che ha come chiave il nome della macchina
+ */
 export function parseDatiServer(dati) {
+    if (dati == null) {
+        alert('Dati ciclatura non validi');
+        return;
+    }
     let result = {};
     //ogni chiave corrisponde al nome della macchina, L180,L232 ecc
     //Il valore della chiave è array con oggetti stallo
@@ -80,11 +89,13 @@ function getTipoStallo(macchina, stallo) {
             result = TIPI_PRODOTTO.SOCKET;
             break;
         case 'L180':
+            //Stalli prese da 1 a 4
             result = ['1', '2', '3', '4'].includes(stallo)
                 ? TIPI_PRODOTTO.SOCKET
                 : TIPI_PRODOTTO.SWITCH;
             break;
         case 'L232':
+            //Stalli prese
             result = ['3', '4'].includes(stallo)
                 ? TIPI_PRODOTTO.SOCKET
                 : TIPI_PRODOTTO.SWITCH;

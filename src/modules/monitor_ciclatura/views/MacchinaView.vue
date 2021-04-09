@@ -14,15 +14,15 @@
                 </v-col>
             </v-row>
             <v-row v-else>
-                <v-col cols="12" class="text-h1">Loading...</v-col>
+                <!-- <v-col cols="12" class="text-h1">Loading...</v-col> -->
             </v-row>
         </div>
     </div>
 </template>
 
 <script>
-import Macchina from '../../components/Macchina';
-import { NOME_MODULO } from './../../costanti.js';
+import Macchina from '../components/Macchina.vue';
+import { NOME_MODULO } from '../costanti.js';
 const UPDATE_UI_SECONDS = 30; //Ogni quanti secondi aggiornare ui
 let pingTimer;
 export default {
