@@ -49,7 +49,7 @@ export function initPreConfig(myScheduler) {
         y_unit: myScheduler.serverList(LISTA_RISORSE_FILTRATA),
         y_property: EV_ID_RISORSA,
         render: 'bar',
-        round_position: true,
+        // round_position: true,
         dy: 40,
         event_dy: 'full', //altezza evento nella riga risorsa
         second_scale: {

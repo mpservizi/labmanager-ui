@@ -38,5 +38,5 @@ export default {
 
 <style scoped>
 @import "./../libs/schedular/dhtmlxscheduler.css";
-@import "./../css/my-style.css";
+/* @import "./../css/my-style.css"; */
 </style>

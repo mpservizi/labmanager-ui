@@ -1,12 +1,18 @@
+09/04/2021
+1 - Non funziona il doppio click su task schedular
+
 07/04/2021
 schedular:
-1-quando inizia lo spostamento del task, la durata viene aumentata di un giorno
+1-quando inizia lo spostamento del task, la durata viene aumentata di un giorno. Done
 2-azzerare al cache delle prove da pianificare al cariamento della schermata del schedular, 
-per evitare incongruenze causate dal cambio della pagina durante la programmazioen delle prove
+per evitare incongruenze causate dal cambio della pagina durante la programmazioen delle prove. Done
 3-Quando ci sono 2 task nella stessa cella, uno sparisce e poi ricompare. DONE
 4-Mettere la schermata di planner come default. Done
 5-Eliminare navigazione con breadcumb links. Done
 
 Risoluzione:
+1 - Disabilitato arrotondamento automatico della data. Al fine drag calcolo la durata task manualmente
+2 - Resetto i dati prima di caricare.
 3 - Cambiato parametri nel config del schedular che impedivano il ridimensionamento automatico delle celle
+4 - Impostatomonitor ciclatura come default view
 5 - Eliminato componente in App.vue
