@@ -68,6 +68,9 @@ export default {
         macchine() {
             if (!this.pronto) return [];
             let dati = this.$store.state[NOME_MODULO].dati;
+            if (!dati) {
+                return [];
+            }
             return [
                 {
                     config: dati['L180'],

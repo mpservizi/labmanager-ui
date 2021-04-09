@@ -7,7 +7,7 @@ import { fake_getDatiCiclatura } from '../fake/ciclatura';
 import { checkTempo } from 'Moduli/monitor_ciclatura/js/util.js';
 
 export const Endpoints = {
-    GET_DATI: 'ciclatura'
+    GET_DATI: 'monitor'
 };
 
 const TEMPO_CACHE_DATI = 50000; //SECONDI * 1000

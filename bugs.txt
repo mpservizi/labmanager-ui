@@ -4,8 +4,9 @@ schedular:
 2-azzerare al cache delle prove da pianificare al cariamento della schermata del schedular, 
 per evitare incongruenze causate dal cambio della pagina durante la programmazioen delle prove
 3-Quando ci sono 2 task nella stessa cella, uno sparisce e poi ricompare. DONE
-4-Mettere la schermata di planner come default
-5-Eliminare navigazione con breadcumb links
+4-Mettere la schermata di planner come default. Done
+5-Eliminare navigazione con breadcumb links. Done
 
 Risoluzione:
 3 - Cambiato parametri nel config del schedular che impedivano il ridimensionamento automatico delle celle
+5 - Eliminato componente in App.vue

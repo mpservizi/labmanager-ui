@@ -1,4 +1,4 @@
-import { STATI_STALLI, TIPI_PRODOTTO } from '../costanti.js';
+import { getLabelStatoById, TIPI_PRODOTTO } from '../costanti.js';
 /**
  * Esegue il parsing dei dati da Api
  * @param {Array} dati : Array con dati della ciclatura
@@ -9,15 +9,15 @@ export function parseDatiServer(dati) {
         alert('Dati ciclatura non validi');
         return;
     }
-    let result = {};
-    //ogni chiave corrisponde al nome della macchina, L180,L232 ecc
-    //Il valore della chiave è array con oggetti stallo
-    for (const [key, stalli] of Object.entries(dati)) {
-        result[key] = []; //inizializzo array per stalli macchina
-        stalli.forEach(stallo => {
-            result[key].push(parseStallo(stallo));
-        });
-    }
+    let result = {
+        L180: [],
+        L232: [],
+        L2020: []
+    };
+    dati.forEach(item => {
+        let stallo = parseStallo(item);
+        result[stallo.macchina].push(stallo);
+    });
     return result;
 }
 
@@ -41,41 +41,12 @@ function parseStallo(stallo) {
         nome: ' ' + stallo.Stallo,
         tecnico: stallo.Tecnico,
         prova: stallo.Prova,
-        stato: getIdStato(stallo.Stato),
+        stato: getLabelStatoById(stallo.Stato),
         start: stallo.Start,
         end: stallo.End,
         timestamp: stallo['Export time'],
         tipo: getTipoStallo(stallo.Macchina, stallo.Stallo)
     };
-}
-
-//  Resituisce la costante stato stallo in base al valore di testo indicato
-function getIdStato(stato) {
-    let result = '';
-    switch (stato) {
-        case 'In progress':
-            result = STATI_STALLI.IN_PROGRESS;
-            break;
-        case 'Waiting':
-            result = STATI_STALLI.WAITING;
-            break;
-        case 'End ok':
-            result = STATI_STALLI.END_OK;
-            break;
-        case 'Error':
-            result = STATI_STALLI.ERROR;
-            break;
-        case 'Manual stop':
-            result = STATI_STALLI.MANUAL_STOP;
-            break;
-        case 'Ready':
-            result = STATI_STALLI.READY;
-            break;
-        case 'Safety block':
-            result = STATI_STALLI.SAFETY_BLOCK;
-            break;
-    }
-    return result;
 }
 
 //  Restituisce il tipo di stallo in base alla macchina e nome stallo

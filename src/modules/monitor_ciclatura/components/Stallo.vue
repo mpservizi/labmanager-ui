@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { STATI_STALLI } from '../costanti.js';
+import { ENUM_STATI_STALLI } from '../costanti.js';
 export default {
     name: 'Stallo',
     props: ['params'],
@@ -35,16 +35,16 @@ export default {
             let result = 'vuoto';
             let classe = this.params.stato;
             const fermo = [
-                STATI_STALLI.ERROR,
-                STATI_STALLI.SAFETY_BLOCK,
-                STATI_STALLI.MANUAL_STOP
+                ENUM_STATI_STALLI.ERROR,
+                ENUM_STATI_STALLI.SAFETY_BLOCK,
+                ENUM_STATI_STALLI.MANUAL_STOP
             ];
             //  Coloro di rosso in caso di fermo
             if (fermo.includes(classe)) {
                 result = 'errore';
             }
             //  Coloro di giallo se è in progress
-            if (classe == STATI_STALLI.IN_PROGRESS) {
+            if (classe == ENUM_STATI_STALLI.IN_PROGRESS) {
                 result = 'in_progress';
             }
             //  In tutti gli altri casi lo stallo è colorato di bianco

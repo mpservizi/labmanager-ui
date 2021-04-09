@@ -4,7 +4,8 @@ module.exports = {
         disableHostCheck: true,
         proxy: {
             '^/api': {
-                target: 'http://10.39.51.46:3000',
+                // target: 'http://10.39.51.46:3000',
+                target: 'http://localhost:3000',
                 ws: true,
                 changeOrigin: true,
                 logLevel: 'debug'
