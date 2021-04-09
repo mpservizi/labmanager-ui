@@ -1,39 +1,26 @@
 <template>
     <div>
         <v-row>
-            <v-col cols="12" class="text-h3 text-center"
+            <v-col cols="12" class="text-h3 text-center primary--text"
                 >{{ dati.macchina }} - Stallo {{ dati.nome }}</v-col
             >
         </v-row>
         <v-row>
             <v-col cols="12">
-                <div class="d-flex justify-center text-center">
-                    <v-card class="pa-2 mr-4" height="200" width="200">
-                        <p>Tecnico : {{ dati.tecnico }}</p>
-                        <p>Info prova : {{ dati.prova }}</p>
-                    </v-card>
-                    <v-card class="pa-2 mr-4" height="200" width="200">
-                        <p>Stato prova: {{ dati.stato }}</p>
-                        <p>Tipo stallo: {{ dati.tipo }}</p>
-                    </v-card>
-
-                    <v-card class="pa-2" height="200" width="200">
-                        <p>Inizio : {{ dati.start }}</p>
-                        <p>Fine : {{ dati.end }}</p>
-                    </v-card>
-                </div>
-            </v-col>
-        </v-row>
-        <v-row>
-            <v-col cols="12">
-                <p class="text-caption text-center">
-                    Timestamp : {{ dati.timestamp }}
-                </p>
+                <v-list color="msfondo">
+                    <v-list-item>Tecnico : {{ dati.tecnico }}</v-list-item>
+                    <v-list-item>Info prova : {{ dati.prova }}</v-list-item>
+                    <v-list-item>Stato prova: {{ dati.stato }}</v-list-item>
+                    <v-list-item>Tipo stallo: {{ dati.tipo }}</v-list-item>
+                    <v-list-item>Inizio : {{ dati.start }}</v-list-item>
+                    <v-list-item>Fine : {{ dati.end }}</v-list-item>
+                    <v-list-item class="text-caption">Timestamp : {{ dati.timestamp }}</v-list-item>
+                </v-list>
             </v-col>
         </v-row>
         <v-row>
             <v-col class="text-center">
-                <v-btn @click="goBack" class="info">Torna indietro</v-btn>
+                <v-btn @click="goBack" class="minfo">Torna indietro</v-btn>
             </v-col>
         </v-row>
     </div>
@@ -66,5 +53,8 @@ export default {
 ul {
     list-style: none;
     text-align: start;
+}
+.v-list-item{
+    color: red !important;
 }
 </style>

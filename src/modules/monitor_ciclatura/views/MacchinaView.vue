@@ -1,5 +1,4 @@
 <template>
-    <div>
         <div class="container">
             <v-row v-if="pronto">
                 <v-col
@@ -17,7 +16,6 @@
                 <!-- <v-col cols="12" class="text-h1">Loading...</v-col> -->
             </v-row>
         </div>
-    </div>
 </template>
 
 <script>

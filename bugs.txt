@@ -1,5 +1,7 @@
 09/04/2021
-1 - Non funziona il doppio click su task schedular
+1 - Non funziona il doppio click su task schedular. Done
+Risoluzione:
+1 - Spostato logica arrotondamento task da onDragEnd event to onBeforeEventUpdate.
 
 07/04/2021
 schedular:

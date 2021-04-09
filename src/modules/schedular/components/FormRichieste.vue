@@ -31,15 +31,15 @@
             <v-col cols="12">
                 <v-card flat>
                     <v-card-actions class="px-10">
-                        <v-btn color="primary" @click.stop="cancel">
+                        <v-btn color="secondary" @click.stop="cancel">
                             Cancel
                         </v-btn>
                         <v-spacer></v-spacer>
-                        <v-btn color="success" @click.stop="completa">
+                        <v-btn color="accent" @click.stop="completa">
                             Pianificato
                         </v-btn>
                         <v-spacer></v-spacer>
-                        <v-btn color="info" @click.stop="save">
+                        <v-btn color="primary" @click.stop="save">
                             Seleziona
                         </v-btn>
                     </v-card-actions>

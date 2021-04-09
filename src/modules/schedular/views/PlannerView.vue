@@ -22,7 +22,7 @@
                         <filtro @cambio="filtra" @save="save"></filtro>
                     </v-col>
                     <v-col cols="2" class="pt-3 text-center">
-                        <v-btn @click="save" class="success">Salva</v-btn>
+                        <v-btn @click="save" class="accent">Salva</v-btn>
                     </v-col>
                     <v-spacer></v-spacer>
                     <!-- Test request -->
@@ -45,7 +45,7 @@
                         <v-btn
                             v-show="hasRichieste"
                             @click.stop="dialog = true"
-                            color="info"
+                            color="minfo"
                             class=""
                             >Richieste</v-btn
                         >

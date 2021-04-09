@@ -1,10 +1,10 @@
 <template>
     <div>
         <!-- Titolo macchina 1 colonna-->
-        <v-row no-gutters>
+        <v-row no-gutters dense>
             <v-col cols="12">
-                <v-card class="mb-2 light-green lighten-3">
-                    <v-card-text class="text-center text-h4">{{
+                <v-card class="mb-1 secondary" dark>
+                    <v-card-text class="text-center text-h5">{{
                         titolo
                     }}</v-card-text>
                 </v-card>
@@ -12,10 +12,10 @@
         </v-row>
 
         <!-- Box stalli 1 colonna -->
-        <v-row>
+        <v-row dense>
             <v-col>
                 <!-- Lista stalli con 2 colonne per riga -->
-                <v-row>
+                <v-row dense> 
                     <v-col
                         v-for="(stallo, index) in config"
                         :key="index"

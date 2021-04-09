@@ -13,22 +13,24 @@
             <v-btn icon :to="{ name: 'apps' }" class="ml-5" plain>
                 <v-icon>mdi-apps</v-icon>
             </v-btn>
+            <v-spacer></v-spacer>
+            <div class="text-caption">Made with passion by Malkit Sandhu</div>
             <!-- <breadcrumbs class="app_links"></breadcrumbs> -->
         </v-app-bar>
 
         <v-main>
-            <v-container fluid class="app_box">
+            <v-container fluid class="app_box msfondo">
                 <div class="router_box">
                     <router-view></router-view>
                     <!-- <test-planner-view></test-planner-view> -->
                 </div>
             </v-container>
         </v-main>
-        <v-footer padless dense>
+        <!-- <v-footer padless dense>
             <v-col class="text-center" cols="12">
                 <span>Made with passion by </span><strong>Malkit Sandhu</strong>
             </v-col>
-        </v-footer>
+        </v-footer> -->
     </v-app>
 </template>
 

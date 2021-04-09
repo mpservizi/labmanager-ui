@@ -68,7 +68,7 @@ export function initEventi(myScheduler) {
 
 
     /** Quando cambia Evento con drag, eseguo arrotondamento della data */
-    myScheduler.attachEvent("onBeforeEventChanged", function (ev, e, is_new, original) {
+    myScheduler.attachEvent('onBeforeEventChanged', function (ev, e, is_new, original) {
         //Se la data viene cambiata in onDragEnd non funziona più il doppio click sul evento
         arrotondaEvento(ev);
         return true;
@@ -87,7 +87,7 @@ export function initEventi(myScheduler) {
     });
 
     /** Prima di aprire lightbox */
-    myScheduler.attachEvent("onBeforeLightbox", function (id){
+    myScheduler.attachEvent('onBeforeLightbox', function (id){
         //any custom logic here
         let ev = myScheduler.getEvent(id);
         let durata = MyDate.calcolaDifferenzaDateInGiorni(

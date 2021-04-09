@@ -11,7 +11,7 @@
                         class="px-10"
                     >
                         <v-card
-                            color="#385F73"
+                            color="secondary"
                             dark
                             :to="{ name: app.routeName }"
                             max-width="300"
