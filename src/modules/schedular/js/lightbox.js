@@ -4,7 +4,7 @@ import {
     LISTA_STATI
 } from './costanti.js';
 
-const ALTEZZZA_CAMPO = 25;
+const ALTEZZZA_CAMPO = 27;
 export function initLightbox(myScheduler) {
     myScheduler.config.lightbox.sections = [
         {
@@ -67,8 +67,11 @@ export function initLightbox(myScheduler) {
 
     //Disabilito i campi nel lightbox
     myScheduler.attachEvent('onLightbox', function(task_id) {
-        document.getElementsByTagName('textarea')[0].disabled = true;
-        document.getElementsByTagName('textarea')[1].disabled = true;
+        for (let index = 0; index < 2; index++) {
+            let el=document.getElementsByTagName('textarea')[index];
+            el.disabled = true;
+            el.classList.add('sololettura');            
+        }
     });
 
     // myScheduler.attachEvent('onBeforeLightbox', function(id) {

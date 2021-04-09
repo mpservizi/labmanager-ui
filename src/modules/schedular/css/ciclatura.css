@@ -43,7 +43,7 @@
 /* Casella data in lightbox */
 .dhx_readonly {
     font-size: medium !important;
-    width: 150px;
+    width: 20%;
 }
 
 /* area campi lighbox */
@@ -60,4 +60,8 @@
 /* Nascondo la selezione della data di fine */
 .dhx_section_time.dhx_lightbox_minical > input:nth-child(4) {
     display: none;
+}
+/* Caselle di testo disabilitate in lightbox */
+.dhx_cal_ltext textarea.sololettura {
+    background: cornsilk;
 }
