@@ -86,12 +86,30 @@ export function initEventi(myScheduler) {
         return false; //diabilito comportamento di default
     });
 
+    /** Prima di aprire lightbox */
+    myScheduler.attachEvent("onBeforeLightbox", function (id){
+        //any custom logic here
+        let ev = myScheduler.getEvent(id);
+        let durata = MyDate.calcolaDifferenzaDateInGiorni(
+            ev.start_date,
+            ev.end_date
+        );
+        //Memorizzo la dura nel evento
+        ev.durata = durata;
+        return true;
+    });
+
     /** Al clik su taso save in lightbox */
     myScheduler.attachEvent('onEventSave', function (id, ev, is_new) {
-        //impoposto l'orario per la data di inizio e fine
-        ev.start_date.setHours(2);
-        ev.end_date.setHours(23);
-        // console.log(ev);
+        //Ricavo evento orginale. ev contiene i valori inseriti nel lightbox
+        let myEv= myScheduler.getEvent(id);
+        //resetto l'orario della data inizio
+        let sd = myScheduler.date.date_part(ev.start_date);
+        //Calcolo la data di fine in base alla durata
+        let ed = myScheduler.date.add(sd, myEv.durata, 'day');
+        //Imposto la date calcolate
+        ev.start_date = sd;
+        ev.end_date = ed;
         return true; // Con true prosegue le azioni di default
     });
 

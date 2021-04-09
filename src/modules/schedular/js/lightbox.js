@@ -4,53 +4,54 @@ import {
     LISTA_STATI
 } from './costanti.js';
 
+const ALTEZZZA_CAMPO = 25;
 export function initLightbox(myScheduler) {
     myScheduler.config.lightbox.sections = [
         {
             map_to: 'progetto',
             name: 'progetto',
             type: 'textarea',
-            height: 30
+            height: ALTEZZZA_CAMPO
         },
         {
             map_to: 'descrizione',
             name: 'descrizione',
             type: 'textarea',
-            height: 30
+            height: ALTEZZZA_CAMPO
         },
         {
             map_to: 'idCarico',
             name: 'carico',
             type: 'radio',
             options: LISTA_CARICHI,
-            height: 30
+            height: ALTEZZZA_CAMPO
         },
         {
             map_to: 'idRisorsa',
             name: 'risorsa',
             type: 'select',
             options: myScheduler.serverList(LISTA_SELEZIONE_RISORSE),
-            height: 30
+            height: ALTEZZZA_CAMPO
         },
         {
             map_to: 'stato',
             name: 'stato',
             type: 'select',
             options: LISTA_STATI,
-            height: 30
+            height: ALTEZZZA_CAMPO
         },
 
         {
             map_to: 'text',
             name: 'sample',
             type: 'textarea',
-            height: 30
+            height: ALTEZZZA_CAMPO
         },
         {
             map_to: 'time',
             name: 'time',
             type: 'calendar_time',
-            height: 30
+            height: ALTEZZZA_CAMPO
         }
     ];
 
@@ -62,7 +63,7 @@ export function initLightbox(myScheduler) {
     // myScheduler.locale.labels.section_request = 'Test request';
     myScheduler.locale.labels.section_risorsa = 'Risorsa';
     myScheduler.locale.labels.section_sample = 'Sample code';
-    myScheduler.locale.labels.section_time = 'Data';
+    myScheduler.locale.labels.section_time = 'Data inizio';
 
     //Disabilito i campi nel lightbox
     myScheduler.attachEvent('onLightbox', function(task_id) {

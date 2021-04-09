@@ -30,7 +30,7 @@
 /* Lista selezione in lighbox */
 .dhx_cal_light select {
     background-color: #f9f9f9;
-    font-size: medium;
+    font-size: small;
     /* Questo ha impatto ache su lista selezione data */
     /* width: 99% !important; */
     height: calc(100% - 10px);
@@ -42,7 +42,7 @@
 }
 /* Casella data in lightbox */
 .dhx_readonly {
-    font-size: large !important;
+    font-size: medium !important;
     width: 150px;
 }
 
@@ -53,5 +53,11 @@
 /* Lighbox selezione data, trattino tra le 2 date */
 .dhx_section_time.dhx_lightbox_minical > span {
     /* Sposto verso sinistra perchè l'ora è nascosta */
-    padding-right: 50px;
+    /* padding-right: 50px; */
+    display: none;
+}
+
+/* Nascondo la selezione della data di fine */
+.dhx_section_time.dhx_lightbox_minical > input:nth-child(4) {
+    display: none;
 }
