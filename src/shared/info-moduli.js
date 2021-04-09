@@ -45,7 +45,7 @@ export const LISTA_MODULI = [
         label: 'Planner',
         route: '/gantt',
         routeName: 'gantt',
-        descrizione: 'Pianificazione delle prove in base ai progetti',
+        descrizione: 'Mostra il carico di lavoro delle macchine di ciclatura',
         registrareOnAvvio: true
     }
 ];
