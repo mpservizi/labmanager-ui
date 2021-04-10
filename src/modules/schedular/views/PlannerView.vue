@@ -34,7 +34,7 @@
                         <p>{{ msgRichieste }}</p>
                         <p>Prova Attiva : {{ provaSelezionata }}</p>
                     </v-col>
-                    <v-col cols="3" class="pt-3">
+                    <v-col cols="3" class="">
                         <form-prove
                             :needUpdate="aggiornareConteggio"
                             :itemProva="gruppoProve"
@@ -255,18 +255,20 @@ export default {
 .box_view {
     display: grid;
     min-height: 100%;
-    grid-template-rows: 100px 1fr;
+    grid-template-rows: 90px 1fr;
+    /* background-color: red; */
     /* padding: 10px; */
 }
 .ms_toolbar {
     /* border: 1px solid pink; */
     display: grid;
-    height: 100px;
+    /* height: 100px; */
+    /* background-color: green; */
     /* background-color: rgb(250, 153, 229); */
 }
 .box_planner_view {
     display: grid;
-    /* background-color: green; */
-    margin-top: 20px;
+    background-color: pink;
+    margin-top: 1px;
 }
 </style>

@@ -96,9 +96,11 @@ export default {
 </script>
 <style scoped>
 .boxProve {
+    display: flex;
+    height: 100%;
     padding-left: 10px;
     padding-top: 20px;
-    padding-bottom: 10px;
     padding-right: 20px;
+    /* padding-bottom: 10px; */
 }
 </style>

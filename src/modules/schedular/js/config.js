@@ -43,7 +43,7 @@ export function initPreConfig(myScheduler) {
         x_date: '%j',
         x_step: 1,
         x_size: paramsScala.giorniView,
-        section_autoheight: true, //le celle vengono ridimensionate in base al altezza della finestra
+        section_autoheight: false, //le celle vengono ridimensionate in base al altezza della finestra
         fit_events: true, //Con true la riga viene aumenta di dimensione in caso di più task
         resize_events: true, //con false in caso di 2 task nella stessa cella uno viene nascosto
         y_unit: myScheduler.serverList(LISTA_RISORSE_FILTRATA),
