@@ -5,8 +5,7 @@
 
         <v-app-bar app color="primary" dark dense>
             <!-- <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon> -->
-
-            <v-toolbar-title>Brescia-Lab</v-toolbar-title>
+            <v-img :src="require('./assets/logo-m.png')" class="mx-2" max-height="40" max-width="40" contain></v-img>
             <v-btn icon to="/" class="ml-5" plain>
                 <v-icon>mdi-home</v-icon>
             </v-btn>
@@ -14,6 +13,9 @@
                 <v-icon>mdi-apps</v-icon>
             </v-btn>
             <v-spacer></v-spacer>
+            <v-toolbar-title>Gestione ciclature</v-toolbar-title>            
+            <v-spacer></v-spacer>
+
             <div class="text-caption">Made with passion by Malkit Sandhu</div>
             <!-- <breadcrumbs class="app_links"></breadcrumbs> -->
         </v-app-bar>
