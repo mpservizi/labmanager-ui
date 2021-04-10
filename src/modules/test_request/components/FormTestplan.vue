@@ -66,7 +66,7 @@
             <v-col cols="1"></v-col>
             <v-col cols="2">
                 <div class="pt-3">
-                    <v-btn @click="handleAdd" text color="info">
+                    <v-btn @click="handleAdd" color="accent">
                         Inserisci
                     </v-btn>
                 </div>

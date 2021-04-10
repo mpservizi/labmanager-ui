@@ -107,13 +107,13 @@
         </v-row>
         <v-row>
             <v-col cols="4">
-                <v-btn @click="dialog = true" class="info"
+                <v-btn @click="dialog = true" class="accent"
                     ><slot name="dialogBtn"></slot
                 ></v-btn>
             </v-col>
             <v-spacer></v-spacer>
             <v-col cols="2">
-                <v-btn @click="salva" class="success"
+                <v-btn @click="salva" class="accent"
                     ><slot name="saveBtn"></slot
                 ></v-btn>
             </v-col>

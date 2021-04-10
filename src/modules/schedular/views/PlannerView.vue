@@ -45,7 +45,7 @@
                         <v-btn
                             v-show="hasRichieste"
                             @click.stop="dialog = true"
-                            color="minfo"
+                            color="accent"
                             class=""
                             >Richieste</v-btn
                         >

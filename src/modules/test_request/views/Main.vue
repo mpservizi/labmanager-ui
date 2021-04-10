@@ -2,10 +2,12 @@
     <div>
         <v-row>
             <v-spacer></v-spacer>
-            <v-col cols="1">
-                <v-btn class="mb-5 info" solo :to="{ name: 'add_request' }"
-                    >Add new</v-btn
-                >
+            <v-col cols="12">
+                <div class="text-center">
+                    <v-btn class="accent" solo :to="{ name: 'add_request' }"
+                        >Add new</v-btn
+                    >
+                </div>
             </v-col>
         </v-row>
 
@@ -14,7 +16,7 @@
             :items="listaRichieste"
             @click:row="handleInfo"
             hide-default-footer
-            class="elevation-1 mytab"
+            class="elevation-1 mytab mt-5"
         >
             <template v-slot:[`item.stato`]="{ item }">
                 {{ labelStato(item.stato) }}

@@ -20,7 +20,7 @@
         </v-row>
         <v-row>
             <v-col class="text-center">
-                <v-btn @click="goBack" class="minfo">Torna indietro</v-btn>
+                <v-btn @click="goBack" class="accent">Torna indietro</v-btn>
             </v-col>
         </v-row>
     </div>
@@ -50,11 +50,4 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-ul {
-    list-style: none;
-    text-align: start;
-}
-.v-list-item{
-    color: red !important;
-}
 </style>

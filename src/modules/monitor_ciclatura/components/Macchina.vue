@@ -3,7 +3,7 @@
         <!-- Titolo macchina 1 colonna-->
         <v-row no-gutters dense>
             <v-col cols="12">
-                <v-card class="mb-1 secondary" dark>
+                <v-card class="mb-1 secondary accent--text">
                     <v-card-text class="text-center text-h5">{{
                         titolo
                     }}</v-card-text>
