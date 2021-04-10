@@ -77,6 +77,8 @@ import { creaTaskPerProva } from '../js/TaskMaker.js';
 import { EventBus } from '@/shared/event-bus.js';
 import { TestRequetService } from '@/api/TestRequetService.js';
 import { ENUM_STATI_RICHIESTE } from '@/data/front-db.js';
+import { MyPlanner } from 'Moduli/schedular/js/my-planner.js';
+
 export default {
     name: 'TestPlannerView',
     components: { Scheduler, FormRichieste, FormProve, Filtro },
@@ -183,6 +185,8 @@ export default {
         //Quando cambia la prova da pianificare nel form prove
         changeProvaAttiva(payload) {
             this.provaAttiva = payload;
+            let idCarico = payload ? payload.idCarico : undefined;
+            MyPlanner.filtraByCarico(idCarico);
         },
         //Filtro macchina
         filtra(valore) {
@@ -232,11 +236,9 @@ export default {
     },
     watch: {
         palnnedResult: function () {
-            console.log('watch filtra risorse');
             this.filtraListaProve();
         },
         showPlanned: function () {
-            console.log('watch planned');
             this.creaListaToPlan();
         }
     }

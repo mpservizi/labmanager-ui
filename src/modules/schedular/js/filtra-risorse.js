@@ -1,13 +1,20 @@
 import { MyPlanner } from 'Moduli/schedular/js/my-planner.js';
 
-function filtraRisorse(valore) {
+export function filtraByCarico(idCarico){
+    console.log('Filtrare i carichi : ' + idCarico);
+
+}
+/** Filtra le risorse
+ * Riceve il parametro dal componente filtro
+ */
+ export function filtraByNome(valore) {
     let risorse = MyPlanner.getListaRisorse();
     let itemsFiltrati;
-    if (valore == 'all') {
+    if (!valore || valore == 'all') {
         itemsFiltrati = risorse;
     } else {
-        itemsFiltrati = risorse.filter(function(room) {
-            return room.label.includes(valore);
+        itemsFiltrati = risorse.filter(function(item) {
+            return item.label.includes(valore);
         });
     }
 

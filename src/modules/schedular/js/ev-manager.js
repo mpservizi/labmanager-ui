@@ -6,9 +6,11 @@ import {
     creaTemplateClasseEvento
 } from './my-templates.js';
 
-import { filtraRisorse, showMessage } from './my-func.js';
+import { showMessage } from './my-func.js';
 import { centraViewOggi } from './my-view.js';
-import { LISTA_RISORSE, LISTA_RISORSE_FILTRATA } from './costanti.js';
+import { LISTA_RISORSE_FILTRATA } from './costanti.js';
+import { MyPlanner } from 'Moduli/schedular/js/my-planner.js';
+
 import MyDate from '@/shared/my-date.js';
 export function initEventi(myScheduler) {
     /** Default values per new event */
@@ -16,7 +18,7 @@ export function initEventi(myScheduler) {
 
     /** Dopo il parsing dei dati */
     myScheduler.attachEvent('onParse', function () {
-        filtraRisorse('all');
+        MyPlanner.filtraRisorse();
     });
 
     /** Prima di cambiare view*/

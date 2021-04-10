@@ -4,29 +4,9 @@ import MyDate from '@/shared/my-date.js';
 import { getGiorniDelMese } from './util.js';
 
 import {
-    LISTA_RISORSE,
-    LISTA_RISORSE_FILTRATA,
     LISTA_CARICHI,
     SCALA_MENSILE
 } from './costanti.js';
-
-/** Filtra le risorse
- * Riceve il parametro dal componente filtro
- */
-export function filtraRisorse(valore) {
-    let risorse = myScheduler.serverList(LISTA_RISORSE);
-    let itemsFiltrati;
-    if (valore == 'all') {
-        itemsFiltrati = risorse.slice();
-    } else {
-        itemsFiltrati = risorse.filter(function(room) {
-            // return room.label == valore;
-            return room.label.includes(valore);
-        });
-    }
-
-    myScheduler.updateCollection(LISTA_RISORSE_FILTRATA, itemsFiltrati);
-}
 
 /**
  * Ricava id del carico in base al nome

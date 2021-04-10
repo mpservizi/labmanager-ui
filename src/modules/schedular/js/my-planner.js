@@ -3,7 +3,6 @@ import { myScheduler } from './my-lib.js';
 import { initLightbox } from './lightbox.js';
 import { initEventi } from './ev-manager.js';
 import { initPreConfig } from './config.js';
-import { filtraRisorse } from './my-func.js';
 
 import {
     creaParamteriCustom,
@@ -14,9 +13,11 @@ import {
 
 import { save, loadRisorse, loadDatiCiclatura } from './api.js';
 import { eventiToJson } from './data-parser.js';
+import {filtraByCarico,filtraByNome} from './filtra-risorse';
 
 import {
     LISTA_RISORSE,
+    LISTA_RISORSE_FILTRATA,
     SCALA_MENSILE,
     SCALA_SETTIMANALE,
     LISTA_SELEZIONE_RISORSE
@@ -66,7 +67,7 @@ async function loadDati() {
         });
         myScheduler.updateCollection(LISTA_RISORSE, risorse);
 
-        filtraRisorse();
+        filtraByNome();
 
         let eventi = await loadDatiCiclatura();
         //Cancello tutti gli eventi esistenti prima di caricare nuovi dati
@@ -109,9 +110,10 @@ function setListaFiltrata(itemsFiltrati){
 function addTask(task){
     myScheduler.addEvent(task);
 }
+
 export const MyPlanner = {
     init: initPlanner,
-    filtraRisorse,
+    filtraRisorse:filtraByNome,
     loadDati,
     saveDati,
     cambiaScala,
@@ -119,5 +121,7 @@ export const MyPlanner = {
     getListaRisorse,
     setListaFiltrata,
     addTask,
+    filtraByCarico,
+    //Calcoli sulle date
     date:myScheduler.date
 };

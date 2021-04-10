@@ -1,16 +1,24 @@
 <template>
-    <div class="py-5">
-        <v-badge
-            overlap
-            v-for="(item, index) in samples"
-            :key="index"
-            :content="item.campioni"
-        >
-            <v-chip class="ml-4" @click="provaClick(item)">{{
-                item.label
-            }}</v-chip>
-        </v-badge>
-    </div>
+    <v-card
+        class="boxProve secondary text-center"
+        flat
+        :ripple="false"
+        active-class=""
+        v-if="hasItems"
+        @click.stop="boxClick"
+    >
+        <v-row>
+            <v-col v-for="(item, index) in samples" :key="index" cols="4">
+                <v-badge overlap :content="item.campioni">
+                    <v-chip
+                        class="mt-2 accent"
+                        @click.stop="provaClick(item)"
+                        >{{ item.label }}</v-chip
+                    >
+                </v-badge>
+            </v-col>
+        </v-row>
+    </v-card>
 </template>
 <script>
 export default {
@@ -23,10 +31,17 @@ export default {
     props: ['itemProva', 'needUpdate'],
     created() {},
     mounted() {},
-    computed: {},
+    computed: {
+        hasItems() {
+            return this.samples.length > 0;
+        }
+    },
     methods: {
         provaClick(item) {
             this.provaAttiva = item;
+        },
+        boxClick() {
+            this.provaAttiva = null;
         },
         handleSaveForm(result) {
             let lista = [];
@@ -80,4 +95,10 @@ export default {
 };
 </script>
 <style scoped>
+.boxProve {
+    padding-left: 10px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    padding-right: 20px;
+}
 </style>
