@@ -99,7 +99,6 @@ export default {
     },
     mounted() {},
     destroyed() {
-        console.log('reset');
         this.resetCampi();
     },
     computed: {

@@ -96,11 +96,28 @@ function getScalaAttiva() {
     if (!myScheduler.myConfig) return SCALA_SETTIMANALE;
     return myScheduler.myConfig.paramScala.scala;
 }
+
+function getListaRisorse(){
+    let risorse = myScheduler.serverList(LISTA_RISORSE);
+    let copia = risorse.slice();
+    return copia;
+}
+
+function setListaFiltrata(itemsFiltrati){
+    myScheduler.updateCollection(LISTA_RISORSE_FILTRATA, itemsFiltrati);
+}
+function addTask(task){
+    myScheduler.addEvent(task);
+}
 export const MyPlanner = {
     init: initPlanner,
     filtraRisorse,
     loadDati,
     saveDati,
     cambiaScala,
-    getScalaAttiva
+    getScalaAttiva,
+    getListaRisorse,
+    setListaFiltrata,
+    addTask,
+    date:myScheduler.date
 };

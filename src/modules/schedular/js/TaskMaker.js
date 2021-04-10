@@ -1,5 +1,5 @@
 import { EV_ID_RISORSA, CAMPO_STATO } from './costanti.js';
-import { myScheduler } from 'Moduli/schedular/js/my-lib.js';
+import { MyPlanner } from 'Moduli/schedular/js/my-planner.js';
 import { getDurataProva } from '@/shared/func-ciclatura.js';
 import { ENUM_STATI_RICHIESTE } from '@/data/front-db.js';
 export function creaTaskPerProva(payload) {
@@ -20,11 +20,11 @@ export function creaTaskPerProva(payload) {
         progetto: payload.titoloProgetto, //test request progetto
         descrizione: payload.descrizione //test request descrizione
     };
-    myScheduler.addEvent(task);
+    MyPlanner.addTask(task);
     return task;
 }
 
 function calcolaDataFine(data_inizio, durata) {
-    let dataFine = myScheduler.date.add(data_inizio, durata, 'day');
+    let dataFine = MyPlanner.date.add(data_inizio, durata, 'day');
     return dataFine;
 }
