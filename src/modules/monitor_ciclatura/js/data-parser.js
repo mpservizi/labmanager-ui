@@ -52,6 +52,7 @@ function parseStallo(stallo) {
 //  Restituisce il tipo di stallo in base alla macchina e nome stallo
 function getTipoStallo(macchina, stallo) {
     let result;
+    let strStallo = stallo.toString();
     switch (macchina.toUpperCase()) {
         case 'L2020':
             result = TIPI_PRODOTTO.SWITCH;
@@ -61,13 +62,13 @@ function getTipoStallo(macchina, stallo) {
             break;
         case 'L180':
             //Stalli prese da 1 a 4
-            result = ['1', '2', '3', '4'].includes(stallo)
+            result = ['1', '2', '3', '4'].includes(strStallo)
                 ? TIPI_PRODOTTO.SOCKET
                 : TIPI_PRODOTTO.SWITCH;
             break;
         case 'L232':
             //Stalli prese
-            result = ['3', '4'].includes(stallo)
+            result = ['3', '4'].includes(strStallo)
                 ? TIPI_PRODOTTO.SOCKET
                 : TIPI_PRODOTTO.SWITCH;
             break;
