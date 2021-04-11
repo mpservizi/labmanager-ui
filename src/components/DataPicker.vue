@@ -15,6 +15,8 @@
                     readonly
                     v-bind="attrs"
                     v-on="on"
+                    :error="isError"
+                    :error-messages="errMsg"
                 ></v-text-field>
             </template>
             <v-date-picker v-model="dataSelect" @input="salva"></v-date-picker>
@@ -23,11 +25,10 @@
 </template>
 
 <script>
-import MyDate from '@/shared/my-date.js';
 export default {
     name: 'DataPicker',
     components: {},
-    props: ['label', 'dataAvvio'],
+    props: ['label', 'dataAvvio','isError','errMsg'],
     data() {
         return {
             menu: false,
@@ -57,7 +58,8 @@ export default {
         }
     },
     mounted() {
-        // this.dataSelect = new Date().toISOString().substr(0, 10)
+        //Data di oggi come data default
+        this.dataSelect = new Date().toISOString().substr(0, 10)
     },
     computed: {
         //Formatta la data selezionata nel data picker

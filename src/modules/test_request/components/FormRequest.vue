@@ -1,5 +1,5 @@
 <template>
-    <v-form>
+    <v-form ref="form">
         <div>
             <DialogTestPlan
                 :listaProvePlan="listaProve"
@@ -7,19 +7,28 @@
                 @chiudi="handleSaveTestPlan"
             ></DialogTestPlan>
         </div>
+        <!-- Error dialog -->
+        <div>
+            <v-dialog v-model="errDialog" max-width="400">
+                <v-card>
+                    <v-card-title class="red--text">Verificare campi del form</v-card-title>
+                    <!-- <v-card-text class="red--text">Verificare campi del form</v-card-text> -->
+                </v-card>
+            </v-dialog>
+        </div>
         <!--  -->
         <v-row>
             <v-col cols="6">
                 <v-text-field
                     v-model="campi.codiceProgetto"
                     label="Codice Progetto"
-                    required
                 ></v-text-field>
             </v-col>
             <v-col cols="6">
                 <v-text-field
                     v-model="campi.titoloProgetto"
                     label="Titolo Progetto"
+                    :rules="testoVuotoRule"
                     required
                 ></v-text-field>
             </v-col>
@@ -35,6 +44,8 @@
                     clearable
                     rows="1"
                     row-height="15"
+                    :rules="testoVuotoRule"
+                    required
                 ></v-textarea>
             </v-col>
         </v-row>
@@ -61,6 +72,7 @@
                 <v-text-field
                     v-model="campi.cliente"
                     label="Richiedente"
+                    :rules="testoVuotoRule"
                     required
                 ></v-text-field>
             </v-col>
@@ -68,6 +80,7 @@
                 <v-text-field
                     v-model="campi.tecnico"
                     label="Tecnico"
+                    :rules="testoVuotoRule"
                     required
                 ></v-text-field>
             </v-col>
@@ -77,6 +90,8 @@
                     :items="listaPrio"
                     return-object
                     v-model="prioForm"
+                    :rules="testoVuotoRule"
+                    required
                 >
                 </v-combobox>
             </v-col>
@@ -86,6 +101,8 @@
                     :items="listaStati"
                     return-object
                     v-model="statoForm"
+                    :rules="testoVuotoRule"
+                    required
                 >
                 </v-combobox>
             </v-col>
@@ -153,11 +170,13 @@ export default {
                 dataFine: '',
                 testProgram: []
             },
-            prioForm: '',
-            statoForm: '',
+            prioForm: LISTA_LABEL_PRIO[2],
+            statoForm: LISTA_LABEL_STATI[0],
             listaPrio: LISTA_LABEL_PRIO,
             listaStati: LISTA_LABEL_STATI,
-            dialog: false
+            dialog: false,
+            errDialog: false,
+            testoVuotoRule: [(v) => !!v || 'Campo obbligatorio']
         };
     },
     props: ['richiesta'],
@@ -171,7 +190,16 @@ export default {
         salva() {
             this.campi.priority = getPrioIdBylabel(this.prioForm);
             this.campi.stato = getStatoIdByLabel(this.statoForm);
-            this.$emit('save', this.campi);
+            if (this.validaForm()) {
+                this.$emit('save', this.campi);
+            } else {
+                this.errDialog = true;
+            }
+        },
+        validaForm() {
+            let campiForm = this.$refs.form.validate();
+            let proveValide = true;
+            return campiForm && proveValide;
         },
         //Click save su dialog test plan
         handleSaveTestPlan(result) {
