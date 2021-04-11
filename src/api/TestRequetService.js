@@ -41,6 +41,15 @@ class TestRequestProvider extends HttpRequest {
         const indexProva = richiesta.testProgram.map(o => o.id).indexOf(gruppoProve.id); 
         //Sostituisco il valore nel array
         richiesta.testProgram[indexProva] = gruppoProve;
+        //Ricavo lo stato minimo di tutti i test program
+        let minimo=richiesta.stato;
+        richiesta.testProgram.forEach(prova=>{
+            if(minimo<prova.stato){
+                minimo=prova.stato;
+            }
+        });
+        //Imposto lo stato della test request uguale al stato minimo
+        richiesta.stato = minimo;
         //Aggiorno la richista in db
         return this.updateTestRequest(richiesta);  
     }

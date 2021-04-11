@@ -49,6 +49,10 @@
                             class=""
                             >Richieste</v-btn
                         >
+                        <v-checkbox
+                            v-model="showPlanned"
+                            label="Mostra tutto"
+                        ></v-checkbox>
                     </v-col>
                 </v-row>
             </div>
@@ -164,7 +168,9 @@ export default {
                     //
                     item.testProgram.forEach((prova, index) => {
                         if (
-                            this.showPlanned || (item.stato == prova.stato && prova.stato== ENUM_STATI_RICHIESTE.TO_PLAN)                            
+                            this.showPlanned ||
+                            (item.stato == prova.stato &&
+                                prova.stato == ENUM_STATI_RICHIESTE.TO_PLAN)
                         ) {
                             //Aggiungere id request nel form di creazione della richiesta
                             // prova.id = item;
