@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- Dialog test plans -->
-        <v-dialog v-model="dialog" max-width="750" scrollable persistent>
+        <v-dialog v-model="dialog" scrollable persistent>
             <v-card class="my_dialog">
                 <FormRichieste
                     :lista-richieste="listaPlannnig"
@@ -164,14 +164,15 @@ export default {
                     //
                     item.testProgram.forEach((prova, index) => {
                         if (
-                            this.showPlanned ||
-                            prova.stato == ENUM_STATI_RICHIESTE.TO_PLAN
+                            this.showPlanned || (item.stato == prova.stato && prova.stato== ENUM_STATI_RICHIESTE.TO_PLAN)                            
                         ) {
                             //Aggiungere id request nel form di creazione della richiesta
                             // prova.id = item;
                             prova.idRequest = item._id;
                             prova.titoloProgetto = item.titoloProgetto;
                             prova.descrizione = item.descrizione;
+                            prova.dataInizio = item.dataInizio;
+                            prova.dataFine = item.dataFine;
                             lista.push(prova);
                             cont++;
                         }

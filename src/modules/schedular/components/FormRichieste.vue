@@ -64,6 +64,8 @@ export default {
             headers: [
                 { text: 'Progetto', value: 'titoloProgetto' },
                 { text: 'Gruppo prove', value: 'titolo' },
+                { text: 'Inizio previsto', value: 'dataInizio' },
+                { text: 'Fine prevista', value: 'dataFine' },
                 { text: 'Stato', value: 'stato' },
                 { text: '19.1', value: 'c1' },
                 { text: '19.2', value: 'c2' },

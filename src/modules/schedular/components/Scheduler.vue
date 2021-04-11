@@ -8,14 +8,14 @@
                         text
                         small
                         class="mr-1"
-                        :class="{ minfo: scalaAttiva == 2 }"
+                        :class="{ secondary: scalaAttiva == 2 }"
                         @click="handleScalaSettimanale"
                         >Settimanale</v-btn
                     >
                     <v-btn
                         text
                         small
-                        :class="{ minfo: scalaAttiva == 1 }"
+                        :class="{ secondary: scalaAttiva == 1 }"
                         @click="handleScalaMensile"
                         >Mensile</v-btn
                     >
