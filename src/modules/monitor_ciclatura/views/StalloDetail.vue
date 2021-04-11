@@ -20,7 +20,7 @@
         </v-row>
         <v-row>
             <v-col class="text-center">
-                <v-btn @click="goBack" class="accent">Torna indietro</v-btn>
+                <v-btn @click="goBack" class="secondary">Torna indietro</v-btn>
             </v-col>
         </v-row>
     </div>

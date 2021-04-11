@@ -1,32 +1,51 @@
 <template>
     <div>
-        <v-row>
+        <v-row dense>
             <v-spacer></v-spacer>
             <v-col cols="12">
                 <div class="text-center">
-                    <v-btn class="accent" solo :to="{ name: 'add_request' }"
-                        >Add new</v-btn
+                    <v-btn class="secondary" solo :to="{ name: 'add_request' }"
+                        >Nuova richiesta di prova</v-btn
                     >
                 </div>
             </v-col>
         </v-row>
-
-        <v-data-table
-            :headers="headers"
-            :items="listaRichieste"
-            @click:row="handleInfo"
-            hide-default-footer
-            class="elevation-1 mytab mt-5"
-        >
-            <template v-slot:[`item.stato`]="{ item }">
-                {{ labelStato(item.stato) }}
-            </template>
-            <template v-slot:[`item.priority`]="{ item }">
-                <v-chip :color="getColor(item.priority)" dark>
-                    {{ labelPrio(item.priority) }}
-                </v-chip>
-            </template>
-        </v-data-table>
+        <!-- Riga ricerca -->
+        <!-- <v-row dense>
+            <v-spacer></v-spacer>
+            <v-col cols="6">
+                <v-text-field
+                    v-model="search"
+                    append-icon="mdi-magnify"
+                    label="Search"
+                    single-line
+                    hide-details
+                ></v-text-field>
+            </v-col>
+            <v-spacer></v-spacer>
+        </v-row> -->
+        <!--  -->
+        <v-row>
+            <v-col cols="12">
+                <v-data-table
+                    :headers="headers"
+                    :items="listaRichieste"
+                    :search="search"
+                    @click:row="handleInfo"
+                    hide-default-footer
+                    class="elevation-1 mytab mt-5"
+                >
+                    <template v-slot:[`item.stato`]="{ item }">
+                        {{ labelStato(item.stato) }}
+                    </template>
+                    <template v-slot:[`item.priority`]="{ item }">
+                        <v-chip :color="getColor(item.priority)" dark>
+                            {{ labelPrio(item.priority) }}
+                        </v-chip>
+                    </template>
+                </v-data-table>
+            </v-col>
+        </v-row>
     </div>
 </template>
 
@@ -50,7 +69,8 @@ export default {
                 { text: '19.1', value: 'c1' },
                 { text: '19.2', value: 'c2' },
                 { text: '19.3', value: 'c3' }
-            ]
+            ],
+            search: ''
         };
     },
     props: {},

@@ -124,6 +124,9 @@
         </v-row>
         <v-row>
             <v-col cols="4">
+                <v-btn :to="{ name: 'test_requests' }" class="secondary">Torna indietro</v-btn>
+            </v-col>
+            <v-col cols="4">
                 <v-btn @click="dialog = true" class="accent"
                     ><slot name="dialogBtn"></slot
                 ></v-btn>
