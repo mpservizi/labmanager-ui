@@ -1,8 +1,18 @@
 <template>
-    <div>
-        <v-row dense>
+    <div class="mt-2">
+        <v-row>
             <v-spacer></v-spacer>
-            <v-col cols="12">
+            <v-col cols="2">
+                <v-select
+                    :items="stati"
+                    label="Filtra richieste"
+                    outlined
+                    dense
+                    @change="filtraRichieste"
+                ></v-select>
+            </v-col>
+            <v-spacer></v-spacer>
+            <v-col cols="4">
                 <div class="text-center">
                     <v-btn class="secondary" solo :to="{ name: 'add_request' }"
                         >Nuova richiesta di prova</v-btn
@@ -10,27 +20,11 @@
                 </div>
             </v-col>
         </v-row>
-        <!-- Riga ricerca -->
-        <!-- <v-row dense>
-            <v-spacer></v-spacer>
-            <v-col cols="6">
-                <v-text-field
-                    v-model="search"
-                    append-icon="mdi-magnify"
-                    label="Search"
-                    single-line
-                    hide-details
-                ></v-text-field>
-            </v-col>
-            <v-spacer></v-spacer>
-        </v-row> -->
-        <!--  -->
         <v-row>
             <v-col cols="12">
                 <v-data-table
                     :headers="headers"
-                    :items="listaRichieste"
-                    :search="search"
+                    :items="listaFiltrata"
                     @click:row="handleInfo"
                     hide-default-footer
                     class="elevation-1 mytab mt-5"
@@ -50,7 +44,12 @@
 </template>
 
 <script>
-import { getStatoById, getPrioById } from '@/data/front-db.js';
+import {
+    getStatoById,
+    getPrioById,
+    getStatoIdByLabel,
+    LISTA_LABEL_STATI
+} from '@/data/front-db.js';
 export default {
     name: 'TestRequet',
     components: {},
@@ -70,6 +69,7 @@ export default {
                 { text: '19.2', value: 'c2' },
                 { text: '19.3', value: 'c3' }
             ],
+            stati: ['All', ...LISTA_LABEL_STATI],
             search: ''
         };
     },
@@ -98,11 +98,34 @@ export default {
             if (prio == 1) return 'red';
             else if (prio == 2) return 'orange';
             else return 'green';
+        },
+        filtraRichieste(stato) {
+            console.log('filtrare richieste : ' + stato);
+            if (stato == 'All') {
+                this.search = '';
+            } else {
+                this.search = getStatoIdByLabel(stato);
+            }
         }
     },
     computed: {
-        listaRichieste() {
-            return this.$store.getters['TestRequestModule/listaRichieste'];
+        // listaRichieste() {
+        //     return this.$store.getters['TestRequestModule/listaRichieste'];
+        // },
+        listaFiltrata() {
+            let allValori = this.$store.getters[
+                'TestRequestModule/listaRichieste'
+            ];
+            let result = [];
+            let statoCriteria = this.search;
+            if (statoCriteria == '') {
+                result = allValori.slice();
+            } else {
+                result = allValori.filter((item) => {
+                    return item.stato == statoCriteria;
+                });
+            }
+            return result;
         }
     }
 };
