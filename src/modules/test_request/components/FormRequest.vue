@@ -11,7 +11,9 @@
         <div>
             <v-dialog v-model="errDialog" max-width="400">
                 <v-card>
-                    <v-card-title class="red--text">Verificare campi del form</v-card-title>
+                    <v-card-title class="red--text"
+                        >Verificare campi del form</v-card-title
+                    >
                     <!-- <v-card-text class="red--text">Verificare campi del form</v-card-text> -->
                 </v-card>
             </v-dialog>
@@ -56,6 +58,7 @@
                     @cambio="handleInizio"
                     :label="'Data inizio'"
                     :dataAvvio="campi.dataInizio"
+                    :isError="errDataInizio"
                 ></DataPicker>
             </v-col>
             <v-col cols="6">
@@ -63,6 +66,7 @@
                     @cambio="handleFine"
                     :label="'Data Fine'"
                     :dataAvvio="campi.dataFine"
+                    :isError="errDataFine"
                 ></DataPicker>
             </v-col>
         </v-row>
@@ -124,7 +128,9 @@
         </v-row>
         <v-row>
             <v-col cols="4">
-                <v-btn :to="{ name: 'test_requests' }" class="secondary">Torna indietro</v-btn>
+                <v-btn :to="{ name: 'test_requests' }" class="secondary"
+                    >Torna indietro</v-btn
+                >
             </v-col>
             <v-col cols="4">
                 <v-btn @click="dialog = true" class="accent"
@@ -179,6 +185,8 @@ export default {
             listaStati: LISTA_LABEL_STATI,
             dialog: false,
             errDialog: false,
+            errDataInizio: false,
+            errDataFine: false,
             testoVuotoRule: [(v) => !!v || 'Campo obbligatorio']
         };
     },
@@ -202,7 +210,21 @@ export default {
         validaForm() {
             let campiForm = this.$refs.form.validate();
             let proveValide = true;
-            return campiForm && proveValide;
+            if (this.campi.dataInizio == '') {
+                this.errDataInizio = true;
+            } else {
+                this.errDataInizio = false;
+            }
+            if (this.campi.dataFine == '') {
+                this.errDataFine = true;
+            } else {
+                this.errDataFine = false;
+            }
+            let dateValide = !this.errDataInizio && !this.errDataFine;
+            let arr = [campiForm, proveValide, dateValide];
+            let result = arr.every((elem) => elem == true);
+            console.log(result);
+            return result;
         },
         //Click save su dialog test plan
         handleSaveTestPlan(result) {

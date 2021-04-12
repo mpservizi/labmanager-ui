@@ -28,7 +28,7 @@
 export default {
     name: 'DataPicker',
     components: {},
-    props: ['label', 'dataAvvio','isError','errMsg'],
+    props: ['label', 'dataAvvio', 'isError', 'errMsg'],
     data() {
         return {
             menu: false,
@@ -59,7 +59,8 @@ export default {
     },
     mounted() {
         //Data di oggi come data default
-        this.dataSelect = new Date().toISOString().substr(0, 10)
+        this.dataSelect = new Date().toISOString().substr(0, 10);
+        this.salva();
     },
     computed: {
         //Formatta la data selezionata nel data picker
