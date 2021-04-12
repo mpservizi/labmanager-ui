@@ -1,5 +1,5 @@
 <template>
-    <v-container>
+    <v-container class="">
         <v-row>
             <v-spacer></v-spacer>
             <v-col cols="8">
@@ -8,16 +8,16 @@
                         cols="6"
                         v-for="app in listaApp"
                         :key="app.id"
-                        class="px-10"
+                        class="pa-10"
                     >
                         <v-card
                             color="secondary"
                             dark
                             :to="{ name: app.routeName }"
-                            max-width="300"
-                            height="150"
+                            max-width="400"
+                            height="200"
                         >
-                            <v-card-title class="headline text-center">
+                            <v-card-title class="headline justify-center">
                                 {{ app.label }}
                             </v-card-title>
 
@@ -39,12 +39,20 @@ export default {
     name: 'Apps',
     components: {},
     data() {
-        return {};
+        return {
+            //List id apps da mostrare in questo ordine
+            listaIds: [4, 2, 5]
+        };
     },
     props: {},
     computed: {
         listaApp() {
-            let result = LISTA_MODULI.filter((item) => item.id != 1);
+            let result = [];
+            let listaIndici = LISTA_MODULI.map((o) => o.id);
+            this.listaIds.forEach((id) => {
+                let pos = listaIndici.indexOf(id);
+                result.push(LISTA_MODULI[pos]);
+            });
             return result;
         }
     }

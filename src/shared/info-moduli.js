@@ -18,7 +18,11 @@ export const LISTA_MODULI = [
         label: 'Schedular Ciclature',
         route: '/schedular',
         routeName: 'SchedularView',
-        descrizione: 'Pianifica le prove sui stalli di ciclatura',
+        descrizione: `
+            Assegnare le prove alle postazioni di ciclatura.
+            Aggiornare lo stato delle prove.
+            Definire le priorità.
+            `,
         registrareOnAvvio: true
     },
     {
@@ -36,7 +40,8 @@ export const LISTA_MODULI = [
         label: 'Test request',
         route: '/test_request',
         routeName: 'test_requests',
-        descrizione: 'Gestisce le richieste di prova per le ciclature',
+        descrizione:
+            'Gestire qui tutte le richieste per le prove di ciclatura. Scegliere la quantità dei prodotti da testare e definire le tempistiche per i risultati',
         registrareOnAvvio: true
     },
     {
@@ -45,7 +50,8 @@ export const LISTA_MODULI = [
         label: 'Planner',
         route: '/gantt',
         routeName: 'gantt',
-        descrizione: 'Mostra il carico di lavoro delle macchine di ciclatura',
+        descrizione:
+            'Mostra il carico di lavoro delle macchine di ciclatura in base ai dati dello Schedular. Non è possibile modificare lo stato delle prove.',
         registrareOnAvvio: true
     }
 ];
