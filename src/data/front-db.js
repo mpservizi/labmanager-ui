@@ -2,12 +2,19 @@ export const ENUM_STATI_RICHIESTE = {
     TO_PLAN: 1,
     PLANNED: 2,
     IN_PROGRESS: 3,
-    DONE: 4
+    DONE: 4,
+    CANCELLED: 5
 };
 export const LISTA_LABEL_PRIO = ['High', 'Medium', 'Low'];
 export const LISTA_ID_PRIO = [1, 2, 3];
-export const LISTA_LABEL_STATI = ['To plan', 'Planned', 'In progress', 'Done','Cancelled'];
-export const LISTA_ID_STATI = [1, 2, 3, 4,5];
+export const LISTA_LABEL_STATI = [
+    'To plan',
+    'Planned',
+    'In progress',
+    'Done',
+    'Cancelled'
+];
+export const LISTA_ID_STATI = [1, 2, 3, 4, 5];
 
 export function getStatoById(idStato) {
     const index = LISTA_ID_STATI.indexOf(idStato);
