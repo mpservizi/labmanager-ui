@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- Dialog test plans -->
-        <v-dialog v-model="dialog" scrollable persistent>
+        <v-dialog v-model="dialog" max-width="80%" scrollable persistent>
             <v-card class="my_dialog">
                 <FormRichieste
                     :lista-richieste="listaPlannnig"
@@ -49,10 +49,11 @@
                             class=""
                             >Richieste</v-btn
                         >
-                        <v-checkbox
+                        <v-switch
+                            class="sw"
                             v-model="showPlanned"
-                            label="Mostra tutto"
-                        ></v-checkbox>
+                            label="Mostra planned"
+                        ></v-switch>
                     </v-col>
                 </v-row>
             </div>
@@ -277,5 +278,10 @@ export default {
     display: grid;
     background-color: pink;
     margin-top: 1px;
+}
+/* Switch toggle tutte richieste */
+.sw {
+    max-width: 200px !important;
+    margin: 5px auto;
 }
 </style>
