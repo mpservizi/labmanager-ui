@@ -2,10 +2,26 @@
     <v-app>
         <!-- <v-navigation-drawer v-model="drawer" app>
         </v-navigation-drawer> -->
-
+        <div>
+            <v-dialog v-model="showPerla" max-width="500">
+                <v-img
+                    :src="require('./assets/perla.jpg')"
+                    class=""
+                    max-height="500"
+                    max-width="500"
+                ></v-img>
+            </v-dialog>
+        </div>
         <v-app-bar app color="primary" dark dense>
             <!-- <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon> -->
-            <v-img :src="require('./assets/logo-m.png')" class="mx-2" max-height="40" max-width="40" contain></v-img>
+            <v-img
+                :src="require('./assets/logo-m.png')"
+                class="mx-2"
+                max-height="40"
+                max-width="40"
+                contain
+                @click.stop="showPerla = true"
+            ></v-img>
             <v-btn icon to="/" class="ml-5" plain>
                 <v-icon>mdi-home</v-icon>
             </v-btn>
@@ -13,7 +29,7 @@
                 <v-icon>mdi-apps</v-icon>
             </v-btn>
             <v-spacer></v-spacer>
-            <v-toolbar-title>Gestione ciclature</v-toolbar-title>            
+            <v-toolbar-title>Gestione ciclature</v-toolbar-title>
             <v-spacer></v-spacer>
 
             <div class="text-caption">Made with passion by Malkit Sandhu</div>
@@ -44,6 +60,7 @@ export default {
     components: {},
     data: () => ({
         // drawer: false,
+        showPerla: false
     }),
     computed: {
         msgLoading() {
