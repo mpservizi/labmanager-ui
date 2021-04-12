@@ -45,14 +45,17 @@ class TestRequestProvider extends HttpRequest {
             .indexOf(gruppoProve.id);
         //Sostituisco il valore nel array
         richiesta.testProgram[indexProva] = gruppoProve;
-        //Ricavo lo stato minimo di tutti i test program
-        let minimo = richiesta.stato;
+        //Ricavo lo stato minimo e massimo di tutti i test program
+        let minimo = Number.POSITIVE_INFINITY;
+        let massimo = Number.NEGATIVE_INFINITY;
+        let tmp;
         richiesta.testProgram.forEach(prova => {
-            if (minimo > prova.stato) {
-                minimo = prova.stato;
-            }
+            tmp = prova.stato;
+            if (tmp < minimo) minimo = tmp;
+            if (tmp > massimo) massimo = tmp;
         });
-        //Imposto lo stato della test request uguale al stato minimo
+
+        //Imposto lo stato della test request uguale al stato minimo dei test program
         richiesta.stato = minimo;
         //Aggiorno la richista in db
         return this.updateTestRequest(richiesta);
