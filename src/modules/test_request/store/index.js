@@ -4,7 +4,7 @@ export default {
     namespaced: true,
     state: {
         lista: [],
-        detail:null
+        detail: null
     },
     getters: {
         listaRichieste: function(state) {
@@ -12,7 +12,7 @@ export default {
         },
         detailRequest: function(state) {
             return state.detail;
-        },
+        }
     },
     mutations: {
         SET_DATI(state, payload) {
@@ -22,12 +22,12 @@ export default {
             state.lista.push(payload);
         },
         DETAIL_REQUEST(state, payload) {
-            state.detail=payload;
+            state.detail = payload;
         },
         AGGIORNA_REQUEST(state, payload) {
             const index = state.lista.map(o => o._id).indexOf(payload._id);
-            state.lista.splice(index, 1, payload);            
-        },
+            state.lista.splice(index, 1, payload);
+        }
     },
     actions: {
         /** Metodo per inizializzare il modulo. Chiamato dopo la registrazione */
@@ -35,8 +35,7 @@ export default {
             console.info('Installazione modulo : ' + NOME_MODULO);
             return true; //Risultato funzione RegistraModulo
         },
-        async loadRichieste({ commit,state,rootState }) {
-            if(state.lista.length>0) return;
+        async loadRichieste({ commit }) {
             let dati = await datiProvider.getAll();
             commit('SET_DATI', dati);
         },
@@ -46,7 +45,7 @@ export default {
             commit('ADD_RICHIESTA', result);
             // commit('HIDE_LOADING', null, { root: true });
         },
-        async aggiornaRichiesta({commit},payload){
+        async aggiornaRichiesta({ commit }, payload) {
             // commit('SHOW_LOADING', null, { root: true });
             let result = await datiProvider.aggiorna(payload);
             commit('AGGIORNA_REQUEST', result);

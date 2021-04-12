@@ -1,9 +1,8 @@
-import { pausa } from '@/shared/util.js';
+// import { pausa } from '@/shared/util.js';
 import { TestRequetService } from '@/api/TestRequetService.js';
 import MyDate from '@/shared/my-date.js';
 async function getAll() {
     let dati = await TestRequetService.getRichieste();
-    await pausa(100);
     return dati;
 }
 /**
@@ -13,20 +12,22 @@ async function getAll() {
  */
 async function save(payload) {
     //Ricavo il numero di settimana in base alle date
+    calcolaWeekNumber(payload);
+    let result = await TestRequetService.saveTestRequest(payload);
+    return result;
+}
+async function aggiorna(payload) {
+    calcolaWeekNumber(payload);
+    let result = await TestRequetService.updateTestRequest(payload);
+    return result;
+}
+
+function calcolaWeekNumber(payload) {
     let di = MyDate.strToDate(payload.dataInizio);
     let df = MyDate.strToDate(payload.dataFine);
 
     payload.weekInizio = MyDate.getWeekNumber(di);
-    payload.weekFine =  MyDate.getWeekNumber(df);
-
-    let result = await TestRequetService.saveTestRequest(payload);
-    await pausa(100);
-    return result;
-}
-async function aggiorna(payload){
-    let result = await TestRequetService.updateTestRequest(payload);
-    await pausa(200);
-    return result;
+    payload.weekFine = MyDate.getWeekNumber(df);
 }
 export default {
     getAll,
