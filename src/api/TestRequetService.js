@@ -6,7 +6,7 @@ const URL_RICHIESTE = 'testrequest';
 let richiste_cache;
 class TestRequestProvider extends HttpRequest {
     async getRichieste() {
-        if (richiste_cache) return richiste_cache;
+        // if (richiste_cache) return richiste_cache;
         let response = await this.getRequest(URL_RICHIESTE);
         richiste_cache = response.data;
         return richiste_cache;
