@@ -15,6 +15,16 @@
 .carico_ {
     background-color: #2abbda !important;
 }
+
+/* Stato in progress */
+.stato_3 {
+    border: 2px solid black;
+    /* border-radius: 20%; */
+}
+/* Stato in progress */
+.stato_4 {
+    background-color: #7e7e7e !important;
+}
 /* Celle weekend */
 .timeline_weekend {
     background-color: #ffe9e9;

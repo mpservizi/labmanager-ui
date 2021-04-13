@@ -32,6 +32,7 @@ export function creaTemplateColonneRisorse(key, label, risorsa) {
     return [
         // '<div class=\'timeline_item_cell\'>' + key + '</div>',
         // '<div class=\'timeline_item_separator\'></div>',
+        // eslint-disable-next-line
         "<div class='timeline_item_cell'>" + label + '</div>'
         // '<div class=\'timeline_item_separator\'></div>',
         // '<div class=\'timeline_item_cell\'>' + stallo + '</div>'
@@ -65,5 +66,8 @@ export function creaTempateTooltip(start, end, event) {
  * @returns
  */
 export function creaTemplateClasseEvento(start, end, event) {
-    return 'carico_' + (event.idCarico || '');
+    let clsCarico = 'carico_' + (event.idCarico || '');
+    let clsStato = 'stato_' + (event.stato || '');
+    // return 'carico_' + (event.idCarico || '');
+    return clsCarico + ' ' + clsStato;
 }
