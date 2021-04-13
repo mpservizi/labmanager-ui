@@ -32,7 +32,7 @@ export function creaTemplateColonneRisorse(key, label, risorsa) {
     return [
         // '<div class=\'timeline_item_cell\'>' + key + '</div>',
         // '<div class=\'timeline_item_separator\'></div>',
-        '<div class=\'timeline_item_cell\'>' + label + '</div>',
+        "<div class='timeline_item_cell'>" + label + '</div>'
         // '<div class=\'timeline_item_separator\'></div>',
         // '<div class=\'timeline_item_cell\'>' + stallo + '</div>'
     ].join('');
@@ -47,12 +47,10 @@ export function creaTemplateColonneRisorse(key, label, risorsa) {
  */
 export function creaTempateTooltip(start, end, event) {
     // var room = getRoom(event.room) || { label: '' };
-
-    var html = [];
-    html.push('Info: <b>' + event.text + '</b>');
+    let html = [];
+    html.push('<b>' + event.progetto + '</b>');
     // html.push('Room: <b>' + room.label + '</b>');
-    html.push('Inzio: <b>' + formattaData(start) + '</b>');
-    html.push('Fine: <b>' + formattaData(end) + '</b>');
+    html.push('' + event.descrizione + '');
     // html.push(
     //   getBookingStatus(event.status) + ', ' + getPaidStatus(event.is_paid)
     // );
