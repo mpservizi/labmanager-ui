@@ -59,8 +59,9 @@ class ApiHttpRequest {
         return axiosInstance.put(methodName, data);
     }
 
-    delete(methodName, id) {
-        return axiosInstance.delete(methodName, { params: { id: id } });
+    delete(methodName, dati) {
+        // return axiosInstance.delete(methodName, { params: { id: id } });
+        return axiosInstance.delete(methodName, { data: dati });
     }
 
     request(type, url, data) {

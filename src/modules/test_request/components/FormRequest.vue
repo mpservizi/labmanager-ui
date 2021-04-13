@@ -223,7 +223,6 @@ export default {
             let dateValide = !this.errDataInizio && !this.errDataFine;
             let arr = [campiForm, proveValide, dateValide];
             let result = arr.every((elem) => elem == true);
-            console.log(result);
             return result;
         },
         //Click save su dialog test plan

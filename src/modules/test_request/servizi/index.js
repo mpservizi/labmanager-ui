@@ -22,6 +22,10 @@ async function aggiorna(payload) {
     return result;
 }
 
+async function elimina(payload) {
+    let result = await TestRequetService.deleteTestRequest(payload);
+    return result;
+}
 function calcolaWeekNumber(payload) {
     let di = MyDate.strToDate(payload.dataInizio);
     let df = MyDate.strToDate(payload.dataFine);
@@ -32,5 +36,6 @@ function calcolaWeekNumber(payload) {
 export default {
     getAll,
     save,
-    aggiorna
+    aggiorna,
+    elimina
 };

@@ -50,6 +50,10 @@ export default {
             let result = await datiProvider.aggiorna(payload);
             commit('AGGIORNA_REQUEST', result);
             // commit('HIDE_LOADING', null, { root: true });
+        },
+        async eliminaRichiesta({ commit, dispatch }, payload) {
+            let result = await datiProvider.elimina(payload);
+            dispatch('loadRichieste');
         }
     }
 };

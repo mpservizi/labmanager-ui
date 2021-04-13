@@ -29,6 +29,11 @@ class TestRequestProvider extends HttpRequest {
         return response.data;
     }
 
+    async deleteTestRequest(payload) {
+        let response = await this.delete(URL_RICHIESTE, payload);
+        return response.data;
+    }
+
     /**
      * Aggiorna lo stato del gruppo test program
      * @param {*} listaRichieste : lista con tutte le test request

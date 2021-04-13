@@ -5,6 +5,9 @@
                 <template v-slot:dialogBtn> Modifica prove </template>
                 <template v-slot:saveBtn> Aggiorna</template>
             </form-request>
+            <div class="mt-5">
+                <v-btn class="error" @click="deleteTask">Delete task</v-btn>
+            </div>
         </v-container>
     </div>
 </template>
@@ -32,6 +35,13 @@ export default {
             // this.objRequest.c3 = result.totProveCarichi.c3;
             // console.log(result);
             this.$store.dispatch('TestRequestModule/aggiornaRichiesta', result);
+            this.$router.push({ name: 'test_requests' });
+        },
+        deleteTask() {
+            this.$store.dispatch(
+                'TestRequestModule/eliminaRichiesta',
+                this.objRequest
+            );
             this.$router.push({ name: 'test_requests' });
         }
     },
