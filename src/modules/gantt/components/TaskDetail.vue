@@ -2,11 +2,12 @@
     <div>
         <v-container>
             <p class="text-h3 text-center mb-10">
-                {{ taskAttivo.macchina }} - WK{{
-                    taskAttivo.week
-                }}
+                {{ taskAttivo.macchina }} - WK{{ taskAttivo.week }}
             </p>
-            <p>Carico {{ taskAttivo.carico }} è occupato per {{ taskAttivo.duration }} giorni</p>
+            <p>
+                Carico {{ taskAttivo.carico }} è occupato per
+                {{ taskAttivo.duration }} giorni
+            </p>
             <v-row>
                 <v-col
                     cols="6"
@@ -20,11 +21,20 @@
                         <p>Numero prove : {{ task.numProve }}</p>
                         <ul>
                             <li v-for="(prova, k) in task.prove" :key="k">
-                                <p class="text-h6">{{prova.progetto}}</p>
+                                <p class="text-h6">{{ prova.progetto }}</p>
                                 {{ prova.msg }}
                             </li>
                         </ul>
                     </v-card>
+                </v-col>
+            </v-row>
+            <v-row>
+                <v-col cols="12">
+                    <div class="text-center mt-5">
+                        <v-btn :to="{ name: 'gantt' }" class="secondary"
+                            >Torna indietro</v-btn
+                        >
+                    </div>
                 </v-col>
             </v-row>
         </v-container>

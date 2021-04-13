@@ -103,8 +103,8 @@ function getGruppoByIdRisorsa(idRisorsa) {
  */
 function creaTaskProgetto() {
     let result = [];
-    let taskPlan = buildTaskToPlan();
-    result.push(taskPlan);    
+    // let taskPlan = buildTaskToPlan();
+    // result.push(taskPlan);
     let gruppi = getGruppiCiclatura();
     gruppi.forEach(item => {
         let task = buildTaskProgetto(item.id, item.label);
@@ -170,7 +170,7 @@ function buildTaskProgetto(id, label) {
         text: label,
         type: 'project',
         render: 'split',
-        isRisorsa:true,
+        isRisorsa: true,
         parent: 0
     };
     return result;
@@ -178,7 +178,7 @@ function buildTaskProgetto(id, label) {
 
 /**
  * Task per raggruppare le prove da pianificare
- * @returns 
+ * @returns
  */
 function buildTaskToPlan() {
     let result = {
@@ -186,8 +186,8 @@ function buildTaskToPlan() {
         text: 'To Plan',
         type: 'project',
         render: '',
-        isRisorsa:true,
-        isPlan:true,
+        isRisorsa: true,
+        isPlan: true,
         parent: 0
     };
     return result;
