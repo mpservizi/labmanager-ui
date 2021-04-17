@@ -131,9 +131,11 @@ function sommaDurataProveCarichi(prove) {
  * @returns
  */
 function creaObjTask(item) {
-    let data_inizio = parseDate(item.start_date);
-    let data_fine = parseDate(item.end_date);
+    // let data_inizio = parseDate(item.start_date);
+    // let data_fine = parseDate(item.end_date);
 
+    let data_inizio = new Date(item.s_t);
+    let data_fine = new Date(item.e_t);
     let result = {
         id: item.id,
         carico: item.carico,

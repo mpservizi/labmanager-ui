@@ -27,9 +27,8 @@ export function eventiToJson(eventi) {
             let s_t = item.start_date.getTime();
             let e_t = item.end_date.getTime();
 
-            //Queste date sono usate dal planner
-            let data_fine = MyDate.dateToStr(item.end_date);
-            let data_inizio = MyDate.dateToStr(item.start_date);
+            // let data_fine = MyDate.dateToStr(item.end_date);
+            // let data_inizio = MyDate.dateToStr(item.start_date);
 
             let nomeCarico = ricavaNomeCaricoDaId(item.idCarico);
             let modello = {
@@ -47,8 +46,8 @@ export function eventiToJson(eventi) {
                 s_t:s_t,//Data start in millisecondi
                 e_t:e_t,//Data end in millisecondi
                 //Date in formato testo è usata dal planner
-                start_date: data_inizio,
-                end_date: data_fine,
+                // start_date: data_inizio,
+                // end_date: data_fine,
                 // time: {
                 //     end_date: data_fine,
                 //     start_date: data_inizio
