@@ -12,6 +12,8 @@ import { LISTA_RISORSE_FILTRATA } from './costanti.js';
 import { MyPlanner } from 'Moduli/schedular/js/my-planner.js';
 
 import MyDate from '@/shared/my-date.js';
+//Flag per limitare drag se task è in progress
+const IN_PROGRESS_BLOCK=false;
 export function initEventi(myScheduler) {
     /** Default values per new event */
     myScheduler.attachEvent('onEventCreated', handleNewEvento);
@@ -73,6 +75,12 @@ export function initEventi(myScheduler) {
     myScheduler.attachEvent('onBeforeEventChanged', function (ev, e, is_new, original) {
         //Se la data viene cambiata in onDragEnd non funziona più il doppio click sul evento
         arrotondaEvento(ev);
+        //se task è in progress evito di cambiare la risorsa con drag
+        if(IN_PROGRESS_BLOCK && ev.stato==3){
+            if(ev.idRisorsa!=original.idRisorsa){
+                return false;
+            }
+        }
         return true;
     });
 
@@ -80,6 +88,18 @@ export function initEventi(myScheduler) {
     // myScheduler.attachEvent('onDragEnd', function (id, mode, e) {
     // });
 
+    /** 
+     * mode = dragging mode: "move","resize" or "create"
+     */
+    myScheduler.attachEvent('onBeforeDrag', function (id, mode, e){
+        if(IN_PROGRESS_BLOCK && mode=='move'){
+            let ev = myScheduler.getEvent(id);
+            if(ev.stato==3){
+                return false;
+            }
+        }
+        return true;
+    });
     /**
      * Al click sul tasto Today
      */
