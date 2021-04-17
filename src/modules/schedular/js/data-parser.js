@@ -43,10 +43,10 @@ export function eventiToJson(eventi) {
                 carico: nomeCarico,
                 start_date: data_inizio,
                 end_date: data_fine,
-                time: {
-                    end_date: data_fine,
-                    start_date: data_inizio
-                }
+                // time: {
+                //     end_date: data_fine,
+                //     start_date: data_inizio
+                // }
             };
 
             lista.push(modello);
