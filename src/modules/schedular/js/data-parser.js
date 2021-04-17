@@ -39,6 +39,7 @@ export function eventiToJson(eventi) {
                 progetto: item.progetto,
                 stato: item.stato,
                 descrizione: item.descrizione,
+                gruppo:item.gruppo, //gruppo test program
                 //Nel db salvo il titolo del carico
                 carico: nomeCarico,
                 start_date: data_inizio,
@@ -90,6 +91,7 @@ export function parseEventiServer(datiServer) {
                 progetto: item.progetto,
                 stato: item.stato,
                 descrizione: item.descrizione,
+                gruppo:item.gruppo, //gruppo test program
                 //nel task memorizzo id del carico
                 idCarico: idCarico,
                 start_date: s_d,

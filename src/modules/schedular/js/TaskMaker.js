@@ -18,7 +18,8 @@ export function creaTaskPerProva(payload) {
         corrente: payload.corrente,
         idRequest: payload.idRequest, //id test request
         progetto: payload.titoloProgetto, //test request progetto
-        descrizione: payload.descrizione //test request descrizione
+        descrizione: payload.descrizione, //test request descrizione
+        gruppo: payload.titolo //test request, titolo gruppo test program
     };
     MyPlanner.addTask(task);
     return task;

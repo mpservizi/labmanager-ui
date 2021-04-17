@@ -1,5 +1,4 @@
 import { myScheduler } from './my-lib.js';
-import { ricavaNomeCaricoDaId } from './my-func.js';
 /**
  * Crea il template per evento quando è mostrato nella pagina
  * @param {*} start
@@ -51,7 +50,10 @@ export function creaTempateTooltip(start, end, event) {
     let html = [];
     html.push('<b>' + event.progetto + '</b>');
     // html.push('Room: <b>' + room.label + '</b>');
-    html.push('' + event.descrizione + '');
+    html.push(event.descrizione);
+    if(event.gruppo){
+        html.push(event.gruppo);
+    }
     // html.push(
     //   getBookingStatus(event.status) + ', ' + getPaidStatus(event.is_paid)
     // );
