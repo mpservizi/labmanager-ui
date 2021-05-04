@@ -13,7 +13,7 @@ import {
 
 import { save, loadRisorse, loadDatiCiclatura } from './api.js';
 import { eventiToJson } from './data-parser.js';
-import {filtraByCarico,filtraByNome} from './filtra-risorse';
+import { filtraByCarico, filtraByNome } from './filtra-risorse';
 
 import {
     LISTA_RISORSE,
@@ -98,22 +98,32 @@ function getScalaAttiva() {
     return myScheduler.myConfig.paramScala.scala;
 }
 
-function getListaRisorse(){
+function getListaRisorse() {
     let risorse = myScheduler.serverList(LISTA_RISORSE);
     let copia = risorse.slice();
     return copia;
 }
 
-function setListaFiltrata(itemsFiltrati){
+function setListaFiltrata(itemsFiltrati) {
     myScheduler.updateCollection(LISTA_RISORSE_FILTRATA, itemsFiltrati);
 }
-function addTask(task){
+function addTask(task) {
     myScheduler.addEvent(task);
+}
+
+//Filtra gli eventi in valore al valore di testo indicato
+function filtraTasks(valore) {
+    //recuperare al lista originale dei eventi caricata nel schedular
+    //impostare lista originale se parametro è null
+    //altrimenti
+    //filtrare solo i tasks che contengono il testo indicato
+    //aggioranre la lista caricata in scheduler con lista filtrata
+    console.log('Ricerca tasks : ' + valore);
 }
 
 export const MyPlanner = {
     init: initPlanner,
-    filtraRisorse:filtraByNome,
+    filtraRisorse: filtraByNome,
     loadDati,
     saveDati,
     cambiaScala,
@@ -122,6 +132,7 @@ export const MyPlanner = {
     setListaFiltrata,
     addTask,
     filtraByCarico,
+    filtraTasks,
     //Calcoli sulle date
-    date:myScheduler.date
+    date: myScheduler.date
 };

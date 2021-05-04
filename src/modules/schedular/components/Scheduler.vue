@@ -50,7 +50,7 @@ export default {
             MyPlanner.filtraRisorse(valore);
         },
         ricercaTasks(valore) {
-            console.log('Ricerca tasks : ' + valore);
+            MyPlanner.filtraTasks(valore);
         },
         cambiaScala(valore) {
             if (!this.pronto) {
