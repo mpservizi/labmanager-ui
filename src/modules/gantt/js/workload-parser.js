@@ -27,6 +27,9 @@ function groupByRisorsa(dati) {
     let result = {};
     // let tmp = [1, 2];
     dati.forEach(item => {
+        //Escludo i task con stato done=4 e cancelled=5
+        if (item.stato && item.stato > 3) return;
+
         let idRisorsa = item.idRisorsa;
         // if (!tmp.includes(idRisorsa)) return;
         let itemRisorsa = getRisorsaById(idRisorsa);
@@ -141,7 +144,7 @@ function creaObjTask(item) {
         carico: item.carico,
         corrente: item.corrente,
         idRequest: item.idRequest,
-        progetto:item.progetto,
+        progetto: item.progetto,
         idRisorsa: item.idRisorsa,
         sample: item.text,
         start_date: data_inizio,
