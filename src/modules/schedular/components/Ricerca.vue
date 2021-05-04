@@ -18,6 +18,9 @@ export default {
     },
     methods: {
         cambioValore(valore) {
+            if (valore == '') {
+                valore = null;
+            }
             this.$emit('cambio', valore);
         },
         clearValore() {

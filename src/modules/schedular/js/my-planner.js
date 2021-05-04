@@ -13,7 +13,7 @@ import {
 
 import { save, loadRisorse, loadDatiCiclatura } from './api.js';
 import { eventiToJson } from './data-parser.js';
-import { filtraByCarico, filtraByNome } from './filtra-risorse';
+import { filtraByCarico, filtraByNome, filtraTask } from './filtra-risorse';
 
 import {
     LISTA_RISORSE,
@@ -22,6 +22,8 @@ import {
     SCALA_SETTIMANALE,
     LISTA_SELEZIONE_RISORSE
 } from './costanti.js';
+
+let criterioFiltro = null;
 
 function initPlanner(container, dataInizio, view) {
     //Il componente viene ricilato. Inizializzo solo se non esiste in memoria
@@ -35,6 +37,14 @@ function initPlanner(container, dataInizio, view) {
         initLightbox(myScheduler); //Lightbox
         initEventi(myScheduler); //Eventi
         myScheduler.xy.scale_height = 30; //Altezza riga scala
+
+        //Funzione per eseguire il filtro su tasks
+        myScheduler.filter_timeline = function(id, event) {
+            if (criterioFiltro == null) return true;
+
+            let ev = myScheduler.getEvent(id);
+            return filtraTask(ev, criterioFiltro);
+        };
     }
     //Init schedular
     myScheduler.init(container, new Date(), 'timeline');
@@ -113,12 +123,8 @@ function addTask(task) {
 
 //Filtra gli eventi in valore al valore di testo indicato
 function filtraTasks(valore) {
-    //recuperare al lista originale dei eventi caricata nel schedular
-    //impostare lista originale se parametro è null
-    //altrimenti
-    //filtrare solo i tasks che contengono il testo indicato
-    //aggioranre la lista caricata in scheduler con lista filtrata
-    console.log('Ricerca tasks : ' + valore);
+    criterioFiltro = valore;
+    myScheduler.updateView();
 }
 
 export const MyPlanner = {
