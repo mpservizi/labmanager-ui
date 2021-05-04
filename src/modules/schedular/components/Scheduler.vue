@@ -36,7 +36,7 @@ import Filtro from './Filtro.vue';
 import { MyPlanner } from './../js/my-planner.js';
 export default {
     name: 'Scheduler',
-    props: ['filtro', 'needSave'],
+    props: ['filtro', 'needSave', 'ricerca'],
     data() {
         return {
             pronto: false,
@@ -48,6 +48,9 @@ export default {
     methods: {
         filtra(valore) {
             MyPlanner.filtraRisorse(valore);
+        },
+        ricercaTasks(valore) {
+            console.log('Ricerca tasks : ' + valore);
         },
         cambiaScala(valore) {
             if (!this.pronto) {
@@ -81,6 +84,9 @@ export default {
         filtro: function (valore) {
             console.log(valore);
             this.filtra(valore);
+        },
+        ricerca: function (valore) {
+            this.ricercaTasks(valore);
         },
         needSave: function () {
             this.save();

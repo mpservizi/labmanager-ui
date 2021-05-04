@@ -11,7 +11,14 @@
                 />
             </v-card>
         </v-dialog>
-
+        <!-- Roga per la ricerca dei tasks -->
+        <v-row dense>
+            <v-spacer></v-spacer>
+            <v-col cols="6" class="">
+                <Ricerca @cambio="ricercaTasks" />
+            </v-col>
+            <v-spacer></v-spacer>
+        </v-row>
         <!-- Contenitore per tollbar e schedular -->
         <div class="box_view">
             <!-- riga Toolbar -->
@@ -64,6 +71,7 @@
                         <Scheduler
                             class="px-5"
                             :filtro="filtro"
+                            :ricerca="txtRicerca"
                             :needSave="needSave"
                         />
                     </v-col>
@@ -75,6 +83,7 @@
 
 <script>
 import Filtro from '../components/Filtro.vue';
+import Ricerca from '../components/Ricerca.vue';
 import Scheduler from 'Moduli/schedular/components/Scheduler.vue';
 import FormProve from '../components/FormProve.vue';
 import FormRichieste from '../components/FormRichieste.vue';
@@ -86,7 +95,7 @@ import { MyPlanner } from 'Moduli/schedular/js/my-planner.js';
 
 export default {
     name: 'TestPlannerView',
-    components: { Scheduler, FormRichieste, FormProve, Filtro },
+    components: { Scheduler, FormRichieste, FormProve, Filtro, Ricerca },
     data: () => ({
         dialog: false,
         listaPlannnig: [], //lista per test request dialog
@@ -94,6 +103,7 @@ export default {
         aggiornareConteggio: false, //per aggioranare il numero di prove da pianificare nel gruppo prove
         provaAttiva: null, //prova selezionat anel gruppo prove
         filtro: 'all', //cambio filtro macchine schedular
+        txtRicerca: '', //testo per filtrare i tasks
         needSave: false, //bottone save dati schedular
         datiRichieste: {}, //dati test request da server,
         numProveToPlan: 0, //Numero di prove ancora da pianificare,
@@ -199,6 +209,10 @@ export default {
         //Filtro macchina
         filtra(valore) {
             this.filtro = valore;
+        },
+        //Ricerca tasks in base al testo
+        ricercaTasks(valore) {
+            this.txtRicerca = valore;
         },
         //Salvataggio dati
         save() {
