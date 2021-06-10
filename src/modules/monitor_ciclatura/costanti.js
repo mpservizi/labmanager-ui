@@ -4,15 +4,16 @@ export const UPDATE_UI_SECONDS = 30; //Ogni quanti secondi aggiornare ui
 export const DURATA_CACHE_SECONDS = 50; //Dopo quanti secondi aggiornare la cache
 //  Elenco dei possibili stati per gli stalli
 export const LISTA_STATI = [
+    'Avaliable',
+    'Ready',
     'In progress',
-    'Waiting',
-    'End ok',
-    'Manual stop',
-    'Safety block',
     'Error',
-    'Ready'
+    'Safety block',
+    'End ok',
+    'Waiting',
+    'Manual stop'
 ];
-export const LISTA_ID_STATI = [1, 2, 3, 4, 5, 6, 7];
+export const LISTA_ID_STATI = [0, 1, 2, 3, 4, 5, 6, 7];
 
 export function getLabelStatoById(id) {
     let pos = LISTA_ID_STATI.indexOf(id);

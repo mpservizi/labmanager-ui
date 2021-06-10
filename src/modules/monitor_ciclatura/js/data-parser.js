@@ -7,6 +7,7 @@ import { getLabelStatoById, TIPI_PRODOTTO } from '../costanti.js';
 export function parseDatiServer(dati) {
     if (dati == null) {
         alert('Dati ciclatura non validi');
+        console.log('Dati ciclatura non validi');
         return;
     }
     let result = {
@@ -14,9 +15,12 @@ export function parseDatiServer(dati) {
         L232: [],
         L2020: []
     };
-    dati.forEach(item => {
-        let stallo = parseStallo(item);
-        result[stallo.macchina].push(stallo);
+    Object.keys(dati).forEach(key => {
+        let macchina = dati[key];
+        macchina.forEach(item => {
+            let stallo = parseStallo(item);
+            result[stallo.macchina].push(stallo);
+        });
     });
     return result;
 }
@@ -33,18 +37,26 @@ export function parseDatiServer(dati) {
  * "End":"17/08/2020 07:50",
  * "Stato":"In progress",
  * "Export time":"17/08/2020 07:50"
+ * 
+ * Nuovo formato dati
+*     "Macchina": "L232",
+      "Stallo": 3,
+      "Stato": 4,
+      "DataInizio": "18/05/2021 08:37:18",
+      "DataFine": "19/05/2021 14:06:57",
+      "LocalCol": "2021-05-20T07:15:00Z"
  * }
  */
 function parseStallo(stallo) {
     return {
         macchina: stallo.Macchina,
         nome: ' ' + stallo.Stallo,
-        tecnico: stallo.Tecnico,
-        prova: stallo.Prova,
+        tecnico: stallo.Tecnico || '-',
+        prova: stallo.Prova || '-',
         stato: getLabelStatoById(stallo.Stato),
-        start: stallo.Start,
-        end: stallo.End,
-        timestamp: stallo['Export time'],
+        start: stallo.DataInizio,
+        end: stallo.DataFine,
+        timestamp: stallo.LocalCol,
         tipo: getTipoStallo(stallo.Macchina, stallo.Stallo)
     };
 }
