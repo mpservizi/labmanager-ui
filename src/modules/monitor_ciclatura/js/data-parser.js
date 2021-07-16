@@ -6,9 +6,9 @@ import { getLabelStatoById, TIPI_PRODOTTO } from '../costanti.js';
  */
 export function parseDatiServer(dati) {
     if (dati == null) {
-        alert('Dati ciclatura non validi');
+        //alert('Dati ciclatura non validi');
         console.log('Dati ciclatura non validi');
-        return;
+        return null;
     }
     let result = {
         L180: [],
@@ -21,6 +21,7 @@ export function parseDatiServer(dati) {
             let stallo = parseStallo(item);
             result[stallo.macchina].push(stallo);
         });
+        macchina.sort(ordinaStalli);
     });
     return result;
 }
@@ -86,4 +87,20 @@ function getTipoStallo(macchina, stallo) {
             break;
     }
     return result;
+}
+
+function ordinaStalliMacchina(macchina) {
+    macchina.forEach(item => {
+        let stallo = parseStallo(item);
+        result[stallo.macchina].push(stallo);
+    });
+}
+function ordinaStalli(a, b) {
+    if (a.Stallo < b.Stallo) {
+        return -1;
+    }
+    if (a.Stallo > b.Stallo) {
+        return 1;
+    }
+    return 0;
 }
