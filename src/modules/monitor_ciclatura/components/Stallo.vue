@@ -34,18 +34,41 @@ export default {
         classeStato: function () {
             let result = 'vuoto';
             let classe = this.params.stato;
-            const fermo = [
-                ENUM_STATI_STALLI.ERROR,
-                ENUM_STATI_STALLI.SAFETY_BLOCK,
-                ENUM_STATI_STALLI.MANUAL_STOP
-            ];
+            // const fermo = [
+            //     ENUM_STATI_STALLI.ERROR,
+            //     ENUM_STATI_STALLI.SAFETY_BLOCK,
+            //     ENUM_STATI_STALLI.MANUAL_STOP
+            // ];
             //  Coloro di rosso in caso di fermo
-            if (fermo.includes(classe)) {
-                result = 'errore';
-            }
+            // if (fermo.includes(classe)) {
+            //     result = 'errore';
+            // }
             //  Coloro di giallo se è in progress
-            if (classe == ENUM_STATI_STALLI.IN_PROGRESS) {
-                result = 'in_progress';
+            // if (classe == ENUM_STATI_STALLI.IN_PROGRESS) {
+            //     result = 'in_progress';
+            // }
+            switch (classe) {
+                case ENUM_STATI_STALLI.IN_PROGRESS:
+                    result = 'in_progress';
+                    break;
+                case ENUM_STATI_STALLI.WAITING:
+                    result = 'waiting';
+                    break;
+                case ENUM_STATI_STALLI.END_OK:
+                    result = 'end_ok';
+                    break;
+                case ENUM_STATI_STALLI.MANUAL_STOP:
+                    result = 'manual_stop';
+                    break;
+                case ENUM_STATI_STALLI.ERROR:
+                    result = 'errore';
+                    break;
+                case ENUM_STATI_STALLI.READY:
+                    result = 'ready';
+                    break;
+                case ENUM_STATI_STALLI.SAFETY_BLOCK:
+                    result = 'safety_block';
+                    break;
             }
             //  In tutti gli altri casi lo stallo è colorato di bianco
             return result;
@@ -86,19 +109,19 @@ export default {
 }
 
 .waiting {
-    // background-color: $waiting !important;
-    background-color: $ready !important;
+    background-color: $waiting !important;
+    //background-color: $ready !important;
 }
 .end_ok {
     background-color: $end_ok !important;
 }
 .manual_stop {
-    // background-color: $manual_stop !important;
-    background-color: $error !important;
+    background-color: $manual_stop !important;
+    //background-color: $error !important;
 }
 .safety_block {
-    // background-color: $safety_block !important;
-    background-color: $error !important;
+    background-color: $safety_block !important;
+    //background-color: $error !important;
 }
 .ready {
     background-color: $ready !important;
