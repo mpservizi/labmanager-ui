@@ -21,8 +21,14 @@ export function parseDatiServer(dati) {
             let stallo = parseStallo(item);
             result[stallo.macchina].push(stallo);
         });
+    });
+
+    //Ordino tutti gli stalli in base numero dello stallo
+    Object.keys(result).forEach(key => {
+        let macchina = result[key];
         macchina.sort(ordinaStalli);
     });
+
     return result;
 }
 
@@ -58,7 +64,8 @@ function parseStallo(stallo) {
         start: stallo.DataInizio,
         end: stallo.DataFine,
         timestamp: stallo.LocalCol,
-        tipo: getTipoStallo(stallo.Macchina, stallo.Stallo)
+        tipo: getTipoStallo(stallo.Macchina, stallo.Stallo),
+        numStallo: stallo.Stallo
     };
 }
 
@@ -96,10 +103,14 @@ function getTipoStallo(macchina, stallo) {
  * @returns
  */
 function ordinaStalli(a, b) {
-    if (a.Stallo < b.Stallo) {
+    let stallo_1, stallo_2;
+    stallo_1 = a.numStallo;
+    stallo_2 = b.numStallo;
+
+    if (stallo_1 < stallo_2) {
         return -1;
     }
-    if (a.Stallo > b.Stallo) {
+    if (stallo_1 > stallo_2) {
         return 1;
     }
     return 0;
