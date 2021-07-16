@@ -89,12 +89,12 @@ function getTipoStallo(macchina, stallo) {
     return result;
 }
 
-function ordinaStalliMacchina(macchina) {
-    macchina.forEach(item => {
-        let stallo = parseStallo(item);
-        result[stallo.macchina].push(stallo);
-    });
-}
+/**
+ * Ordin array dei stalli in ordine crescente, base al numero dello stallo
+ * @param {*} a
+ * @param {*} b
+ * @returns
+ */
 function ordinaStalli(a, b) {
     if (a.Stallo < b.Stallo) {
         return -1;

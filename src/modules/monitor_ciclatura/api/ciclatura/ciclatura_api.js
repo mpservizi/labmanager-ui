@@ -18,7 +18,7 @@ export class CiclaturaApi extends HttpRequest {
      * Restiuisce i dati di tutte le macchine di cicaltura
      */
     async getDatiCiclatura() {
-        let dati = {};
+        let dati = null;
         try {
             //Se sono presenti dati nella cache e non è trascorso il tempo
             if (datiCache && !checkTempo(lastUpdate, TEMPO_CACHE_DATI)) {

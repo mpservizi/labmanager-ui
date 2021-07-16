@@ -1,21 +1,21 @@
 <template>
-        <div class="container">
-            <v-row v-if="pronto">
-                <v-col
-                    :cols="sizeCols"
-                    v-for="(macchina, pos) in macchine"
-                    :key="pos"
-                >
-                    <macchina
-                        :config="macchina.config"
-                        :titolo="macchina.titolo"
-                    ></macchina>
-                </v-col>
-            </v-row>
-            <v-row v-else>
-                <!-- <v-col cols="12" class="text-h1">Loading...</v-col> -->
-            </v-row>
-        </div>
+    <div class="container">
+        <v-row v-if="pronto">
+            <v-col
+                :cols="sizeCols"
+                v-for="(macchina, pos) in macchine"
+                :key="pos"
+            >
+                <macchina
+                    :config="macchina.config"
+                    :titolo="macchina.titolo"
+                ></macchina>
+            </v-col>
+        </v-row>
+        <v-row v-else>
+            <!-- <v-col cols="12" class="text-h1">Loading...</v-col> -->
+        </v-row>
+    </div>
 </template>
 
 <script>
@@ -69,6 +69,8 @@ export default {
             if (!this.pronto) return [];
             let dati = this.$store.state[NOME_MODULO].dati;
             if (!dati) {
+                console.log('Errore dati ciclatura, reload');
+                this.loadDati();
                 return [];
             }
             return [
